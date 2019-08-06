@@ -4,14 +4,18 @@ import { graphql } from 'gatsby'
 
 const Index = ({ data }) => {
   const {
-    landingHeader: header,
-    landingSubheader: subheader
+    headerTitle: title,
+    headerDescription: desc,
+    headerIcon: {
+      url: iconUrl
+    }
   } = data.datoCmsHomePage
 
   return (
     <div>
-      <h1>{header}</h1>
-      <p>{subheader}</p>
+      <img src={iconUrl} alt="header icon" />
+      <h1>{title}</h1>
+      <p>{desc}</p>
     </div>
   )
 }
@@ -19,8 +23,12 @@ const Index = ({ data }) => {
 Index.propTypes = {
   data: PropTypes.shape({
     datoCmsHomePage: PropTypes.shape({
-      landingHeader: PropTypes.string,
-      landingSubheader: PropTypes.string
+      headerTitle: PropTypes.string,
+      headerDescription: PropTypes.string,
+      headerIcon: PropTypes.shape({
+        url: PropTypes.string,
+        id: PropTypes.string
+      })
     })
   })
 }
@@ -28,8 +36,12 @@ Index.propTypes = {
 export const query = graphql`
   query HomeQuery {
     datoCmsHomePage {
-      landingHeader
-      landingSubheader
+      headerIcon {
+        id
+        url
+      }
+      headerTitle
+      headerDescription
     }
   }
 `
