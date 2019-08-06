@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { graphql } from 'gatsby'
+import Container from '../components/Container';
 
 export default ({ data }) => {
   const [isChecked, setChecked] = useState(false)
@@ -14,13 +15,15 @@ export default ({ data }) => {
   }
 
   return (
-    <div>
-      <h1>{data.site.siteMetadata.title}</h1>
-      {isChecked && <p>Hello kvalifik!</p>}
-      {!isChecked && <p>Goodbye kvalifik!</p>}
-      <input type="button" onClick={onToggle} value="Toggle" />
-      <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
-    </div>
+    <Container sideLine="smagen">
+        <div>
+            <h1>{data.site.siteMetadata.title}</h1>
+            {isChecked && <p>Hello kvalifik!</p>}
+            {!isChecked && <p>Goodbye kvalifik!</p>}
+            <input type="button" onClick={onToggle} value="Toggle" />
+            <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
+        </div>
+    </Container>
   )
 }
 
