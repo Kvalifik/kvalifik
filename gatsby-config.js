@@ -10,12 +10,13 @@ module.exports = {
     title: 'Crazy title!'
   },
   plugins: [
+    'gatsby-plugin-resolve-src',
     {
       resolve: `gatsby-source-datocms`,
       options: {
         apiToken: `4cd38b7807abbdff5ee4b344a4d7b0`,
         preview: false,
-        disableLiveReload: false,
+        disableLiveReload: false
       }
     }
   ]

@@ -2,20 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
+import ActionBlock from 'Components/ActionBlock'
+
 const Index = ({ data }) => {
   const {
-    headerTitle: title,
-    headerDescription: desc,
-    headerIcon: {
-      url: iconUrl
-    }
+    contactTitle,
+    contactButtonText,
+    contactDescription
   } = data.datoCmsHomePage
 
   return (
     <div>
-      <img src={iconUrl} alt="header icon" />
-      <h1>{title}</h1>
-      <p dangerouslySetInnerHTML={{ __html: desc }} />
+      <ActionBlock
+        title={contactTitle}
+        body={contactDescription}
+        buttonLabel={contactButtonText}
+        buttonType="button"
+      />
     </div>
   )
 }
@@ -23,12 +26,9 @@ const Index = ({ data }) => {
 Index.propTypes = {
   data: PropTypes.shape({
     datoCmsHomePage: PropTypes.shape({
-      headerTitle: PropTypes.string,
-      headerDescription: PropTypes.string,
-      headerIcon: PropTypes.shape({
-        url: PropTypes.string,
-        id: PropTypes.string
-      })
+      contactTitle: PropTypes.string,
+      contactButtonText: PropTypes.string,
+      contactDescription: PropTypes.string
     })
   })
 }
@@ -36,12 +36,9 @@ Index.propTypes = {
 export const query = graphql`
   query HomeQuery {
     datoCmsHomePage {
-      headerIcon {
-        id
-        url
-      }
-      headerTitle
-      headerDescription
+      contactTitle
+      contactDescription
+      contactButtonText
     }
   }
 `
