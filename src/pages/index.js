@@ -1,35 +1,25 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { graphql } from 'gatsby'
 
 export default ({ data }) => {
-  const [isChecked, setChecked] = useState(false)
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    document.title = search
-  }, [search])
-
-  const onToggle = () => {
-    setChecked(!isChecked)
-  }
+  const {
+    landingHeader: header,
+    landingSubheader: subheader
+  } = data.datoCmsHomePage
 
   return (
     <div>
-      <h1>{data.site.siteMetadata.title}</h1>
-      {isChecked && <p>Hello kvalifik!</p>}
-      {!isChecked && <p>Goodbye kvalifik!</p>}
-      <input type="button" onClick={onToggle} value="Toggle" />
-      <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
+      <h1>{header}</h1>
+      <p>{subheader}</p>
     </div>
   )
 }
 
 export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
+  query HomeQuery {
+    datoCmsHomePage {
+      landingHeader
+      landingSubheader
     }
   }
 `
