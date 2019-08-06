@@ -1,7 +1,8 @@
-import React from "react"
+import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-export default ({ data }) => {
+const Index = ({ data }) => {
   const {
     landingHeader: header,
     landingSubheader: subheader
@@ -15,6 +16,15 @@ export default ({ data }) => {
   )
 }
 
+Index.propTypes = {
+  data: PropTypes.shape({
+    datoCmsHomePage: PropTypes.shape({
+      landingHeader: PropTypes.string,
+      landingSubheader: PropTypes.string
+    })
+  })
+}
+
 export const query = graphql`
   query HomeQuery {
     datoCmsHomePage {
@@ -23,3 +33,5 @@ export const query = graphql`
     }
   }
 `
+
+export default Index
