@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-export default ({ data }) => {
+const Index = ({ data }) => {
   const [isChecked, setChecked] = useState(false)
   const [search, setSearch] = useState('')
 
@@ -24,6 +25,16 @@ export default ({ data }) => {
   )
 }
 
+Index.propTypes = {
+  data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string
+      })
+    })
+  })
+}
+
 export const query = graphql`
   query {
     site {
@@ -33,3 +44,5 @@ export const query = graphql`
     }
   }
 `
+
+export default Index
