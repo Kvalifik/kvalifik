@@ -15,7 +15,7 @@ const Index = ({ data }) => {
     <div>
       <img src={iconUrl} alt="header icon" />
       <h1>{title}</h1>
-      <p>{desc}</p>
+      <p dangerouslySetInnerHTML={{ __html: desc }} />
     </div>
   )
 }
