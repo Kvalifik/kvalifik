@@ -11,7 +11,7 @@ const ActionBlock = ({
   buttonLabel
 }) => {
   return (
-    <Skewer bgColor="#cc8014">
+    <Skewer bgColor="#cc8014" angle={8} reverse>
       <Container>
         <h1>{title}</h1>
         <p dangerouslySetInnerHTML={{ __html: body }} />
