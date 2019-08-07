@@ -18,6 +18,12 @@ module.exports = {
         preview: false,
         disableLiveReload: false
       }
+    },
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography'
+      }
     }
   ]
 }

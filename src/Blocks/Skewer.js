@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 
 const Root = styled.div`
   overflow: hidden;
-  width: 100vw;
   background-color: ${props => props.bgColor};
 
   ${props => props.reverse
@@ -19,25 +18,30 @@ const Root = styled.div`
 `
 
 const Inner = styled.div`
-  padding: ${props => props.offset} 0;
+  margin: ${props => props.offset} 0;
   transform: ${props => props.reverse
     ? `skewy(${props.angle})`
     : `skewy(-${props.angle})`}
 `
 
-const Skewer = ({ bgColor, angle, children, reverse }) => {
+const Skewer = ({ bgColor, angle, children, reverse, noPadding }) => {
   const deg = `${angle}deg`
-  const rad = angle / 180 * Math.PI
+  let offset = 0
+
   // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
-  const offset = Math.tan(rad) * 50
-  const offsetWithUnit = `${offset}vw`
+  const rad = angle / 180 * Math.PI
+  offset = Math.tan(rad) * 50
+
+  if (noPadding) {
+    offset *= -1
+  }
 
   return (
     <Root bgColor={bgColor} angle={deg} reverse={reverse}>
       <Inner
         reverse={reverse}
         angle={deg}
-        offset={offsetWithUnit}
+        offset={`${offset}vw`}
       >{children}</Inner>
     </Root>
   )
@@ -47,7 +51,8 @@ Skewer.propTypes = {
   bgColor: PropTypes.string,
   children: PropTypes.any,
   angle: PropTypes.number,
-  reverse: PropTypes.bool
+  reverse: PropTypes.bool,
+  noPadding: PropTypes.bool
 }
 
 export default Skewer
