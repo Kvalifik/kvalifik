@@ -1,7 +1,9 @@
-const sm = 576
-const md = 768
-const lg = 992
-const xl = 1200
+module.exports = {
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200
+}
 
 const smPadding = 15
 const skewAngle = 8

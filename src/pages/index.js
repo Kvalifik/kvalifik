@@ -17,13 +17,13 @@ const Index = ({ data }) => {
 
   return (
     <Container sideLine="smagen">
-        <div>
-            <h1>{data.site.siteMetadata.title}</h1>
-            {isChecked && <p>Hello kvalifik!</p>}
-            {!isChecked && <p>Goodbye kvalifik!</p>}
-            <input type="button" onClick={onToggle} value="Toggle" />
-            <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
-        </div>
+      <div>
+          <h1>{data.site.siteMetadata.title}</h1>
+          {isChecked && <p>Hello kvalifik!</p>}
+          {!isChecked && <p>Goodbye kvalifik!</p>}
+          <input type="button" onClick={onToggle} value="Toggle" />
+          <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
+      </div>
     </Container>
   )
 }
