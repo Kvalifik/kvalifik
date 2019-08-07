@@ -8,5 +8,22 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     title: 'Crazy title!'
-  }
+  },
+  plugins: [
+    'gatsby-plugin-resolve-src',
+    {
+      resolve: `gatsby-source-datocms`,
+      options: {
+        apiToken: `4cd38b7807abbdff5ee4b344a4d7b0`,
+        preview: false,
+        disableLiveReload: false
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography'
+      }
+    }
+  ]
 }
