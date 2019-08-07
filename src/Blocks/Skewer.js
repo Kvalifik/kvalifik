@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components'
 const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
+  margin-top: ${props => props.offset || 0};
+  height: ${props => props.height || 'auto'};
 
   ${props => props.reverse
     ? css`
@@ -24,7 +26,7 @@ const Inner = styled.div`
     : `skewy(-${props.angle})`}
 `
 
-const Skewer = ({ bgColor, angle, children, reverse, noPadding }) => {
+const Skewer = ({ bgColor, angle, children, reverse, noPadding, flushTop, height }) => {
   const deg = `${angle}deg`
   let offset = 0
 
@@ -37,22 +39,30 @@ const Skewer = ({ bgColor, angle, children, reverse, noPadding }) => {
   }
 
   return (
-    <Root bgColor={bgColor} angle={deg} reverse={reverse}>
+    <Root
+      bgColor={bgColor}
+      angle={deg}
+      reverse={reverse}
+      offset={flushTop && `-${offset * 2}vw`}
+      height={height}
+    >
       <Inner
         reverse={reverse}
         angle={deg}
-        offset={`${offset}vw`}
+        offset={!flushTop && `${offset}vw`}
       >{children}</Inner>
     </Root>
   )
 }
 
 Skewer.propTypes = {
+  height: PropTypes.string,
   bgColor: PropTypes.string,
   children: PropTypes.any,
   angle: PropTypes.number,
   reverse: PropTypes.bool,
-  noPadding: PropTypes.bool
+  noPadding: PropTypes.bool,
+  flushTop: PropTypes.bool
 }
 
 export default Skewer

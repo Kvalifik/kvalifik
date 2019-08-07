@@ -44,11 +44,14 @@ const SideTextInner = styled.div`
 `
 
 const Content = styled.div`
-  grid-column-start: 2;
+  grid-column-start: ${props => props.overflowLeft ? 1 : 2};
+  grid-column-end: ${props => props.overflowRight ? -1 : 3};
 `
 
 const Container = ({
   sideText,
+  overflowRight,
+  overflowLeft,
   children
 }) => (
   <Root>
@@ -57,7 +60,7 @@ const Container = ({
         {sideText}
       </SideTextInner>
     </SideText>
-    <Content>
+    <Content overflowRight={overflowRight} overflowLeft={overflowLeft}>
       {children}
     </Content>
   </Root>
@@ -65,7 +68,9 @@ const Container = ({
 
 Container.propTypes = {
   sideText: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  overflowRight: PropTypes.bool,
+  overflowLeft: PropTypes.bool
 }
 
 export default Container
