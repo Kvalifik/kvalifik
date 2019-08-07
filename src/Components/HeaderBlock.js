@@ -37,6 +37,11 @@ const Video = styled.video`
   height: 100%;
 `
 
+const Title = styled.div`
+  font-size: ${props => props.theme.typography.fontSize.md};
+  ${props => props.theme.mixins.typography.hero};
+`
+
 const HeaderBlock = ({
   title,
   body,
@@ -49,7 +54,7 @@ const HeaderBlock = ({
       <Content>
         <TopLeftContainer>
           <Icon src={iconUrl} />
-          <h1>{title}</h1>
+          <Title>{title}</Title>
         </TopLeftContainer>
         <BottomLeftContainer>
           <p dangerouslySetInnerHTML={{ __html: body }} />

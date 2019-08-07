@@ -43,13 +43,13 @@ const Skewer = ({ bgColor, angle, children, reverse, noPadding, flushTop, height
       bgColor={bgColor}
       angle={deg}
       reverse={reverse}
-      offset={flushTop && `-${offset * 2}vw`}
+      offset={flushTop ? `-${offset * 2}vw` : 0}
       height={height}
     >
       <Inner
         reverse={reverse}
         angle={deg}
-        offset={!flushTop && `${offset}vw`}
+        offset={!flushTop ? `${offset}vw` : 0}
       >{children}</Inner>
     </Root>
   )
