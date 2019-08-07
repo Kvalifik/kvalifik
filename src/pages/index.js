@@ -1,46 +1,47 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 const Index = ({ data }) => {
-  const [isChecked, setChecked] = useState(false)
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    document.title = search
-  }, [search])
-
-  const onToggle = () => {
-    setChecked(!isChecked)
-  }
+  const {
+    headerTitle: title,
+    headerDescription: desc,
+    headerIcon: {
+      url: iconUrl
+    }
+  } = data.datoCmsHomePage
 
   return (
     <div>
-      <h1>{data.site.siteMetadata.title}</h1>
-      {isChecked && <p>Hello kvalifik!</p>}
-      {!isChecked && <p>Goodbye kvalifik!</p>}
-      <input type="button" onClick={onToggle} value="Toggle" />
-      <input type="text" onChange={({ target: { value } }) => setSearch(value)} value={search} />
+      <img src={iconUrl} alt="header icon" />
+      <h1>{title}</h1>
+      <p dangerouslySetInnerHTML={{ __html: desc }} />
     </div>
   )
 }
 
 Index.propTypes = {
   data: PropTypes.shape({
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string
+    datoCmsHomePage: PropTypes.shape({
+      headerTitle: PropTypes.string,
+      headerDescription: PropTypes.string,
+      headerIcon: PropTypes.shape({
+        url: PropTypes.string,
+        id: PropTypes.string
       })
     })
   })
 }
 
 export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
+  query HomeQuery {
+    datoCmsHomePage {
+      headerIcon {
+        id
+        url
       }
+      headerTitle
+      headerDescription
     }
   }
 `
