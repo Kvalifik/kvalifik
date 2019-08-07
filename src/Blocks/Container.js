@@ -44,6 +44,7 @@ const SideTextInner = styled.div`
 `
 
 const Content = styled.div`
+  padding: ${props => props.theme.padding.sm};
   grid-column-start: 2;
 `
 
