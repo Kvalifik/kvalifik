@@ -10,7 +10,8 @@ const Index = ({ data }) => {
   const {
     contactTitle,
     contactButtonText,
-    contactDescription
+    contactDescription,
+    contactImages
   } = data.datoCmsHomePage
 
   return (
@@ -20,6 +21,7 @@ const Index = ({ data }) => {
         body={contactDescription}
         buttonLabel={contactButtonText}
         buttonType="button"
+        images={contactImages}
       />
     </Main>
   )
@@ -30,7 +32,10 @@ Index.propTypes = {
     datoCmsHomePage: PropTypes.shape({
       contactTitle: PropTypes.string,
       contactButtonText: PropTypes.string,
-      contactDescription: PropTypes.string
+      contactDescription: PropTypes.string,
+      contactImages: PropTypes.arrayOf(PropTypes.shape({
+        url: PropTypes.string
+      }))
     })
   })
 }
@@ -41,6 +46,9 @@ export const query = graphql`
       contactTitle
       contactDescription
       contactButtonText
+      contactImages {
+        url
+      }
     }
   }
 `

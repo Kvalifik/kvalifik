@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
+import Gallery from 'Blocks/Gallery'
 
 const Content = styled.div`
   display: grid;
@@ -18,14 +19,22 @@ const RightContainer = styled.div`
   grid-column: 2 / 3;
 `
 
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 650px;
+`
+
 const ActionBlock = ({
   title,
   body,
+  images,
   buttonType = 'button',
   buttonProps,
   buttonLabel,
   bgColor = 'lightblue'
 }) => {
+  const imageUrls = images.map(image => image.url)
+
   return (
     <Skewer bgColor={bgColor} angle={4} reverse noPadding>
       <Container>
@@ -36,7 +45,11 @@ const ActionBlock = ({
             <button type="button" alt={buttonLabel}>{buttonLabel}</button>
           </LeftContainer>
           <RightContainer>
-            <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/286/508/f8e.jpg" />
+            <Gallery
+              images={imageUrls}
+              WrapperComponent={ImageWrapper}
+              delay={5000}
+            />
           </RightContainer>
         </Content>
       </Container>
@@ -50,7 +63,10 @@ ActionBlock.propTypes = {
   buttonLabel: PropTypes.string,
   buttonType: PropTypes.oneOf(['button', 'link']),
   buttonProps: PropTypes.object,
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
+  images: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string
+  }))
 }
 
 export default ActionBlock
