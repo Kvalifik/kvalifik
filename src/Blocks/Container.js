@@ -6,6 +6,22 @@ const Root = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 60px 1fr;
+
+  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+    grid-template-columns: 1fr 400px 1fr;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr 630px 1fr;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.lg}) {
+    grid-template-columns: 1fr 870px 1fr;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.xl}) {
+    grid-template-columns: 1fr 1050px 1fr;
+  }
 `
 
 const SideText = styled.div`
@@ -19,16 +35,16 @@ const SideText = styled.div`
 
 const SideTextInner = styled.div`
   @media (max-width: calc(576px + 80px)) {
-    padding: 0px $sm-padding 0px 0px;
+    padding: 0px ${props => props.theme.padding.sm} 0px 0px;
   }
-  padding: 0px $sm-padding $sm-padding 0;
+  padding: ${props => `0px ${props.theme.padding.sm} ${props.theme.padding.sm} 0`};
   position: absolute;
   transform-origin: 0% 0%;
   transform: rotate(90deg) scale(-1) translate(-100%, -100%);
 `
 
 const Content = styled.div`
-  padding: 15px;
+  padding: ${props => props.theme.padding.sm};
   grid-column-start: 2;
 `
 

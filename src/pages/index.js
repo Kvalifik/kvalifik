@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
+import Main from 'Components/Main'
 import ActionBlock from 'Components/ActionBlock'
 
 const Index = ({ data }) => {
@@ -13,14 +14,14 @@ const Index = ({ data }) => {
   } = data.datoCmsHomePage
 
   return (
-    <div>
+    <Main>
       <ActionBlock
         title={contactTitle}
         body={contactDescription}
         buttonLabel={contactButtonText}
         buttonType="button"
       />
-    </div>
+    </Main>
   )
 }
 
