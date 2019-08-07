@@ -35,13 +35,10 @@ class Gallery extends Component {
   handleNextStep () {
     const { images } = this.props
     const { step } = this.state
-    console.log('Got step ' + step)
     if (step + 1 < images.length) {
       this.setState({ step: step + 1 })
-      console.log('Increasing')
     } else {
       this.setState({ step: 0 })
-      console.log('Rewinding')
     }
   }
 
@@ -51,8 +48,6 @@ class Gallery extends Component {
       WrapperComponent
     } = this.props
     const { step } = this.state
-
-    console.log(step)
 
     return (
       <WrapperComponent>
