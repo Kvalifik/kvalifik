@@ -16,7 +16,6 @@ const Root = styled.div`
     grid-column: 1 / -1;
     @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
       height: 350px;
-      background-color: rgb(163, 255, 200);
     }
   ` : ''}
 
