@@ -2,10 +2,11 @@ import 'normalize.css'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Container from '../components/Container';
 
 import Main from 'Components/Main'
 import ActionBlock from 'Components/ActionBlock'
+import CaseGrid from 'Blocks/CaseGrid'
+import CaseThump from '../Blocks/CaseThump'
 
 const Index = ({ data }) => {
   const {
@@ -17,13 +18,20 @@ const Index = ({ data }) => {
 
   return (
     <Main>
-      <ActionBlock
+      {/* <ActionBlock
         title={contactTitle}
         body={contactDescription}
         buttonLabel={contactButtonText}
         buttonType="button"
         images={contactImages}
-      />
+      /> */}
+      <CaseGrid>
+        <CaseThump />
+        <CaseThump />
+        <CaseThump full />
+        <CaseThump />
+        <CaseThump />
+      </CaseGrid>
     </Main>
   )
 }

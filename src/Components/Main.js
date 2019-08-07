@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 
 const Main = ({ children }) => (
   <ThemeProvider theme={theme}>
-    {children}
+    <div>
+      {children}
+    </div>
   </ThemeProvider>
 )
 

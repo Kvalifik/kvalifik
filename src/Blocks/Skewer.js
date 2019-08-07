@@ -24,7 +24,7 @@ const Inner = styled.div`
     : `skewy(-${props.angle})`}
 `
 
-const Skewer = ({ bgColor, angle, children, reverse, noPadding }) => {
+const Skewer = ({ bgColor, angle = 4, children, reverse, noPadding }) => {
   const deg = `${angle}deg`
   let offset = 0
 
