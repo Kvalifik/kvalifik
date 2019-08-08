@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import Container from './Container'
 import Skewer from './Skewer'
@@ -39,15 +39,16 @@ const Fader = styled.div`
     bottom:13px;
     top: 0;
     width:100%;
-    background:-webkit-linear-gradient(#1d1d1d00 92%, #1d1d1d 100%
-  ); 
+    ${props => props.fadeBottom ? css`
+        background:-webkit-linear-gradient(${props => props.bgColor + '00 92%, ' + props.bgColor + ' 100%)'}
+    ` : ''}
 `
 
 function CaseGrid (props) {
   return (
     <Skewer innerPadding bgColor={props.bgColor}>
       <Container sideText="Cases" bgColor={props.bgColor}>
-        <Fader />
+        <Fader bgColor={props.bgColor} fadeBottom={props.fadeBottom} />
         <Content fadeBottom={props.fadeBottom}>
           {props.children}
         </Content>
@@ -63,7 +64,7 @@ function CaseGrid (props) {
 
 CaseGrid.propTypes = {
   children: PropTypes.any,
-  bgColor: PropTypes.string,
+  bgColor: PropTypes.string.isRequired,
   fadeBottom: PropTypes.bool
 }
 
