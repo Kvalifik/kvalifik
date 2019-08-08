@@ -28,7 +28,7 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
       /> */}
-      <CaseGrid>
+      <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
         <CaseThump name="Andet" bg={bg2} />
         <CaseThump full name="Andet" desc="don trippa shu" bg={bg3} />

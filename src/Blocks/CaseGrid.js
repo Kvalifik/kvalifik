@@ -14,20 +14,57 @@ const Content = styled.div`
   }
 `
 
+const MoreWork = styled.div`
+  display: ${props => props.fadeBottom ? 'flex' : 'none'};
+  justify-content: center;
+`
+
+const MoreWorkButton = styled.button`
+    padding: 20px 100px;
+    margin: 20px;
+    background: #707070;
+    border: 0;
+    color: white;
+    @media only screen and (max-width : ${props => props.theme.breakpoints.sm} ) {
+      width: 100%;
+    }
+
+`
+
+const Fader = styled.div`
+    position: absolute; 
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    bottom:13px;
+    top: 0;
+    width:100%;
+    background:-webkit-linear-gradient(#1d1d1d00 92%, #1d1d1d 100%
+  ); 
+`
+
 function CaseGrid (props) {
   return (
-    <Skewer bgColor="#1d1d1d" innerPadding>
-      <Container sideText="Hey!">
-        <Content>
+    <Skewer innerPadding bgColor={props.bgColor}>
+      <Container sideText="Cases" bgColor={props.bgColor}>
+        <Fader />
+        <Content fadeBottom={props.fadeBottom}>
           {props.children}
         </Content>
       </Container>
+      <MoreWork fadeBottom={props.fadeBottom}>
+        <MoreWorkButton>
+          More Work
+        </MoreWorkButton>
+      </MoreWork>
     </Skewer>
   )
 }
 
 CaseGrid.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any,
+  bgColor: PropTypes.string,
+  fadeBottom: PropTypes.bool
 }
 
 export default CaseGrid
