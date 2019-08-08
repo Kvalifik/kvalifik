@@ -74,7 +74,9 @@ const Header = styled.div`
 
 const H3 = styled.h3`
   margin: 0 calc(15px * 2.5);
-  font-size: ${props => props.full ? '30px' : '15px'};
+  @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
+    font-size: ${props => props.full ? '30px' : '15px'};
+  }
 `
 
 export default function CaseThump (props) {

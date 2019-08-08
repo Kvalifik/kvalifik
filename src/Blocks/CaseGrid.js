@@ -41,7 +41,7 @@ const Fader = styled.div`
     width:100%;
     ${props => props.fadeBottom ? css`
         background:-webkit-linear-gradient(${props => props.bgColor + '00 92%, ' + props.bgColor + ' 100%)'}
-    ` : ''}
+    ` : 'display:none'}
 `
 
 function CaseGrid (props) {
