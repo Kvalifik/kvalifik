@@ -6,6 +6,8 @@ import { graphql } from 'gatsby'
 import Main from 'Components/Main'
 import CaseGrid from 'Blocks/CaseGrid'
 import CaseThump from 'Blocks/CaseThump'
+import Toolbox from 'Components/Toolbox';
+import ToolBoxContent from '../Blocks/ToolBoxContent';
 
 /* Import from cms */
 import bg from 'graphics/test.jpeg'
@@ -29,14 +31,17 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
       /> */}
-      <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
+      {/* <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
         <CaseThump name="Andet" bg={bg2} />
         <CaseThump full name="Andet" desc="don trippa shu" bg={bg3} />
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg2} color="rgb(163, 241, 255)" />
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
         <CaseThump full name="Have A Look" desc="el preben hmm" bg={bg3} color="rgb(163, 241, 255)" />
-      </CaseGrid>
+      </CaseGrid> */}
+      <Toolbox>
+        <ToolBoxContent project={'test'} />
+      </Toolbox>
     </Main>
   )
 }
