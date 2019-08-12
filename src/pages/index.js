@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Main from 'Components/Main'
-// import ActionBlock from 'Components/ActionBlock'
 import CaseGrid from 'Blocks/CaseGrid'
-import CaseThump from '../Blocks/CaseThump'
-import bg from '../graphics/test.jpeg'
-import bg2 from '../graphics/test2.jpeg'
-import bg3 from '../graphics/test3.jpeg'
+import CaseThump from 'Blocks/CaseThump'
+
+/* Import from cms */
+import bg from 'graphics/test.jpeg'
+import bg2 from 'graphics/test2.jpeg'
+import bg3 from 'graphics/test3.jpeg'
 
 const Index = ({ data }) => {
   // const {

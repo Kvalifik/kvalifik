@@ -1,8 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import Container from './Container'
-import Skewer from './Skewer'
+import Container from 'Blocks/Container'
+import Skewer from 'Blocks/Skewer'
+import Padder from 'Blocks/Padder'
 
 const Content = styled.div`
   display: grid;
@@ -44,20 +45,22 @@ const Fader = styled.div`
     ` : 'display:none'}
 `
 
-function CaseGrid (props) {
+const CaseGrid = (props) => {
   return (
     <Skewer innerPadding bgColor={props.bgColor}>
-      <Container sideText="Cases" bgColor={props.bgColor}>
-        <Fader bgColor={props.bgColor} fadeBottom={props.fadeBottom} />
-        <Content fadeBottom={props.fadeBottom}>
-          {props.children}
-        </Content>
-      </Container>
-      <MoreWork fadeBottom={props.fadeBottom}>
-        <MoreWorkButton>
-          More Work
-        </MoreWorkButton>
-      </MoreWork>
+      <Padder>
+        <Container sideText="Cases" bgColor={props.bgColor}>
+          <Fader bgColor={props.bgColor} fadeBottom={props.fadeBottom} />
+          <Content fadeBottom={props.fadeBottom}>
+            {props.children}
+          </Content>
+        </Container>
+        <MoreWork fadeBottom={props.fadeBottom}>
+          <MoreWorkButton>
+            More Work
+          </MoreWorkButton>
+        </MoreWork>
+      </Padder>
     </Skewer>
   )
 }

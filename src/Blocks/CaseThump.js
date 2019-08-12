@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import arrowImg from '../graphics/arrow.svg'
+import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   align-self: center;
@@ -17,7 +17,7 @@ const Root = styled.div`
     @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
       height: 350px;
     }
-  ` : ''}
+  ` : ''};
 
   &:hover{
     transform: scale(1.012);
@@ -48,7 +48,6 @@ const ProjectName = styled.div`
   font-size: 13px;
   @media only screen and (max-width : ${props => props.theme.breakpoints.xs} ) {
     width: 50%;
-    /* font-size: 4vw; */
   }
 `
 
@@ -58,11 +57,10 @@ const Arrow = styled.img`
   height: 15px;
   right: 15px;
   bottom: 15px;
-  margin:0 !important;
+  margin: 0 !important;
 `
 
 const Img = styled.div`
-  background: rgb(255, 83, 83);
   background-position: 50% 50%;
   background-size: cover;
 `
@@ -79,7 +77,7 @@ const H3 = styled.h3`
   }
 `
 
-export default function CaseThump (props) {
+const CaseThump = (props) => {
   return (
     <Root full={props.full} color={props.color}>
       <Desc>
@@ -105,3 +103,5 @@ CaseThump.propTypes = {
   full: PropTypes.bool,
   bg: PropTypes.any // not sure of prop type yet. (string or node maybe)
 }
+
+export default CaseThump

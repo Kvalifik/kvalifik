@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components'
 const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
-  padding: ${props => props.innerPadding ? '150px' : '0px'} 0;
   ${props => props.reverse
     ? css`
       transform-origin: 100%;
