@@ -39,9 +39,7 @@ const Index = ({ data }) => {
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
         <CaseThump full name="Have A Look" desc="el preben hmm" bg={bg3} color="rgb(163, 241, 255)" />
       </CaseGrid> */}
-      <Toolbox>
-        <ToolBoxContent project={'test'} />
-      </Toolbox>
+      <Toolbox />
     </Main>
   )
 }
