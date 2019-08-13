@@ -42,6 +42,7 @@ const Index = ({ data }) => {
       <FixedSkewer
         angle="large"
         reverse
+        height="30px"
       />
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         <CaseThump

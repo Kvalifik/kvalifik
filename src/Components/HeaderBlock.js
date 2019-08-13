@@ -9,7 +9,7 @@ import downArrow from 'graphics/down.svg'
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 2fr 5fr;
+  grid-template-rows: 2fr 4fr;
   grid-column: 2 / -1;
 
   ${props => props.theme.media.xl`
