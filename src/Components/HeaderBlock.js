@@ -15,14 +15,15 @@ const Content = styled.div`
 const TopLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  padding: 35% ${props => props.theme.spacing(10)} 0 0;
+  padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   align-self: end;
+  line-height: 1.25;
 `
 
 const BottomLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  padding: 0 ${props => props.theme.spacing(10)} 0 0;
+  padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
 `
 
 const RightContainer = styled.div`
@@ -40,7 +41,8 @@ const Video = styled.video`
 
 const Title = styled.div`
   font-size: ${props => props.theme.typography.fontSize.md};
-  ${props => props.theme.mixins.typography.hero};
+  padding: 5px 0;
+  ${props => props.theme.mixins.typography.hero()};
 `
 
 const DownArrow = styled.img.attrs({
