@@ -17,13 +17,15 @@ const NavDiv = styled.div`
   right: 0;
   top:0;
   bottom:0;
-  width: 20vw;
+  width: 300px;
   background-color: #1D1D1DCC; /* CC = 80% in hex */
 
-  ${props => props.collapsed ? css`
-    right: calc(-20vw + 50px);
-    ` :
-  ''};
+  ${props => props.collapsed
+    ? css`
+      right: calc(-300px + 75px);
+    `
+    : ''
+}
 `
 
 const CollapseIcon = styled.img`
@@ -37,8 +39,8 @@ const IconWrapper = styled.div`
   z-index:10;
   right: 0;
   top:0; 
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   position:fixed;
 `
 
@@ -68,7 +70,7 @@ class Navigation extends Component {
           <CollapseIcon src={this.state.collapsed ? burgerIcon : exitIcon} onClick={this.toggleNavigation.bind(this)} />
         </IconWrapper>
         <NavDiv collapsed={this.state.collapsed}>
-          <NavigationContent navigationItems={navigationItems} />
+          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} />
         </NavDiv>
       </Root>
     )

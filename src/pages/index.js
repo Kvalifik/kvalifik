@@ -133,7 +133,8 @@ Index.propTypes = {
         url: PropTypes.string
       })),
       contactImageDelay: PropTypes.number
-    })
+    }),
+    allDatoCmsCase: PropTypes.object
   })
 }
 

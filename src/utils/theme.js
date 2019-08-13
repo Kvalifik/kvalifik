@@ -48,7 +48,8 @@ const theme = {
       sm: '14px',
       md: '40px',
       xl: '80px',
-      quote: '18px'
+      quote: '18px',
+      menuItem: '25px'
     },
     body: {
       fontFamily: 'Montserrat',

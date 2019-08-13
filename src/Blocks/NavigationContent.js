@@ -1,20 +1,32 @@
 import React from 'react'
 import PropTypes, { any } from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const NavItem = styled.a`
-  border: 0;
   color: white;
   list-style-type: none;
   text-decoration:none;
-  font-weight:900;
-  /* font-size: ${props = props.theme} */
+  font-weight:700;
+  font-size: ${props => props.theme.typography.fontSize.menuItem};
+  text-transform: uppercase;
+  ${props => props.collapsed
+    ? css`
+      transform:translateX(-1000%);
+      `
+    : css`
+      transform:translateX(0%);  
+    `
+}
+`
+
+const Li = styled.li`
+  padding-bottom: 10px;
 `
 
 const NavItems = styled.div`
   justify-self:center;
   align-self:center;
-  `
+`
 
 const NavFoot = styled.ul`
   justify-self:center;
@@ -29,16 +41,16 @@ const Root = styled.div`
 `
 
 const NavigationContent = props => {
-  const { navigationItems } = props
+  const { navigationItems, collapsed } = props
 
   return (
     <Root>
       <NavItems>
         { navigationItems.map(navigationItem => (
-          <NavItem href={navigationItem.link}>
-            <li>
+          <NavItem href={navigationItem.link} collapsed={collapsed}>
+            <Li>
               {navigationItem.name}
-            </li>
+            </Li>
           </NavItem>
         )) }
       </NavItems>
@@ -50,6 +62,7 @@ const NavigationContent = props => {
 }
 
 NavigationContent.propTypes = {
-  navigationItems: PropTypes.array
+  navigationItems: PropTypes.array,
+  collapsed: PropTypes.bool
 }
 export default NavigationContent
