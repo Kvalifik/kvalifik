@@ -8,6 +8,7 @@ import CaseGrid from 'Blocks/CaseGrid'
 import CaseThump from 'Blocks/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
+import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
@@ -27,7 +28,8 @@ const Index = ({ data }) => {
     contactButtonText,
     contactDescription,
     contactImages,
-    contactImageDelay
+    contactImageDelay,
+    punchline
   } = data.datoCmsHomePage
 
   return (
@@ -80,6 +82,7 @@ const Index = ({ data }) => {
           bgColor="rgb(163, 241, 255)"
         />
       </CaseGrid>
+      <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
         title={contactTitle}
         body={contactDescription}
@@ -110,7 +113,8 @@ Index.propTypes = {
       contactImages: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string
       })),
-      contactImageDelay: PropTypes.number
+      contactImageDelay: PropTypes.number,
+      punchline: PropTypes.string
     })
   })
 }
@@ -132,7 +136,8 @@ export const query = graphql`
       contactImages {
         url
       }
-      contactImageDelay
+      contactImageDelay,
+      punchline
     }
   }
 `
