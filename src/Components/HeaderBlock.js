@@ -9,7 +9,22 @@ import downArrow from 'graphics/down.svg'
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 4fr 5fr;
+  grid-template-rows: 2fr 5fr;
+  grid-column: 2 / -1;
+
+  ${props => props.theme.media.xl`
+    grid-column: 1 / -1;
+  `}
+
+  ${props => props.theme.media.lg`
+    grid-column: 2 / 3;
+    padding: ${({ theme: { spacing } }) => `${spacing(2)} 0 0`};
+    grid-template-rows: auto auto;
+  `}
+
+  ${props => props.theme.media.md`
+    grid-column: 1 / -1;
+  `}
 `
 
 const TopLeftContainer = styled.div`
@@ -18,23 +33,43 @@ const TopLeftContainer = styled.div`
   padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   align-self: end;
   line-height: 1.25;
+
+  ${props => props.theme.media.lg`
+    grid-column: 1 / -1;
+  `}
 `
 
 const BottomLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+
+  ${props => props.theme.media.lg`
+    grid-column: 1 / -1;
+    grid-row: 3 / -1;
+  `}
 `
 
 const RightContainer = styled.div`
   grid-column: 2 / 3;
   grid-row: 1 / -1;
   height: 145vh;
+
+  ${props => props.theme.media.lg`
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+
+    height: initial;
+    padding: ${props => props.theme.spacing(2)};
+    iframe, video{
+      height: initial;
+    }
+  `}
 `
 
 const Video = styled.video`
   object-fit: cover;
-  object-position: 28%;
+  object-position: 15%;
   width: 100%;
   height: 100%;
 `
@@ -42,7 +77,14 @@ const Video = styled.video`
 const Title = styled.div`
   font-size: ${props => props.theme.typography.fontSize.md};
   padding: 5px 0;
-  ${props => props.theme.mixins.typography.hero()};
+  ${props => props.theme.typography.hero.mixin()};
+
+  ${props => props.theme.media.md`
+    font-size: 4.5vw;
+  `}
+  ${props => props.theme.media.sm`
+    font-size: 7vw;
+  `}
 `
 
 const DownArrow = styled.img.attrs({
@@ -56,6 +98,10 @@ const DownArrow = styled.img.attrs({
   bottom: 50vh;
   left: 50%;
   transform: translateX(-50%);
+
+  ${props => props.theme.media.lg`
+    display: none;
+  `}
 `
 
 const HeaderBlock = ({
@@ -65,8 +111,8 @@ const HeaderBlock = ({
   videoUrl,
   iconUrl
 }) => (
-  <Skewer angle="large" flushTop bgColor={bgColor} height="130vh">
-    <Container overflowRight>
+  <Skewer angle="large" flushTop bgColor={bgColor} noPadding height="130vh">
+    <Container noContentWrapper>
       <Content>
         <TopLeftContainer>
           <Icon src={iconUrl} />

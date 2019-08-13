@@ -52,6 +52,7 @@ const Container = ({
   sideText,
   overflowRight,
   overflowLeft,
+  noContentWrapper,
   children
 }) => (
   <Root>
@@ -60,9 +61,13 @@ const Container = ({
         {sideText}
       </SideTextInner>
     </SideText>
-    <Content overflowRight={overflowRight} overflowLeft={overflowLeft}>
-      {children}
-    </Content>
+    {noContentWrapper ? (
+      children
+    ) : (
+      <Content overflowRight={overflowRight} overflowLeft={overflowLeft}>
+        {children}
+      </Content>
+    )}
   </Root>
 )
 
@@ -70,7 +75,8 @@ Container.propTypes = {
   sideText: PropTypes.string,
   children: PropTypes.any,
   overflowRight: PropTypes.bool,
-  overflowLeft: PropTypes.bool
+  overflowLeft: PropTypes.bool,
+  noContentWrapper: PropTypes.bool
 }
 
 export default Container

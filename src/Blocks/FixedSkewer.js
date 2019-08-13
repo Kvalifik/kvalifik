@@ -24,11 +24,7 @@ const FixedSkewer = ({ angle: type = 'small', reverse, height = '100px' }) => {
   if (reverse) {
     angle *= -1
   }
-  let offset = 0
-
-  // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
-  const rad = angle / 180 * Math.PI
-  offset = Math.tan(rad) * 50
+  const offset = -theme.skewer.calculateOffset(type)
 
   return (
     <Root

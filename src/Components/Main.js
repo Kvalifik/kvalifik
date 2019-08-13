@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = styled.div`
-  ${props => props.theme.mixins.typography.body()}
+  ${props => props.theme.typography.body.mixin()}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `

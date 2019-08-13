@@ -6,14 +6,14 @@ import theme from 'utils/theme'
 const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
-  margin-top: ${props => props.offset || 0};
+  margin-top: ${props => props.offsetTop}vw;
   height: ${props => props.height || 'auto'};
   transform-origin: 0%;
   transform: skewy(${props => props.angle}deg);
 `
 
 const Inner = styled.div`
-  margin: ${props => props.offset} 0;
+  margin: ${props => props.offsetTop}vw 0 ${props => props.offsetBottom}vw;
   transform: skewy(${props => -props.angle}deg);
 `
 
@@ -27,26 +27,28 @@ const Skewer = ({ bgColor, angle: type = 'small', children, reverse, noPadding, 
   if (reverse) {
     angle *= -1
   }
-  let offset = 0
+  const offset = theme.skewer.calculateOffset(type)
 
-  // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
-  const rad = angle / 180 * Math.PI
-  offset = Math.tan(rad) * 50
-
+  let topOffset = offset
+  let bottomOffset = offset
+  if (noPadding && !flushTop) {
+    topOffset = -offset
+  }
   if (noPadding) {
-    offset *= -1
+    bottomOffset = -offset
   }
 
   return (
     <Root
       bgColor={bgColor}
       angle={angle}
-      offset={flushTop ? `${-offset * 2}vw` : 0}
+      offsetTop={flushTop ? -topOffset * 2 : 0}
       height={height}
     >
       <Inner
         angle={angle}
-        offset={!flushTop ? `${offset}vw` : 0}
+        offsetBottom={bottomOffset}
+        offsetTop={topOffset}
       >
         {children}
       </Inner>
