@@ -16,6 +16,10 @@ const Root = styled.div`
 const Slider = styled.div`
   padding: ${props => props.theme.spacing(4)} 0;
   grid-gap: ${props => props.theme.spacing(6)};
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm} ) {
+    grid-gap: ${props => props.theme.spacing(2)};
+  
+  }
   grid-column: 2 / 3;
   display: grid;
   grid-auto-flow: column;
