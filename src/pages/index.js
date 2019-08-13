@@ -18,6 +18,25 @@ import bg from 'graphics/test.jpeg'
 import bg2 from 'graphics/test2.jpeg'
 import bg3 from 'graphics/test3.jpeg'
 
+const navigationItems = [
+  {
+    name: 'Work',
+    link: '/work'
+  },
+  {
+    name: 'Services',
+    link: '/services'
+  },
+  {
+    name: 'Toolbox',
+    link: '/toolbox'
+  },
+  {
+    name: 'Contact',
+    link: '/contact'
+  }
+]
+
 const Index = ({ data }) => {
   const {
     headerTitle,
@@ -90,15 +109,6 @@ const Index = ({ data }) => {
         bgColor={theme.palette.primary.B}
         galleryDelay={contactImageDelay}
       />
-      {/* <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
-        <CaseThump name="Andet" bg={bg2} />
-        <CaseThump full name="Andet" desc="don trippa shu" bg={bg3} />
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg2} color="rgb(163, 241, 255)" />
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
-        <CaseThump full name="Have A Look" desc="el preben hmm" bg={bg3} color="rgb(163, 241, 255)" />
-      </CaseGrid> */}
-      {/* <Toolbox /> */}
     </Main>
   )
 }
@@ -121,7 +131,8 @@ Index.propTypes = {
         url: PropTypes.string
       })),
       contactImageDelay: PropTypes.number
-    })
+    }),
+    allDatoCmsWork: PropTypes.nodes()
   })
 }
 
@@ -143,6 +154,16 @@ export const query = graphql`
         url
       }
       contactImageDelay
+    }
+    allDatoCmsWork {
+      nodes {
+        title
+        description
+        id
+        forWho
+        fullSize
+        date(formatString: "DD/MM-YY")
+      }
     }
   }
 `
