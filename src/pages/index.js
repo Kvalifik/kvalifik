@@ -7,11 +7,31 @@ import Main from 'Components/Main'
 import CaseGrid from 'Blocks/CaseGrid'
 import CaseThump from 'Blocks/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
+import Navigation from 'Components/Navigation'
 
 /* Import from cms */
 import bg from 'graphics/test.jpeg'
 import bg2 from 'graphics/test2.jpeg'
 import bg3 from 'graphics/test3.jpeg'
+
+const navigationItems = [
+  {
+    name: 'Work',
+    link: '/work'
+  },
+  {
+    name: 'Services',
+    link: '/services'
+  },
+  {
+    name: 'Toolbox',
+    link: '/toolbox'
+  },
+  {
+    name: 'Contact',
+    link: '/contact'
+  }
+]
 
 const Index = ({ data }) => {
   const {
@@ -67,6 +87,7 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
       />
+      <Navigation navigationItems={navigationItems} />
     </Main>
   )
 }
