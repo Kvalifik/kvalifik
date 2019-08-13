@@ -51,7 +51,7 @@ const DownArrow = styled.img.attrs({
   border-radius: 100%;
   width: 30px;
   height: 30px;
-  bottom: 20vh;
+  bottom: 50vh;
   left: 50%;
   transform: translateX(-50%);
 `
