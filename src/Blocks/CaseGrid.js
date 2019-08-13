@@ -33,7 +33,7 @@ const MoreWorkButton = styled.button`
 `
 
 const Fader = styled.div`
-    position: absolute; 
+    position: absolute;
     z-index: 1000;
     left: 0;
     right: 0;
@@ -47,7 +47,7 @@ const Fader = styled.div`
 
 const CaseGrid = (props) => {
   return (
-    <Skewer innerPadding bgColor={props.bgColor}>
+    <Skewer bgColor={props.bgColor}>
       <Padder>
         <Container sideText="Cases" bgColor={props.bgColor}>
           <Fader bgColor={props.bgColor} fadeBottom={props.fadeBottom} />

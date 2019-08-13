@@ -11,7 +11,7 @@ const Root = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
+
   ${props => props.full ? css`
     grid-column: 1 / -1;
     @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
@@ -57,51 +57,53 @@ const Arrow = styled.img`
   height: 15px;
   right: 15px;
   bottom: 15px;
-  margin: 0 !important;
+  margin: 0;
 `
 
 const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
+  background-image: url(${props => props.src});
 `
 
-const Header = styled.div`
+const Header = styled.h3`
   display: grid;
   align-content: center;
-`
-
-const H3 = styled.h3`
   margin: 0 calc(15px * 2.5);
   @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
     font-size: ${props => props.full ? '30px' : '15px'};
   }
 `
 
-const CaseThump = (props) => {
+const CaseThump = ({
+  name,
+  description,
+  bgColor,
+  bgUrl,
+  fullWidth
+}) => {
   return (
-    <Root full={props.full} color={props.color}>
+    <Root full={fullWidth} color={bgColor}>
       <Desc>
         <Arrow src={arrowImg} alt="arrow" />
         <ProjectName>
-          {props.name}
+          {name}
         </ProjectName>
-        <Header className="head-desc">
-          <H3 full={props.full}>
-            {props.desc}
-          </H3>
+        <Header full={fullWidth}>
+          {description}
         </Header>
       </Desc>
-      <Img style={{ backgroundImage: `url(${props.bg})` }} />
+      <Img src={bgUrl} />
     </Root>
   )
 }
 
 CaseThump.propTypes = {
   name: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  full: PropTypes.bool,
-  bg: PropTypes.any // not sure of prop type yet. (string or node maybe)
+  description: PropTypes.string.isRequired,
+  bgColor: PropTypes.string.isRequired,
+  fullWidth: PropTypes.bool,
+  bgUrl: PropTypes.string
 }
 
 export default CaseThump

@@ -10,6 +10,12 @@ module.exports = {
     title: 'Crazy title!'
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: true
+      }
+    },
     'gatsby-plugin-resolve-src',
     {
       resolve: `gatsby-source-datocms`,
