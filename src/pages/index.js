@@ -4,10 +4,17 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Main from 'Components/Main'
+import CaseGrid from 'Blocks/CaseGrid'
+import CaseThump from 'Blocks/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 
 import theme from 'utils/theme'
+
+/* Import from cms */
+import bg from 'graphics/test.jpeg'
+import bg2 from 'graphics/test2.jpeg'
+import bg3 from 'graphics/test3.jpeg'
 
 const Index = ({ data }) => {
   const {
@@ -30,6 +37,43 @@ const Index = ({ data }) => {
         bgColor={theme.palette.primary.C}
         videoUrl={headerMedia.url}
       />
+      <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
+        <CaseThump
+          name="Have A Look"
+          description="el preben hmm"
+          bgUrl={bg}
+          bgColor="rgb(163, 241, 255)"
+        />
+        <CaseThump
+          name="Andet"
+          bgUrl={bg2}
+        />
+        <CaseThump
+          fullWidth
+          name="Andet"
+          description="don trippa shu"
+          bgUrl={bg3}
+        />
+        <CaseThump
+          name="Have A Look"
+          description="el preben hmm"
+          bgUrl={bg2}
+          bgColor="rgb(163, 241, 255)"
+        />
+        <CaseThump
+          name="Have A Look"
+          description="el preben hmm"
+          bgUrl={bg}
+          bgColor="rgb(163, 241, 255)"
+        />
+        <CaseThump
+          fullWidth
+          name="Have A Look"
+          description="el preben hmm"
+          bgUrl={bg3}
+          bgColor="rgb(163, 241, 255)"
+        />
+      </CaseGrid>
       <ActionBlock
         title={contactTitle}
         body={contactDescription}

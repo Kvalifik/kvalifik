@@ -14,19 +14,17 @@ const Root = styled.div`
       transform: ${props => `skewy(-${props.angle})`};
     `
     : css`
-      transform-origin: 0%
+      transform-origin: 0%;
       transform: ${props => `skewy(${props.angle})`};
     `}
 `
 
 const Inner = styled.div`
   margin: ${props => props.offset} 0;
-  transform: ${props => props.reverse
-    ? `skewy(${props.angle})`
-    : `skewy(-${props.angle})`}
+  transform: ${props => props.reverse ? `skewy(${props.angle})` : `skewy(-${props.angle})`};
 `
 
-const Skewer = ({ bgColor, angle, children, reverse, noPadding, flushTop, height }) => {
+const Skewer = ({ bgColor, angle = 4, children, reverse, noPadding, flushTop, height }) => {
   const deg = `${angle}deg`
   let offset = 0
 
@@ -50,7 +48,9 @@ const Skewer = ({ bgColor, angle, children, reverse, noPadding, flushTop, height
         reverse={reverse}
         angle={deg}
         offset={!flushTop ? `${offset}vw` : 0}
-      >{children}</Inner>
+      >
+        {children}
+      </Inner>
     </Root>
   )
 }
