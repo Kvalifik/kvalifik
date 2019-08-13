@@ -8,6 +8,7 @@ import CaseGrid from 'Blocks/CaseGrid'
 import CaseThump from 'Blocks/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
+import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
 
@@ -36,6 +37,9 @@ const Index = ({ data }) => {
         iconUrl={headerIcon.url}
         bgColor={theme.palette.primary.C}
         videoUrl={headerMedia.url}
+      />
+      <FixedSkewer
+        angle={-11}
       />
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         <CaseThump

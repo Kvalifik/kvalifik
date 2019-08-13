@@ -24,7 +24,7 @@ const Inner = styled.div`
   transform: ${props => props.reverse ? `skewy(${props.angle})` : `skewy(-${props.angle})`};
 `
 
-const Skewer = ({ bgColor, angle = 4, children, reverse, noPadding, flushTop, height }) => {
+const Skewer = ({ bgColor, angle = 5, children, reverse, noPadding, flushTop, height }) => {
   const deg = `${angle}deg`
   let offset = 0
 
