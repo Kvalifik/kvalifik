@@ -31,12 +31,13 @@ const ActionBlock = ({
   buttonType = 'button',
   buttonProps,
   buttonLabel,
-  bgColor = 'lightblue'
+  bgColor,
+  galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
 
   return (
-    <Skewer bgColor={bgColor} angle={4} noPadding>
+    <Skewer bgColor={bgColor} noPadding>
       <Container>
         <Content>
           <LeftContainer>
@@ -45,11 +46,12 @@ const ActionBlock = ({
             <button type="button" alt={buttonLabel}>{buttonLabel}</button>
           </LeftContainer>
           <RightContainer>
-            <Gallery
-              images={imageUrls}
-              WrapperComponent={ImageWrapper}
-              delay={5000}
-            />
+            <ImageWrapper>
+              <Gallery
+                images={imageUrls}
+                delay={galleryDelay}
+              />
+            </ImageWrapper>
           </RightContainer>
         </Content>
       </Container>
@@ -66,7 +68,8 @@ ActionBlock.propTypes = {
   bgColor: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
-  }))
+  })),
+  galleryDelay: PropTypes.number
 }
 
 export default ActionBlock

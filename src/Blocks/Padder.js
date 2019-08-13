@@ -15,7 +15,7 @@ const Padder = (props) => {
 }
 
 Padder.propTypes = {
-  innerPadding: PropTypes.int,
+  innerPadding: PropTypes.number,
   children: PropTypes.any
 }
 
