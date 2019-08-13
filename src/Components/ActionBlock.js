@@ -31,7 +31,8 @@ const ActionBlock = ({
   buttonType = 'button',
   buttonProps,
   buttonLabel,
-  bgColor
+  bgColor,
+  galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
 
@@ -48,7 +49,7 @@ const ActionBlock = ({
             <ImageWrapper>
               <Gallery
                 images={imageUrls}
-                delay={5000}
+                delay={galleryDelay}
               />
             </ImageWrapper>
           </RightContainer>
@@ -67,7 +68,8 @@ ActionBlock.propTypes = {
   bgColor: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
-  }))
+  })),
+  galleryDelay: PropTypes.number
 }
 
 export default ActionBlock

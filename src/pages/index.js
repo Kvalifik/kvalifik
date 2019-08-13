@@ -26,7 +26,8 @@ const Index = ({ data }) => {
     contactTitle,
     contactButtonText,
     contactDescription,
-    contactImages
+    contactImages,
+    contactImageDelay
   } = data.datoCmsHomePage
 
   return (
@@ -39,7 +40,8 @@ const Index = ({ data }) => {
         videoUrl={headerMedia.url}
       />
       <FixedSkewer
-        angle={-11}
+        angle="large"
+        reverse
       />
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         <CaseThump
@@ -85,6 +87,7 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
         bgColor={theme.palette.primary.B}
+        galleryDelay={contactImageDelay}
       />
     </Main>
   )
@@ -106,7 +109,8 @@ Index.propTypes = {
       contactDescription: PropTypes.string,
       contactImages: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string
-      }))
+      })),
+      contactImageDelay: PropTypes.number
     })
   })
 }
@@ -128,6 +132,7 @@ export const query = graphql`
       contactImages {
         url
       }
+      contactImageDelay
     }
   }
 `

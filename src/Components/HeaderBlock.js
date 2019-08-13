@@ -65,7 +65,7 @@ const HeaderBlock = ({
   videoUrl,
   iconUrl
 }) => (
-  <Skewer angle={8} flushTop bgColor={bgColor} height="130vh">
+  <Skewer angle="large" flushTop bgColor={bgColor} height="130vh">
     <Container overflowRight>
       <Content>
         <TopLeftContainer>

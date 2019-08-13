@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
@@ -9,12 +10,20 @@ const Root = styled.div`
   bottom: ${props => props.offset || 0};
   height: ${props => props.height || 0};
   transform-origin: 0%;
-  transform: ${props => `skewy(${props.angle})`};
+  transform: ${props => `skewy(${props.angle}deg)`};
   width: 100vw;
 `
 
-const FixedSkewer = ({ angle = -5 }) => {
-  const deg = `${angle}deg`
+const angles = {
+  small: theme.skewer.smallAngle,
+  large: theme.skewer.largeAngle
+}
+
+const FixedSkewer = ({ angle: type = 'small', reverse }) => {
+  let angle = angles[type]
+  if (reverse) {
+    angle *= -1
+  }
   let offset = 0
 
   // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
@@ -23,7 +32,7 @@ const FixedSkewer = ({ angle = -5 }) => {
 
   return (
     <Root
-      angle={deg}
+      angle={angle}
       height={`calc(100px + ${-offset * 2}vw)`}
       offset={`${offset * 2}vw`}
     />
@@ -31,7 +40,8 @@ const FixedSkewer = ({ angle = -5 }) => {
 }
 
 FixedSkewer.propTypes = {
-  angle: PropTypes.number
+  angle: PropTypes.oneOf(['small', 'large']),
+  reverse: PropTypes.bool
 }
 
 export default FixedSkewer

@@ -14,6 +14,10 @@ const theme = {
     ].filter(a => !!a)
     return components.join(' ')
   },
+  skewer: {
+    smallAngle: 5,
+    largeAngle: 11
+  },
   breakpoints: {
     sm: '576px',
     md: '768px',
