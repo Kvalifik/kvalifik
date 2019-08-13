@@ -29,7 +29,7 @@ const SideText = styled.div`
   text-transform: uppercase;
   justify-self: flex-end;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: bold;
   grid-column: 1 / 2;
 `
 
