@@ -19,7 +19,7 @@ const angles = {
   large: theme.skewer.largeAngle
 }
 
-const FixedSkewer = ({ angle: type = 'small', reverse }) => {
+const FixedSkewer = ({ angle: type = 'small', reverse, height = '100px' }) => {
   let angle = angles[type]
   if (reverse) {
     angle *= -1
@@ -33,7 +33,7 @@ const FixedSkewer = ({ angle: type = 'small', reverse }) => {
   return (
     <Root
       angle={angle}
-      height={`calc(100px + ${-offset * 2}vw)`}
+      height={`calc(${height} + ${-offset * 2}vw)`}
       offset={`${offset * 2}vw`}
     />
   )
@@ -41,7 +41,8 @@ const FixedSkewer = ({ angle: type = 'small', reverse }) => {
 
 FixedSkewer.propTypes = {
   angle: PropTypes.oneOf(['small', 'large']),
-  reverse: PropTypes.bool
+  reverse: PropTypes.bool,
+  height: PropTypes.string
 }
 
 export default FixedSkewer
