@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
+import downArrow from 'graphics/down.svg'
 
 const Content = styled.div`
   display: grid;
@@ -42,6 +43,19 @@ const Title = styled.div`
   ${props => props.theme.mixins.typography.hero};
 `
 
+const DownArrow = styled.img.attrs({
+  src: downArrow
+})`
+  position: absolute;
+  z-index: 200;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  bottom: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+`
+
 const HeaderBlock = ({
   title,
   body,
@@ -66,6 +80,7 @@ const HeaderBlock = ({
         </RightContainer>
       </Content>
     </Container>
+    <DownArrow />
   </Skewer>
 )
 
