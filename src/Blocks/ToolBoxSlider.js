@@ -44,12 +44,12 @@ const SliderElement = styled.div`
   ${props => props.chosen ? css`
     transform: scale(1.1) !important;
     ::after{
-      content:'';
+      content: "";
       position: absolute;
-      bottom:0;
+      bottom: 0;
       left: 0;
       width:100%;
-      background:#49EAAC;;
+      background: #49EAAC;
       height: ${props => props.theme.spacing(0.5)};
     }
     ` : ''}

@@ -36,7 +36,7 @@ const ActionBlock = ({
   const imageUrls = images.map(image => image.url)
 
   return (
-    <Skewer bgColor={bgColor} angle={4} reverse noPadding>
+    <Skewer bgColor={bgColor} angle={4} noPadding>
       <Container>
         <Content>
           <LeftContainer>

@@ -33,7 +33,7 @@ const MoreWorkButton = styled.button`
 `
 
 const Fader = styled.div`
-    position: absolute; 
+    position: absolute;
     z-index: 1000;
     left: 0;
     right: 0;

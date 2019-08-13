@@ -16,7 +16,7 @@ const Img = styled.div`
   margin: 0;
   grid-column: 2 / -1;
   grid-row: 1 / -1;
-  background-image: url('${props => props.bg}');
+  background-image: url(${props => props.bg});
   background-position: 50% 50%;
   background-size: cover;
 `
@@ -73,7 +73,6 @@ const ToolBoxContent = props => {
         <h3>
           { tool.desc }
         </h3>
-        {/* {props.project} */}
         <Link>Learn how to do it <Arrow src={arrowImg} /></Link>
       </Text>
     </Root>
