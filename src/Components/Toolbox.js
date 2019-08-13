@@ -5,7 +5,7 @@ import Container from 'Blocks/Container'
 import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
 import ToolBoxSlider from 'Blocks/ToolBoxSlider'
-import ToolBoxContent from '../Blocks/ToolBoxContent';
+import ToolBoxContent from 'Blocks/ToolBoxContent';
 import svg from 'graphics/skills.svg'
 import svg2 from 'graphics/skills2.svg'
 import svg3 from 'graphics/skills3.svg'
@@ -25,7 +25,6 @@ export class Toolbox extends Component {
 
     this.chooseTool.bind(this);
   }
-
 
   tools = [
     {

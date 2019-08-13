@@ -6,7 +6,7 @@ import { graphql } from 'gatsby'
 import Main from 'Components/Main'
 import CaseGrid from 'Blocks/CaseGrid'
 import CaseThump from 'Blocks/CaseThump'
-import Toolbox from 'Components/Toolbox';
+import Toolbox from 'Components/Toolbox'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
@@ -98,7 +98,7 @@ const Index = ({ data }) => {
         <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
         <CaseThump full name="Have A Look" desc="el preben hmm" bg={bg3} color="rgb(163, 241, 255)" />
       </CaseGrid> */}
-      <Toolbox />
+      {/* <Toolbox /> */}
     </Main>
   )
 }

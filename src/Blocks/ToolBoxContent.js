@@ -61,7 +61,7 @@ const Arrow = styled.img`
 
 const ToolBoxContent = props => {
   const tool = props.tools[props.chosenTool]
-  console.log(tool.icon)
+
   return (
     <Root>
       <Icon src={tool.icon} />
