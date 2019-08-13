@@ -32,19 +32,24 @@ const SliderElement = styled.div`
   transition: .4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   transition-delay: 0;
   :hover{
-    transform: scale(1.1)
+    transform: scale(0.95);
+    &::after{
+      height: ${props => props.theme.spacing(0.5) * 2};
+    }
   }
   ${props => props.chosen ? css`
+    transform: scale(1.1) !important;
     ::after{
       content:'';
-      height: ${props => props.theme.spacing(0.5)};
       position: absolute;
       bottom:0;
       left: 0;
       width:100%;
       background:#49EAAC;;
+      height: ${props => props.theme.spacing(0.5)};
     }
-  ` : ''}
+    ` : ''}
+
 `
 
 const Img = styled.img`
