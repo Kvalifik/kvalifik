@@ -29,7 +29,7 @@ const SideText = styled.div`
   text-transform: uppercase;
   justify-self: flex-end;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: bold;
   grid-column: 1 / 2;
 `
 
@@ -44,12 +44,15 @@ const SideTextInner = styled.div`
 `
 
 const Content = styled.div`
-  padding: ${props => props.theme.padding.sm};
-  grid-column-start: 2;
+  grid-column-start: ${props => props.overflowLeft ? 1 : 2};
+  grid-column-end: ${props => props.overflowRight ? -1 : 3};
 `
 
 const Container = ({
   sideText,
+  overflowRight,
+  overflowLeft,
+  noContentWrapper,
   children
 }) => (
   <Root>
@@ -58,15 +61,22 @@ const Container = ({
         {sideText}
       </SideTextInner>
     </SideText>
-    <Content>
-      {children}
-    </Content>
+    {noContentWrapper ? (
+      children
+    ) : (
+      <Content overflowRight={overflowRight} overflowLeft={overflowLeft}>
+        {children}
+      </Content>
+    )}
   </Root>
 )
 
 Container.propTypes = {
   sideText: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  overflowRight: PropTypes.bool,
+  overflowLeft: PropTypes.bool,
+  noContentWrapper: PropTypes.bool
 }
 
 export default Container

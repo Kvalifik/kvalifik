@@ -99,9 +99,9 @@ const CaseThump = ({
 }
 
 CaseThump.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  bgColor: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  bgColor: PropTypes.string,
   fullWidth: PropTypes.bool,
   bgUrl: PropTypes.string
 }

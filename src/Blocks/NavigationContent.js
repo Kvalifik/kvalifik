@@ -8,7 +8,7 @@ const NavItem = styled.a`
   list-style-type: none;
   text-decoration:none;
   font-weight:900;
-  /* font-size: ${props = props.theme.} */
+  /* font-size: ${props = props.theme} */
 `
 
 const NavItems = styled.div`
