@@ -44,22 +44,18 @@ class Gallery extends Component {
 
   render () {
     const {
-      images,
-      WrapperComponent
+      images
     } = this.props
     const { step } = this.state
 
     return (
-      <WrapperComponent>
-        <Img src={images[step]} />
-      </WrapperComponent>
+      <Img src={images[step]} />
     )
   }
 }
 
 Gallery.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),
-  WrapperComponent: PropTypes.elementType,
   delay: PropTypes.number
 }
 

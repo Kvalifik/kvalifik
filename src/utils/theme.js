@@ -14,6 +14,10 @@ const theme = {
     ].filter(a => !!a)
     return components.join(' ')
   },
+  skewer: {
+    smallAngle: 5,
+    largeAngle: 11
+  },
   breakpoints: {
     sm: '576px',
     md: '768px',
@@ -69,32 +73,64 @@ const theme = {
   }
 }
 
-const defineMixins = (theme) => ({
+const appendMixins = (theme) => ({
+  ...theme,
+  skewer: {
+    ...theme.skewer,
+    calculateOffset: (type) => {
+      let angle = theme.skewer[type + 'Angle']
+      let offset = 0
+
+      // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
+      const rad = angle / 180 * Math.PI
+      offset = Math.tan(rad) * 50
+
+      return offset
+    }
+  },
   typography: {
-    body: () => css`
-      font-family: ${theme.typography.body.fontFamily};
-      font-weight: ${theme.typography.body.fontWeight};
-      font-style: ${theme.typography.body.fontStyle}
-    `,
-    hero: () => css`
-      font-family: ${theme.typography.hero.fontFamily};
-      font-weight: ${theme.typography.hero.fontWeight};
-      font-style: ${theme.typography.hero.fontStyle}
-    `,
-    header: () => css`
-      font-family: ${theme.typography.header.fontFamily};
-      font-weight: ${theme.typography.header.fontWeight};
-      font-style: ${theme.typography.header.fontStyle}
-    `,
-    quote: () => css`
-      font-family: ${theme.typography.quote.fontFamily};
-      font-weight: ${theme.typography.quote.fontWeight};
-      font-style: ${theme.typography.quote.fontStyle}
+    ...theme.typography,
+    body: {
+      ...theme.typography.body,
+      mixin: () => css`
+        font-family: ${theme.typography.body.fontFamily};
+        font-weight: ${theme.typography.body.fontWeight};
+        font-style: ${theme.typography.body.fontStyle}
+      `
+    },
+    hero: {
+      ...theme.typography.hero,
+      mixin: () => css`
+        font-family: ${theme.typography.hero.fontFamily};
+        font-weight: ${theme.typography.hero.fontWeight};
+        font-style: ${theme.typography.hero.fontStyle}
+      `
+    },
+    header: {
+      ...theme.typography.header,
+      mixin: () => css`
+        font-family: ${theme.typography.header.fontFamily};
+        font-weight: ${theme.typography.header.fontWeight};
+        font-style: ${theme.typography.header.fontStyle}
+      `
+    },
+    quote: {
+      ...theme.typography.quote,
+      mixin: () => css`
+        font-family: ${theme.typography.quote.fontFamily};
+        font-weight: ${theme.typography.quote.fontWeight};
+        font-style: ${theme.typography.quote.fontStyle}
+      `
+    }
+  },
+  media: Object.keys(theme.breakpoints).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+      @media (max-width: ${theme.breakpoints[label]}) {
+        ${css(...args)};
+      }
     `
-  }
+    return acc
+  }, {})
 })
 
-export default {
-  ...theme,
-  mixins: defineMixins(theme)
-}
+export default appendMixins(theme)
