@@ -2,9 +2,8 @@ import React from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
-
 import Footer from 'Components/Footer'
-
+import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
 
 const GlobalStyle = createGlobalStyle`
@@ -23,6 +22,44 @@ const App = styled.div`
 `
 
 const Main = ({ children }) => {
+  const navigationItems = [
+    {
+      name: 'Work',
+      link: '/work'
+    },
+    {
+      name: 'Services',
+      link: '/services'
+    },
+    {
+      name: 'Toolbox',
+      link: '/toolbox'
+    },
+    {
+      name: 'Contact',
+      link: '/contact'
+    }
+  ]
+
+  const navigationLinks = [
+    {
+      name: 'Work',
+      link: '/work'
+    },
+    {
+      name: 'Services',
+      link: '/services'
+    },
+    {
+      name: 'Toolbox',
+      link: '/toolbox'
+    },
+    {
+      name: 'Contact',
+      link: '/contact'
+    }
+  ]
+
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -57,6 +94,7 @@ const Main = ({ children }) => {
         <App> {/* Add a surrounding div to make sure ThemeProvider only has a single child */}
           {children}
           <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
+          <Navigation navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
         </App>
       </ThemeProvider>
     </>

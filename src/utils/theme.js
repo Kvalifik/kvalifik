@@ -1,6 +1,7 @@
 import { css } from 'styled-components'
 
 const theme = {
+  navBarWidth: '75px',
   padding: {
     sm: '15px'
   },

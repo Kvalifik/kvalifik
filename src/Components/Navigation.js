@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components'
 import exitIcon from 'graphics/exit.svg'
 import burgerIcon from 'graphics/burger.svg'
 import NavigationContent from 'Blocks/NavigationContent'
-import kvalfikLogo from 'graphics/kvalifik_90_logo.svg'
+import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
+import kvalfikLogo from 'graphics/kvalifik_logo.svg'
 
 const Root = styled.div`
 
@@ -20,12 +21,27 @@ const NavDiv = styled.div`
   width: 300px;
   background-color: #1D1D1DCC; /* CC = 80% in hex */
 
-  ${props => props.collapsed
-    ? css`
-      right: calc(-300px + 75px);
-    `
-    : ''
+  /* Mobile Nav: */
+  ${props => props.theme.media.sm`
+    width: 100% !important;
+    left: 0;
+    top: calc(-100vh + ${props => props.theme.navBarWidth});
+    height: 100vh;
+    /* Collapsed mobile nav */
+    ${props => props.collapsed ||
+      css`
+        top: 0;
+        right: calc(-100% + ${props => props.theme.navBarWidth});
+      `
 }
+  `}
+    /* Collapsed Nav: */
+    ${props => !props.collapsed ||
+    css`
+      right: calc(-300px + (${props => props.theme.navBarWidth}));
+    `
+}
+
 `
 
 const CollapseIcon = styled.img`
@@ -33,20 +49,22 @@ const CollapseIcon = styled.img`
 `
 
 const IconWrapper = styled.div`
+  cursor: pointer;
   display:flex;
   justify-content: center;
   align-items:center;
   z-index:10;
   right: 0;
   top:0; 
-  height: 75px;
-  width: 75px;
+  height: ${props => props.theme.navBarWidth};
+  width: ${props => props.theme.navBarWidth};
   position:fixed;
 `
 
 const KvalfikLogo = styled.img`
   transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   position:fixed;
+  
   right: 0;
   top: 0;
   bottom:0;
@@ -56,8 +74,16 @@ const KvalfikLogo = styled.img`
     `
     : css`
       margin: auto ${props => props.theme.spacing(4)};
-    `
-}  
+  `}
+  ${props => props.theme.media.sm`
+    transform: rotate(90deg) translate(100%, -100%);
+    transform-origin: 50% 0%;
+    height: 100px;
+    left: 0;
+    bottom:initial;
+    right: initial;
+    margin: 15px !important;
+  `}
   z-index: 100;
 `
 
@@ -65,7 +91,7 @@ class Navigation extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      collapsed: false
+      collapsed: true
     }
   }
 
@@ -77,17 +103,18 @@ class Navigation extends Component {
     console.log(this.props)
     const {
       navigationItems,
-      navigationLinks
+      navigationLinks,
+      socialMediaLinks
     } = this.props
 
     return (
       <Root>
-        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo} />
+        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
         <IconWrapper>
           <CollapseIcon src={this.state.collapsed ? burgerIcon : exitIcon} onClick={this.toggleNavigation.bind(this)} />
         </IconWrapper>
         <NavDiv collapsed={this.state.collapsed}>
-          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} />
+          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={socialMediaLinks} />
         </NavDiv>
       </Root>
     )
@@ -96,7 +123,8 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   navigationItems: PropTypes.array,
-  navigationLinks: PropTypes.array
+  navigationLinks: PropTypes.array,
+  socialMediaLinks: PropTypes.array
 }
 
 export default Navigation

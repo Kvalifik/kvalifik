@@ -7,50 +7,11 @@ import Layout from 'Components/Layout'
 import CaseGrid from 'Components/CaseGrid'
 import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
-import Navigation from 'Components/Navigation'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
-
-const navigationItems = [
-  {
-    name: 'Work',
-    link: '/work'
-  },
-  {
-    name: 'Services',
-    link: '/services'
-  },
-  {
-    name: 'Toolbox',
-    link: '/toolbox'
-  },
-  {
-    name: 'Contact',
-    link: '/contact'
-  }
-]
-
-const navigationLinks = [
-  {
-    name: 'Work',
-    link: '/work'
-  },
-  {
-    name: 'Services',
-    link: '/services'
-  },
-  {
-    name: 'Toolbox',
-    link: '/toolbox'
-  },
-  {
-    name: 'Contact',
-    link: '/contact'
-  }
-]
 
 const Index = ({ data }) => {
   const {
@@ -105,7 +66,6 @@ const Index = ({ data }) => {
         textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
-      <Navigation navigationItems={navigationItems} navigationLinks={navigationLinks} />
       <ActionBlock
         title={contactTitle}
         body={contactDescription}
