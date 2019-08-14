@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Container from 'Blocks/Container'
 import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
+import Button from '../Blocks/Button'
 
 const Content = styled.div`
   display: grid;
@@ -19,18 +20,7 @@ const Content = styled.div`
 const MoreWork = styled.div`
   display: ${props => props.fadeBottom ? 'flex' : 'none'};
   justify-content: center;
-`
-
-const MoreWorkButton = styled.button`
-    padding: 20px 100px;
-    margin: 20px;
-    background: #707070;
-    border: 0;
-    color: white;
-    @media only screen and (max-width : ${props => props.theme.breakpoints.sm} ) {
-      width: 100%;
-    }
-
+  margin: 40px 100px;
 `
 
 const Fader = styled.div`
@@ -57,9 +47,10 @@ const CaseGrid = (props) => {
           </Content>
         </Container>
         <MoreWork fadeBottom={props.fadeBottom}>
-          <MoreWorkButton>
+          <Button bgColor="#707070" color="white" >
             More Work
-          </MoreWorkButton>
+
+          </Button>
         </MoreWork>
       </Padder>
     </Skewer>

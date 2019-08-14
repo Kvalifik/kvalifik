@@ -52,7 +52,7 @@ const Index = ({ data }) => {
   } = data.datoCmsHomePage
 
   const works = data.allDatoCmsWork.nodes
-  console.log(works[0].image.path)
+
   return (
     <Layout>
       <HeaderBlock
@@ -68,18 +68,6 @@ const Index = ({ data }) => {
         height="30px"
       />
 
-    {/* nodes {
-        title 
-        description
-        id
-        forWho
-        fullSize
-        date(formatString: "DD/MM-YY")
-        color {
-          hex
-        }
-      } */}
-      
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         {works.map(work => {
           return (<CaseThump
@@ -90,36 +78,6 @@ const Index = ({ data }) => {
             fullWidth={work.fullSize}
           />)
         })}
-
-        {/* <CaseThump
-          name="Andet"
-          bgUrl={bg2}
-        />
-        <CaseThump
-          fullWidth
-          name="Andet"
-          description="don trippa shu"
-          bgUrl={bg3}
-        />
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg2}
-          bgColor="rgb(163, 241, 255)"
-        />
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg}
-          bgColor="rgb(163, 241, 255)"
-        />
-        <CaseThump
-          fullWidth
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg3}
-          bgColor="rgb(163, 241, 255)"
-        /> */}
       </CaseGrid>
       <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
