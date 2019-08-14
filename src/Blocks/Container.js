@@ -29,14 +29,15 @@ const SideText = styled.div`
   text-transform: uppercase;
   justify-self: flex-end;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: bold;
   grid-column: 1 / 2;
 `
 
 const SideTextInner = styled.div`
   @media (max-width: calc(576px + 80px)) {
-    padding: 0px ${props => props.theme.padding.sm} 0px 0px;
+    padding: 0 ${props => props.theme.padding.sm} 0 0;
   }
+
   padding: ${props => `0px ${props.theme.padding.sm} ${props.theme.padding.sm} 0`};
   position: absolute;
   transform-origin: 0% 0%;

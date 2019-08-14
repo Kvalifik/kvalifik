@@ -7,11 +7,9 @@ const Img = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-
   width: 100%;
   height: 100%;
-
-  transition: background-image .5s linear;
+  transition: background-image 0.5s linear;
 `
 
 class Gallery extends Component {
