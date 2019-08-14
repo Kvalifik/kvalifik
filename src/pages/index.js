@@ -90,6 +90,17 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
         bgColor={theme.palette.primary.B}
+        textColor={theme.palette.dark}
+        galleryDelay={contactImageDelay}
+      />
+      <ActionBlock
+        title={contactTitle}
+        body={contactDescription}
+        buttonLabel={contactButtonText}
+        buttonType="button"
+        images={contactImages}
+        bgColor={theme.palette.primary.F}
+        textColor={theme.palette.primary.C}
         galleryDelay={contactImageDelay}
       />
     </Main>
