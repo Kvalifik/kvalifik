@@ -18,6 +18,25 @@ import bg from 'graphics/test.jpeg'
 import bg2 from 'graphics/test2.jpeg'
 import bg3 from 'graphics/test3.jpeg'
 
+const navigationItems = [
+  {
+    name: 'Work',
+    link: '/work'
+  },
+  {
+    name: 'Services',
+    link: '/services'
+  },
+  {
+    name: 'Toolbox',
+    link: '/toolbox'
+  },
+  {
+    name: 'Contact',
+    link: '/contact'
+  }
+]
+
 const Index = ({ data }) => {
   const {
     headerTitle,
@@ -31,6 +50,8 @@ const Index = ({ data }) => {
     contactImageDelay,
     punchline
   } = data.datoCmsHomePage
+
+  const works = data.allDatoCmsWork.nodes
 
   return (
     <Layout>
@@ -46,42 +67,17 @@ const Index = ({ data }) => {
         reverse
         height="30px"
       />
+
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg}
-          bgColor="rgb(163, 241, 255)"
-        />
-        <CaseThump
-          name="Andet"
-          bgUrl={bg2}
-        />
-        <CaseThump
-          fullWidth
-          name="Andet"
-          description="don trippa shu"
-          bgUrl={bg3}
-        />
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg2}
-          bgColor="rgb(163, 241, 255)"
-        />
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg}
-          bgColor="rgb(163, 241, 255)"
-        />
-        <CaseThump
-          fullWidth
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg3}
-          bgColor="rgb(163, 241, 255)"
-        />
+        {works.map(work => {
+          return (<CaseThump
+            name={work.forWho}
+            description={work.description}
+            bgUrl={work.image.url}
+            bgColor={work.color.hex}
+            fullWidth={work.fullSize}
+          />)
+        })}
       </CaseGrid>
       <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
@@ -125,8 +121,26 @@ Index.propTypes = {
       contactImages: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string
       })),
-      contactImageDelay: PropTypes.number,
-      punchline: PropTypes.string
+      punchline: PropTypes.string,
+      contactImageDelay: PropTypes.number
+    }),
+    allDatoCmsWork: PropTypes.shape({
+      nodes: PropTypes.arrayOf(PropTypes.shape({
+        headerTitle: PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string,
+        id: PropTypes.string,
+        forWho: PropTypes.string,
+        fullSize: PropTypes.bool,
+        date: PropTypes.string,
+        color: PropTypes.shape({
+          hex: PropTypes.string
+        }),
+        image: PropTypes.shape({
+          url: PropTypes.string
+        })
+
+      }))
     })
   })
 }
@@ -150,6 +164,22 @@ export const query = graphql`
       }
       contactImageDelay,
       punchline
+    }
+    allDatoCmsWork {
+      nodes {
+        title
+        description
+        id
+        forWho
+        fullSize
+        date(formatString: "DD/MM-YY")
+        color {
+          hex
+        }
+        image{
+          url
+        }
+      }
     }
   }
 `
