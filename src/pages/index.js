@@ -52,7 +52,7 @@ const Index = ({ data }) => {
   } = data.datoCmsHomePage
 
   const works = data.allDatoCmsWork.nodes
-
+  console.log(works[0].image.path)
   return (
     <Layout>
       <HeaderBlock
@@ -67,18 +67,31 @@ const Index = ({ data }) => {
         reverse
         height="30px"
       />
+
+    {/* nodes {
+        title 
+        description
+        id
+        forWho
+        fullSize
+        date(formatString: "DD/MM-YY")
+        color {
+          hex
+        }
+      } */}
+      
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         {works.map(work => {
           return (<CaseThump
-            name="Have A Look"
-            description="el preben hmm"
-            bgUrl={bg}
-            bgColor="rgb(163, 241, 255)"
-            fullWidth={}
+            name={work.forWho}
+            description={work.description}
+            bgUrl={work.image.url}
+            bgColor={work.color.hex}
+            fullWidth={work.fullSize}
           />)
         })}
 
-        <CaseThump
+        {/* <CaseThump
           name="Andet"
           bgUrl={bg2}
         />
@@ -106,7 +119,7 @@ const Index = ({ data }) => {
           description="el preben hmm"
           bgUrl={bg3}
           bgColor="rgb(163, 241, 255)"
-        />
+        /> */}
       </CaseGrid>
       <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
@@ -162,7 +175,13 @@ Index.propTypes = {
         forWho: PropTypes.string,
         fullSize: PropTypes.bool,
         date: PropTypes.string,
-        color: PropTypes.string
+        color: PropTypes.shape({
+          hex: PropTypes.string
+        }),
+        image: PropTypes.shape({
+          url: PropTypes.string
+        })
+
       }))
     })
   })
@@ -197,12 +216,10 @@ export const query = graphql`
         fullSize
         date(formatString: "DD/MM-YY")
         color {
-          red
-          green
-          blue
-          alpha
-          rgb
           hex
+        }
+        image{
+          url
         }
       }
     }
