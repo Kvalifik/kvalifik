@@ -80,7 +80,6 @@ const ToolBoxContent = props => {
 }
 
 ToolBoxContent.propTypes = {
-  project: PropTypes.any,
   tools: PropTypes.array,
   chosenTool: PropTypes.int
 }

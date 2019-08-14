@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import svg from 'graphics/skills.svg'
 
 const Root = styled.div`
   color: white;
@@ -18,14 +17,14 @@ const Slider = styled.div`
   grid-gap: ${props => props.theme.spacing(6)};
   @media only screen and (max-width: ${props => props.theme.breakpoints.sm} ) {
     grid-gap: ${props => props.theme.spacing(2)};
-  
+
   }
   grid-column: 2 / 3;
   display: grid;
   grid-auto-flow: column;
 `
 
-const SliderElement = styled.div`  
+const SliderElement = styled.div`
   cursor: pointer !important;
   padding: 0;
   padding-bottom: ${props => props.theme.spacing(1.5)};
@@ -90,7 +89,7 @@ const ToolBoxSlider = props => {
 ToolBoxSlider.propTypes = {
   tools: PropTypes.array,
   chosenTool: PropTypes.any,
-  chooseTool:PropTypes.any
+  chooseTool: PropTypes.any
 }
 
 export default ToolBoxSlider

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Main from 'Components/Main'
-import CaseGrid from 'Blocks/CaseGrid'
-import CaseThump from 'Blocks/CaseThump'
-import Toolbox from 'Components/Toolbox'
+import CaseGrid from 'Components/CaseGrid'
+import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
+
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
@@ -90,15 +90,6 @@ const Index = ({ data }) => {
         bgColor={theme.palette.primary.B}
         galleryDelay={contactImageDelay}
       />
-      {/* <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
-        <CaseThump name="Andet" bg={bg2} />
-        <CaseThump full name="Andet" desc="don trippa shu" bg={bg3} />
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg2} color="rgb(163, 241, 255)" />
-        <CaseThump name="Have A Look" desc="el preben hmm" bg={bg} color="rgb(163, 241, 255)" />
-        <CaseThump full name="Have A Look" desc="el preben hmm" bg={bg3} color="rgb(163, 241, 255)" />
-      </CaseGrid> */}
-      {/* <Toolbox /> */}
     </Main>
   )
 }
