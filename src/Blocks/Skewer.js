@@ -7,6 +7,7 @@ const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
   margin-top: ${props => props.offsetTop}vw;
+  margin-bottom: ${props => props.offsetBottom}vw;
   height: ${props => props.height || 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
@@ -22,7 +23,16 @@ const angles = {
   large: theme.skewer.largeAngle
 }
 
-const Skewer = ({ bgColor, angle: type = 'small', children, reverse, noPadding, flushTop, height }) => {
+const Skewer = ({
+  bgColor,
+  angle: type = 'small',
+  children,
+  reverse,
+  noPadding,
+  flushTop,
+  flushBottom,
+  height
+}) => {
   let angle = angles[type]
   if (reverse) {
     angle *= -1
@@ -34,7 +44,7 @@ const Skewer = ({ bgColor, angle: type = 'small', children, reverse, noPadding, 
   if (noPadding && !flushTop) {
     topOffset = -offset
   }
-  if (noPadding) {
+  if (noPadding && !flushBottom) {
     bottomOffset = -offset
   }
 
@@ -43,6 +53,7 @@ const Skewer = ({ bgColor, angle: type = 'small', children, reverse, noPadding, 
       bgColor={bgColor}
       angle={angle}
       offsetTop={flushTop ? -topOffset * 2 : 0}
+      offsetBottom={flushBottom ? -bottomOffset * 2 : 0}
       height={height}
     >
       <Inner
@@ -63,7 +74,8 @@ Skewer.propTypes = {
   angle: PropTypes.oneOf(['small', 'large']),
   reverse: PropTypes.bool,
   noPadding: PropTypes.bool,
-  flushTop: PropTypes.bool
+  flushTop: PropTypes.bool,
+  flushBottom: PropTypes.bool
 }
 
 export default Skewer
