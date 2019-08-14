@@ -61,6 +61,17 @@ const CopyrightLine = styled.div`
 const LeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+
+  justify-self: start;
+  align-self: end;
+`
+
+const RightContainer = styled.div`
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+
+  justify-self: end;
+  align-self: end;
 `
 
 const CenterContainer = styled.div`
@@ -83,7 +94,27 @@ const ExtendedIcon = styled(Icon)`
 const LinkHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
   font-size: ${props => props.theme.typography.fontSize.xs};
-  margin-bottom: ${props => props.theme.spacing(1)};
+  margin-bottom: ${props => props.theme.spacing(1.5)};
+`
+
+const FeedItem = styled.div`
+  width: 75px;
+  height: 75px;
+  background-image: url(${props => props.src});
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: ${props => props.theme.spacing(1.5)};
+
+  &:last-child {
+    margin-right: 0;
+  }
+`
+
+const FeedHeader = styled.div`
+  ${props => props.theme.typography.body.mixin()}
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  margin-bottom: ${props => props.theme.spacing(1.5)};
 `
 
 const Footer = ({
@@ -93,12 +124,27 @@ const Footer = ({
   copyrightLine,
   links,
   socialMediaLinks,
-  socialMediaHeader
+  socialMediaHeader,
+  instagramFeed
 }) => {
   const mappedLinks = socialMediaLinks.map(link => ({
     href: link.linkUrl,
     iconUrl: link.icon.url
   }))
+  const mappedFeed = instagramFeed.map(node => ({
+    src: node.thumbnails[1].src,
+    timestamp: node.timestamp
+  }))
+  mappedFeed.sort((a, b) => {
+    if (a.timestamp > b.timestamp) {
+      return -1
+    } else if (a.timestamp < b.timestamp) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+  const slicedFeed = mappedFeed.slice(0, 4)
 
   return (
     <Skewer angle="small" flushBottom bgColor={theme.palette.dark}>
@@ -121,6 +167,12 @@ const Footer = ({
               </a>
             ))}
           </CenterContainer>
+          <RightContainer>
+            <FeedHeader>Follow us on Instagram</FeedHeader>
+            {slicedFeed.map(item => (
+              <FeedItem src={item.src} />
+            ))}
+          </RightContainer>
           <CopyrightLine>{copyrightLine}</CopyrightLine>
         </Grid>
       </Container>
@@ -140,7 +192,13 @@ Footer.propTypes = {
       url: PropTypes.string
     })
   })),
-  socialMediaHeader: PropTypes.string
+  socialMediaHeader: PropTypes.string,
+  instagramFeed: PropTypes.arrayOf(PropTypes.shape({
+    thumbnails: PropTypes.arrayOf(PropTypes.shape({
+      src: PropTypes.string,
+      timestamp: PropTypes.number
+    }))
+  }))
 }
 
 export default Footer

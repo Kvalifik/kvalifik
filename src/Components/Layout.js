@@ -39,6 +39,14 @@ const Main = ({ children }) => {
         },
         socialMediaHeader
       }
+      allInstaNode {
+        nodes {
+          thumbnails {
+            src
+          }
+          timestamp
+        }
+      }
     }
   `)
 
@@ -48,7 +56,7 @@ const Main = ({ children }) => {
       <ThemeProvider theme={theme}>
         <App> {/* Add a surrounding div to make sure ThemeProvider only has a single child */}
           {children}
-          <Footer {...data.datoCmsFooter} />
+          <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
         </App>
       </ThemeProvider>
     </>
