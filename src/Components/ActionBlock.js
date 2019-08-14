@@ -5,23 +5,20 @@ import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Gallery from 'Blocks/Gallery'
 
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: 50% 50%;
-`
-
 const LeftContainer = styled.div`
-  grid-column: 1 / 2;
-  padding: 35% ${props => props.theme.spacing(10)} 0 0;
+  grid-column: 2 / 3;
+  padding-right: ${props => props.theme.spacing(10)};
+  padding-bottom: ${props => props.theme.spacing(10)};
+  align-self: center;
 `
 
 const RightContainer = styled.div`
-  grid-column: 2 / 3;
+  grid-column: 3 / -1;
 `
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 650px;
+  height: 850px;
 `
 
 const ActionBlock = ({
@@ -38,22 +35,20 @@ const ActionBlock = ({
 
   return (
     <Skewer bgColor={bgColor} noPadding>
-      <Container>
-        <Content>
-          <LeftContainer>
-            <h1>{title}</h1>
-            <p dangerouslySetInnerHTML={{ __html: body }} />
-            <button type="button" alt={buttonLabel}>{buttonLabel}</button>
-          </LeftContainer>
-          <RightContainer>
-            <ImageWrapper>
-              <Gallery
-                images={imageUrls}
-                delay={galleryDelay}
-              />
-            </ImageWrapper>
-          </RightContainer>
-        </Content>
+      <Container noContentWrapper>
+        <LeftContainer>
+          <h1>{title}</h1>
+          <p dangerouslySetInnerHTML={{ __html: body }} />
+          <button type="button" alt={buttonLabel}>{buttonLabel}</button>
+        </LeftContainer>
+        <RightContainer>
+          <ImageWrapper>
+            <Gallery
+              images={imageUrls}
+              delay={galleryDelay}
+            />
+          </ImageWrapper>
+        </RightContainer>
       </Container>
     </Skewer>
   )
