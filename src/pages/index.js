@@ -38,6 +38,25 @@ const navigationItems = [
   }
 ]
 
+const navigationLinks = [
+  {
+    name: 'Work',
+    link: '/work'
+  },
+  {
+    name: 'Services',
+    link: '/services'
+  },
+  {
+    name: 'Toolbox',
+    link: '/toolbox'
+  },
+  {
+    name: 'Contact',
+    link: '/contact'
+  }
+]
+
 const Index = ({ data }) => {
   const {
     headerTitle,
@@ -110,7 +129,7 @@ const Index = ({ data }) => {
         bgColor={theme.palette.primary.B}
         galleryDelay={contactImageDelay}
       />
-      <Navigation navigationItems={navigationItems} />
+      <Navigation navigationItems={navigationItems} navigationLinks={navigationLinks} />
     </Main>
   )
 }

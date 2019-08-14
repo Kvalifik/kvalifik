@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import exitIcon from 'graphics/exit.svg'
 import burgerIcon from 'graphics/burger.svg'
-import NavigationContent from '../Blocks/NavigationContent';
-
+import NavigationContent from 'Blocks/NavigationContent'
+import kvalfikLogo from 'graphics/kvalifik_90_logo.svg'
 
 const Root = styled.div`
 
@@ -44,6 +44,22 @@ const IconWrapper = styled.div`
   position:fixed;
 `
 
+const KvalfikLogo = styled.img`
+  transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  position:fixed;
+  right: 0;
+  top: 0;
+  bottom:0;
+  ${props => props.collapsed
+    ? css`
+      margin: auto ${props => props.theme.spacing(2.5)};
+    `
+    : css`
+      margin: auto ${props => props.theme.spacing(4)};
+    `
+}  
+  z-index: 100;
+`
 
 class Navigation extends Component {
   constructor (props) {
@@ -54,23 +70,24 @@ class Navigation extends Component {
   }
 
   toggleNavigation () {
-    console.log('test')
     this.setState({ collapsed: !this.state.collapsed })
   }
 
   render () {
     console.log(this.props)
     const {
-      navigationItems
+      navigationItems,
+      navigationLinks
     } = this.props
 
     return (
       <Root>
+        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo} />
         <IconWrapper>
           <CollapseIcon src={this.state.collapsed ? burgerIcon : exitIcon} onClick={this.toggleNavigation.bind(this)} />
         </IconWrapper>
         <NavDiv collapsed={this.state.collapsed}>
-          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} />
+          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} />
         </NavDiv>
       </Root>
     )
@@ -78,7 +95,8 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  navigationItems: PropTypes.array
+  navigationItems: PropTypes.array,
+  navigationLinks: PropTypes.array
 }
 
 export default Navigation

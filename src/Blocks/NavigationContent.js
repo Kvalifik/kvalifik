@@ -4,32 +4,37 @@ import styled, { css } from 'styled-components'
 
 const NavItem = styled.a`
   color: white;
-  list-style-type: none;
   text-decoration:none;
   font-weight:700;
   font-size: ${props => props.theme.typography.fontSize.menuItem};
   text-transform: uppercase;
+`
+
+const FooterItem = styled.a`
+  color: white;
+  text-decoration:none;
+  font-weight:300;
+  font-size: calc(${props => props.theme.typography.fontSize.menuItem} - 5px);
+  text-transform: uppercase;
+`
+
+const Li = styled.li`
+  transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  list-style-type: none;
+  padding-bottom: ${props => props.theme.spacing(2)};
   ${props => props.collapsed
     ? css`
-      transform:translateX(-1000%);
+      padding-left:calc(200px + (${props => props.index * 10 + 'px'}) );
       `
     : css`
-      transform:translateX(0%);  
+      padding-left:0px;
     `
 }
 `
 
-const Li = styled.li`
-  padding-bottom: 10px;
-`
-
 const NavItems = styled.div`
-  justify-self:center;
-  align-self:center;
-`
-
-const NavFoot = styled.ul`
-  justify-self:center;
+  margin-left: ${props => props.theme.spacing(8)};
+  justify-self:left;
   align-self:center;
 `
 
@@ -41,28 +46,43 @@ const Root = styled.div`
 `
 
 const NavigationContent = props => {
-  const { navigationItems, collapsed } = props
+  const { navigationItems, navigationLinks, socialIcons, collapsed } = props
 
   return (
     <Root>
       <NavItems>
-        { navigationItems.map(navigationItem => (
-          <NavItem href={navigationItem.link} collapsed={collapsed}>
-            <Li>
-              {navigationItem.name}
+        {
+          navigationItems.map((navigationItem, i) => (
+            <Li collapsed={collapsed} key={i} index={i}>
+              <NavItem href={navigationItem.link}>
+                {navigationItem.name}
+              </NavItem>
             </Li>
-          </NavItem>
-        )) }
+          ))
+        }
       </NavItems>
-      <NavFoot>
-        Hey!
-      </NavFoot>
+      <NavItems>
+        {
+          navigationLinks.map((navigationItem, i) => (
+            <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
+              <FooterItem href={navigationItem.link}>
+                {navigationItem.name}
+              </FooterItem>
+            </Li>
+          ))
+        }
+      </NavItems>
+      <SocialIcons>
+        
+      </SocialIcons>
     </Root>
   )
 }
 
 NavigationContent.propTypes = {
   navigationItems: PropTypes.array,
+  navigationLinks: PropTypes.array,
+  socialIcons: PropTypes.array,
   collapsed: PropTypes.bool
 }
 export default NavigationContent
