@@ -35,8 +35,9 @@ const SideText = styled.div`
 
 const SideTextInner = styled.div`
   @media (max-width: calc(576px + 80px)) {
-    padding: 0px ${props => props.theme.padding.sm} 0px 0px;
+    padding: 0 ${props => props.theme.padding.sm} 0 0;
   }
+
   padding: ${props => `0px ${props.theme.padding.sm} ${props.theme.padding.sm} 0`};
   position: absolute;
   transform-origin: 0% 0%;
