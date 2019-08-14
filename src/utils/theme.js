@@ -45,6 +45,7 @@ const theme = {
   },
   typography: {
     fontSize: {
+      xs: '13px',
       sm: '14px',
       md: '40px',
       xl: '80px',

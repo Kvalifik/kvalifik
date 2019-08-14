@@ -8,19 +8,19 @@ const Root = styled.div`
   grid-template-columns: 60px 1fr;
 
   @media (min-width: ${props => props.theme.breakpoints.sm}) {
-    grid-template-columns: 1fr 400px 1fr;
+    grid-template-columns: 1fr 200px 200px 1fr;
   }
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
-    grid-template-columns: 1fr 630px 1fr;
+    grid-template-columns: 1fr 315px 315px 1fr;
   }
 
   @media (min-width: ${props => props.theme.breakpoints.lg}) {
-    grid-template-columns: 1fr 870px 1fr;
+    grid-template-columns: 1fr 435px 435px 1fr;
   }
 
   @media (min-width: ${props => props.theme.breakpoints.xl}) {
-    grid-template-columns: 1fr 1050px 1fr;
+    grid-template-columns: 1fr 525px 525px 1fr;
   }
 `
 
@@ -46,7 +46,7 @@ const SideTextInner = styled.div`
 
 const Content = styled.div`
   grid-column-start: ${props => props.overflowLeft ? 1 : 2};
-  grid-column-end: ${props => props.overflowRight ? -1 : 3};
+  grid-column-end: ${props => props.overflowRight ? -1 : 4};
 `
 
 const Container = ({

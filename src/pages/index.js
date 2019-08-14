@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import Main from 'Components/Main'
+import Layout from 'Components/Layout'
 import CaseGrid from 'Components/CaseGrid'
 import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
@@ -33,7 +33,7 @@ const Index = ({ data }) => {
   } = data.datoCmsHomePage
 
   return (
-    <Main>
+    <Layout>
       <HeaderBlock
         title={headerTitle}
         body={headerDescription}
@@ -91,9 +91,20 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
         bgColor={theme.palette.primary.B}
+        textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
-    </Main>
+      <ActionBlock
+        title={contactTitle}
+        body={contactDescription}
+        buttonLabel={contactButtonText}
+        buttonType="button"
+        images={contactImages}
+        bgColor={theme.palette.primary.F}
+        textColor={theme.palette.primary.C}
+        galleryDelay={contactImageDelay}
+      />
+    </Layout>
   )
 }
 
