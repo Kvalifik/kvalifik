@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Main from 'Components/Main'
-import CaseGrid from 'Blocks/CaseGrid'
-import CaseThump from 'Blocks/CaseThump'
+import CaseGrid from 'Components/CaseGrid'
+import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
+
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'

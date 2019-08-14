@@ -9,12 +9,12 @@ const Root = styled.div`
   margin-top: ${props => props.offsetTop}vw;
   height: ${props => `calc(${props.height} + ${-props.offsetTop}vw)` || 'auto'};
   transform-origin: 0%;
-  transform: skewy(${props => props.angle}deg);
+  transform: skewY(${props => props.angle}deg);
 `
 
 const Inner = styled.div`
   margin: ${props => props.offsetTop}vw 0 ${props => props.offsetBottom}vw;
-  transform: skewy(${props => -props.angle}deg);
+  transform: skewY(${props => -props.angle}deg);
 `
 
 const angles = {
