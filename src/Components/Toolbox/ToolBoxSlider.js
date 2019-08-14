@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import svg from 'graphics/skills.svg'
 
 const Root = styled.div`
   color: white;
   display: grid;
   grid-template-columns: 20% 1fr 20%;
-  @media only screen and (max-width: ${props => props.theme.breakpoints.lg} ) {
-    color: red ;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.lg}) {
+    color: red;
     grid-template-columns: 2% 1fr 2%;
   }
 `
@@ -16,16 +16,16 @@ const Root = styled.div`
 const Slider = styled.div`
   padding: ${props => props.theme.spacing(4)} 0;
   grid-gap: ${props => props.theme.spacing(6)};
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm} ) {
-    grid-gap: ${props => props.theme.spacing(2)};
-  
-  }
   grid-column: 2 / 3;
   display: grid;
   grid-auto-flow: column;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+    grid-gap: ${props => props.theme.spacing(2)};
+  }
 `
 
-const SliderElement = styled.div`  
+const SliderElement = styled.div`
   cursor: pointer !important;
   padding: 0;
   padding-bottom: ${props => props.theme.spacing(1.5)};
@@ -33,11 +33,13 @@ const SliderElement = styled.div`
   text-align: center;
   position: relative;
   transform-origin: center;
-  transition: .4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   transition-delay: 0;
-  :hover{
+
+  &:hover {
     transform: scale(0.95);
-    &::after{
+
+    &::after {
       height: ${props => props.theme.spacing(0.5) * 2};
     }
   }
@@ -53,16 +55,16 @@ const SliderElement = styled.div`
       height: ${props => props.theme.spacing(0.5)};
     }
     ` : ''}
-
 `
 
 const Img = styled.img`
   margin: 0;
   width: 50%;
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md} ) {
+  max-width: 50px;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
     width: 100%;
   }
-  max-width: 50px;
 `
 
 const ToolBoxSlider = props => {
@@ -90,7 +92,7 @@ const ToolBoxSlider = props => {
 ToolBoxSlider.propTypes = {
   tools: PropTypes.array,
   chosenTool: PropTypes.any,
-  chooseTool:PropTypes.any
+  chooseTool: PropTypes.any
 }
 
 export default ToolBoxSlider

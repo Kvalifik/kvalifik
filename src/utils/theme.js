@@ -45,6 +45,7 @@ const theme = {
   },
   typography: {
     fontSize: {
+      xs: '13px',
       sm: '14px',
       md: '40px',
       xl: '80px',
@@ -96,7 +97,7 @@ const appendMixins = (theme) => ({
       mixin: () => css`
         font-family: ${theme.typography.body.fontFamily};
         font-weight: ${theme.typography.body.fontWeight};
-        font-style: ${theme.typography.body.fontStyle}
+        font-style: ${theme.typography.body.fontStyle};
       `
     },
     hero: {
@@ -104,7 +105,7 @@ const appendMixins = (theme) => ({
       mixin: () => css`
         font-family: ${theme.typography.hero.fontFamily};
         font-weight: ${theme.typography.hero.fontWeight};
-        font-style: ${theme.typography.hero.fontStyle}
+        font-style: ${theme.typography.hero.fontStyle};
       `
     },
     header: {
@@ -112,7 +113,7 @@ const appendMixins = (theme) => ({
       mixin: () => css`
         font-family: ${theme.typography.header.fontFamily};
         font-weight: ${theme.typography.header.fontWeight};
-        font-style: ${theme.typography.header.fontStyle}
+        font-style: ${theme.typography.header.fontStyle};
       `
     },
     quote: {
@@ -120,7 +121,7 @@ const appendMixins = (theme) => ({
       mixin: () => css`
         font-family: ${theme.typography.quote.fontFamily};
         font-weight: ${theme.typography.quote.fontWeight};
-        font-style: ${theme.typography.quote.fontStyle}
+        font-style: ${theme.typography.quote.fontStyle};
       `
     }
   },

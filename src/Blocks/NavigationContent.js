@@ -72,9 +72,9 @@ const NavigationContent = props => {
           ))
         }
       </NavItems>
-      <SocialIcons>
-        
-      </SocialIcons>
+      {/* <SocialIcons>
+
+      </SocialIcons> */}
     </Root>
   )
 }
