@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
+import VideoFullscreen from 'Blocks/VideoFullscreen'
+
 import downArrow from 'graphics/down.svg'
 import playButton from 'graphics/play-button.svg'
 
@@ -130,34 +133,66 @@ const PlayButton = styled.button`
   }
 `
 
-const HeaderBlock = ({
-  title,
-  body,
-  bgColor,
-  videoUrl,
-  iconUrl
-}) => (
-  <Skewer angle="large" flushTop bgColor={bgColor} noPadding height="130vh">
-    <Container noContentWrapper>
-      <Content>
-        <TopLeftContainer>
-          <Icon src={iconUrl} />
-          <Title>{title}</Title>
-        </TopLeftContainer>
-        <BottomLeftContainer>
-          <p dangerouslySetInnerHTML={{ __html: body }} />
-        </BottomLeftContainer>
-        <RightContainer>
-          <Video>
-            <source src={videoUrl} type="video/mp4" />
-          </Video>
-          <PlayButton onClick={console.log} />
-        </RightContainer>
-      </Content>
-    </Container>
-    <DownArrow />
-  </Skewer>
-)
+class HeaderBlock extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      playing: false
+    }
+  }
+
+  handlePlay () {
+    this.setState({
+      playing: true
+    })
+  }
+
+  handleClose () {
+    this.setState({
+      playing: false
+    })
+  }
+
+  render () {
+    const {
+      title,
+      body,
+      bgColor,
+      videoUrl,
+      iconUrl
+    } = this.props
+    const { playing } = this.state
+
+    return (
+      <>
+        {playing && (
+          <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
+        )}
+        <Skewer angle="large" flushTop bgColor={bgColor} noPadding height="130vh">
+          <Container noContentWrapper>
+            <Content>
+              <TopLeftContainer>
+                <Icon src={iconUrl} />
+                <Title>{title}</Title>
+              </TopLeftContainer>
+              <BottomLeftContainer>
+                <p dangerouslySetInnerHTML={{ __html: body }} />
+              </BottomLeftContainer>
+              <RightContainer>
+                <Video preload="true">
+                  <source src={videoUrl} type="video/mp4" />
+                </Video>
+                <PlayButton onClick={this.handlePlay.bind(this)} />
+              </RightContainer>
+            </Content>
+          </Container>
+          <DownArrow />
+        </Skewer>
+      </>
+    )
+  }
+}
 
 HeaderBlock.propTypes = {
   title: PropTypes.string,
