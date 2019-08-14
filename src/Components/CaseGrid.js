@@ -47,9 +47,8 @@ const CaseGrid = (props) => {
           </Content>
         </Container>
         <MoreWork fadeBottom={props.fadeBottom}>
-          <Button bgColor="#707070" color="white" >
+          <Button bgColor="#707070" color="white">
             More Work
-
           </Button>
         </MoreWork>
       </Padder>
