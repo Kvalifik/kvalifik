@@ -62,7 +62,6 @@ const Main = ({ children }) => {
       }
     }
   `)
-  console.log({links: data.allDatoCmsNavigation.nodes[0].mainLinks})
   return (
     <>
       <GlobalStyle />

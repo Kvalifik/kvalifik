@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes, { any } from 'prop-types'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import targetBlankIcon from 'graphics/target_blank.svg'
-
-
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -11,18 +9,17 @@ const Li = styled.li`
   padding-bottom: ${props => props.theme.spacing(2)};
   ${props => props.collapsed
     ? css`
-      padding-left:calc(200px + (${props => props.index * 10 + 'px'}) );
+      padding-left: calc(200px + (${props => props.index * 10 + 'px'}) );
       `
     : css`
-      padding-left:0px;
-    `
-}
+      padding-left: 0px;
+    `}
 `
 
 const NavItems = styled.div`
   margin-left: ${props => props.theme.spacing(8)};
-  justify-self:left;
-  align-self:center;
+  justify-self: left;
+  align-self: center;
   &:first-of-type{
     margin-top: ${props => props.theme.navBarWidth};
   }
@@ -30,8 +27,8 @@ const NavItems = styled.div`
 
 const NavItem = styled.a`
   color: white;
-  text-decoration:none;
-  font-weight:700;
+  text-decoration: none;
+  font-weight: 700;
   font-size: ${props => props.theme.typography.fontSize.menuItem};
   text-transform: uppercase;
   ${props => !props.isexternal || css`
@@ -43,8 +40,8 @@ const NavItem = styled.a`
 
 const FooterItem = styled.a`
   color: white;
-  text-decoration:none;
-  font-weight:300;
+  text-decoration: none;
+  font-weight: 300;
   font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 5px);
   text-transform: uppercase;
   ${props => !props.isexternal || css`
@@ -58,11 +55,10 @@ const FooterItem = styled.a`
 `
 
 const Root = styled.div`
-  color:white;
+  color: white;
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  
 `
 
 const SocialIcons = styled.div`
@@ -77,14 +73,13 @@ const SocialIcon = styled.a`
   width: 100%;
   ${props => props.collapsed
     ? css`
-      opacity:0;
-      padding-left:calc(500px + (${props => props.index * 10 + 'px'}) );
+      opacity: 0;
+      padding-left: calc(500px + (${props => props.index * 10 + 'px'}) );
       `
     : css`
-      opacity:1;
-      padding-left:0px;
-    `
-}
+      opacity: 1;
+      padding-left: 0px;
+    `}
 `
 
 const NavigationContent = props => {

@@ -5,7 +5,6 @@ import exitIcon from 'graphics/exit.svg'
 import burgerIcon from 'graphics/burger.svg'
 import NavigationContent from 'Blocks/NavigationContent'
 import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
-import kvalfikLogo from 'graphics/kvalifik_logo.svg'
 
 const Root = styled.div`
 
@@ -14,10 +13,10 @@ const Root = styled.div`
 const NavDiv = styled.div`
   transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   color: white;
-  position:fixed;
+  position: fixed;
   right: 0;
-  top:0;
-  bottom:0;
+  top: 0;
+  bottom: 0;
   width: 300px;
   background-color: #1D1D1DCC; /* CC = 80% in hex */
 
@@ -45,25 +44,25 @@ const NavDiv = styled.div`
 `
 
 const CollapseIcon = styled.img`
-  margin:0;
+  margin: 0;
 `
 
 const IconWrapper = styled.div`
   cursor: pointer;
-  display:flex;
+  display: flex;
   justify-content: center;
-  align-items:center;
-  z-index:10;
+  align-items: center;
+  z-index: 10;
   right: 0;
   top:0; 
   height: ${props => props.theme.navBarWidth};
   width: ${props => props.theme.navBarWidth};
-  position:fixed;
+  position: fixed;
 `
 
 const KvalfikLogo = styled.img`
   transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
-  position:fixed;
+  position: fixed;
   
   right: 0;
   top: 0;
