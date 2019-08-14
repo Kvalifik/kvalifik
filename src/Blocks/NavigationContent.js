@@ -1,22 +1,9 @@
 import React from 'react'
 import PropTypes, { any } from 'prop-types'
 import styled, { css } from 'styled-components'
+import targetBlankIcon from 'graphics/target_blank.svg'
 
-const NavItem = styled.a`
-  color: white;
-  text-decoration:none;
-  font-weight:700;
-  font-size: ${props => props.theme.typography.fontSize.menuItem};
-  text-transform: uppercase;
-`
 
-const FooterItem = styled.a`
-  color: white;
-  text-decoration:none;
-  font-weight:300;
-  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 5px);
-  text-transform: uppercase;
-`
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -39,6 +26,35 @@ const NavItems = styled.div`
   &:first-of-type{
     margin-top: ${props => props.theme.navBarWidth};
   }
+`
+
+const NavItem = styled.a`
+  color: white;
+  text-decoration:none;
+  font-weight:700;
+  font-size: ${props => props.theme.typography.fontSize.menuItem};
+  text-transform: uppercase;
+  ${props => !props.isexternal || css`
+    &:after{
+      content: url('${targetBlankIcon}');
+    }
+  `}
+`
+
+const FooterItem = styled.a`
+  color: white;
+  text-decoration:none;
+  font-weight:300;
+  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 5px);
+  text-transform: uppercase;
+  ${props => !props.isexternal || css`
+    display:flex;
+    &:after{
+      margin-top: -3px;
+      margin-left: 5px;
+      content: url('${targetBlankIcon}');
+    }
+  `}
 `
 
 const Root = styled.div`
@@ -80,7 +96,7 @@ const NavigationContent = props => {
         {
           navigationItems.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem href={navigationItem.link}>
+              <NavItem href={navigationItem.path} isexternal={navigationItem.isexternal} target={!navigationItem.isexternal || '_blank'} >
                 {navigationItem.name}
               </NavItem>
             </Li>
@@ -91,7 +107,7 @@ const NavigationContent = props => {
         {
           navigationLinks.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem href={navigationItem.link}>
+              <FooterItem href={navigationItem.path} isexternal={navigationItem.isexternal} target={!navigationItem.isexternal || '_blank'}>
                 {navigationItem.name}
               </FooterItem>
             </Li>

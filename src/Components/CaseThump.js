@@ -25,7 +25,7 @@ const Root = styled.div`
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
   &:hover {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {

@@ -22,44 +22,6 @@ const App = styled.div`
 `
 
 const Main = ({ children }) => {
-  const navigationItems = [
-    {
-      name: 'Work',
-      link: '/work'
-    },
-    {
-      name: 'Services',
-      link: '/services'
-    },
-    {
-      name: 'Toolbox',
-      link: '/toolbox'
-    },
-    {
-      name: 'Contact',
-      link: '/contact'
-    }
-  ]
-
-  const navigationLinks = [
-    {
-      name: 'Work',
-      link: '/work'
-    },
-    {
-      name: 'Services',
-      link: '/services'
-    },
-    {
-      name: 'Toolbox',
-      link: '/toolbox'
-    },
-    {
-      name: 'Contact',
-      link: '/contact'
-    }
-  ]
-
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -84,9 +46,23 @@ const Main = ({ children }) => {
           timestamp
         }
       }
+      allDatoCmsNavigation {
+        nodes {
+          mainLinks {
+            name
+            path
+            isexternal
+          }
+          secondaryLinks {
+            name
+            path
+            isexternal
+          }
+        }
+      }
     }
   `)
-
+  console.log({links: data.allDatoCmsNavigation.nodes[0].mainLinks})
   return (
     <>
       <GlobalStyle />
@@ -94,7 +70,7 @@ const Main = ({ children }) => {
         <App> {/* Add a surrounding div to make sure ThemeProvider only has a single child */}
           {children}
           <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
-          <Navigation navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
+          <Navigation navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks} navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
         </App>
       </ThemeProvider>
     </>

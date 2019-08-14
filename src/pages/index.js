@@ -10,6 +10,7 @@ import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
+import Toolbox from 'Components/Toolbox/index.js'
 
 import theme from 'utils/theme'
 
@@ -66,6 +67,7 @@ const Index = ({ data }) => {
         textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
+      <Toolbox />
       <ActionBlock
         title={contactTitle}
         body={contactDescription}

@@ -100,12 +100,13 @@ class Navigation extends Component {
   }
 
   render () {
-    console.log(this.props)
     const {
       navigationItems,
       navigationLinks,
       socialMediaLinks
     } = this.props
+
+    console.log({ navigationLinks })
 
     return (
       <Root>
@@ -122,8 +123,16 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  navigationItems: PropTypes.array,
-  navigationLinks: PropTypes.array,
+  navigationItems: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    link: PropTypes.string,
+    isExternal: PropTypes.bool
+  })),
+  navigationLinks: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    link: PropTypes.string,
+    isExternal: PropTypes.bool
+  })),
   socialMediaLinks: PropTypes.array
 }
 
