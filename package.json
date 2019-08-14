@@ -10,22 +10,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "lint": "eslint ."
-  },
-  "eslintConfig": {
-    "extends": [
-      "standard",
-      "standard-react"
-    ],
-    "rules": {
-      "jsx-quotes": [
-        "error",
-        "prefer-double"
-      ]
-    },
-    "env": {
-      "browser": true
-    }
+    "lint": "eslint . && stylelint 'src/**/*.js'"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
@@ -33,6 +18,7 @@
     "gatsby-plugin-resolve-src": "^2.0.0",
     "gatsby-plugin-styled-components": "^3.1.2",
     "gatsby-source-datocms": "^2.1.15",
+    "gatsby-source-instagram": "^0.5.1",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -48,7 +34,11 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "stylelint": "^10.1.0",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0"
   },
   "repository": {
     "type": "git",
