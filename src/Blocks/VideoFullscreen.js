@@ -97,7 +97,7 @@ const VideoFullscreen = ({ src, onClose }) => {
     <>
       <Backdrop />
       <Container onClick={handleClose}>
-        <Video controls={true} autoPlay muted>
+        <Video controls={true} autoPlay>
           <source src={src} type="video/mp4" />
         </Video>
         <CloseButton onClick={onClose}>
