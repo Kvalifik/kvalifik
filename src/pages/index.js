@@ -3,12 +3,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import Main from 'Components/Main'
-import CaseGrid from 'Blocks/CaseGrid'
-import CaseThump from 'Blocks/CaseThump'
-import Toolbox from 'Components/Toolbox'
+import Layout from 'Components/Layout'
+import CaseGrid from 'Components/CaseGrid'
+import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
+import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
@@ -47,13 +47,14 @@ const Index = ({ data }) => {
     contactButtonText,
     contactDescription,
     contactImages,
-    contactImageDelay
+    contactImageDelay,
+    punchline
   } = data.datoCmsHomePage
 
   const works = data.allDatoCmsWork.nodes
 
   return (
-    <Main>
+    <Layout>
       <HeaderBlock
         title={headerTitle}
         body={headerDescription}
@@ -64,14 +65,19 @@ const Index = ({ data }) => {
       <FixedSkewer
         angle="large"
         reverse
+        height="30px"
       />
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
-        <CaseThump
-          name="Have A Look"
-          description="el preben hmm"
-          bgUrl={bg}
-          bgColor="rgb(163, 241, 255)"
-        />
+        {works.map(work => {
+          return (<CaseThump
+            name="Have A Look"
+            description="el preben hmm"
+            bgUrl={bg}
+            bgColor="rgb(163, 241, 255)"
+            fullWidth={}
+          />)
+        })}
+
         <CaseThump
           name="Andet"
           bgUrl={bg2}
@@ -102,6 +108,7 @@ const Index = ({ data }) => {
           bgColor="rgb(163, 241, 255)"
         />
       </CaseGrid>
+      <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
         title={contactTitle}
         body={contactDescription}
@@ -109,9 +116,20 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
         bgColor={theme.palette.primary.B}
+        textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
-    </Main>
+      <ActionBlock
+        title={contactTitle}
+        body={contactDescription}
+        buttonLabel={contactButtonText}
+        buttonType="button"
+        images={contactImages}
+        bgColor={theme.palette.primary.F}
+        textColor={theme.palette.primary.C}
+        galleryDelay={contactImageDelay}
+      />
+    </Layout>
   )
 }
 
@@ -132,6 +150,7 @@ Index.propTypes = {
       contactImages: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string
       })),
+      punchline: PropTypes.string,
       contactImageDelay: PropTypes.number
     }),
     allDatoCmsWork: PropTypes.shape({
@@ -142,7 +161,8 @@ Index.propTypes = {
         id: PropTypes.string,
         forWho: PropTypes.string,
         fullSize: PropTypes.bool,
-        date: PropTypes.string
+        date: PropTypes.string,
+        color: PropTypes.string
       }))
     })
   })
@@ -165,7 +185,8 @@ export const query = graphql`
       contactImages {
         url
       }
-      contactImageDelay
+      contactImageDelay,
+      punchline
     }
     allDatoCmsWork {
       nodes {
@@ -175,6 +196,14 @@ export const query = graphql`
         forWho
         fullSize
         date(formatString: "DD/MM-YY")
+        color {
+          red
+          green
+          blue
+          alpha
+          rgb
+          hex
+        }
       }
     }
   }

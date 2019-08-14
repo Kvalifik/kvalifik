@@ -9,7 +9,7 @@ const Root = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
-  background-color: rgba(255, 255, 255, .1);
+  background-color: rgba(255, 255, 255, 0.1);
 `
 
 const Img = styled.div`
@@ -25,7 +25,8 @@ const Icon = styled.img`
   margin: 0;
   padding: ${props => props.theme.spacing(4)};
   width: 150px;
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md} ) {
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
     width: 100%;
   }
 `
@@ -34,14 +35,17 @@ const Text = styled.div`
   position: relative;
   margin: ${props => props.theme.spacing(4)};
   padding-bottom: ${props => props.theme.spacing(4)};
-  @media only screen and (max-width : ${props => props.theme.breakpoints.md} ) {
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
     grid-column: 1 / -1;
   }
-  h2{
+
+  h2 {
     font-size: 25px;
   }
-  h3{
-    color: #49EAAC;
+
+  h3 {
+    color: #49eaac;
   }
 `
 
@@ -80,7 +84,6 @@ const ToolBoxContent = props => {
 }
 
 ToolBoxContent.propTypes = {
-  project: PropTypes.any,
   tools: PropTypes.array,
   chosenTool: PropTypes.int
 }

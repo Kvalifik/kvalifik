@@ -11,18 +11,24 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-styled-components`,
+      resolve: 'gatsby-plugin-styled-components',
       options: {
         displayName: true
       }
     },
     'gatsby-plugin-resolve-src',
     {
-      resolve: `gatsby-source-datocms`,
+      resolve: 'gatsby-source-datocms',
       options: {
-        apiToken: `4cd38b7807abbdff5ee4b344a4d7b0`,
+        apiToken: '4cd38b7807abbdff5ee4b344a4d7b0',
         preview: false,
         disableLiveReload: false
+      }
+    },
+    {
+      resolve: 'gatsby-source-instagram',
+      options: {
+        username: 'kvalifik'
       }
     }
   ]

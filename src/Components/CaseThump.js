@@ -14,16 +14,17 @@ const Root = styled.div`
 
   ${props => props.full ? css`
     grid-column: 1 / -1;
-    @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
       height: 350px;
     }
   ` : ''};
 
-  &:hover{
+  &:hover {
     transform: scale(1.012);
   }
 
-  @media only screen and (max-width : ${props => props.theme.breakpoints.sm} ) {
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
     grid-auto-flow: dense;
@@ -34,19 +35,21 @@ const Root = styled.div`
 const Desc = styled.div`
   display: flex;
   position: relative;
-  @media only screen and (max-width : ${props => props.theme.breakpoints.sm} ){
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}){
     grid-row: 2 / 2;
   }
 `
 
 const ProjectName = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   transform: rotate(-90deg);
   transform-origin: 0% 0%;
   left: 10px;
   font-size: 13px;
-  @media only screen and (max-width : ${props => props.theme.breakpoints.xs} ) {
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     width: 50%;
   }
 `
@@ -70,7 +73,8 @@ const Header = styled.h3`
   display: grid;
   align-content: center;
   margin: 0 calc(15px * 2.5);
-  @media only screen and (min-width : ${props => props.theme.breakpoints.lg} ) {
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
     font-size: ${props => props.full ? '30px' : '15px'};
   }
 `
