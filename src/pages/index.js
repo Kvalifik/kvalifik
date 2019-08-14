@@ -88,6 +88,7 @@ const Index = ({ data }) => {
         buttonType="button"
         images={contactImages}
         bgColor={theme.palette.primary.B}
+        textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
     </Main>

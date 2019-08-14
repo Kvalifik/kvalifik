@@ -45,7 +45,7 @@ const SideTextInner = styled.div`
 `
 
 const Content = styled.div`
-  grid-column-start: ${props => props.overflowLeft ? 1 : 3};
+  grid-column-start: ${props => props.overflowLeft ? 1 : 2};
   grid-column-end: ${props => props.overflowRight ? -1 : 4};
 `
 

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Gallery from 'Blocks/Gallery'
+import Button from 'Blocks/Button'
 
 const LeftContainer = styled.div`
   grid-column: 2 / 3;
@@ -21,6 +22,17 @@ const ImageWrapper = styled.div`
   height: 850px;
 `
 
+const Description = styled.p`
+  margin: ${props => props.theme.spacing(4)} 0;
+  line-height: 1.25;
+`
+
+const Title = styled.h1`
+  ${props => props.theme.typography.header.mixin()}
+  font-size: ${props => props.theme.typography.fontSize.md};
+  margin: ${props => props.theme.spacing(4)} 0;
+`
+
 const ActionBlock = ({
   title,
   body,
@@ -29,6 +41,7 @@ const ActionBlock = ({
   buttonProps,
   buttonLabel,
   bgColor,
+  textColor,
   galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
@@ -37,9 +50,16 @@ const ActionBlock = ({
     <Skewer bgColor={bgColor} noPadding>
       <Container noContentWrapper>
         <LeftContainer>
-          <h1>{title}</h1>
-          <p dangerouslySetInnerHTML={{ __html: body }} />
-          <button type="button" alt={buttonLabel}>{buttonLabel}</button>
+          <Title>{title}</Title>
+          <Description dangerouslySetInnerHTML={{ __html: body }} />
+          <Button
+            type="button"
+            alt={buttonLabel}
+            bgColor={textColor}
+            color={bgColor}
+          >
+            {buttonLabel}
+          </Button>
         </LeftContainer>
         <RightContainer>
           <ImageWrapper>
@@ -61,6 +81,7 @@ ActionBlock.propTypes = {
   buttonType: PropTypes.oneOf(['button', 'link']),
   buttonProps: PropTypes.object,
   bgColor: PropTypes.string,
+  textColor: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
   })),
