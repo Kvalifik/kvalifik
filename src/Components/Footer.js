@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import theme from 'utils/theme'
 
 import Skewer from 'Blocks/Skewer'
-import Padder from 'Blocks/Padder'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 
@@ -13,6 +12,7 @@ const Grid = styled.div`
   grid-template-rows: auto auto;
   display: grid;
   color: ${props => props.theme.palette.light};
+  padding: ${props => props.theme.spacing(7)} 0 ${props => props.theme.spacing(6)};
 `
 
 const Title = styled.h1`
@@ -103,28 +103,26 @@ const Footer = ({
   return (
     <Skewer angle="small" flushBottom bgColor={theme.palette.dark}>
       <Container>
-        <Padder innerPadding="70px">
-          <Grid>
-            <LeftContainer>
-              <Title>{title}</Title>
-              <Subtitle>
-                {phoneNumber}
-                <Separator />
-                {emailAddress}
-              </Subtitle>
-              <LinkContainer dangerouslySetInnerHTML={{ __html: links }} />
-            </LeftContainer>
-            <CenterContainer>
-              <LinkHeader>{socialMediaHeader}</LinkHeader>
-              {mappedLinks.map(link => (
-                <a key={link.href} href={link.href} target="_blank">
-                  <ExtendedIcon src={link.iconUrl} />
-                </a>
-              ))}
-            </CenterContainer>
-            <CopyrightLine>{copyrightLine}</CopyrightLine>
-          </Grid>
-        </Padder>
+        <Grid>
+          <LeftContainer>
+            <Title>{title}</Title>
+            <Subtitle>
+              {phoneNumber}
+              <Separator />
+              {emailAddress}
+            </Subtitle>
+            <LinkContainer dangerouslySetInnerHTML={{ __html: links }} />
+          </LeftContainer>
+          <CenterContainer>
+            <LinkHeader>{socialMediaHeader}</LinkHeader>
+            {mappedLinks.map(link => (
+              <a key={link.href} href={link.href} target="_blank">
+                <ExtendedIcon src={link.iconUrl} />
+              </a>
+            ))}
+          </CenterContainer>
+          <CopyrightLine>{copyrightLine}</CopyrightLine>
+        </Grid>
       </Container>
     </Skewer>
   )
