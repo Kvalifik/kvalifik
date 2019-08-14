@@ -170,7 +170,7 @@ const Footer = ({
           <RightContainer>
             <FeedHeader>Follow us on Instagram</FeedHeader>
             {slicedFeed.map(item => (
-              <FeedItem src={item.src} />
+              <FeedItem key={item.src} src={item.src} />
             ))}
           </RightContainer>
           <CopyrightLine>{copyrightLine}</CopyrightLine>
