@@ -70,13 +70,16 @@ const Index = ({ data }) => {
 
       <CaseGrid fadeBottom bgColor={'#1d1d1d'}>
         {works.map(work => {
-          return (<CaseThump
-            name={work.forWho}
-            description={work.description}
-            bgUrl={work.image.url}
-            bgColor={work.color.hex}
-            fullWidth={work.fullSize}
-          />)
+          return (
+            <CaseThump
+              key={work.forWho}
+              name={work.forWho}
+              description={work.description}
+              bgUrl={work.image.url}
+              bgColor={work.color.hex}
+              fullWidth={work.fullSize}
+            />
+          )
         })}
       </CaseGrid>
       <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
