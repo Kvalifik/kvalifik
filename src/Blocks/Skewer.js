@@ -7,8 +7,8 @@ const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
   margin-top: ${props => props.offsetTop}vw;
+  height: ${props => `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` || 'auto'};
   margin-bottom: ${props => props.offsetBottom}vw;
-  height: ${props => props.height || 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
 `
@@ -47,6 +47,7 @@ const Skewer = ({
   if (noPadding && !flushBottom) {
     bottomOffset = -offset
   }
+
 
   return (
     <Root
