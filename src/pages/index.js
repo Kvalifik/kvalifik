@@ -50,6 +50,8 @@ const Index = ({ data }) => {
     contactImageDelay
   } = data.datoCmsHomePage
 
+  const works = data.allDatoCmsWork.nodes
+
   return (
     <Main>
       <HeaderBlock
@@ -132,7 +134,17 @@ Index.propTypes = {
       })),
       contactImageDelay: PropTypes.number
     }),
-    allDatoCmsWork: PropTypes.nodes()
+    allDatoCmsWork: PropTypes.shape({
+      nodes: PropTypes.arrayOf(PropTypes.shape({
+        headerTitle: PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string,
+        id: PropTypes.string,
+        forWho: PropTypes.string,
+        fullSize: PropTypes.bool,
+        date: PropTypes.string
+      }))
+    })
   })
 }
 
