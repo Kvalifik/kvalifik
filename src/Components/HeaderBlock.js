@@ -5,6 +5,7 @@ import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 import downArrow from 'graphics/down.svg'
+import playButton from 'graphics/play-button.svg'
 
 const Content = styled.div`
   display: grid;
@@ -54,6 +55,7 @@ const RightContainer = styled.div`
   grid-column: 2 / 3;
   grid-row: 1 / -1;
   height: 145vh;
+  position: relative;
 
   ${props => props.theme.media.lg`
     grid-row: 2 / 3;
@@ -61,7 +63,7 @@ const RightContainer = styled.div`
 
     height: initial;
     padding: ${props => props.theme.spacing(2)};
-    iframe, video{
+    iframe, video {
       height: initial;
     }
   `}
@@ -104,6 +106,30 @@ const DownArrow = styled.img.attrs({
   `}
 `
 
+const PlayButton = styled.button`
+  width: 60px;
+  height: 60px;
+  background-image: url(${playButton});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  transition: transform 0.5s ease-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+`
+
 const HeaderBlock = ({
   title,
   body,
@@ -125,6 +151,7 @@ const HeaderBlock = ({
           <Video>
             <source src={videoUrl} type="video/mp4" />
           </Video>
+          <PlayButton onClick={console.log} />
         </RightContainer>
       </Content>
     </Container>
