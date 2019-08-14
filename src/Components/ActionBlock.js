@@ -25,12 +25,14 @@ const ImageWrapper = styled.div`
 const Description = styled.p`
   margin: ${props => props.theme.spacing(4)} 0;
   line-height: 1.25;
+  color: ${props => props.color};
 `
 
 const Title = styled.h1`
   ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.md};
   margin: ${props => props.theme.spacing(4)} 0;
+  color: ${props => props.color};
 `
 
 const ActionBlock = ({
@@ -50,8 +52,8 @@ const ActionBlock = ({
     <Skewer bgColor={bgColor} noPadding>
       <Container noContentWrapper>
         <LeftContainer>
-          <Title>{title}</Title>
-          <Description dangerouslySetInnerHTML={{ __html: body }} />
+          <Title color={textColor}>{title}</Title>
+          <Description color={textColor} dangerouslySetInnerHTML={{ __html: body }} />
           <Button
             type="button"
             alt={buttonLabel}
