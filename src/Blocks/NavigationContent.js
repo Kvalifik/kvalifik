@@ -6,7 +6,6 @@ import targetBlankIcon from 'graphics/target_blank.svg'
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
   list-style-type: none;
-  padding-bottom: ${props => props.theme.spacing(2)};
   ${props => props.collapsed
     ? css`
       padding-left: calc(200px + (${props => props.index * 10 + 'px'}) );
@@ -26,6 +25,8 @@ const NavItems = styled.div`
 `
 
 const NavItem = styled.a`
+  line-height: ${props => props.theme.spacing(5)};
+  height:100%;
   color: white;
   text-decoration: none;
   font-weight: 700;
@@ -39,10 +40,11 @@ const NavItem = styled.a`
 `
 
 const FooterItem = styled.a`
+  line-height: ${props => props.theme.spacing(3)};
   color: white;
   text-decoration: none;
   font-weight: 300;
-  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 5px);
+  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 7px);
   text-transform: uppercase;
   ${props => !props.isexternal || css`
     display:flex;
@@ -62,15 +64,19 @@ const Root = styled.div`
 `
 
 const SocialIcons = styled.div`
-  margin-top: ${props => props.theme.spacing(2)};
+  margin-top: ${props => props.theme.spacing(1)};
   grid-gap: ${props => props.theme.spacing(2)};
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  width: 100%;
 `
 
 const SocialIcon = styled.a`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
-  width: 100%;
+  img{
+    width:30px;
+
+  }
   ${props => props.collapsed
     ? css`
       opacity: 0;

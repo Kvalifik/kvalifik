@@ -24,10 +24,10 @@ const Burger = styled.div`
     ${props => props.collapsed ? css`
       opacity: 1;
       &.div1{
-        transform: translateY(-10px)
+        transform: translateY(-7px)
       }
       &.div2{
-        transform: translateY(10px)
+        transform: translateY(7px)
       }
     ` : css`
       opacity: 0;
