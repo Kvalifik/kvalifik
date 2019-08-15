@@ -31,8 +31,11 @@ const NavDiv = styled.div`
       `}
   `}
   /* Collapsed Nav: */
-  ${props => !props.collapsed ||
-  css`
+  ${props => !props.collapsed || css`
+    &:hover{
+      /* transform: translateX(-10px); */
+      right: calc(-300px + (${props => props.theme.navBarWidth} + 10px));
+    }
     right: calc(-300px + (${props => props.theme.navBarWidth}));
   `}
 `
@@ -98,11 +101,11 @@ class Navigation extends Component {
 
     return (
       <Root>
-        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
-        <IconWrapper onClick={this.toggleNavigation.bind(this)} >
-          <ToggleNavButton collapsed={this.state.collapsed} />
-        </IconWrapper>
         <NavDiv collapsed={this.state.collapsed}>
+          <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+          <IconWrapper onClick={this.toggleNavigation.bind(this)} >
+            <ToggleNavButton collapsed={this.state.collapsed} />
+          </IconWrapper>
           <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={socialMediaLinks} />
         </NavDiv>
       </Root>
