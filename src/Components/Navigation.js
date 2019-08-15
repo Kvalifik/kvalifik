@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import exitIcon from 'graphics/exit.svg'
-import burgerIcon from 'graphics/burger.svg'
 import NavigationContent from 'Blocks/NavigationContent'
 import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
+import ToggleNavButton from 'Blocks/ToggleNavButton'
 
-const Root = styled.div`
-
-`
+const Root = styled.div``
 
 const NavDiv = styled.div`
   transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -31,20 +28,13 @@ const NavDiv = styled.div`
       css`
         top: 0;
         right: calc(-100% + ${props => props.theme.navBarWidth});
-      `
-}
+      `}
   `}
-    /* Collapsed Nav: */
-    ${props => !props.collapsed ||
-    css`
-      right: calc(-300px + (${props => props.theme.navBarWidth}));
-    `
-}
-
-`
-
-const CollapseIcon = styled.img`
-  margin: 0;
+  /* Collapsed Nav: */
+  ${props => !props.collapsed ||
+  css`
+    right: calc(-300px + (${props => props.theme.navBarWidth}));
+  `}
 `
 
 const IconWrapper = styled.div`
@@ -54,7 +44,7 @@ const IconWrapper = styled.div`
   align-items: center;
   z-index: 10;
   right: 0;
-  top:0; 
+  top: 0; 
   height: ${props => props.theme.navBarWidth};
   width: ${props => props.theme.navBarWidth};
   position: fixed;
@@ -63,10 +53,10 @@ const IconWrapper = styled.div`
 const KvalfikLogo = styled.img`
   transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   position: fixed;
-  
+  width: 30px;
   right: 0;
   top: 0;
-  bottom:0;
+  bottom: 0;
   ${props => props.collapsed
     ? css`
       margin: auto ${props => props.theme.spacing(2.5)};
@@ -77,9 +67,10 @@ const KvalfikLogo = styled.img`
   ${props => props.theme.media.sm`
     transform: rotate(90deg) translate(100%, -100%);
     transform-origin: 50% 0%;
-    height: 100px;
+    height: 80px;
+    width: initial;
     left: 0;
-    bottom:initial;
+    bottom: initial;
     right: initial;
     margin: 15px !important;
   `}
@@ -105,13 +96,11 @@ class Navigation extends Component {
       socialMediaLinks
     } = this.props
 
-    console.log({ navigationLinks })
-
     return (
       <Root>
         <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
-        <IconWrapper>
-          <CollapseIcon src={this.state.collapsed ? burgerIcon : exitIcon} onClick={this.toggleNavigation.bind(this)} />
+        <IconWrapper onClick={this.toggleNavigation.bind(this)} >
+          <ToggleNavButton collapsed={this.state.collapsed} />
         </IconWrapper>
         <NavDiv collapsed={this.state.collapsed}>
           <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={socialMediaLinks} />
