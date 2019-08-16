@@ -15,6 +15,19 @@ const theme = {
     ].filter(a => !!a)
     return components.join(' ')
   },
+  hexToRgba: (hex, opacity = '1') => {
+    const hexbody = hex.replace('#', '')
+    const r = parseInt(hexbody.substring(0, 2), 16)
+    const g = parseInt(hexbody.substring(2, 4), 16)
+    const b = parseInt(hexbody.substring(4, 6), 16)
+
+    return `rgba(${[
+      r,
+      g,
+      b,
+      opacity
+    ].join(', ')})`
+  },
   skewer: {
     smallAngle: 5,
     largeAngle: 11
