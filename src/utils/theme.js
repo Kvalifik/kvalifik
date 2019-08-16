@@ -1,6 +1,7 @@
 import { css } from 'styled-components'
 
 const theme = {
+  navBarWidth: '65px',
   padding: {
     sm: '15px'
   },
@@ -62,7 +63,8 @@ const theme = {
       sm: '14px',
       md: '40px',
       xl: '80px',
-      quote: '18px'
+      quote: '18px',
+      menuItem: '25px'
     },
     body: {
       fontFamily: 'Montserrat',

@@ -21,9 +21,11 @@ const MoreWork = styled.div`
   display: ${props => props.fadeBottom ? 'flex' : 'none'};
   justify-content: center;
   margin: 40px 100px;
+  
 `
 
 const Fader = styled.div`
+    pointer-events: none;
     position: absolute;
     z-index: 1000;
     left: 0;

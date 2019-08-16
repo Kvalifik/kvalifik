@@ -16,7 +16,11 @@ const Content = styled.div`
   grid-template-rows: 2fr 4fr;
   grid-column: 2 / -1;
 
-  ${props => props.theme.media.xl`
+  ${props => props.theme.media.sm`
+    margin-top: ${props => props.theme.navBarWidth};
+  `}
+
+  ${props => props.theme.media.md`
     grid-column: 1 / -1;
   `}
 
@@ -26,9 +30,10 @@ const Content = styled.div`
     grid-template-rows: auto auto;
   `}
 
-  ${props => props.theme.media.md`
+  ${props => props.theme.media.xl`
     grid-column: 1 / -1;
   `}
+
 `
 
 const TopLeftContainer = styled.div`
