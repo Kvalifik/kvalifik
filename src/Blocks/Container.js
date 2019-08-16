@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Root = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: ${props => props.hasSideText ? '60px' : 0} 1fr;
 
   @media (min-width: ${props => props.theme.breakpoints.sm}) {
     grid-template-columns: 1fr 200px 200px 1fr;
@@ -56,7 +56,7 @@ const Container = ({
   noContentWrapper,
   children
 }) => (
-  <Root>
+  <Root hasSideText={!!sideText}>
     <SideText>
       <SideTextInner>
         {sideText}

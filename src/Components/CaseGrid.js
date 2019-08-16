@@ -20,8 +20,7 @@ const Content = styled.div`
 const MoreWork = styled.div`
   display: ${props => props.fadeBottom ? 'flex' : 'none'};
   justify-content: center;
-  margin: 40px 100px;
-  
+  margin: 40px 16px;
 `
 
 const Fader = styled.div`

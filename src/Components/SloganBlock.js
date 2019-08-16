@@ -18,6 +18,7 @@ const Content = styled.div`
 
   p {
     margin: ${props => props.theme.spacing(0.5)};
+    text-align: center;
   }
 
   strong {

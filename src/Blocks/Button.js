@@ -16,4 +16,8 @@ export default styled.button`
   &:hover {
     transform: scale(0.95);
   }
+
+  ${props => props.theme.media.md`
+    width: 100%;
+  `}
 `
