@@ -150,7 +150,7 @@ export const query = graphql`
       contactImages {
         url
       }
-      contactImageDelay,
+      contactImageDelay
       punchline
     }
     allDatoCmsWork {
