@@ -28,7 +28,9 @@ const Main = ({ children }) => {
       datoCmsFooter {
         title,
         emailAddress,
-        copyrightLine,
+        copyright,
+        cvr,
+        address,
         phoneNumber,
         links,
         socialMediaLinks {
