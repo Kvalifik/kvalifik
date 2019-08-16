@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import cross from 'graphics/cross.svg'
 
-const Container = styled.div`
+const CustomContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1050px 1fr;
   grid-template-rows: 1fr calc(1050px * 0.5625) 1fr;
@@ -96,14 +96,14 @@ const VideoFullscreen = ({ src, onClose }) => {
   return (
     <>
       <Backdrop />
-      <Container onClick={handleClose}>
+      <CustomContainer onClick={handleClose}>
         <Video controls={true} autoPlay>
           <source src={src} type="video/mp4" />
         </Video>
         <CloseButton onClick={onClose}>
           <img src={cross} />
         </CloseButton>
-      </Container>
+      </CustomContainer>
     </>
   )
 }

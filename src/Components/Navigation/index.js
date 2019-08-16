@@ -19,6 +19,14 @@ const NavDiv = styled.div`
   width: 300px;
   background-color: #1d1d1dcc; /* CC = 80% in hex */
 
+  ${props => props.theme.media.lg`
+    background-color: #1d1d1d;
+  `}
+
+  ${props => props.theme.media.sm`
+    background-color: #1d1d1dcc;
+  `}
+
   /* Mobile Nav: */
   ${props => props.theme.media.sm`
     width: 100%;

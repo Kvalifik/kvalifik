@@ -33,29 +33,30 @@ const Content = styled.div`
   ${props => props.theme.media.xl`
     grid-column: 1 / -1;
   `}
-
 `
 
 const TopLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+  padding: 0 ${props => props.theme.spacing(6)};
   align-self: end;
   line-height: 1.25;
 
   ${props => props.theme.media.lg`
     grid-column: 1 / -1;
+    padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   `}
 `
 
 const BottomLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+  padding: 0 ${props => props.theme.spacing(6)};
 
   ${props => props.theme.media.lg`
     grid-column: 1 / -1;
     grid-row: 3 / -1;
+    padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   `}
 `
 
@@ -69,7 +70,7 @@ const RightContainer = styled.div`
     grid-row: 2 / 3;
     grid-column: 1 / 3;
 
-    height: initial;
+    height: 55vw;
     padding: ${props => props.theme.spacing(2)};
     iframe, video {
       height: initial;
@@ -77,11 +78,13 @@ const RightContainer = styled.div`
   `}
 `
 
-const Video = styled.video`
-  object-fit: cover;
-  object-position: 15%;
+const VideoThumb = styled.div`
   width: 100%;
   height: 100%;
+  background-image: url(${props => props.src});
+  background-position: 15%;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const Title = styled.div`
@@ -136,6 +139,10 @@ const PlayButton = styled.button`
   &:hover {
     transform: translate(-50%, -50%) scale(0.95);
   }
+
+  ${props => props.theme.media.lg`
+    top: 50%;
+  `}
 `
 
 class HeaderBlock extends Component {
@@ -165,7 +172,8 @@ class HeaderBlock extends Component {
       body,
       bgColor,
       videoUrl,
-      iconUrl
+      iconUrl,
+      videoThumbUrl
     } = this.props
     const { playing } = this.state
 
@@ -185,9 +193,7 @@ class HeaderBlock extends Component {
                 <p dangerouslySetInnerHTML={{ __html: body }} />
               </BottomLeftContainer>
               <RightContainer>
-                <Video preload="true">
-                  <source src={videoUrl} type="video/mp4" />
-                </Video>
+                <VideoThumb src={videoThumbUrl} />
                 <PlayButton onClick={this.handlePlay.bind(this)} />
               </RightContainer>
             </Content>
@@ -204,7 +210,8 @@ HeaderBlock.propTypes = {
   body: PropTypes.string,
   bgColor: PropTypes.string,
   videoUrl: PropTypes.string,
-  iconUrl: PropTypes.string
+  iconUrl: PropTypes.string,
+  videoThumbUrl: PropTypes.string
 }
 
 export default HeaderBlock

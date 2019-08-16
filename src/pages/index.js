@@ -20,6 +20,7 @@ const Index = ({ data }) => {
     headerDescription,
     headerIcon,
     headerMedia,
+    headerVideoThumbnail,
     contactTitle,
     contactButtonText,
     contactDescription,
@@ -38,6 +39,7 @@ const Index = ({ data }) => {
         iconUrl={headerIcon.url}
         bgColor={theme.palette.primary.C}
         videoUrl={headerMedia.url}
+        videoThumbUrl={headerVideoThumbnail.url}
       />
       <FixedSkewer
         angle="large"
@@ -93,6 +95,9 @@ Index.propTypes = {
       headerMedia: PropTypes.shape({
         url: PropTypes.string
       }),
+      headerVideoThumbnail: PropTypes.shape({
+        url: PropTypes.string
+      }),
       headerIcon: PropTypes.shape({
         url: PropTypes.string
       }),
@@ -131,6 +136,9 @@ export const query = graphql`
       headerTitle
       headerDescription
       headerMedia {
+        url
+      }
+      headerVideoThumbnail {
         url
       }
       headerIcon {

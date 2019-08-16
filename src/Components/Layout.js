@@ -23,6 +23,14 @@ const App = styled.div`
   ${props => props.theme.typography.body.mixin()}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  ${props => props.theme.media.lg`
+    padding-right: ${props.theme.navBarWidth};
+  `}
+
+  ${props => props.theme.media.sm`
+    padding-right: 0;
+  `}
 `
 
 const Main = ({ children }) => {
