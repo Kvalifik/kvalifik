@@ -19,20 +19,21 @@ const NavItems = styled.div`
   margin-left: ${props => props.theme.spacing(8)};
   justify-self: left;
   align-self: center;
-  &:first-of-type{
+
+  &:first-of-type {
     margin-top: ${props => props.theme.navBarWidth};
   }
 `
 
 const NavItem = styled.a`
   line-height: ${props => props.theme.spacing(5)};
-  height:100%;
+  height: 100%;
   color: white;
   text-decoration: none;
   font-weight: 700;
   font-size: ${props => props.theme.typography.fontSize.menuItem};
   text-transform: uppercase;
-  ${props => !props.isexternal || css`
+  ${props => !props.isExternal || css`
     &:after{
       content: url('${targetBlankIcon}');
     }
@@ -44,9 +45,9 @@ const FooterItem = styled.a`
   color: white;
   text-decoration: none;
   font-weight: 300;
-  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) - 7px);
+  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
   text-transform: uppercase;
-  ${props => !props.isexternal || css`
+  ${props => !props.isExternal || css`
     display:flex;
     &:after{
       margin-top: -3px;
@@ -73,10 +74,11 @@ const SocialIcons = styled.div`
 
 const SocialIcon = styled.a`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
-  img{
-    width:30px;
 
+  img {
+    width: 30px;
   }
+
   ${props => props.collapsed
     ? css`
       opacity: 0;
@@ -97,7 +99,7 @@ const NavigationContent = props => {
         {
           navigationItems.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem href={navigationItem.path} isexternal={navigationItem.isexternal} target={!navigationItem.isexternal || '_blank'} >
+              <NavItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={!navigationItem.isExternal || '_blank'} >
                 {navigationItem.name}
               </NavItem>
             </Li>
@@ -108,7 +110,7 @@ const NavigationContent = props => {
         {
           navigationLinks.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem href={navigationItem.path} isexternal={navigationItem.isexternal} target={!navigationItem.isexternal || '_blank'}>
+              <FooterItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={!navigationItem.isExternal || '_blank'}>
                 {navigationItem.name}
               </FooterItem>
             </Li>

@@ -1,42 +1,46 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import NavigationContent from 'Blocks/NavigationContent'
+
+import NavigationContent from './NavigationContent'
+import ToggleNavButton from './ToggleNavButton'
+
 import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
-import ToggleNavButton from 'Blocks/ToggleNavButton'
 
 const Root = styled.div``
 
 const NavDiv = styled.div`
-  transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   color: white;
   position: fixed;
   right: 0;
   top: 0;
   bottom: 0;
   width: 300px;
-  background-color: #1D1D1DCC; /* CC = 80% in hex */
+  background-color: #1d1d1dcc; /* CC = 80% in hex */
 
   /* Mobile Nav: */
   ${props => props.theme.media.sm`
-    width: 100% !important;
+    width: 100%;
     left: 0;
     top: calc(-100vh + ${props => props.theme.navBarWidth});
     height: 100vh;
+
     /* Collapsed mobile nav */
-    ${props => props.collapsed ||
+    ${props => !props.collapsed &&
       css`
         top: 0;
         right: calc(-100% + ${props => props.theme.navBarWidth});
       `}
   `}
+
   /* Collapsed Nav: */
-  ${props => !props.collapsed || css`
+  ${props => props.collapsed && css`
+    right: calc(-300px + (${props => props.theme.navBarWidth}));
+
     &:hover{
-      /* transform: translateX(-10px); */
       right: calc(-300px + (${props => props.theme.navBarWidth} + 10px));
     }
-    right: calc(-300px + (${props => props.theme.navBarWidth}));
   `}
 `
 
@@ -47,19 +51,21 @@ const IconWrapper = styled.div`
   align-items: center;
   z-index: 10;
   right: 0;
-  top: 0; 
+  top: 0;
   height: ${props => props.theme.navBarWidth};
   width: ${props => props.theme.navBarWidth};
   position: fixed;
 `
 
 const KvalfikLogo = styled.img`
-  transition: .5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   position: fixed;
   width: 30px;
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 100;
+
   ${props => props.collapsed
     ? css`
       margin: auto ${props => props.theme.spacing(2.5)};
@@ -67,6 +73,7 @@ const KvalfikLogo = styled.img`
     : css`
       margin: auto ${props => props.theme.spacing(4)};
   `}
+
   ${props => props.theme.media.sm`
     transform: rotate(90deg) translate(100%, -100%);
     transform-origin: 50% 0%;
@@ -75,9 +82,8 @@ const KvalfikLogo = styled.img`
     left: 0;
     bottom: initial;
     right: initial;
-    margin: 15px !important;
+    margin: 15px;
   `}
-  z-index: 100;
 `
 
 class Navigation extends Component {
@@ -106,7 +112,12 @@ class Navigation extends Component {
           <IconWrapper onClick={this.toggleNavigation.bind(this)} >
             <ToggleNavButton collapsed={this.state.collapsed} />
           </IconWrapper>
-          <NavigationContent collapsed={this.state.collapsed} navigationItems={navigationItems} navigationLinks={navigationLinks} socialMediaLinks={socialMediaLinks} />
+          <NavigationContent
+            collapsed={this.state.collapsed}
+            navigationItems={navigationItems}
+            navigationLinks={navigationLinks}
+            socialMediaLinks={socialMediaLinks}
+          />
         </NavDiv>
       </Root>
     )

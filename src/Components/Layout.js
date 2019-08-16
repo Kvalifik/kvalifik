@@ -51,12 +51,12 @@ const Main = ({ children }) => {
           mainLinks {
             name
             path
-            isexternal
+            isExternal
           }
           secondaryLinks {
             name
             path
-            isexternal
+            isExternal
           }
         }
       }
