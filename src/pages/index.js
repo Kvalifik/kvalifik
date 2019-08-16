@@ -12,6 +12,7 @@ import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
 
 import theme from 'utils/theme'
+import OverlayBlock from '../Components/OverlayBlock'
 
 /* Import from cms */
 import bg from 'graphics/test.jpeg'
@@ -48,10 +49,12 @@ const Index = ({ data }) => {
     contactDescription,
     contactImages,
     contactImageDelay,
-    punchline
+    punchline,
+    works
   } = data.datoCmsHomePage
 
-  const works = data.allDatoCmsWork.nodes
+  console.log(works[0])
+  // const works = data.allDatoCmsWork.nodes
 
   return (
     <Layout>
@@ -82,6 +85,9 @@ const Index = ({ data }) => {
           )
         })}
       </CaseGrid>
+      <OverlayBlock header="Smagen">
+        hey!
+      </OverlayBlock>
       <SloganBlock bgColor={theme.palette.primary.E} content={punchline} />
       <ActionBlock
         title={contactTitle}
@@ -125,10 +131,9 @@ Index.propTypes = {
         url: PropTypes.string
       })),
       punchline: PropTypes.string,
-      contactImageDelay: PropTypes.number
-    }),
-    allDatoCmsWork: PropTypes.shape({
-      nodes: PropTypes.arrayOf(PropTypes.shape({
+      contactImageDelay: PropTypes.number,
+
+      works: PropTypes.arrayOf(PropTypes.shape({
         headerTitle: PropTypes.string,
         title: PropTypes.string,
         description: PropTypes.string,
@@ -142,7 +147,6 @@ Index.propTypes = {
         image: PropTypes.shape({
           url: PropTypes.string
         })
-
       }))
     })
   })
@@ -165,11 +169,9 @@ export const query = graphql`
       contactImages {
         url
       }
-      contactImageDelay,
+      contactImageDelay
       punchline
-    }
-    allDatoCmsWork {
-      nodes {
+      works {
         title
         description
         id

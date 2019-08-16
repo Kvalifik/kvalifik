@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
+  ${props => props.fiftyFiftyBg ? css`
+    background: linear-gradient(to right, ${props.bgColor} 50%, transparent 50%);` : ''}
   margin-top: ${props => props.offsetTop}vw;
   height: ${props => `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` || 'auto'};
   margin-bottom: ${props => props.offsetBottom}vw;
@@ -31,6 +33,7 @@ const Skewer = ({
   noPadding,
   flushTop,
   flushBottom,
+  fiftyFiftyBg,
   height
 }) => {
   let angle = angles[type]
@@ -48,9 +51,9 @@ const Skewer = ({
     bottomOffset = -offset
   }
 
-
   return (
     <Root
+      fiftyFiftyBg={fiftyFiftyBg}
       bgColor={bgColor}
       angle={angle}
       offsetTop={flushTop ? -topOffset * 2 : 0}
@@ -71,6 +74,7 @@ const Skewer = ({
 Skewer.propTypes = {
   height: PropTypes.string,
   bgColor: PropTypes.string,
+  fiftyFiftyBg: PropTypes.bool,
   children: PropTypes.any,
   angle: PropTypes.oneOf(['small', 'large']),
   reverse: PropTypes.bool,
