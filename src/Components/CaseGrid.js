@@ -24,6 +24,7 @@ const MoreWork = styled.div`
 `
 
 const Fader = styled.div`
+    pointer-events: none;
     position: absolute;
     z-index: 1000;
     left: 0;

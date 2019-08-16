@@ -11,6 +11,8 @@ const Root = styled.div`
     color: red;
     grid-template-columns: 2% 1fr 2%;
   }
+  margin: ${props => props.theme.spacing(2)};
+
 `
 
 const Slider = styled.div`

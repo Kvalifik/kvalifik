@@ -10,6 +10,7 @@ const Root = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
   background-color: rgba(255, 255, 255, 0.1);
+  margin: ${props => props.theme.spacing(2)};
 `
 
 const Img = styled.div`
@@ -25,9 +26,10 @@ const Icon = styled.img`
   margin: 0;
   padding: ${props => props.theme.spacing(4)};
   width: 150px;
-
   @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
-    width: 100%;
+    justify-self: center;
+    align-self: center;
+    width: 60%;
   }
 `
 
