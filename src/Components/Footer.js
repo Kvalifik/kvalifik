@@ -141,6 +141,7 @@ const FeedItem = styled.div`
   background-image: url(${props => props.src});
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   display: inline-block;
 
   &:last-child {
@@ -171,7 +172,7 @@ const Footer = ({
     iconUrl: link.icon.url
   }))
   const mappedFeed = instagramFeed.map(node => ({
-    src: node.thumbnails[1].src,
+    src: node.thumbnails[3].src,
     timestamp: node.timestamp
   }))
   mappedFeed.sort((a, b) => {
