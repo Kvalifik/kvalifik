@@ -17,14 +17,14 @@ const NavDiv = styled.div`
   top: 0;
   bottom: 0;
   width: 300px;
-  background-color: #1d1d1dcc; /* CC = 80% in hex */
+  background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
 
   ${props => props.theme.media.lg`
-    background-color: #1d1d1d;
+    background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 1)};
   `}
 
   ${props => props.theme.media.sm`
-    background-color: #1d1d1dcc;
+    background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
   `}
 
   /* Mobile Nav: */
