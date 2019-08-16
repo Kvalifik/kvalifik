@@ -8,28 +8,56 @@ import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 
 const Grid = styled.div`
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
   display: grid;
+
+  grid-template-areas:
+    "info links feed"
+    "copyright copyright copyright";
+
+  justify-content: space-between;
+  align-items: end;
+
   color: ${props => props.theme.palette.light};
   padding: ${props => props.theme.spacing(7)} 0 ${props => props.theme.spacing(6)};
+
+  ${props => props.theme.media.lg`
+    grid-template-areas:
+      ". info ."
+      ". feed ."
+      ". links ."
+      ". copyright .";
+
+    gap: ${props.theme.spacing(5)} 0;
+    justify-items: center;
+  `}
 `
 
-const Title = styled.h1`
-  ${props => props.theme.typography.header.mixin()}
-  font-size: ${props => props.theme.typography.fontSize.md};
-  margin: 0 0 ${props => props.theme.spacing(2)};
+const Logo = styled.img`
+  height: 30px;
+  margin: 0 0 ${props => props.theme.spacing(1)};
 `
 
 const Subtitle = styled.h2`
   ${props => props.theme.typography.header.mixin()};
   font-size: ${props => props.theme.typography.fontSize.sm};
+  white-space: nowrap;
+
+  ${props => props.theme.media.md`
+    white-space: normal;
+  `}
 `
 
 const Separator = styled.span`
   margin: 0 ${props => props.theme.spacing(1)};
   height: 100%;
   border-right: 1px solid #d1d1d1;
+
+  ${props => props.theme.media.md`
+    display: block;
+    border-right: 0;
+    height: ${props.theme.spacing(0.5)};
+    margin: 0;
+  `}
 `
 
 const LinkContainer = styled.div`
@@ -51,37 +79,50 @@ const LinkContainer = styled.div`
 `
 
 const CopyrightLine = styled.div`
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
   margin-top: ${props => props.theme.spacing(3)};
-  opacity: 0.5;
   font-size: ${props => props.theme.typography.fontSize.xs};
+  grid-area: copyright;
+  white-space: nowrap;
+  opacity: 0.5;
+
+  ${props => props.theme.media.md`
+    text-align: center;
+    white-space: normal;
+  `}
 `
 
-const LeftContainer = styled.div`
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
+const InfoContainer = styled.div`
+  grid-area: info;
 
-  justify-self: start;
-  align-self: end;
+  ${props => props.theme.media.lg`
+    text-align: center;
+  `}
 `
 
-const RightContainer = styled.div`
-  grid-column: 3 / 4;
-  grid-row: 1 / 2;
+const FeedContainer = styled.div`
+  grid-area: feed;
 
-  justify-self: end;
-  align-self: end;
+  display: grid;
+  grid-template-columns: repeat(4, 75px);
+  grid-gap: ${props => props.theme.spacing(1.5)};
+
+  ${props => props.theme.media.xl`
+    grid-template-columns: repeat(2, 75px);
+  `}
+
+  ${props => props.theme.media.lg`
+    justify-items: center;
+    grid-template-columns: repeat(4, 75px);
+  `}
+
+  ${props => props.theme.media.md`
+    grid-template-columns: repeat(2, 75px);
+  `}
 `
 
-const CenterContainer = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-
-  margin: 0 -${props => props.theme.spacing(2)};
-
+const LinksContainer = styled.div`
+  grid-area: links;
   justify-self: center;
-  align-self: end;
 `
 
 const ExtendedIcon = styled(Icon)`
@@ -103,8 +144,8 @@ const FeedItem = styled.div`
   background-image: url(${props => props.src});
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   display: inline-block;
-  margin-right: ${props => props.theme.spacing(1.5)};
 
   &:last-child {
     margin-right: 0;
@@ -114,14 +155,16 @@ const FeedItem = styled.div`
 const FeedHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
   font-size: ${props => props.theme.typography.fontSize.xs};
-  margin-bottom: ${props => props.theme.spacing(1.5)};
+  grid-column: 1 / -1;
 `
 
 const Footer = ({
-  title,
+  logo,
   phoneNumber,
   emailAddress,
-  copyrightLine,
+  copyright,
+  cvr,
+  address,
   links,
   socialMediaLinks,
   socialMediaHeader,
@@ -132,7 +175,7 @@ const Footer = ({
     iconUrl: link.icon.url
   }))
   const mappedFeed = instagramFeed.map(node => ({
-    src: node.thumbnails[1].src,
+    src: node.thumbnails[3].src,
     timestamp: node.timestamp
   }))
   mappedFeed.sort((a, b) => {
@@ -150,30 +193,36 @@ const Footer = ({
     <Skewer angle="small" flushBottom bgColor={theme.palette.dark}>
       <Container>
         <Grid>
-          <LeftContainer>
-            <Title>{title}</Title>
+          <InfoContainer>
+            <Logo src={logo.url} />
             <Subtitle>
               {phoneNumber}
               <Separator />
               {emailAddress}
             </Subtitle>
             <LinkContainer dangerouslySetInnerHTML={{ __html: links }} />
-          </LeftContainer>
-          <CenterContainer>
+          </InfoContainer>
+          <LinksContainer>
             <LinkHeader>{socialMediaHeader}</LinkHeader>
             {mappedLinks.map(link => (
               <a key={link.href} href={link.href} target="_blank">
                 <ExtendedIcon src={link.iconUrl} />
               </a>
             ))}
-          </CenterContainer>
-          <RightContainer>
+          </LinksContainer>
+          <FeedContainer>
             <FeedHeader>Follow us on Instagram</FeedHeader>
             {slicedFeed.map(item => (
               <FeedItem key={item.src} src={item.src} />
             ))}
-          </RightContainer>
-          <CopyrightLine>{copyrightLine}</CopyrightLine>
+          </FeedContainer>
+          <CopyrightLine>
+            {copyright}
+            <Separator />
+            {cvr}
+            <Separator />
+            {address}
+          </CopyrightLine>
         </Grid>
       </Container>
     </Skewer>
@@ -181,10 +230,14 @@ const Footer = ({
 }
 
 Footer.propTypes = {
-  title: PropTypes.string,
+  logo: PropTypes.shape({
+    url: PropTypes.string
+  }),
   phoneNumber: PropTypes.string,
   emailAddress: PropTypes.string,
-  copyrightLine: PropTypes.string,
+  copyright: PropTypes.string,
+  cvr: PropTypes.string,
+  address: PropTypes.string,
   links: PropTypes.string,
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
     linkUrl: PropTypes.string,
