@@ -2,9 +2,8 @@ import React from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
-
 import Footer from 'Components/Footer'
-
+import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
 
 const GlobalStyle = createGlobalStyle`
@@ -47,9 +46,22 @@ const Main = ({ children }) => {
           timestamp
         }
       }
+      allDatoCmsNavigation {
+        nodes {
+          mainLinks {
+            name
+            path
+            isExternal
+          }
+          secondaryLinks {
+            name
+            path
+            isExternal
+          }
+        }
+      }
     }
   `)
-
   return (
     <>
       <GlobalStyle />
@@ -57,6 +69,7 @@ const Main = ({ children }) => {
         <App> {/* Add a surrounding div to make sure ThemeProvider only has a single child */}
           {children}
           <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
+          <Navigation navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks} navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
         </App>
       </ThemeProvider>
     </>

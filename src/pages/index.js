@@ -10,32 +10,9 @@ import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import FixedSkewer from 'Blocks/FixedSkewer'
+import Toolbox from 'Components/Toolbox/index.js'
 
 import theme from 'utils/theme'
-
-/* Import from cms */
-import bg from 'graphics/test.jpeg'
-import bg2 from 'graphics/test2.jpeg'
-import bg3 from 'graphics/test3.jpeg'
-
-const navigationItems = [
-  {
-    name: 'Work',
-    link: '/work'
-  },
-  {
-    name: 'Services',
-    link: '/services'
-  },
-  {
-    name: 'Toolbox',
-    link: '/toolbox'
-  },
-  {
-    name: 'Contact',
-    link: '/contact'
-  }
-]
 
 const Index = ({ data }) => {
   const {
@@ -93,6 +70,7 @@ const Index = ({ data }) => {
         textColor={theme.palette.dark}
         galleryDelay={contactImageDelay}
       />
+      <Toolbox />
       <ActionBlock
         title={contactTitle}
         body={contactDescription}
@@ -142,7 +120,6 @@ Index.propTypes = {
         image: PropTypes.shape({
           url: PropTypes.string
         })
-
       }))
     })
   })
