@@ -99,7 +99,7 @@ const NavigationContent = props => {
         {
           navigationItems.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={!navigationItem.isExternal || '_blank'} >
+              <NavItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={navigationItem.isExternal ? '_blank' : ''} >
                 {navigationItem.name}
               </NavItem>
             </Li>
@@ -110,7 +110,7 @@ const NavigationContent = props => {
         {
           navigationLinks.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={!navigationItem.isExternal || '_blank'}>
+              <FooterItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={navigationItem.isExternal ? '_blank' : ''}>
                 {navigationItem.name}
               </FooterItem>
             </Li>

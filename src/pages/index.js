@@ -131,7 +131,7 @@ Index.propTypes = {
 }
 
 export const query = graphql`
-  query HomeQuery {
+  query IndexQuery {
     datoCmsHomePage {
       headerTitle
       headerDescription
