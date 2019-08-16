@@ -26,7 +26,9 @@ const Main = ({ children }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
-        title,
+        logo {
+          url
+        },
         emailAddress,
         copyright,
         cvr,

@@ -16,7 +16,6 @@ const Grid = styled.div`
 
   justify-content: space-between;
   align-items: end;
-  justify-items: center;
 
   color: ${props => props.theme.palette.light};
   padding: ${props => props.theme.spacing(7)} 0 ${props => props.theme.spacing(6)};
@@ -29,13 +28,13 @@ const Grid = styled.div`
       ". copyright .";
 
     gap: ${props.theme.spacing(5)} 0;
+    justify-items: center;
   `}
 `
 
-const Title = styled.h1`
-  ${props => props.theme.typography.header.mixin()}
-  font-size: ${props => props.theme.typography.fontSize.md};
-  margin: 0 0 ${props => props.theme.spacing(2)};
+const Logo = styled.img`
+  height: 30px;
+  margin: 0 0 ${props => props.theme.spacing(1)};
 `
 
 const Subtitle = styled.h2`
@@ -84,6 +83,7 @@ const CopyrightLine = styled.div`
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-area: copyright;
   white-space: nowrap;
+  opacity: 0.5;
 
   ${props => props.theme.media.md`
     text-align: center;
@@ -93,14 +93,16 @@ const CopyrightLine = styled.div`
 
 const InfoContainer = styled.div`
   grid-area: info;
-  text-align: center;
+
+  ${props => props.theme.media.lg`
+    text-align: center;
+  `}
 `
 
 const FeedContainer = styled.div`
   grid-area: feed;
 
   display: grid;
-  justify-items: center;
   grid-template-columns: repeat(4, 75px);
   grid-gap: ${props => props.theme.spacing(1.5)};
 
@@ -109,6 +111,7 @@ const FeedContainer = styled.div`
   `}
 
   ${props => props.theme.media.lg`
+    justify-items: center;
     grid-template-columns: repeat(4, 75px);
   `}
 
@@ -156,7 +159,7 @@ const FeedHeader = styled.div`
 `
 
 const Footer = ({
-  title,
+  logo,
   phoneNumber,
   emailAddress,
   copyright,
@@ -191,7 +194,7 @@ const Footer = ({
       <Container>
         <Grid>
           <InfoContainer>
-            <Title>{title}</Title>
+            <Logo src={logo.url} />
             <Subtitle>
               {phoneNumber}
               <Separator />
@@ -227,7 +230,9 @@ const Footer = ({
 }
 
 Footer.propTypes = {
-  title: PropTypes.string,
+  logo: PropTypes.shape({
+    url: PropTypes.string
+  }),
   phoneNumber: PropTypes.string,
   emailAddress: PropTypes.string,
   copyright: PropTypes.string,
