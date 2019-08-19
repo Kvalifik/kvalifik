@@ -23,7 +23,7 @@ export default (block) => {
       )
     case 'DatoCmsBlockCaseGrid':
       return (
-        <CaseGrid fadeBottom bgColor={theme.palette.dark} key={block.id}>
+        <CaseGrid hasMoreWork={block.hasMoreWork} bgColor={theme.palette.dark} key={block.id}>
           {block.works.map(work => {
             return (
               <CaseThump

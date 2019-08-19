@@ -23,6 +23,7 @@ export const query = graphql`
       }
       ... on DatoCmsBlockCaseGrid {
         id
+        hasMoreWork
         works {
           title
           description
