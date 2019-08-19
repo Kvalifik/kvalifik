@@ -4,12 +4,11 @@ import styled from 'styled-components'
 import Container from 'Blocks/Container'
 import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
-import testImg from 'graphics/test.jpeg'
 
 import theme from 'utils/theme'
 
 const Bg = styled.div`
-  background: url(${testImg});
+  background: url();
   background-position: center;
   background-size: cover;
 `

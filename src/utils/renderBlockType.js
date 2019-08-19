@@ -5,6 +5,7 @@ import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import Toolbox from 'Components/Toolbox'
+import OverlayBlock from 'Components/OverlayBlock'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -59,6 +60,16 @@ export default (block) => {
     case 'DatoCmsBlockToolbox':
       return (
         <Toolbox key={block.id} />
+      )
+    case 'DatoCmsBlockOverlay':
+      return (
+        <OverlayBlock
+          key={block.id}
+          title={block.title}
+          description={block.description}
+          bgColor={block.bgColor.hex}
+          imageUrl={block.image.url}
+        />
       )
   }
 }

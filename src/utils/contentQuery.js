@@ -65,6 +65,17 @@ export const query = graphql`
           hex
         }
       }
+      ... on DatoCmsBlockOverlay {
+        id
+        title
+        description
+        image {
+          url
+        }
+        bgColor {
+          hex
+        }
+      }
     }
   }
 `
