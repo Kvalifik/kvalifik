@@ -5,12 +5,12 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
-  height: ${props => props.height ? `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` : 'auto'};
+  height: ${props => props.height ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` : 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
 
-  margin-top: ${props => props.offsetTop}vw;
-  margin-bottom: ${props => props.offsetBottom}vw;
+  margin-top: ${props => props.marginTop}vw;
+  margin-bottom: ${props => props.marginBottom}vw;
 
   ${props => props.bgImage ? css`
     background-image:
