@@ -9,15 +9,15 @@ import { contentPropType } from 'blockTypes/content'
 import renderBlockType from 'utils/renderBlockType'
 import 'utils/contentQuery'
 
-const Index = ({ data }) => {
+const PageTemplate = ({ data }) => {
   const {
-    content,
-    hasSkewer
-  } = data.datoCmsHomePageNew
+    showSkewer,
+    content
+  } = data.datoCmsPage
 
   return (
     <Layout>
-      {hasSkewer && (
+      {showSkewer && (
         <FixedSkewer
           angle="large"
           reverse
@@ -29,22 +29,22 @@ const Index = ({ data }) => {
   )
 }
 
-Index.propTypes = {
+PageTemplate.propTypes = {
   data: PropTypes.shape({
-    datoCmsHomePageNew: PropTypes.shape({
+    datoCmsPage: PropTypes.shape({
       content: contentPropType,
-      hasSkewer: PropTypes.bool
+      showSkewer: PropTypes.bool
     })
   })
 }
 
 export const query = graphql`
-  query HomeQuery {
-    datoCmsHomePageNew {
-      hasSkewer
+  query($url: String!) {
+    datoCmsPage(url: { eq: $url }) {
+      showSkewer
       ...ContentFragment
     }
   }
 `
 
-export default Index
+export default PageTemplate

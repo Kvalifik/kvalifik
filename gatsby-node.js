@@ -1,36 +1,28 @@
-exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
-  console.log('Type: ' + node.internal.type)
-  if (node.internal.type === 'DatoCmsWork') {
-    const uri = node.forWho.toLowerCase()
-      .replace(/\s/g, '-')
-      .replace(/æ/gi, 'ae')
-      .replace(/ø/gi, 'oe')
-      .replace(/å/gi, 'aa')
-    console.log('Uri: ' + uri)
+const path = require('path')
 
-    console.log(createNodeField({
-      node,
-      name: 'slug',
-      value: `/work/${uri}`
-    }))
-  }
-}
 exports.createPages = async ({ graphql, actions }) => {
-  // **Note:** The graphql function call returns a Promise
-  // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
+  const { createPage } = actions
   const result = await graphql(`
     {
-      allDatoCmsWork {
+      allDatoCmsPage {
         edges {
           node {
-            fields {
-              slug
-            }
+            url
           }
         }
       }
     }
   `)
-  console.log(JSON.stringify(result, null, 4))
+  result.data.allDatoCmsPage.edges.forEach(({ node }) => {
+    console.log(`Creating page ${node.title} on ${node.url}`)
+    createPage({
+      path: node.url,
+      component: path.resolve(`./src/templates/page.js`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        url: node.url
+      }
+    })
+  })
 }
