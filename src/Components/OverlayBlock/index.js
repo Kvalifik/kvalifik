@@ -6,6 +6,8 @@ import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
 import testImg from 'graphics/test.jpeg'
 
+import theme from 'utils/theme'
+
 const Bg = styled.div`
   background: url(${testImg});
   background-position: center;
@@ -16,17 +18,24 @@ const Header = styled.h2`
   /* font-size:  */
 `
 
-const OverlayBlock = props => {
+const Description = styled.p`
+
+`
+
+const OverlayBlock = ({
+  bgColor,
+  title,
+  imageUrl,
+  description
+}) => {
   return (
     <Skewer noPadding>
       <Bg>
         <Padder>
-          <Skewer bgColor="#FF5477DD" half>
+          <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
             <Container>
-              <Header>
-                {props.header}
-              </Header>
-              {props.children}
+              <Header>{title}</Header>
+              <Description dangerouslySetInnerHTML={{ __html: description }} />
             </Container>
           </Skewer>
         </Padder>
@@ -36,8 +45,10 @@ const OverlayBlock = props => {
 }
 
 OverlayBlock.propTypes = {
-  children: PropTypes.any,
-  header: PropTypes.string
+  bgColor: PropTypes.string,
+  title: PropTypes.string,
+  imageUrl: PropTypes.string,
+  description: PropTypes.string
 }
 
 export default OverlayBlock
