@@ -16,12 +16,12 @@ const Header = styled.h2`
   /* font-size:  */
 `
 
-const index = props => {
+const OverlayBlock = props => {
   return (
     <Skewer noPadding>
       <Bg>
-        <Padder doubleBottom>
-          <Skewer bgColor="#FF5477DD" fiftyFiftyBg>
+        <Padder>
+          <Skewer bgColor="#FF5477DD" half>
             <Container>
               <Header>
                 {props.header}
@@ -35,8 +35,9 @@ const index = props => {
   )
 }
 
-index.propTypes = {
-  children: PropTypes.any
+OverlayBlock.propTypes = {
+  children: PropTypes.any,
+  header: PropTypes.string
 }
 
-export default index
+export default OverlayBlock

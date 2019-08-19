@@ -6,18 +6,22 @@ import theme from 'utils/theme'
 const Root = styled.div`
   overflow: hidden;
   background-color: ${props => props.bgColor};
-  ${props => props.fiftyFiftyBg ? css`
-    background: linear-gradient(to right, ${props.bgColor} 50%, transparent 50%);` : ''}
-  margin-top: ${props => props.offsetTop}vw;
-  height: ${props => `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` || 'auto'};
-  margin-bottom: ${props => props.offsetBottom}vw;
+  height: ${props => `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` || 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
+
+  margin-top: ${props => props.marginTop}vw;
+  margin-bottom: ${props => props.marginBottom}vw;
+
+  ${props => props.half && css`
+    background: linear-gradient(to right, ${props.bgColor} 50%, transparent 50%);
+  `}
 `
 
 const Inner = styled.div`
-  margin: ${props => props.offsetTop}vw 0 ${props => props.offsetBottom}vw;
   transform: skewY(${props => -props.angle}deg);
+  margin-top: ${props => props.paddingTop}vw;
+  margin-bottom: ${props => props.paddingBottom}vw;
 `
 
 const angles = {
@@ -33,7 +37,7 @@ const Skewer = ({
   noPadding,
   flushTop,
   flushBottom,
-  fiftyFiftyBg,
+  half,
   height
 }) => {
   let angle = angles[type]
@@ -41,29 +45,44 @@ const Skewer = ({
     angle *= -1
   }
   const offset = theme.skewer.calculateOffset(type)
+  let marginTop = 0
+  let marginBottom = 0
+  let paddingTop = 0
+  let paddingBottom = 0
 
-  let topOffset = offset
-  let bottomOffset = offset
-  if (noPadding && !flushTop) {
-    topOffset = -offset
+  if (flushTop) {
+    marginTop = -offset * 2
   }
+
+  if (flushBottom) {
+    marginBottom = -offset * 2
+  }
+
+  if (noPadding && !flushTop) {
+    paddingTop = -offset
+  } else {
+    paddingTop = offset
+  }
+
   if (noPadding && !flushBottom) {
-    bottomOffset = -offset
+    paddingBottom = -offset
+  } else {
+    paddingBottom = offset
   }
 
   return (
     <Root
-      fiftyFiftyBg={fiftyFiftyBg}
+      half={half}
       bgColor={bgColor}
       angle={angle}
-      offsetTop={flushTop ? -topOffset * 2 : 0}
-      offsetBottom={flushBottom ? -bottomOffset * 2 : 0}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
       height={height}
     >
       <Inner
         angle={angle}
-        offsetBottom={bottomOffset}
-        offsetTop={topOffset}
+        paddingTop={paddingTop}
+        paddingBottom={paddingBottom}
       >
         {children}
       </Inner>
@@ -74,7 +93,7 @@ const Skewer = ({
 Skewer.propTypes = {
   height: PropTypes.string,
   bgColor: PropTypes.string,
-  fiftyFiftyBg: PropTypes.bool,
+  half: PropTypes.bool,
   children: PropTypes.any,
   angle: PropTypes.oneOf(['small', 'large']),
   reverse: PropTypes.bool,
