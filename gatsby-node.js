@@ -8,6 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             url
+            title
           }
         }
       }

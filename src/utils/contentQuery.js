@@ -7,6 +7,9 @@ export const query = graphql`
       ... on DatoCmsBlockHeader {
         id
         title
+        bgColor {
+          hex
+        }
         icon {
           url
         }

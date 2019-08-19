@@ -155,6 +155,9 @@ class HeaderBlock extends Component {
   }
 
   handlePlay () {
+    if (!this.props.videoUrl) {
+      return
+    }
     this.setState({
       playing: true
     })
@@ -176,10 +179,11 @@ class HeaderBlock extends Component {
       videoThumbUrl
     } = this.props
     const { playing } = this.state
+    const hasVideo = !!videoUrl
 
     return (
       <>
-        {playing && (
+        {playing && hasVideo && (
           <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
         )}
         <Skewer angle="large" flushTop bgColor={bgColor} noPadding height="130vh">
@@ -194,11 +198,13 @@ class HeaderBlock extends Component {
               </BottomLeftContainer>
               <RightContainer>
                 <VideoThumb src={videoThumbUrl} />
-                <PlayButton onClick={this.handlePlay.bind(this)} />
+                {hasVideo && (
+                  <PlayButton onClick={this.handlePlay.bind(this)} />
+                )}
               </RightContainer>
             </Content>
           </Container>
-          <DownArrow />
+          <DownArrow color={bgColor} />
         </Skewer>
       </>
     )

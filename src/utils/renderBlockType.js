@@ -16,8 +16,8 @@ export default (block) => {
           title={block.title}
           body={block.description}
           iconUrl={block.icon.url}
-          bgColor={theme.palette.primary.C}
-          videoUrl={block.video.url}
+          bgColor={block.bgColor.hex}
+          videoUrl={block.video ? block.video.url : null}
           videoThumbUrl={block.videoThumbnail.url}
         />
       )
