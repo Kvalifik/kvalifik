@@ -5,16 +5,24 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
-  background-color: ${props => props.bgColor};
-  height: ${props => `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` || 'auto'};
+  height: ${props => props.height ? `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` : 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
 
-  margin-top: ${props => props.marginTop}vw;
-  margin-bottom: ${props => props.marginBottom}vw;
+  margin-top: ${props => props.offsetTop}vw;
+  margin-bottom: ${props => props.offsetBottom}vw;
 
-  ${props => props.half && css`
-    background: linear-gradient(to right, ${props.bgColor} 50%, transparent 50%);
+  ${props => props.bgImage ? css`
+    background-image:
+      ${props.half
+    ? `linear-gradient(to right, ${props.theme.hexToRgba(props.bgColor, 0.9)} 50%, transparent 50%)`
+    : `linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)})`},
+      url(${props.bgImage});
+    background-size: cover, 100% 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, left, left;
+  ` : css`
+    background-color: ${props.half ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)` : props.bgColor};
   `}
 `
 
@@ -31,6 +39,7 @@ const angles = {
 
 const Skewer = ({
   bgColor,
+  bgImageUrl,
   angle: type = 'small',
   children,
   reverse,
@@ -74,6 +83,7 @@ const Skewer = ({
     <Root
       half={half}
       bgColor={bgColor}
+      bgImage={bgImageUrl}
       angle={angle}
       marginTop={marginTop}
       marginBottom={marginBottom}
@@ -91,6 +101,7 @@ const Skewer = ({
 }
 
 Skewer.propTypes = {
+  bgImageUrl: PropTypes.string,
   height: PropTypes.string,
   bgColor: PropTypes.string,
   half: PropTypes.bool,

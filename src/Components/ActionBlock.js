@@ -21,10 +21,6 @@ const LeftContainer = styled.div`
 
   ${props => props.theme.media.md`
     padding: 30vw ${props.theme.spacing(2)};
-
-    button {
-      width: 100%;
-    }
   `}
 `
 

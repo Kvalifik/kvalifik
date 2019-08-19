@@ -1,6 +1,7 @@
 import { css } from 'styled-components'
 
 const theme = {
+  navBarWidth: '65px',
   padding: {
     sm: '15px'
   },
@@ -13,6 +14,19 @@ const theme = {
       w && `${w * unit}px`
     ].filter(a => !!a)
     return components.join(' ')
+  },
+  hexToRgba: (hex, opacity = '1') => {
+    const hexbody = hex.replace('#', '')
+    const r = parseInt(hexbody.substring(0, 2), 16)
+    const g = parseInt(hexbody.substring(2, 4), 16)
+    const b = parseInt(hexbody.substring(4, 6), 16)
+
+    return `rgba(${[
+      r,
+      g,
+      b,
+      opacity
+    ].join(', ')})`
   },
   skewer: {
     smallAngle: 5,
@@ -49,7 +63,8 @@ const theme = {
       sm: '14px',
       md: '40px',
       xl: '80px',
-      quote: '18px'
+      quote: '18px',
+      menuItem: '25px'
     },
     body: {
       fontFamily: 'Montserrat',
