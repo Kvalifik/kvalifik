@@ -1,3 +1,4 @@
+import 'normalize.css'
 import React from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
