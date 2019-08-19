@@ -1,16 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
-  background-color: ${props => props.bgColor};
   margin-top: ${props => props.offsetTop}vw;
-  height: ${props => `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` || 'auto'};
+  height: ${props => props.height ? `calc(${props.height} + ${-props.offsetTop}vw + ${-props.offsetBottom}vw)` : 'auto'};
   margin-bottom: ${props => props.offsetBottom}vw;
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
+
+  ${props => props.bgImage ? css`
+    background-image:
+      linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)}),
+      url(${props.bgImage});
+    background-size: cover, 100% 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, left, left;
+  ` : css`
+    background-color: ${props.bgColor};
+  `}
 `
 
 const Inner = styled.div`
@@ -25,6 +35,7 @@ const angles = {
 
 const Skewer = ({
   bgColor,
+  bgImageUrl,
   angle: type = 'small',
   children,
   reverse,
@@ -48,10 +59,10 @@ const Skewer = ({
     bottomOffset = -offset
   }
 
-
   return (
     <Root
       bgColor={bgColor}
+      bgImage={bgImageUrl}
       angle={angle}
       offsetTop={flushTop ? -topOffset * 2 : 0}
       offsetBottom={flushBottom ? -bottomOffset * 2 : 0}
@@ -69,6 +80,7 @@ const Skewer = ({
 }
 
 Skewer.propTypes = {
+  bgImageUrl: PropTypes.string,
   height: PropTypes.string,
   bgColor: PropTypes.string,
   children: PropTypes.any,
