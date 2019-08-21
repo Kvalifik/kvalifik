@@ -43,7 +43,7 @@ const Description = styled.p`
   line-height: 1.3em;
 `
 
-const ProgressBlock = ({
+const ProcessBlock = ({
   labelOne,
   titleOne,
   descriptionOne,
@@ -76,7 +76,7 @@ const ProgressBlock = ({
 
 )
 
-ProgressBlock.propTypes = {
+ProcessBlock.propTypes = {
   labelOne: PropTypes.string,
   titleOne: PropTypes.string,
   descriptionOne: PropTypes.string,
@@ -88,4 +88,4 @@ ProgressBlock.propTypes = {
   descriptionThree: PropTypes.string
 }
 
-export default ProgressBlock
+export default ProcessBlock

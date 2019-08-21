@@ -7,22 +7,20 @@ import Padder from 'Blocks/Padder'
 
 import theme from 'utils/theme'
 
-const Bg = styled.div`
-  background: url();
-  background-position: center;
-  background-size: cover;
-`
-
 const Header = styled.h2`
-  /* font-size:  */
+  ${props => props.theme.typography.header.mixin()}
+  font-size: ${props => props.theme.typography.fontSize.md};
+  line-height: 1.2em;
 `
 
 const Description = styled.p`
-
+  font-size: 14px;
+  line-height: 1.6em;
 `
 
 const Content = styled.div`
   grid-column: 2 / 3;
+  padding-right: ${props => props.theme.spacing(4)};
 `
 
 const OverlayBlock = ({
@@ -33,18 +31,16 @@ const OverlayBlock = ({
 }) => {
   return (
     <Skewer noPadding bgImageUrl={imageUrl}>
-      <Bg>
-        <Padder>
-          <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
-            <Container noContentWrapper>
-              <Content>
-                <Header>{title}</Header>
-                <Description dangerouslySetInnerHTML={{ __html: description }} />
-              </Content>
-            </Container>
-          </Skewer>
-        </Padder>
-      </Bg>
+      <Padder>
+        <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
+          <Container noContentWrapper>
+            <Content>
+              <Header>{title}</Header>
+              <Description dangerouslySetInnerHTML={{ __html: description }} />
+            </Content>
+          </Container>
+        </Skewer>
+      </Padder>
     </Skewer>
   )
 }
