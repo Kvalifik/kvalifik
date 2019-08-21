@@ -24,7 +24,12 @@ export default (block) => {
       )
     case 'DatoCmsBlockCaseGrid':
       return (
-        <CaseGrid hasMoreWork={block.hasMoreWork} bgColor={theme.palette.dark} key={block.id}>
+        <CaseGrid
+          key={block.id}
+          hasMoreWork={block.hasMoreWork}
+          bgColor={theme.palette.dark}
+          moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
+        >
           {block.works.map(work => {
             return (
               <CaseThump

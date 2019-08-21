@@ -21,6 +21,9 @@ export const query = graphql`
   fragment BlockCaseGridFragment on DatoCmsBlockCaseGrid {
     id
     hasMoreWork
+    moreWorkPage {
+      url
+    }
     works {
       title
       description

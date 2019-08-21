@@ -43,7 +43,8 @@ const CaseGrid = (props) => {
   const {
     bgColor,
     children,
-    hasMoreWork
+    hasMoreWork,
+    moreWorkUrl
   } = props
 
   return (
@@ -57,7 +58,7 @@ const CaseGrid = (props) => {
         </Container>
         <MoreWork fadeBottom={hasMoreWork}>
           <Button bgColor="#707070" color="white">
-            More Work
+            More Work {moreWorkUrl}
           </Button>
         </MoreWork>
       </Padder>
@@ -68,7 +69,8 @@ const CaseGrid = (props) => {
 CaseGrid.propTypes = {
   children: PropTypes.any,
   bgColor: PropTypes.string.isRequired,
-  hasMoreWork: PropTypes.bool
+  hasMoreWork: PropTypes.bool,
+  moreWorkUrl: PropTypes.string
 }
 
 export default CaseGrid
