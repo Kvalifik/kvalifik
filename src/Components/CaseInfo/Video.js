@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
-import VideoFullscreen from 'Blocks/VideoFullscreen'
 
 import playButton from 'graphics/play-button.svg'
 
@@ -14,8 +12,19 @@ const Root = styled.div`
   border-radius: 50px;
   position: relative;
 
-  width: 500px;
-  height: calc(500px * 0.5625);
+  width: 650px;
+  height: calc(650px * 0.5625);
+  margin-bottom: 100px;
+
+  ${props => props.theme.media.lg`
+    width: 500px;
+    height: calc(500px * 0.5625);
+  `}
+
+  ${props => props.theme.media.md`
+    width: 400px;
+    height: calc(400px * 0.5625);
+  `}
 `
 
 const PlayButton = styled.button`
@@ -52,55 +61,21 @@ const Thumbnail = styled.div`
   border-radius: 32px;
 `
 
-class Video extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      playing: false
-    }
-  }
-
-  handlePlay () {
-    this.setState({
-      playing: true
-    })
-  }
-
-  handleClose () {
-    this.setState({
-      playing: false
-    })
-  }
-
-  render () {
-    const {
-      thumbnailUrl,
-      videoUrl,
-      color
-    } = this.props
-
-    return (
-      <>
-        {this.state.playing && (
-          <VideoFullscreen
-            src={videoUrl}
-            onClose={this.handleClose.bind(this)}
-          />
-        )}
-        <Root color={color}>
-          <Thumbnail src={thumbnailUrl} />
-          <PlayButton onClick={this.handlePlay.bind(this)} />
-        </Root>
-      </>
-    )
-  }
-}
+const Video = ({
+  thumbnailUrl,
+  color,
+  onOpen
+}) => (
+  <Root color={color}>
+    <Thumbnail src={thumbnailUrl} />
+    <PlayButton onClick={onOpen} />
+  </Root>
+)
 
 Video.propTypes = {
-  videoUrl: PropTypes.string,
   thumbnailUrl: PropTypes.string,
-  color: PropTypes.string
+  color: PropTypes.string,
+  onOpen: PropTypes.func
 }
 
 export default Video
