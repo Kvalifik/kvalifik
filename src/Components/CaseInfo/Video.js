@@ -14,7 +14,6 @@ const Root = styled.div`
 
   width: 650px;
   height: calc(650px * 0.5625);
-  margin-bottom: 100px;
 
   ${props => props.theme.media.lg`
     width: 500px;

@@ -17,6 +17,7 @@ const Root = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 80px;
   justify-items: center;
+  padding: ${props => props.theme.spacing(4, 0, 12)};
 `
 
 class CaseInfo extends Component {
