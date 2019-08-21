@@ -6,11 +6,12 @@ import arrowImg from 'graphics/arrow.svg'
 const Root = styled.a`
   align-self: center;
   height: 250px;
-  background-color: ${props => props.color || 'rgb(255, 233, 163)'};
+  background-color: ${props => props.color || props.theme.palette.primary.C};
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   text-decoration: none;
+  color: ${props => props.theme.palette.dark};
 
   ${props => props.full && css`
     grid-column: 1 / -1;
