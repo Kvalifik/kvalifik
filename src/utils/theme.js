@@ -15,6 +15,30 @@ const theme = {
     ].filter(a => !!a)
     return components.join(' ')
   },
+  contrastColor: (hex, lightColor, darkColor) => {
+    /* Is the 'hex' argument really a hex? */
+    if (!/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)) {
+      return hex
+    }
+
+    if (hex.indexOf('#') === 0) {
+      hex = hex.slice(1)
+    }
+
+    if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    }
+    if (hex.length !== 6) {
+      throw new Error('Invalid HEX color.')
+    }
+    return (
+      parseInt(hex.slice(0, 2), 16) * 0.299 +
+      parseInt(hex.slice(2, 4), 16) * 0.587 +
+      parseInt(hex.slice(4, 6), 16) * 0.114
+    ) > 186
+      ? darkColor || '#000000'
+      : lightColor || '#ffffff'
+  },
   hexToRgba: (hex, opacity = '1') => {
     /* Is the 'hex' argument really a hex? */
     if (!/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)) {

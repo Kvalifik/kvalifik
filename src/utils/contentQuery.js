@@ -76,6 +76,32 @@ export const query = graphql`
       hex
     }
   }
+  fragment BlockCaseInfoFragment on DatoCmsBlockCaseInfo {
+    id
+    buttonLink {
+      name
+      path
+      isExternal
+    }
+    labelOne
+    labelTwo
+    labelThree
+    descriptionOne
+    descriptionTwo
+    descriptionThree
+    titleOne
+    titleTwo
+    titleThree
+    bgColor {
+      hex
+    }
+    accentColor {
+      hex
+    }
+    video {
+      url
+    }
+  }
 
   fragment PageContentFragment on DatoCmsPage {
     content {
@@ -86,6 +112,7 @@ export const query = graphql`
       ...BlockOverlayFragment
       ...BlockActionFragment
       ...BlockToolboxFragment
+      ...BlockCaseInfoFragment
     }
   }
 
@@ -98,6 +125,7 @@ export const query = graphql`
       ...BlockOverlayFragment
       ...BlockActionFragment
       ...BlockToolboxFragment
+      ...BlockCaseInfoFragment
     }
   }
 `

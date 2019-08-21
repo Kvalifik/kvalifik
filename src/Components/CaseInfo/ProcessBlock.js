@@ -4,6 +4,12 @@ import PropTypes from 'prop-types'
 
 import Container from 'Blocks/Container'
 
+const Label = styled.span`
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1.8em;
+`
+
 const Root = styled.div`
   display: grid;
   grid-template-areas: "block-one block-two block-three";
@@ -16,17 +22,14 @@ const Root = styled.div`
       "block-two"
       "block-three";
   `}
+
+  & ${Label} {
+    color: ${props => props.color};
+  }
 `
 
 const Block = styled.div`
   grid-area: block-${props => props.name};
-`
-
-const Label = styled.span`
-  text-transform: uppercase;
-  font-size: 14px;
-  color: ${props => props.theme.palette.primary.A};
-  line-height: 1.8em;
 `
 
 const Title = styled.h4`
@@ -52,10 +55,11 @@ const ProcessBlock = ({
   descriptionTwo,
   labelThree,
   titleThree,
-  descriptionThree
+  descriptionThree,
+  color
 }) => (
   <Container>
-    <Root>
+    <Root color={color}>
       <Block name="one">
         <Label>{labelOne}</Label>
         <Title>{titleOne}</Title>
@@ -73,7 +77,6 @@ const ProcessBlock = ({
       </Block>
     </Root>
   </Container>
-
 )
 
 ProcessBlock.propTypes = {
@@ -85,7 +88,8 @@ ProcessBlock.propTypes = {
   descriptionTwo: PropTypes.string,
   labelThree: PropTypes.string,
   titleThree: PropTypes.string,
-  descriptionThree: PropTypes.string
+  descriptionThree: PropTypes.string,
+  color: PropTypes.string
 }
 
 export default ProcessBlock
