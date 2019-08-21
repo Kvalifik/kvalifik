@@ -72,7 +72,7 @@ export class Toolbox extends Component {
     setTimeout(() => {
       action()
       this.setState({ fadeIn: true })
-    }, 100)
+    }, 50)
   }
 
   chooseTool (chosen) {
