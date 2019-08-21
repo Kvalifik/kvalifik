@@ -12,6 +12,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsWork {
+        edges {
+          node {
+            url,
+            forWho
+          }
+        }
+      }
     }
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
@@ -20,8 +28,17 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.url,
       component: path.resolve(`./src/templates/page.js`),
       context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
+        url: node.url
+      }
+    })
+  })
+  result.data.allDatoCmsWork.edges.forEach(({ node }) => {
+    const url = `/work/${node.url}`
+    console.log(`Creating work page ${node.forWho} on ${url}`)
+    createPage({
+      path: url,
+      component: path.resolve(`./src/templates/work.js`),
+      context: {
         url: node.url
       }
     })
