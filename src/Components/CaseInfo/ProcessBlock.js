@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Container from 'Blocks/Container'
-
 const Label = styled.span`
   text-transform: uppercase;
   font-size: 14px;
@@ -58,25 +56,23 @@ const ProcessBlock = ({
   descriptionThree,
   color
 }) => (
-  <Container>
-    <Root color={color}>
-      <Block name="one">
-        <Label>{labelOne}</Label>
-        <Title>{titleOne}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: descriptionOne }} />
-      </Block>
-      <Block name="two">
-        <Label>{labelTwo}</Label>
-        <Title>{titleTwo}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: descriptionTwo }} />
-      </Block>
-      <Block name="three">
-        <Label>{labelThree}</Label>
-        <Title>{titleThree}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: descriptionThree }} />
-      </Block>
-    </Root>
-  </Container>
+  <Root color={color}>
+    <Block name="one">
+      <Label>{labelOne}</Label>
+      <Title>{titleOne}</Title>
+      <Description dangerouslySetInnerHTML={{ __html: descriptionOne }} />
+    </Block>
+    <Block name="two">
+      <Label>{labelTwo}</Label>
+      <Title>{titleTwo}</Title>
+      <Description dangerouslySetInnerHTML={{ __html: descriptionTwo }} />
+    </Block>
+    <Block name="three">
+      <Label>{labelThree}</Label>
+      <Title>{titleThree}</Title>
+      <Description dangerouslySetInnerHTML={{ __html: descriptionThree }} />
+    </Block>
+  </Root>
 )
 
 ProcessBlock.propTypes = {

@@ -8,10 +8,10 @@ const theme = {
   spacing: (x, y, z, w) => {
     const unit = 8
     const components = [
-      x && `${x * unit}px`,
-      y && `${y * unit}px`,
-      z && `${z * unit}px`,
-      w && `${w * unit}px`
+      !isNaN(x) && `${x * unit}px`,
+      !isNaN(y) && `${y * unit}px`,
+      !isNaN(z) && `${z * unit}px`,
+      !isNaN(w) && `${w * unit}px`
     ].filter(a => !!a)
     return components.join(' ')
   },
