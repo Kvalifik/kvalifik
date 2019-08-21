@@ -20,4 +20,8 @@ export default styled.button`
   ${props => props.theme.media.md`
     width: 100%;
   `}
+
+  ${props => props.theme.media.sm`
+    padding: ${props => props.theme.spacing(2, 2)};
+  `}
 `

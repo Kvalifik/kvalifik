@@ -12,6 +12,7 @@ import ToolBoxContent from './ToolBoxContent'
 import svg from 'graphics/skills.svg'
 import svg2 from 'graphics/skills2.svg'
 import svg3 from 'graphics/skills3.svg'
+import Button from 'Blocks/Button'
 
 const Root = styled.div`
   background-color: ${props => props.bgColor};
@@ -50,18 +51,44 @@ const tools = [
   }
 ]
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: ${props => props.theme.spacing(2)};
+`
+
 export class Toolbox extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      chosenTool: 2
+      chosenTool: 2,
+      fadeIn: true
     }
   }
 
+  changeFadeState (action) {
+    this.setState({ fadeIn: false })
+    setTimeout(() => {
+      action()
+      this.setState({ fadeIn: true })
+    }, 100)
+  }
+
   chooseTool (chosen) {
-    console.log({ chosen })
-    this.setState({ chosenTool: chosen })
+    this.changeFadeState(() => {
+      this.setState({ chosenTool: chosen })
+    })
+  }
+
+  clamp (value, min, max) {
+    return Math.max(min, Math.min(value, max))
+  }
+
+  slideTool (direction) {
+    this.changeFadeState(() => {
+      this.setState({ chosenTool: this.clamp(this.state.chosenTool + direction, 0, tools.length - 1) })
+    })
   }
 
   render () {
@@ -70,9 +97,12 @@ export class Toolbox extends Component {
         <Skewer bgColor={'#1D1D1D'}>
           <Padder>
             <Container sideText={'Toolbox'} >
-              <ToolBoxContent tools={tools} chosenTool={this.state.chosenTool} />
-              <ToolBoxSlider tools={tools} chooseTool={this.chooseTool.bind(this)} chosenTool={this.state.chosenTool} />
+              <ToolBoxContent tools={tools} chosenTool={this.state.chosenTool} fadeIn={this.state.fadeIn} />
+              <ToolBoxSlider tools={tools} chooseTool={this.chooseTool.bind(this)} chosenTool={this.state.chosenTool} slideTool={this.slideTool.bind(this)} />
             </Container>
+            <ButtonWrapper>
+              <Button>See all of our tools</Button>
+            </ButtonWrapper>
           </Padder>
         </Skewer>
       </Root>
