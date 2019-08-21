@@ -3,22 +3,23 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import arrowImg from 'graphics/arrow.svg'
 
-const Root = styled.div`
+const Root = styled.a`
   align-self: center;
   height: 250px;
-  background-color: ${props => props.color || 'rgb(255, 233, 163)'};
+  background-color: ${props => props.color || props.theme.palette.primary.C};
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  color: ${props => props.theme.palette.dark};
 
-  ${props => props.full ? css`
+  ${props => props.full && css`
     grid-column: 1 / -1;
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
       height: 350px;
     }
-  ` : ''};
+  `}
 
   cursor: pointer;
   transform-origin: center;
@@ -40,7 +41,7 @@ const Desc = styled.div`
   display: flex;
   position: relative;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}){
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     grid-row: 2 / 2;
   }
 `
@@ -88,10 +89,11 @@ const CaseThump = ({
   description,
   bgColor,
   bgUrl,
-  fullWidth
+  fullWidth,
+  workUrl
 }) => {
   return (
-    <Root full={fullWidth} color={bgColor}>
+    <Root full={fullWidth} color={bgColor} href={workUrl}>
       <Desc>
         <Arrow src={arrowImg} alt="arrow" />
         <ProjectName>
@@ -111,7 +113,8 @@ CaseThump.propTypes = {
   description: PropTypes.string,
   bgColor: PropTypes.string,
   fullWidth: PropTypes.bool,
-  bgUrl: PropTypes.string
+  bgUrl: PropTypes.string,
+  workUrl: PropTypes.string
 }
 
 export default CaseThump

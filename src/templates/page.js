@@ -59,7 +59,7 @@ export const query = graphql`
       downArrowColor {
         hex
       }
-      ...ContentFragment
+      ...PageContentFragment
     }
   }
 `

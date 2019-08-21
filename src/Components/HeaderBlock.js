@@ -168,7 +168,7 @@ class HeaderBlock extends Component {
         {playing && hasVideo && (
           <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer angle="large" flushTop bgColor={bgColor} noPadding height="130vh">
+        <Skewer flushTop bgColor={bgColor} noPadding height="130vh">
           <Container noContentWrapper>
             <Content>
               <TopLeftContainer>
