@@ -99,7 +99,12 @@ export const query = graphql`
       hex
     }
     video {
-      url
+      thumbnail {
+        url
+      }
+      video {
+        url
+      }
     }
   }
 

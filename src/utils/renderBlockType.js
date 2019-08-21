@@ -91,7 +91,8 @@ export default (block) => {
         <CaseInfoBlock
           key={block.id}
           button={block.buttonLink}
-          videoUrl={video ? video.url : ''}
+          thumbnailUrl={video ? video.thumbnail.url : ''}
+          videoUrl={video ? video.video.url : ''}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}
           {...others}

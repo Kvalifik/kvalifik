@@ -22,6 +22,7 @@ const CaseInfo = ({
   bgColor,
   accentColor,
   videoUrl,
+  thumbnailUrl,
   button: {
     path,
     isExternal,
@@ -33,7 +34,14 @@ const CaseInfo = ({
     <Container>
       <Root>
         <Button
-          bgColor={theme.hexToRgba(theme.contrastColor(bgColor, theme.palette.light, theme.palette.dark), 0.2)}
+          bgColor={theme.hexToRgba(
+            theme.contrastColor(
+              bgColor,
+              theme.palette.light,
+              theme.palette.dark
+            ),
+            0.2
+          )}
           isExternal={isExternal}
           href={path}
           as="a"
@@ -41,7 +49,11 @@ const CaseInfo = ({
           {buttonText}
         </Button>
         <ProcessBlock {...process} color={accentColor} />
-        <Video src={videoUrl} color={accentColor} />
+        <Video
+          videoUrl={videoUrl}
+          thumbnailUrl={thumbnailUrl}
+          color={accentColor}
+        />
       </Root>
     </Container>
   </Skewer>
@@ -64,7 +76,8 @@ CaseInfo.propTypes = {
     path: PropTypes.string,
     isExternal: PropTypes.bool,
     name: PropTypes.string
-  })
+  }),
+  thumbnailUrl: PropTypes.string
 }
 
 export default CaseInfo

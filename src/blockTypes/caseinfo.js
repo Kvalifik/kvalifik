@@ -23,6 +23,11 @@ export const caseinfoPropType = PropTypes.shape({
     hex: PropTypes.string
   }),
   video: PropTypes.shape({
-    url: PropTypes.string
+    video: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    thumbnail: PropTypes.shape({
+      url: PropTypes.string
+    })
   })
 })
