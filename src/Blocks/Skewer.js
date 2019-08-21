@@ -5,6 +5,7 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
+  position: relative;
   height: ${props => props.height ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` : 'auto'};
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
@@ -12,18 +13,29 @@ const Root = styled.div`
   margin-top: ${props => props.marginTop}vw;
   margin-bottom: ${props => props.marginBottom}vw;
 
-  ${props => props.bgImage ? css`
-    background-image:
-      ${props.half
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    transform: skewY(${props => -props.angle}deg);
+    margin-top: ${props => -props.offset}vw;
+    margin-bottom: ${props => -props.offset}vw;
+
+    ${props => props.bgImage ? css`
+      background:
+        ${props.half
     ? `linear-gradient(to right, ${props.theme.hexToRgba(props.bgColor, 0.9)} 50%, transparent 50%)`
     : `linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)})`},
-      url(${props.bgImage});
-    background-size: cover, 100% 100%;
-    background-repeat: no-repeat, no-repeat;
-    background-position: center, left, left;
-  ` : css`
-    background-color: ${props.half ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)` : props.bgColor};
-  `}
+        url(${props.bgImage});
+      background-size: cover, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, left, left;
+    ` : css`
+      background: ${props.half ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)` : props.bgColor};
+    `}
+  }
 `
 
 const Inner = styled.div`
@@ -38,7 +50,7 @@ const angles = {
 }
 
 const Skewer = ({
-  bgColor,
+  bgColor = 'transparent',
   bgImageUrl,
   angle: type = 'small',
   children,
@@ -79,15 +91,21 @@ const Skewer = ({
     paddingBottom = offset
   }
 
+  if (half) {
+    paddingBottom += offset
+    marginBottom = 2 * offset
+  }
+
   return (
     <Root
-      half={half}
-      bgColor={bgColor}
-      bgImage={bgImageUrl}
       angle={angle}
       marginTop={marginTop}
       marginBottom={marginBottom}
       height={height}
+      half={half}
+      bgColor={bgColor}
+      bgImage={bgImageUrl}
+      offset={offset}
     >
       <Inner
         angle={angle}

@@ -16,6 +16,11 @@ const theme = {
     return components.join(' ')
   },
   hexToRgba: (hex, opacity = '1') => {
+    /* Is the 'hex' argument really a hex? */
+    if (!/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)) {
+      return hex
+    }
+
     const hexbody = hex.replace('#', '')
     const r = parseInt(hexbody.substring(0, 2), 16)
     const g = parseInt(hexbody.substring(2, 4), 16)

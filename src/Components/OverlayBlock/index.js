@@ -21,6 +21,10 @@ const Description = styled.p`
 
 `
 
+const Content = styled.div`
+  grid-column: 2 / 3;
+`
+
 const OverlayBlock = ({
   bgColor,
   title,
@@ -28,13 +32,15 @@ const OverlayBlock = ({
   description
 }) => {
   return (
-    <Skewer noPadding>
+    <Skewer noPadding bgImageUrl={imageUrl}>
       <Bg>
         <Padder>
           <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
-            <Container>
-              <Header>{title}</Header>
-              <Description dangerouslySetInnerHTML={{ __html: description }} />
+            <Container noContentWrapper>
+              <Content>
+                <Header>{title}</Header>
+                <Description dangerouslySetInnerHTML={{ __html: description }} />
+              </Content>
             </Container>
           </Skewer>
         </Padder>
