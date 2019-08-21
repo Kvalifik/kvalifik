@@ -33,10 +33,9 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
   result.data.allDatoCmsWork.edges.forEach(({ node }) => {
-    const url = `/work/${node.url}`
-    console.log(`Creating work page ${node.forWho} on ${url}`)
+    console.log(`Creating work page ${node.forWho} on ${node.url}`)
     createPage({
-      path: url,
+      path: node.url,
       component: path.resolve(`./src/templates/work.js`),
       context: {
         url: node.url

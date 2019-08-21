@@ -36,6 +36,7 @@ export const query = graphql`
       image{
         url
       }
+      url
     }
   }
   fragment BlockSloganFragment on DatoCmsBlockSlogan {
