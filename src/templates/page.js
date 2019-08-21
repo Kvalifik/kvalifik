@@ -42,7 +42,7 @@ export const query = graphql`
   query($url: String!) {
     datoCmsPage(url: { eq: $url }) {
       showSkewer
-      ...ContentFragment
+      ...PageContentFragment
     }
   }
 `

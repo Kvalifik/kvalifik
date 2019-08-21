@@ -83,7 +83,7 @@ const Main = ({ children }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <App> {/* Add a surrounding div to make sure ThemeProvider only has a single child */}
+        <App>
           {children}
           <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
           <Navigation navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks} navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
