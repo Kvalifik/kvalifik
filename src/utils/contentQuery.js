@@ -48,6 +48,20 @@ export const query = graphql`
   }
   fragment BlockToolboxFragment on DatoCmsBlockToolbox {
     id
+    bgColor {
+      hex
+    }
+    tools {
+      id
+      headline,
+      description
+      icon {
+        url
+      }
+      image {
+        url
+      }
+    }
   }
   fragment BlockActionFragment on DatoCmsBlockAction {
     id

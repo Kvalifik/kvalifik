@@ -5,23 +5,22 @@ import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   overflow: hidden;
-
-  > * {
-    opacity: 0;
-    transform: translateY(-20%);
-    ${props => props.fadeIn && css`
-      transition: 0.5s 0s cubic-bezier(0, 0, 0.04, 1);
-      transform: translateY(0%);
-      opacity: 1;
-    `}
-  }
-
   color: white;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
   background-color: rgba(255, 255, 255, 0.1);
   margin: ${props => props.theme.spacing(2)};
+
+  & > * {
+    opacity: 0;
+    transform: translateY(-20%);
+    transition: 0.5s 0s cubic-bezier(0, 0, 0.04, 1);
+    ${props => props.fadeIn && css`
+      transform: translateY(0%);
+      opacity: 1;
+    `}
+  }
 `
 
 const Img = styled.div`
@@ -37,13 +36,13 @@ const Icon = styled.img`
   padding: ${props => props.theme.spacing(4)};
   width: 150px;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  ${props => props.theme.media.sm`
     padding: 0;
     margin: ${props => props.theme.spacing(4)};
     justify-self: center;
     align-self: center;
     width: 60%;
-  }
+  `}
 `
 
 const Text = styled.div`
@@ -84,18 +83,15 @@ const Description = styled.h3`
 const ToolBoxContent = ({
   tools,
   chosenTool,
-  bgImageUrl,
   fadeIn
 }) => {
   const tool = tools[chosenTool]
   return (
     <Root fadeIn={fadeIn}>
-      <Icon src={tool.icon} />
-      <Img src={bgImageUrl} />
+      <Icon src={tool.icon.url} />
+      <Img src={tool.image.url} />
       <Text>
-        <Headline>
-          { tool.headline }
-        </Headline>
+        <Headline>{tool.headline}</Headline>
         <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
         <Link href="/" >Learn how to do it <Arrow src={arrowImg} /></Link>
       </Text>
@@ -107,11 +103,15 @@ ToolBoxContent.propTypes = {
   tools: PropTypes.arrayOf(PropTypes.shape({
     headline: PropTypes.string,
     description: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    image: PropTypes.shape({
+      url: PropTypes.string
+    })
   })),
-  chosenTool: PropTypes.int,
-  fadeIn: PropTypes.bool,
-  bgImageUrl: PropTypes.string
+  chosenTool: PropTypes.number,
+  fadeIn: PropTypes.bool
 }
 
 export default ToolBoxContent

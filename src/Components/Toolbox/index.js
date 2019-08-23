@@ -9,68 +9,25 @@ import Padder from 'Blocks/Padder'
 import ToolBoxSlider from './ToolBoxSlider'
 import ToolBoxContent from './ToolBoxContent'
 
-import svg from 'graphics/skills.svg'
-import svg2 from 'graphics/skills2.svg'
-import svg3 from 'graphics/skills3.svg'
-import Button from 'Blocks/Button'
-
 const Root = styled.div`
   background-color: ${props => props.bgColor};
 `
 
-const tools = [
-  {
-    headline: 'A tool1',
-    desc: 'more about the tool...',
-    icon: svg
-  },
-  {
-    headline: 'A second tool',
-    desc: 'more about the tool...',
-    icon: svg2
-  },
-  {
-    headline: 'A tool',
-    desc: 'more about the tool...',
-    icon: svg3
-  },
-  {
-    headline: 'A tool',
-    desc: 'more about the tool...',
-    icon: svg
-  },
-  {
-    headline: 'A tool',
-    desc: 'more about the tool...',
-    icon: svg3
-  },
-  {
-    headline: 'A tool',
-    desc: 'more about the tool...',
-    icon: svg
-  }
-]
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: ${props => props.theme.spacing(2)};
-`
-
-export class Toolbox extends Component {
+class Toolbox extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      chosenTool: 2,
+      chosenTool: 0,
       fadeIn: true
     }
   }
 
-  changeFadeState (action) {
+  changeFadeState (callback) {
     this.setState({ fadeIn: false })
+
     setTimeout(() => {
-      action()
+      callback()
       this.setState({ fadeIn: true })
     }, 50)
   }
@@ -81,28 +38,52 @@ export class Toolbox extends Component {
     })
   }
 
-  clamp (value, min, max) {
-    return Math.max(min, Math.min(value, max))
+  loop (value, min, max) {
+    if (value > max) {
+      value = min
+    } else if (value < min) {
+      value = max
+    }
+    return value
   }
 
   slideTool (direction) {
+    const { tools } = this.props
+
     this.changeFadeState(() => {
-      this.setState({ chosenTool: this.clamp(this.state.chosenTool + direction, 0, tools.length - 1) })
+      this.setState({
+        chosenTool: this.loop(
+          this.state.chosenTool + direction,
+          0,
+          tools.length - 1
+        )
+      })
     })
   }
 
   render () {
+    const {
+      tools,
+      bgColor
+    } = this.props
+
     return (
       <Root>
-        <Skewer bgColor={'#1D1D1D'} layer={1200}>
+        <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
             <Container sideText={'Toolbox'} >
-              <ToolBoxContent tools={tools} chosenTool={this.state.chosenTool} fadeIn={this.state.fadeIn} />
-              <ToolBoxSlider tools={tools} chooseTool={this.chooseTool.bind(this)} chosenTool={this.state.chosenTool} slideTool={this.slideTool.bind(this)} />
+              <ToolBoxContent
+                tools={tools}
+                chosenTool={this.state.chosenTool}
+                fadeIn={this.state.fadeIn}
+              />
+              <ToolBoxSlider
+                tools={tools}
+                chosenTool={this.state.chosenTool}
+                onChooseTool={this.chooseTool.bind(this)}
+                onSlideTool={this.slideTool.bind(this)}
+              />
             </Container>
-            <ButtonWrapper>
-              <Button>See all of our tools</Button>
-            </ButtonWrapper>
           </Padder>
         </Skewer>
       </Root>
@@ -110,8 +91,18 @@ export class Toolbox extends Component {
   }
 }
 
-Toolbox.protoTypes = {
-  children: PropTypes.any
+Toolbox.propTypes = {
+  tools: PropTypes.arrayOf(PropTypes.shape({
+    headline: PropTypes.string,
+    description: PropTypes.string,
+    icon: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    image: PropTypes.shape({
+      url: PropTypes.string
+    })
+  })),
+  bgColor: PropTypes.string
 }
 
 export default Toolbox

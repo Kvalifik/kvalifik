@@ -98,27 +98,28 @@ const Img = styled.img`
   }
 `
 
-const ToolBoxSlider = props => {
+const ToolBoxSlider = ({
+  onSlideTool,
+  onChooseTool,
+  tools,
+  chosenTool
+}) => {
   return (
     <Root>
       <Slider>
-        <SliderElement onClick={props.slideTool.bind(this, -1)}>
+        <SliderElement onClick={() => onSlideTool(-1)}>
           <Img src={leftArrow} arrow />
         </SliderElement>
-        {
-          props.tools.map((tool, i) => {
-            return (
-              <SliderElement
-                onClick={props.chooseTool.bind(this, i)}
-                key={i}
-                chosen={(props.chosenTool === i)}>
-                <Img src={props.tools[i].icon}
-                />
-              </SliderElement>
-            )
-          })
-        }
-        <SliderElement onClick={props.slideTool.bind(this, 1)}>
+        {tools.map((tool, i) => (
+          <SliderElement
+            onClick={() => onChooseTool(i)}
+            key={tool.id}
+            chosen={(chosenTool === i)}
+          >
+            <Img src={tools[i].icon.url} />
+          </SliderElement>
+        ))}
+        <SliderElement onClick={() => onSlideTool(1)}>
           <Img src={leftArrow} reverse arrow />
         </SliderElement>
       </Slider>
@@ -129,8 +130,8 @@ const ToolBoxSlider = props => {
 ToolBoxSlider.propTypes = {
   tools: PropTypes.array,
   chosenTool: PropTypes.any,
-  chooseTool: PropTypes.any,
-  slideTool: PropTypes.any
+  onChooseTool: PropTypes.any,
+  onSlideTool: PropTypes.any
 }
 
 export default ToolBoxSlider

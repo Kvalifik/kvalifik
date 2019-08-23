@@ -67,7 +67,11 @@ export default (block) => {
       )
     case 'DatoCmsBlockToolbox':
       return (
-        <Toolbox key={block.id} />
+        <Toolbox
+          key={block.id}
+          tools={block.tools}
+          bgColor={block.bgColor && block.bgColor.hex}
+        />
       )
     case 'DatoCmsBlockOverlay':
       return (
