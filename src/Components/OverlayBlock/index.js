@@ -20,7 +20,12 @@ const Description = styled.p`
 
 const Content = styled.div`
   grid-column: 2 / 3;
-  padding-right: ${props => props.theme.spacing(4)};
+  padding: ${props => props.theme.spacing(0, 4, 0, 0)};
+
+  ${props => props.theme.media.lg`
+    grid-column: 2 / 4;
+    padding: ${props => props.theme.spacing(10, 0)};
+  `}
 `
 
 const OverlayBlock = ({
@@ -31,7 +36,7 @@ const OverlayBlock = ({
 }) => {
   return (
     <Skewer noPadding bgImageUrl={imageUrl}>
-      <Padder>
+      <Padder removeOnMedia="lg">
         <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
           <Container noContentWrapper>
             <Content>

@@ -37,6 +37,19 @@ const Root = styled.div`
     ` : css`
       background: ${props.half ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)` : props.bgColor};
     `}
+
+    ${props => props.theme.media.lg`
+      ${props => props.bgImage ? css`
+        background:
+          linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)}),
+          url(${props.bgImage});
+        background-size: cover, cover;
+        background-repeat: no-repeat, no-repeat;
+        background-position: center, center;
+      ` : css`
+        background: ${props.bgColor};
+      `}
+    `}
   }
 `
 
