@@ -12,6 +12,7 @@ const Root = styled.div`
   transform-origin: 0%;
   transform: ${props => `skewy(${props.angle}deg)`};
   width: 100vw;
+  z-index: ${props => props.layer};
 `
 
 const angles = {
@@ -19,7 +20,12 @@ const angles = {
   large: theme.skewer.largeAngle
 }
 
-const FixedSkewer = ({ angle: type = 'small', reverse, height = '100px' }) => {
+const FixedSkewer = ({
+  angle: type = 'small',
+  reverse,
+  height = '100px',
+  layer
+}) => {
   let angle = angles[type]
   if (reverse) {
     angle *= -1
@@ -28,6 +34,7 @@ const FixedSkewer = ({ angle: type = 'small', reverse, height = '100px' }) => {
 
   return (
     <Root
+      layer={layer}
       angle={angle}
       height={`calc(${height} + ${-offset * 2}vw)`}
       offset={`${offset * 2}vw`}
@@ -38,7 +45,8 @@ const FixedSkewer = ({ angle: type = 'small', reverse, height = '100px' }) => {
 FixedSkewer.propTypes = {
   angle: PropTypes.oneOf(['small', 'large']),
   reverse: PropTypes.bool,
-  height: PropTypes.string
+  height: PropTypes.string,
+  layer: PropTypes.number
 }
 
 export default FixedSkewer

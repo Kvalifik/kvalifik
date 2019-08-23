@@ -8,14 +8,43 @@ const theme = {
   spacing: (x, y, z, w) => {
     const unit = 8
     const components = [
-      x && `${x * unit}px`,
-      y && `${y * unit}px`,
-      z && `${z * unit}px`,
-      w && `${w * unit}px`
+      !isNaN(x) && `${x * unit}px`,
+      !isNaN(y) && `${y * unit}px`,
+      !isNaN(z) && `${z * unit}px`,
+      !isNaN(w) && `${w * unit}px`
     ].filter(a => !!a)
     return components.join(' ')
   },
+  contrastColor: (hex, lightColor, darkColor) => {
+    /* Is the 'hex' argument really a hex? */
+    if (!/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)) {
+      return hex
+    }
+
+    if (hex.indexOf('#') === 0) {
+      hex = hex.slice(1)
+    }
+
+    if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    }
+    if (hex.length !== 6) {
+      throw new Error('Invalid HEX color.')
+    }
+    return (
+      parseInt(hex.slice(0, 2), 16) * 0.299 +
+      parseInt(hex.slice(2, 4), 16) * 0.587 +
+      parseInt(hex.slice(4, 6), 16) * 0.114
+    ) > 186
+      ? darkColor || '#000000'
+      : lightColor || '#ffffff'
+  },
   hexToRgba: (hex, opacity = '1') => {
+    /* Is the 'hex' argument really a hex? */
+    if (!/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)) {
+      return hex
+    }
+
     const hexbody = hex.replace('#', '')
     const r = parseInt(hexbody.substring(0, 2), 16)
     const g = parseInt(hexbody.substring(2, 4), 16)

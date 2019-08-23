@@ -16,6 +16,14 @@ module.exports = {
         displayName: true
       }
     },
+    {
+      resolve: 'gatsby-plugin-polyfill-io',
+      options: {
+        features: [
+          'Promise'
+        ]
+      }
+    },
     'gatsby-plugin-resolve-src',
     {
       resolve: 'gatsby-source-datocms',

@@ -15,6 +15,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.13.51",
+    "gatsby-plugin-polyfill-io": "^1.1.0",
     "gatsby-plugin-resolve-src": "^2.0.0",
     "gatsby-plugin-styled-components": "^3.1.2",
     "gatsby-source-datocms": "^2.1.15",
@@ -46,5 +47,10 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  },
+  "browserslist": [
+    ">0.25%",
+    "not dead",
+    "IE 11"
+  ]
 }
