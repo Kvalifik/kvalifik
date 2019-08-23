@@ -6,6 +6,14 @@ import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Padder from 'Blocks/Padder'
 
+const Root = styled.div`
+  &::after {
+    clear: both;
+    display: table;
+    content: "";
+  }
+`
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,13 +43,22 @@ const SloganBlock = ({
   bgColor,
   content
 }) => (
-  <Skewer bgColor={bgColor}>
-    <Container overflowLeft overflowRight>
-      <Padder>
-        <Content dangerouslySetInnerHTML={{ __html: content }} />
-      </Padder>
-    </Container>
-  </Skewer>
+  <Root>
+    <Skewer bgColor={bgColor} layer={300} position="absolute">
+      <Container overflowLeft overflowRight>
+        <Padder>
+          <Content />
+        </Padder>
+      </Container>
+    </Skewer>
+    <Skewer bgColor="transparent" layer={1200}>
+      <Container overflowLeft overflowRight>
+        <Padder>
+          <Content dangerouslySetInnerHTML={{ __html: content }} />
+        </Padder>
+      </Container>
+    </Skewer>
+  </Root>
 )
 
 SloganBlock.propTypes = {

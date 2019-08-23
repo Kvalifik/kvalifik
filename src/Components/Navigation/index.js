@@ -7,12 +7,11 @@ import ToggleNavButton from './ToggleNavButton'
 
 import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
 
-const Root = styled.div``
-
 const NavDiv = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   color: white;
   position: fixed;
+  z-index: 10000;
   right: 0;
   top: 0;
   bottom: 0;
@@ -114,20 +113,18 @@ class Navigation extends Component {
     } = this.props
 
     return (
-      <Root>
-        <NavDiv collapsed={this.state.collapsed}>
-          <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
-          <IconWrapper onClick={this.toggleNavigation.bind(this)} >
-            <ToggleNavButton collapsed={this.state.collapsed} />
-          </IconWrapper>
-          <NavigationContent
-            collapsed={this.state.collapsed}
-            navigationItems={navigationItems}
-            navigationLinks={navigationLinks}
-            socialMediaLinks={socialMediaLinks}
-          />
-        </NavDiv>
-      </Root>
+      <NavDiv collapsed={this.state.collapsed}>
+        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+        <IconWrapper onClick={this.toggleNavigation.bind(this)} >
+          <ToggleNavButton collapsed={this.state.collapsed} />
+        </IconWrapper>
+        <NavigationContent
+          collapsed={this.state.collapsed}
+          navigationItems={navigationItems}
+          navigationLinks={navigationLinks}
+          socialMediaLinks={socialMediaLinks}
+        />
+      </NavDiv>
     )
   }
 }

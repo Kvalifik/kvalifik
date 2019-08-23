@@ -190,7 +190,7 @@ const Footer = ({
   const slicedFeed = mappedFeed.slice(0, 4)
 
   return (
-    <Skewer angle="small" flushBottom bgColor={theme.palette.dark}>
+    <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
       <Container>
         <Grid>
           <InfoContainer>

@@ -67,7 +67,7 @@ export class Toolbox extends Component {
   render () {
     return (
       <Root>
-        <Skewer bgColor={'#1D1D1D'}>
+        <Skewer bgColor={'#1D1D1D'} layer={1200}>
           <Padder>
             <Container sideText={'Toolbox'} >
               <ToolBoxContent tools={tools} chosenTool={this.state.chosenTool} />

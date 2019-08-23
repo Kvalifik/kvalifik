@@ -7,7 +7,6 @@ import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 import VideoFullscreen from 'Blocks/VideoFullscreen'
 
-import downArrow from 'graphics/down-arrow.svg'
 import playButton from 'graphics/play-button.svg'
 
 const Content = styled.div`
@@ -100,32 +99,6 @@ const Title = styled.div`
   `}
 `
 
-const DownArrow = styled.div`
-  position: absolute;
-  z-index: 200;
-  border-radius: 100%;
-  bottom: 50vh;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: ${props => props.color};
-  padding: 16px;
-
-  ${props => props.theme.media.lg`
-    display: none;
-  `}
-
-  &::after {
-    content: "";
-    display: block;
-    background-image: url(${downArrow});
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 16px;
-    height: 16px;
-  }
-`
-
 const PlayButton = styled.button`
   width: 60px;
   height: 60px;
@@ -195,7 +168,7 @@ class HeaderBlock extends Component {
         {playing && hasVideo && (
           <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer flushTop bgColor={bgColor} noPadding height="130vh">
+        <Skewer flushTop bgColor={bgColor} noPadding height="130vh" layer={800}>
           <Container noContentWrapper>
             <Content>
               <TopLeftContainer>
@@ -213,7 +186,6 @@ class HeaderBlock extends Component {
               </RightContainer>
             </Content>
           </Container>
-          <DownArrow color={bgColor} />
         </Skewer>
       </>
     )
