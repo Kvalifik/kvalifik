@@ -30,7 +30,6 @@ const withScrollInfoView = Wrapped => class ScrollInfoView extends Component {
       const bounding = el.getBoundingClientRect()
 
       if (
-        bounding.top >= (window.innerHeight || document.documentElement.clientHeight) * 0.25 &&
         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 0.75
       ) {
         this.setState({
