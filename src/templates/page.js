@@ -30,6 +30,14 @@ const PageTemplate = ({ data }) => {
           angle="large"
           reverse
           height="30px"
+          layer={1000}
+        />
+      )}
+      {showSkewer && (
+        <FixedSkewer
+          angle="large"
+          reverse
+          height="100px"
           layer={500}
         />
       )}

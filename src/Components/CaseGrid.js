@@ -48,7 +48,7 @@ const CaseGrid = (props) => {
   } = props
 
   return (
-    <Skewer bgColor={bgColor}>
+    <Skewer bgColor={bgColor} layer={1200}>
       <Padder>
         <Container sideText="Cases" bgColor={bgColor}>
           <Fader bgColor={bgColor} fadeBottom={hasMoreWork} />

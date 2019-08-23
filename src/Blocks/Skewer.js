@@ -5,10 +5,12 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   overflow: hidden;
-  position: relative;
+  position: ${props => props.position || 'relative'};
   height: ${props => props.height ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` : 'auto'};
+  width: 100%;
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);
+  z-index: ${props => props.layer || 'auto'};
 
   margin-top: ${props => props.marginTop}vw;
   margin-bottom: ${props => props.marginBottom}vw;
@@ -59,7 +61,9 @@ const Skewer = ({
   flushTop,
   flushBottom,
   half,
-  height
+  height,
+  layer,
+  position
 }) => {
   let angle = angles[type]
   if (reverse) {
@@ -106,6 +110,8 @@ const Skewer = ({
       bgColor={bgColor}
       bgImage={bgImageUrl}
       offset={offset}
+      layer={layer}
+      position={position}
     >
       <Inner
         angle={angle}
@@ -128,7 +134,9 @@ Skewer.propTypes = {
   reverse: PropTypes.bool,
   noPadding: PropTypes.bool,
   flushTop: PropTypes.bool,
-  flushBottom: PropTypes.bool
+  flushBottom: PropTypes.bool,
+  layer: PropTypes.number,
+  position: PropTypes.string
 }
 
 export default Skewer

@@ -70,7 +70,7 @@ const ActionBlock = ({
   const imageUrls = images.map(image => image.url)
 
   return (
-    <Skewer bgColor={bgColor} noPadding>
+    <Skewer bgColor={bgColor} noPadding layer={1200}>
       <Container noContentWrapper>
         <LeftContainer>
           <Title color={textColor}>{title}</Title>
