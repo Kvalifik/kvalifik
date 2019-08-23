@@ -11,7 +11,7 @@ const NavDiv = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   color: white;
   position: fixed;
-  z-index: 10000;
+  z-index: 4000;
   right: 0;
   top: 0;
   bottom: 0;

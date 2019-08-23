@@ -14,7 +14,7 @@ const CustomContainer = styled.div`
   top: 0;
   left: 0;
 
-  z-index: 1000;
+  z-index: 5000;
   height: 100vh;
   width: 100vw;
 
@@ -46,7 +46,7 @@ const Backdrop = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
-  z-index: 999;
+  z-index: 4999;
   opacity: 0.9;
   top: 0;
   left: 0;
