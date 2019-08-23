@@ -11,9 +11,9 @@ import VideoThumb from './VideoThumb'
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 3fr 4fr;
   grid-template-rows: 2fr 4fr;
-  grid-column: 2 / -1;
+  grid-column: 1 / -1;
 
   ${props => props.theme.media.sm`
     margin-top: ${props => props.theme.navBarWidth};
@@ -40,8 +40,16 @@ const TopLeftContainer = styled.div`
   padding: 0 ${props => props.theme.spacing(6)};
   align-self: end;
   line-height: 1.25;
+  justify-self: center;
+  width: 70%;
+
+  ${props => props.theme.media.xl`
+    width: 80%;
+  `}
 
   ${props => props.theme.media.lg`
+    justify-self: start;
+    width: auto;
     grid-column: 1 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   `}
@@ -51,8 +59,16 @@ const BottomLeftContainer = styled.div`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   padding: 0 ${props => props.theme.spacing(6)};
+  justify-self: center;
+  width: 70%;
+
+  ${props => props.theme.media.xl`
+    width: 80%;
+  `}
 
   ${props => props.theme.media.lg`
+    justify-self: start;
+    width: auto;
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
