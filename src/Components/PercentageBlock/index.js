@@ -9,7 +9,7 @@ import EasingNumber from './EasingNumber'
 const Content = styled.div`
   display: grid;
   padding: 150px 0;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   align-items: center;
   color: ${props => props.theme.palette.light};
 `
@@ -17,6 +17,10 @@ const Content = styled.div`
 const Description = styled.div`
   ${props => props.theme.typography.header.mixin()}
   font-size: 30px;
+
+  ${props => props.theme.media.lg`
+    text-align: center;
+  `}
 `
 
 const Number = styled.div`
@@ -24,6 +28,10 @@ const Number = styled.div`
   font-size: 100px;
   padding: ${props => props.theme.spacing(0, 5)};
   justify-self: end;
+
+  ${props => props.theme.media.lg`
+    justify-self: center;
+  `}
 `
 
 const PercentageBlock = ({
