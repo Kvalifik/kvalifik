@@ -9,7 +9,7 @@ const DownArrow = styled.div`
   transform: translateX(-50%);
   background-color: ${props => props.color};
   padding: 16px;
-  z-index: 800;
+  z-index: 1500;
 
   ${props => props.theme.media.lg`
     display: none;
