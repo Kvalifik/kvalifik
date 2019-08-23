@@ -14,16 +14,14 @@ const PageTemplate = ({ data }) => {
   const {
     showSkewer,
     showDownArrow,
-    downArrowColor: {
-      hex: downArrowColor
-    },
+    downArrowColor,
     content
   } = data.datoCmsPage
 
   return (
     <Layout>
       {showDownArrow && (
-        <DownArrow color={downArrowColor} />
+        <DownArrow color={downArrowColor.hex} />
       )}
       {showSkewer && (
         <FixedSkewer

@@ -64,14 +64,15 @@ const IconWrapper = styled.div`
   position: fixed;
 `
 
-const KvalfikLogo = styled.img`
+const HomeLink = styled.a.attrs({
+  href: '/'
+})`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   position: fixed;
-  width: 30px;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   z-index: 100;
+  transform: translateY(-50%);
 
   ${props => props.collapsed
     ? css`
@@ -82,14 +83,23 @@ const KvalfikLogo = styled.img`
   `}
 
   ${props => props.theme.media.sm`
-    transform: rotate(90deg) translate(100%, -100%);
-    transform-origin: 50% 0%;
-    height: 80px;
-    width: initial;
     left: 0;
     bottom: initial;
     right: initial;
+    top: 0;
     margin: 15px;
+    transform: rotate(90deg) translate(100%, -100%);
+    transform-origin: 50% 0%;
+  `}
+`
+
+const KvalfikLogo = styled.img`
+  transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  width: 30px;
+
+  ${props => props.theme.media.sm`
+    height: 80px;
+    width: initial;
   `}
 `
 
@@ -114,7 +124,9 @@ class Navigation extends Component {
 
     return (
       <NavDiv collapsed={this.state.collapsed}>
-        <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+        <HomeLink collapsed={this.state.collapsed}>
+          <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+        </HomeLink>
         <IconWrapper onClick={this.toggleNavigation.bind(this)} >
           <ToggleNavButton collapsed={this.state.collapsed} />
         </IconWrapper>

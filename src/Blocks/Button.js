@@ -18,6 +18,7 @@ export default styled.button`
   flex-direction: row;
   flex-wrap: no-wrap;
   align-items: center;
+  justify-content: center;
 
   &:hover {
     transform: scale(0.95);

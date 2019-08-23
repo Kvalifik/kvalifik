@@ -22,13 +22,14 @@ const Grid = styled.div`
 
   ${props => props.theme.media.lg`
     grid-template-areas:
-      ". info ."
-      ". feed ."
-      ". links ."
-      ". copyright .";
+      "info"
+      "feed"
+      "links"
+      "copyright";
 
     gap: ${props.theme.spacing(5)} 0;
     justify-items: center;
+    justify-content: center;
   `}
 `
 
@@ -38,9 +39,10 @@ const Logo = styled.img`
 `
 
 const Subtitle = styled.h2`
-  ${props => props.theme.typography.header.mixin()};
+  ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.sm};
   white-space: nowrap;
+  color: ${props => props.theme.palette.light};
 
   ${props => props.theme.media.md`
     white-space: normal;
