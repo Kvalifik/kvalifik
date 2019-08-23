@@ -48,6 +48,7 @@ const Quote = ({
   <Skewer
     bgColor={bgColor}
     bgImageUrl={imageUrl}
+    layer={1200}
   >
     <QuoteRoot>
       <QuoteText dangerouslySetInnerHTML={{ __html: quote }} />

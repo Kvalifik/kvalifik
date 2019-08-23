@@ -35,7 +35,7 @@ const OverlayBlock = ({
   description
 }) => {
   return (
-    <Skewer noPadding bgImageUrl={imageUrl}>
+    <Skewer noPadding bgImageUrl={imageUrl} layer={1200}>
       <Padder removeOnMedia="lg">
         <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
           <Container noContentWrapper>

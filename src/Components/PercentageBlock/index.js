@@ -40,7 +40,7 @@ const PercentageBlock = ({
   duration,
   bgColor
 }) => (
-  <Skewer bgColor={bgColor}>
+  <Skewer bgColor={bgColor} layer={1200}>
     <Container>
       <Content>
         <Number>

@@ -63,7 +63,7 @@ class CaseInfo extends Component {
             onClose={this.handleClose.bind(this)}
           />
         )}
-        <Skewer bgColor={bgColor}>
+        <Skewer bgColor={bgColor} layer={1200}>
           <Container>
             <Root>
               <Button
