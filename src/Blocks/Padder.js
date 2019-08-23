@@ -4,11 +4,15 @@ import styled from 'styled-components'
 
 const Root = styled.div`
   padding: ${props => props.innerPadding} 0; /* Either use defined innerPadding or default 150px */
+
+  ${props => props.removeOnMedia && props.theme.media[props.removeOnMedia]`
+    padding: 0;
+  `}
 `
 
-const Padder = ({ innerPadding = '150px', children }) => {
+const Padder = ({ innerPadding = '150px', removeOnMedia, children }) => {
   return (
-    <Root innerPadding={innerPadding}>
+    <Root innerPadding={innerPadding} removeOnMedia={removeOnMedia}>
       {children}
     </Root>
   )
@@ -16,7 +20,8 @@ const Padder = ({ innerPadding = '150px', children }) => {
 
 Padder.propTypes = {
   innerPadding: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  removeOnMedia: PropTypes.string
 }
 
 export default Padder
