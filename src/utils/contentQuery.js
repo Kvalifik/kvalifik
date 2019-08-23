@@ -107,6 +107,15 @@ export const query = graphql`
       }
     }
   }
+  fragment BlockPercentageFragment on DatoCmsBlockPercentage {
+    bgColor {
+      hex
+    }
+    id
+    description
+    duration
+    number
+  }
 
   fragment PageContentFragment on DatoCmsPage {
     content {
@@ -118,6 +127,7 @@ export const query = graphql`
       ...BlockActionFragment
       ...BlockToolboxFragment
       ...BlockCaseInfoFragment
+      ...BlockPercentageFragment
     }
   }
 
@@ -131,6 +141,7 @@ export const query = graphql`
       ...BlockActionFragment
       ...BlockToolboxFragment
       ...BlockCaseInfoFragment
+      ...BlockPercentageFragment
     }
   }
 `
