@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import bg from 'graphics/test3.jpeg'
 import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
@@ -29,7 +28,7 @@ const Img = styled.div`
   margin: 0;
   grid-column: 2 / -1;
   grid-row: 1 / -1;
-  background-image: url(${props => props.bg});
+  background-image: url(${props => props.src});
   background-position: 50% 50%;
   background-size: cover;
 `
@@ -52,20 +51,13 @@ const Text = styled.div`
   margin: ${props => props.theme.spacing(4)};
   padding-bottom: ${props => props.theme.spacing(4)};
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.lg}) {
+  ${props => props.theme.media.lg`
     grid-column: 1 / -1;
-  }
-
-  h2 {
-    font-size: 25px;
-  }
-
-  h3 {
-    color: #49eaac;
-  }
+  `}
 `
 
 const Link = styled.a`
+  display: none; /* Temporary */
   position: absolute;
   bottom: 0;
   color: white;
@@ -81,20 +73,30 @@ const Arrow = styled.img`
   transform: translateY(20%);
 `
 
-const ToolBoxContent = props => {
-  const tool = props.tools[props.chosenTool]
-  console.log({ innerFde: props.fadeIn })
+const Headline = styled.h2`
+  font-size: 25px;
+`
+
+const Description = styled.h3`
+  color: #49eaac;
+`
+
+const ToolBoxContent = ({
+  tools,
+  chosenTool,
+  bgImageUrl,
+  fadeIn
+}) => {
+  const tool = tools[chosenTool]
   return (
-    <Root fadeIn={props.fadeIn}>
+    <Root fadeIn={fadeIn}>
       <Icon src={tool.icon} />
-      <Img bg={bg} />
+      <Img src={bgImageUrl} />
       <Text>
-        <h2>
+        <Headline>
           { tool.headline }
-        </h2>
-        <h3>
-          { tool.desc }
-        </h3>
+        </Headline>
+        <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
         <Link href="/" >Learn how to do it <Arrow src={arrowImg} /></Link>
       </Text>
     </Root>
@@ -102,9 +104,14 @@ const ToolBoxContent = props => {
 }
 
 ToolBoxContent.propTypes = {
-  tools: PropTypes.array,
+  tools: PropTypes.arrayOf(PropTypes.shape({
+    headline: PropTypes.string,
+    description: PropTypes.string,
+    icon: PropTypes.string
+  })),
   chosenTool: PropTypes.int,
-  fadeIn: PropTypes.bool
+  fadeIn: PropTypes.bool,
+  bgImageUrl: PropTypes.string
 }
 
 export default ToolBoxContent
