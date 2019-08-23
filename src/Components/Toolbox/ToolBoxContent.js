@@ -77,7 +77,7 @@ const Headline = styled.h2`
 `
 
 const Description = styled.h3`
-  color: #49eaac;
+  color: ${props => props.theme.palette.primary.D};
 `
 
 const ToolBoxContent = ({

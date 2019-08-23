@@ -9,6 +9,11 @@ import theme from 'utils/theme'
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,700i,900');
+  @font-face {
+    font-family: Semplice;
+    src: url('/semplice.TTF');
+  }
+
 
   body {
     -webkit-font-smoothing: antialiased;

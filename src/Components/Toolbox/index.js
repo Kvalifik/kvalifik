@@ -8,6 +8,7 @@ import Padder from 'Blocks/Padder'
 
 import ToolBoxSlider from './ToolBoxSlider'
 import ToolBoxContent from './ToolBoxContent'
+import Console from './Console'
 
 const Root = styled.div`
   background-color: ${props => props.bgColor};
@@ -72,6 +73,7 @@ class Toolbox extends Component {
         <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
             <Container sideText={'Toolbox'} >
+              <Console />
               <ToolBoxContent
                 tools={tools}
                 chosenTool={this.state.chosenTool}
