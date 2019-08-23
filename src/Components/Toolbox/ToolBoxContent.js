@@ -5,11 +5,10 @@ import bg from 'graphics/test3.jpeg'
 import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
-  overflow:hidden;
+  overflow: hidden;
 
   > * {
     opacity: 0;
-    /* transition: opacity 0.1s ease-in; */
     transform: translateY(-20%);
     ${props => props.fadeIn && css`
       transition: 0.5s 0s cubic-bezier(0, 0, 0.04, 1);
