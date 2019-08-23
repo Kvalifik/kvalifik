@@ -6,8 +6,8 @@ import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 import VideoFullscreen from 'Blocks/VideoFullscreen'
-
-import playButton from 'graphics/play-button.svg'
+import PlayButton from './PlayButton'
+import VideoThumb from './VideoThumb'
 
 const Content = styled.div`
   display: grid;
@@ -77,15 +77,6 @@ const RightContainer = styled.div`
   `}
 `
 
-const VideoThumb = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${props => props.src});
-  background-position: 15%;
-  background-repeat: no-repeat;
-  background-size: cover;
-`
-
 const Title = styled.div`
   font-size: ${props => props.theme.typography.fontSize.md};
   padding: 5px 0;
@@ -96,34 +87,6 @@ const Title = styled.div`
   `}
   ${props => props.theme.media.sm`
     font-size: 7vw;
-  `}
-`
-
-const PlayButton = styled.button`
-  width: 60px;
-  height: 60px;
-  background-image: url(${playButton});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  outline: none;
-  position: absolute;
-  top: 50vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transform-origin: center;
-  transition: transform 0.5s ease-out;
-  cursor: pointer;
-
-  &:hover {
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-
-  ${props => props.theme.media.lg`
-    top: 50%;
   `}
 `
 
