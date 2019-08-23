@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 
 import Layout from 'Components/Layout'
 import FixedSkewer from 'Blocks/FixedSkewer'
-import DownArrow from 'Blocks/DownArrow'
+import DownArrow from 'Components/DownArrow'
 
 import { contentPropType } from 'blockTypes/content'
 import renderBlockType from 'utils/renderBlockType'
