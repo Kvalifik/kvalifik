@@ -46,7 +46,7 @@ class Console extends Component {
 
     return [
       'Session starting: ' + dateString,
-      window.location.origin + ':~ visiterName$ _',
+      'https://kvalifik.dk:~ visiterName$ _',
       'Authorizing ......'
     ].join('|')
   }
