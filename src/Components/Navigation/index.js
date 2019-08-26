@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import NavigationContent from './NavigationContent'
 import ToggleNavButton from './ToggleNavButton'
 
-import kvalfikLogo90 from 'graphics/kvalifik_90_logo.svg'
+import kvalfikLogo90 from 'graphics/kvalifik_logo.svg'
 
 const NavDiv = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -71,14 +71,14 @@ const HomeLink = styled.div`
   right: 0;
   top: 50%;
   z-index: 100;
-  transform: translateY(-50%);
+  transform: rotate(-90deg) translate(30%, 100%);
 
   ${props => props.collapsed
     ? css`
-      margin: auto ${props => props.theme.spacing(2.5)};
+      margin: ${props => props.theme.spacing(2.5)} 0;
     `
     : css`
-      margin: auto ${props => props.theme.spacing(4)};
+      margin: ${props => props.theme.spacing(2.5)} ${props => props.theme.spacing(1.5)};
   `}
 
   ${props => props.theme.media.sm`
@@ -87,18 +87,17 @@ const HomeLink = styled.div`
     right: initial;
     top: 0;
     margin: 15px;
-    transform: rotate(90deg) translate(100%, -100%);
-    transform-origin: 50% 0%;
+    transform: translate(10%, 30%);
   `}
 `
 
 const KvalfikLogo = styled.img`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
-  width: 30px;
+  height: 30px;
 
   ${props => props.theme.media.sm`
-    height: 80px;
-    width: initial;
+    width: 80px;
+    height: initial;
   `}
 `
 
