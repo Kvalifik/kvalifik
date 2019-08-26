@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import downArrow from 'graphics/down-arrow.svg'
+import theme from 'utils/theme'
 
 const DownArrowIcon = styled.div`
   position: absolute;
@@ -10,9 +11,13 @@ const DownArrowIcon = styled.div`
   left: 50%;
   transform: translateX(-50%);
   background-color: ${props => props.color};
-  padding: 16px;
   z-index: 1500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
 
   ${props => props.theme.media.lg`
     display: none;
@@ -27,17 +32,25 @@ const DownArrowIcon = styled.div`
     background-size: 100% 100%;
     width: 16px;
     height: 16px;
+    margin-top: 2px;
   }
 `
 
 const DownArrow = ({ color }) => {
-  const handleScroll = () => {
-    const target = window.innerHeight * 1.5
-    if (window.scrollY < target - 20) {
-      setTimeout(handleScroll, 10)
+  function handleScroll () {
+    const skewerOffset = theme.skewer.calculateOffset('large') * window.innerWidth / 100
+    const target = Math.min(window.innerHeight * 1.5, document.body.clientHeight - window.innerHeight - skewerOffset)
 
-      window.scrollTo(0, (target - window.scrollY) / 10 + window.scrollY)
+    function timeoutHandler () {
+      console.log(target, window.scrollY)
+      if (target - window.scrollY > 20 && target > window.scrollY) {
+        setTimeout(timeoutHandler, 10)
+
+        window.scrollTo(0, (target - window.scrollY) / 10 + window.scrollY)
+      }
     }
+
+    timeoutHandler()
   }
 
   return (
