@@ -12,7 +12,24 @@ import theme from 'utils/theme'
 
 export default (block) => {
   switch (block.__typename) {
-    case 'DatoCmsBlockHeader':
+    case 'DatoCmsHeader': {
+      const mediaType = block.media ? block.media.__typename : null
+      let imageUrl = null
+      let videoUrl = null
+
+      switch (mediaType) {
+        case 'DatoCmsImage':
+          imageUrl = block.media.image.url
+          break
+        case 'DatoCmsVideo':
+          imageUrl = block.media.thumbnail.url
+          videoUrl = block.media.video.url
+          break
+        default:
+          imageUrl = null
+          videoUrl = null
+      }
+
       return (
         <HeaderBlock
           key={block.id}
@@ -20,19 +37,20 @@ export default (block) => {
           body={block.description}
           iconUrl={block.icon.url}
           bgColor={block.bgColor.hex}
-          videoUrl={block.video ? block.video.url : null}
-          videoThumbUrl={block.videoThumbnail.url}
+          videoUrl={videoUrl}
+          imageUrl={imageUrl}
         />
       )
-    case 'DatoCmsBlockCaseGrid':
+    }
+    case 'DatoCmsCaseGrid':
       return (
         <CaseGrid
           key={block.id}
-          hasMoreWork={block.hasMoreWork}
+          hasMoreWork={!!block.moreWorkPage}
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
         >
-          {block.works.map(work => {
+          {block.cases.map(work => {
             return (
               <CaseThump
                 key={work.id}
@@ -41,23 +59,23 @@ export default (block) => {
                 bgUrl={work.image.url}
                 bgColor={work.color.hex}
                 fullWidth={work.fullSize}
-                workUrl={work.url}
+                workUrl={work.page && work.page.url}
               />
             )
           })}
         </CaseGrid>
       )
-    case 'DatoCmsBlockSlogan':
+    case 'DatoCmsSlogan':
       return (
         <SloganBlock bgColor={block.bgColor.hex} content={block.punchline} key={block.id} />
       )
-    case 'DatoCmsBlockAction':
+    case 'DatoCmsAction':
       return (
         <ActionBlock
           key={block.id}
           title={block.title}
           body={block.description}
-          buttonLabel={block.buttonText}
+          buttonLabel={block.buttonLink.name}
           buttonType="button"
           images={block.images}
           bgColor={block.bgColor.hex}
@@ -65,7 +83,7 @@ export default (block) => {
           galleryDelay={block.imageDelay}
         />
       )
-    case 'DatoCmsBlockToolbox':
+    case 'DatoCmsToolbox':
       return (
         <Toolbox
           key={block.id}
@@ -73,7 +91,7 @@ export default (block) => {
           bgColor={block.bgColor && block.bgColor.hex}
         />
       )
-    case 'DatoCmsBlockOverlay':
+    case 'DatoCmsOverlay':
       return (
         <OverlayBlock
           key={block.id}
@@ -83,7 +101,7 @@ export default (block) => {
           imageUrl={block.image.url}
         />
       )
-    case 'DatoCmsBlockCaseInfo': {
+    case 'DatoCmsCaseInfo': {
       const {
         buttonLink,
         id,
@@ -104,7 +122,7 @@ export default (block) => {
         />
       )
     }
-    case 'DatoCmsBlockPercentage':
+    case 'DatoCmsPercentage':
       return (
         <PercentageBlock
           key={block.id}

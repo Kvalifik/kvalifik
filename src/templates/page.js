@@ -6,66 +6,49 @@ import Layout from 'Components/Layout'
 import FixedSkewer from 'Blocks/FixedSkewer'
 import DownArrow from 'Components/DownArrow'
 
-import { contentPropType } from 'blockTypes/content'
+import { pagePropType } from 'models/page'
 import renderBlockType from 'utils/renderBlockType'
 import 'utils/contentQuery'
 
 const PageTemplate = ({ data }) => {
   const {
-    showSkewer,
-    showDownArrow,
-    downArrowColor,
-    content
+    pageSetup
   } = data.datoCmsPage
+
+  const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout>
-      {showDownArrow && (
-        <DownArrow color={downArrowColor.hex} />
+      {headerBlock && headerBlock.bgColor && (
+        <DownArrow color={headerBlock.bgColor.hex} />
       )}
-      {showSkewer && (
-        <FixedSkewer
-          angle="large"
-          reverse
-          height="5vh"
-          layer={1000}
-        />
-      )}
-      {showSkewer && (
-        <FixedSkewer
-          angle="large"
-          reverse
-          height="20vh"
-          layer={500}
-        />
-      )}
-      {content.map(renderBlockType)}
+      <FixedSkewer
+        angle="large"
+        reverse
+        height="5vh"
+        layer={1000}
+      />
+      <FixedSkewer
+        angle="large"
+        reverse
+        height="20vh"
+        layer={500}
+      />
+      {pageSetup.map(renderBlockType)}
     </Layout>
   )
 }
 
 PageTemplate.propTypes = {
   data: PropTypes.shape({
-    datoCmsPage: PropTypes.shape({
-      content: contentPropType,
-      showSkewer: PropTypes.bool,
-      downArrowColor: PropTypes.shape({
-        hex: PropTypes.string
-      }),
-      showDownArrow: PropTypes.bool
-    })
+    datoCmsPage: pagePropType
   })
 }
 
 export const query = graphql`
   query($url: String!) {
     datoCmsPage(url: { eq: $url }) {
-      showSkewer
-      showDownArrow
-      downArrowColor {
-        hex
-      }
-      ...PageContentFragment
+      ...PageFragment
     }
   }
 `

@@ -7,7 +7,7 @@ import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
 import VideoFullscreen from 'Blocks/VideoFullscreen'
 import PlayButton from './PlayButton'
-import VideoThumb from './VideoThumb'
+import ThumbImage from './ThumbImage'
 
 const Content = styled.div`
   display: grid;
@@ -137,7 +137,7 @@ class HeaderBlock extends Component {
       bgColor,
       videoUrl,
       iconUrl,
-      videoThumbUrl
+      imageUrl
     } = this.props
     const { playing } = this.state
     const hasVideo = !!videoUrl
@@ -156,7 +156,7 @@ class HeaderBlock extends Component {
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer>
-                <VideoThumb src={videoThumbUrl} />
+                <ThumbImage src={imageUrl} />
                 {hasVideo && (
                   <PlayButton onClick={this.handlePlay.bind(this)} />
                 )}
@@ -175,7 +175,7 @@ HeaderBlock.propTypes = {
   bgColor: PropTypes.string,
   videoUrl: PropTypes.string,
   iconUrl: PropTypes.string,
-  videoThumbUrl: PropTypes.string
+  imageUrl: PropTypes.string
 }
 
 export default HeaderBlock

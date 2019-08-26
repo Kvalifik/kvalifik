@@ -19,7 +19,7 @@ const Content = styled.div`
 `
 
 const MoreWork = styled.div`
-  display: ${props => props.fadeBottom ? 'flex' : 'none'};
+  display: flex;
   justify-content: center;
   margin: 40px 16px;
 
@@ -48,9 +48,9 @@ const CaseGrid = (props) => {
   const {
     bgColor,
     children,
-    hasMoreWork,
     moreWorkUrl
   } = props
+  const hasMoreWork = !!moreWorkUrl
 
   return (
     <Skewer bgColor={bgColor} layer={1200}>
@@ -61,13 +61,15 @@ const CaseGrid = (props) => {
             {children}
           </Content>
         </Container>
-        <MoreWork fadeBottom={hasMoreWork}>
-          <Link to={moreWorkUrl}>
-            <Button bgColor="#707070" color="white">
-              More Work
-            </Button>
-          </Link>
-        </MoreWork>
+        {hasMoreWork && (
+          <MoreWork>
+            <Link to={moreWorkUrl}>
+              <Button bgColor="#707070" color="white">
+                More Work
+              </Button>
+            </Link>
+          </MoreWork>
+        )}
       </Padder>
     </Skewer>
   )
@@ -76,7 +78,6 @@ const CaseGrid = (props) => {
 CaseGrid.propTypes = {
   children: PropTypes.any,
   bgColor: PropTypes.string.isRequired,
-  hasMoreWork: PropTypes.bool,
   moreWorkUrl: PropTypes.string
 }
 

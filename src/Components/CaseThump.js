@@ -105,22 +105,28 @@ const CaseThump = ({
   fullWidth,
   workUrl
 }) => {
+  const body = (
+    <Content>
+      <Desc>
+        <Arrow src={arrowImg} alt="arrow" />
+        <ProjectName>
+          {name}
+        </ProjectName>
+        <Header full={fullWidth}>
+          {description}
+        </Header>
+      </Desc>
+      <Img src={bgUrl} />
+    </Content>
+  )
+
   return (
     <Root full={fullWidth} color={bgColor}>
-      <Link to={workUrl}>
-        <Content>
-          <Desc>
-            <Arrow src={arrowImg} alt="arrow" />
-            <ProjectName>
-              {name}
-            </ProjectName>
-            <Header full={fullWidth}>
-              {description}
-            </Header>
-          </Desc>
-          <Img src={bgUrl} />
-        </Content>
-      </Link>
+      {workUrl ? (
+        <Link to={workUrl}>
+          {body}
+        </Link>
+      ) : body}
     </Root>
   )
 }

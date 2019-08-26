@@ -1,30 +1,39 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment BlockHeaderFragment on DatoCmsBlockHeader {
+  fragment HeaderFragment on DatoCmsHeader {
     id
     title
+    description
     bgColor {
       hex
     }
     icon {
       url
     }
-    video {
-      url
+    media {
+      __typename
+      ... on DatoCmsVideo {
+        thumbnail {
+          url
+        }
+        video {
+          url
+        }
+      }
+      ... on DatoCmsImage {
+        image {
+          url
+        }
+      }
     }
-    videoThumbnail {
-      url
-    }
-    description
   }
-  fragment BlockCaseGridFragment on DatoCmsBlockCaseGrid {
+  fragment CaseGridFragment on DatoCmsCaseGrid {
     id
-    hasMoreWork
     moreWorkPage {
       url
     }
-    works {
+    cases {
       title
       description
       id
@@ -36,38 +45,47 @@ export const query = graphql`
       image{
         url
       }
-      url
+      page {
+        ... on DatoCmsPage {
+          url
+        }
+      }
     }
   }
-  fragment BlockSloganFragment on DatoCmsBlockSlogan {
+  fragment SloganFragment on DatoCmsSlogan {
     id
     punchline
     bgColor {
       hex
     }
   }
-  fragment BlockToolboxFragment on DatoCmsBlockToolbox {
+  fragment ToolboxFragment on DatoCmsToolbox {
     id
     bgColor {
       hex
     }
     tools {
-      id
-      headline,
-      description
-      icon {
-        url
-      }
-      image {
-        url
+      ... on DatoCmsTool {
+        id
+        headline,
+        description
+        icon {
+          url
+        }
+        image {
+          url
+        }
       }
     }
   }
-  fragment BlockActionFragment on DatoCmsBlockAction {
+  fragment ActionBlockFragment on DatoCmsAction {
     id
     title
     description
-    buttonText
+    buttonLink {
+      name
+      path
+    }
     images {
       url
     }
@@ -79,7 +97,7 @@ export const query = graphql`
       hex
     }
   }
-  fragment BlockOverlayFragment on DatoCmsBlockOverlay {
+  fragment OverlayBlockFragment on DatoCmsOverlay {
     id
     title
     description
@@ -90,7 +108,7 @@ export const query = graphql`
       hex
     }
   }
-  fragment BlockCaseInfoFragment on DatoCmsBlockCaseInfo {
+  fragment CaseInfoFragment on DatoCmsCaseInfo {
     id
     buttonLink {
       name
@@ -120,7 +138,7 @@ export const query = graphql`
       }
     }
   }
-  fragment BlockPercentageFragment on DatoCmsBlockPercentage {
+  fragment PercentageBlockFragment on DatoCmsPercentage {
     bgColor {
       hex
     }
@@ -130,31 +148,23 @@ export const query = graphql`
     number
   }
 
-  fragment PageContentFragment on DatoCmsPage {
-    content {
+  fragment PageFragment on DatoCmsPage {
+    pageSetup {
       __typename
-      ...BlockHeaderFragment
-      ...BlockCaseGridFragment
-      ...BlockSloganFragment
-      ...BlockOverlayFragment
-      ...BlockActionFragment
-      ...BlockToolboxFragment
-      ...BlockCaseInfoFragment
-      ...BlockPercentageFragment
+      ...HeaderFragment,
+      ...ActionBlockFragment,
+      ...SloganFragment,
+      ...PercentageBlockFragment,
+      ...CaseGridFragment,
+      ...CaseInfoFragment,
+      ...ToolboxFragment
+      ...OverlayBlockFragment
     }
   }
 
   fragment WorkPageContentFragment on DatoCmsWork {
     page {
-      __typename
-      ...BlockHeaderFragment
-      ...BlockCaseGridFragment
-      ...BlockSloganFragment
-      ...BlockOverlayFragment
-      ...BlockActionFragment
-      ...BlockToolboxFragment
-      ...BlockCaseInfoFragment
-      ...BlockPercentageFragment
+      ...PageFragment
     }
   }
 `

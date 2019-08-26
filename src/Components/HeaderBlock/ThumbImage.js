@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const VideoThumb = styled.div`
+const ThumbImage = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${props => props.src});
@@ -9,4 +9,4 @@ const VideoThumb = styled.div`
   background-size: cover;
 `
 
-export default VideoThumb
+export default ThumbImage
