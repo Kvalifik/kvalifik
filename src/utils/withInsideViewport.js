@@ -17,6 +17,7 @@ const withInsideViewport = Wrapped => class ScrollInfoView extends Component {
     window.addEventListener('scroll', this.bindedScrollHandler)
 
     this.node = ReactDOM.findDOMNode(this.ref.current)
+    this.bindedScrollHandler()
   }
 
   componentWillUnmount () {

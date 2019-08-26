@@ -96,22 +96,22 @@ const theme = {
       menuItem: '25px'
     },
     body: {
-      fontFamily: 'Montserrat',
+      fontFamily: '"Montserrat", sans-serif',
       fontWeight: '400',
       fontStyle: 'normal'
     },
     hero: {
-      fontFamily: 'Montserrat',
+      fontFamily: '"Montserrat", sans-serif',
       fontWeight: '900',
       fontStyle: 'normal'
     },
     header: {
-      fontFamily: 'Montserrat',
+      fontFamily: '"Montserrat", sans-serif',
       fontWeight: '700',
       fontStyle: 'normal'
     },
     quote: {
-      fontFamily: 'Montserrat',
+      fontFamily: '"Montserrat", sans-serif',
       fontWeight: '700',
       fontStyle: 'italic'
     }

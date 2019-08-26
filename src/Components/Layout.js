@@ -8,10 +8,41 @@ import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,700i,900');
   @font-face {
     font-family: Semplice;
-    src: url('/semplice.TTF');
+    src: url('/fonts/semplice.ttf');
+  }
+
+  @font-face {
+    font-family: Montserrat;
+    src: url('/fonts/Montserrat-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: Montserrat;
+    src: url('/fonts/Montserrat-Black.ttf');
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: Montserrat;
+    src: url('/fonts/Montserrat-Bold.ttf');
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: Montserrat;
+    src: url('/fonts/Montserrat-BoldItalic.ttf');
+    font-style: italic;
+    font-weight: 700;
+    font-display: block;
   }
 
 

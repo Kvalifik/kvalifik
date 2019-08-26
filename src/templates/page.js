@@ -27,7 +27,7 @@ const PageTemplate = ({ data }) => {
         <FixedSkewer
           angle="large"
           reverse
-          height="5vw"
+          height="5vh"
           layer={1000}
         />
       )}
@@ -35,7 +35,7 @@ const PageTemplate = ({ data }) => {
         <FixedSkewer
           angle="large"
           reverse
-          height="20vw"
+          height="20vh"
           layer={500}
         />
       )}
