@@ -68,6 +68,7 @@ export const query = graphql`
       ... on DatoCmsTool {
         id
         headline,
+        subHeadline,
         description
         icon {
           url

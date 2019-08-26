@@ -9,8 +9,8 @@ const Root = styled.div`
   font-size: 12px;
   color: ${props => props.theme.palette.primary.D};
   margin: ${props => props.theme.spacing(4, 2)};
+  padding-left: 2px;
   line-height: 1.4em;
-
   min-height: calc(12px * 3 * 1.4);
 `
 
@@ -36,8 +36,9 @@ class Console extends Component {
       this.setState({
         step: step + 1
       })
-
-      this.nextStep()
+      if (step < this.state.text.length) {
+        this.nextStep()
+      }
     }, Math.floor(Math.random() * 25 + 10))
   }
 
