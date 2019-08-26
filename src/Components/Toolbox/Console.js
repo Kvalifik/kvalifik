@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import withScrollInfoView from 'utils/withScrollInfoView'
+import withInsideViewport from 'utils/withInsideViewport'
 import dateformat from 'dateformat'
 
 const Root = styled.div`
@@ -25,7 +25,7 @@ class Console extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (!prevProps.isIntoView && this.props.isIntoView) {
+    if (!prevProps.isInsideViewport && this.props.isInsideViewport) {
       this.nextStep()
     }
   }
@@ -68,8 +68,8 @@ class Console extends Component {
 }
 
 Console.propTypes = {
-  isIntoView: PropTypes.bool,
+  isInsideViewport: PropTypes.bool,
   color: PropTypes.string
 }
 
-export default withScrollInfoView(Console)
+export default withInsideViewport(Console)

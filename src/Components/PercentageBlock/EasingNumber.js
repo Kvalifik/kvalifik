@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import withScrollInfoView from 'utils/withScrollInfoView'
+import withInsideViewport from 'utils/withInsideViewport'
 
 class EasingNumber extends Component {
   constructor (props) {
@@ -12,7 +12,7 @@ class EasingNumber extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (!prevProps.isIntoView && this.props.isIntoView) {
+    if (!prevProps.isInsideViewport && this.props.isInsideViewport) {
       this.bindedEaseHandler = this.handleEase.bind(this, Date.now())
       this.bindedEaseHandler()
     }
@@ -59,7 +59,7 @@ EasingNumber.propTypes = {
   render: PropTypes.func,
   duration: PropTypes.number,
   value: PropTypes.number,
-  isIntoView: PropTypes.bool
+  isInsideViewport: PropTypes.bool
 }
 
-export default withScrollInfoView(EasingNumber)
+export default withInsideViewport(EasingNumber)

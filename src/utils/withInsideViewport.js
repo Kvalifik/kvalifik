@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-const withScrollInfoView = Wrapped => class ScrollInfoView extends Component {
+const withInsideViewport = Wrapped => class ScrollInfoView extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      isIntoView: false
+      isInsideViewport: false
     }
 
     this.bindedScrollHandler = this.handleScroll.bind(this)
@@ -26,14 +26,14 @@ const withScrollInfoView = Wrapped => class ScrollInfoView extends Component {
   handleScroll (ev) {
     const el = this.node
 
-    if (el && !this.state.active) {
+    if (el && !this.state.isInsideViewport) {
       const bounding = el.getBoundingClientRect()
 
       if (
         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 0.75
       ) {
         this.setState({
-          isIntoView: true
+          isInsideViewport: true
         })
         window.removeEventListener('scroll', this.bindedScrollHandler)
       }
@@ -41,12 +41,12 @@ const withScrollInfoView = Wrapped => class ScrollInfoView extends Component {
   }
 
   render () {
-    const { isIntoView } = this.state
+    const { isInsideViewport } = this.state
 
     return (
-      <Wrapped {...this.props} ref={this.ref} isIntoView={isIntoView} />
+      <Wrapped {...this.props} ref={this.ref} isInsideViewport={isInsideViewport} />
     )
   }
 }
 
-export default withScrollInfoView
+export default withInsideViewport
