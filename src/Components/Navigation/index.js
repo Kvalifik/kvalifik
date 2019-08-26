@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Link } from 'gatsby'
 
 import NavigationContent from './NavigationContent'
 import ToggleNavButton from './ToggleNavButton'
@@ -64,9 +65,7 @@ const IconWrapper = styled.div`
   position: fixed;
 `
 
-const HomeLink = styled.a.attrs({
-  href: '/'
-})`
+const HomeLink = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   position: fixed;
   right: 0;
@@ -125,7 +124,9 @@ class Navigation extends Component {
     return (
       <NavDiv collapsed={this.state.collapsed}>
         <HomeLink collapsed={this.state.collapsed}>
-          <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+          <Link to="/">
+            <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+          </Link>
         </HomeLink>
         <IconWrapper onClick={this.toggleNavigation.bind(this)} >
           <ToggleNavButton collapsed={this.state.collapsed} />

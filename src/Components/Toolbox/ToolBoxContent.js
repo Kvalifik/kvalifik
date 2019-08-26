@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
@@ -55,13 +56,15 @@ const Text = styled.div`
   `}
 `
 
-const Link = styled.a`
-  display: none; /* Temporary */
-  position: absolute;
-  bottom: 0;
-  color: white;
-  text-decoration: none;
-  right: 0;
+const LinkWrapper = styled.div`
+  a {
+    display: none; /* Temporary */
+    position: absolute;
+    bottom: 0;
+    color: white;
+    text-decoration: none;
+    right: 0;
+  }
 `
 
 const Arrow = styled.img`
@@ -93,7 +96,9 @@ const ToolBoxContent = ({
       <Text>
         <Headline>{tool.headline}</Headline>
         <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
-        <Link href="/" >Learn how to do it <Arrow src={arrowImg} /></Link>
+        <LinkWrapper>
+          <Link to="/">Learn how to do it <Arrow src={arrowImg} /></Link>
+        </LinkWrapper>
       </Text>
     </Root>
   )

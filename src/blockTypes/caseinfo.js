@@ -4,7 +4,6 @@ export const caseinfoPropType = PropTypes.shape({
   id: PropTypes.string,
   buttonLink: PropTypes.shape({
     name: PropTypes.string,
-    isExternal: PropTypes.bool,
     path: PropTypes.string
   }),
   labelOne: PropTypes.string,

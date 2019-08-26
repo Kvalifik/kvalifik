@@ -49,7 +49,6 @@ class CaseInfo extends Component {
       thumbnailUrl,
       button: {
         path,
-        isExternal,
         name: buttonText
       },
       ...process
@@ -75,7 +74,7 @@ class CaseInfo extends Component {
                   ),
                   0.2
                 )}
-                isExternal={isExternal}
+                isExternal
                 href={path}
                 as="a"
               >

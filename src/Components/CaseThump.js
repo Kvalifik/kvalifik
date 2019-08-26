@@ -1,17 +1,27 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
 
-const Root = styled.a`
+const Root = styled.div`
   align-self: center;
-  height: 250px;
   background-color: ${props => props.color || props.theme.palette.primary.C};
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-decoration: none;
+  height: 250px;
   color: ${props => props.theme.palette.dark};
+
+  & > a {
+    text-decoration: none;
+    color: ${props => props.theme.palette.dark};
+  }
+
+  transform-origin: center;
+  transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+
+  &:hover {
+    transform: scale(0.98);
+  }
 
   ${props => props.full && css`
     grid-column: 1 / -1;
@@ -21,19 +31,22 @@ const Root = styled.a`
     }
   `}
 
-  cursor: pointer;
-  transform-origin: center;
-  transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-
-  &:hover {
-    transform: scale(0.98);
+  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+    height: 400px;
   }
+`
+
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: ${props => props.theme.palette.dark};
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
     grid-auto-flow: dense;
-    height: 400px;
   }
 `
 
@@ -93,17 +106,21 @@ const CaseThump = ({
   workUrl
 }) => {
   return (
-    <Root full={fullWidth} color={bgColor} href={workUrl}>
-      <Desc>
-        <Arrow src={arrowImg} alt="arrow" />
-        <ProjectName>
-          {name}
-        </ProjectName>
-        <Header full={fullWidth}>
-          {description}
-        </Header>
-      </Desc>
-      <Img src={bgUrl} />
+    <Root full={fullWidth} color={bgColor}>
+      <Link to={workUrl}>
+        <Content>
+          <Desc>
+            <Arrow src={arrowImg} alt="arrow" />
+            <ProjectName>
+              {name}
+            </ProjectName>
+            <Header full={fullWidth}>
+              {description}
+            </Header>
+          </Desc>
+          <Img src={bgUrl} />
+        </Content>
+      </Link>
     </Root>
   )
 }

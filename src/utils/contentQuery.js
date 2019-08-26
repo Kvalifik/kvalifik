@@ -95,7 +95,6 @@ export const query = graphql`
     buttonLink {
       name
       path
-      isExternal
     }
     labelOne
     labelTwo

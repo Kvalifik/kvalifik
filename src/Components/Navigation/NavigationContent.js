@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Link } from 'gatsby'
 import targetBlankIcon from 'graphics/target_blank.svg'
 
 const Li = styled.li`
@@ -25,36 +26,45 @@ const NavItems = styled.div`
   }
 `
 
-const NavItem = styled.a`
-  line-height: ${props => props.theme.spacing(5)};
-  height: 100%;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: ${props => props.theme.typography.fontSize.menuItem};
-  text-transform: uppercase;
-  ${props => !props.isExternal || css`
-    &:after{
+const NavItem = styled.div`
+  ${props => props.isExternal && css`
+    a:after{
       content: url('${targetBlankIcon}');
     }
   `}
+
+  a {
+    color: white;
+    text-decoration: none;
+    line-height: ${props => props.theme.spacing(5)};
+    height: 100%;
+    font-weight: 700;
+    font-size: ${props => props.theme.typography.fontSize.menuItem};
+    text-transform: uppercase;
+  }
 `
 
-const FooterItem = styled.a`
-  line-height: ${props => props.theme.spacing(3)};
-  color: white;
-  text-decoration: none;
-  font-weight: 300;
-  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
-  text-transform: uppercase;
-  ${props => !props.isExternal || css`
-    display:flex;
-    &:after{
-      margin-top: -3px;
-      margin-left: 5px;
-      content: url('${targetBlankIcon}');
+const FooterItem = styled.div`
+  ${props => props.isExternal && css`
+    a {
+      display:flex;
+
+      &:after {
+        margin-top: -3px;
+        margin-left: 5px;
+        content: url('${targetBlankIcon}');
+      }
     }
   `}
+
+  a {
+    line-height: ${props => props.theme.spacing(3)};
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
+    text-transform: uppercase;
+  }
 `
 
 const Root = styled.div`
@@ -99,8 +109,12 @@ const NavigationContent = props => {
         {
           navigationItems.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={navigationItem.isExternal ? '_blank' : ''} >
-                {navigationItem.name}
+              <NavItem isExternal={navigationItem.isExternal}>
+                {navigationItem.isExternal ? (
+                  <a href={navigationItem.path} target="_blank">{navigationItem.name}</a>
+                ) : (
+                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
+                )}
               </NavItem>
             </Li>
           ))
@@ -110,8 +124,12 @@ const NavigationContent = props => {
         {
           navigationLinks.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem href={navigationItem.path} isExternal={navigationItem.isExternal} target={navigationItem.isExternal ? '_blank' : ''}>
-                {navigationItem.name}
+              <FooterItem isExternal={navigationItem.isExternal}>
+                {navigationItem.isExternal ? (
+                  <a href={navigationItem.path} target="_blank">{navigationItem.name}</a>
+                ) : (
+                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
+                )}
               </FooterItem>
             </Li>
           ))
