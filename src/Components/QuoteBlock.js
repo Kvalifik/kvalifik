@@ -18,7 +18,7 @@ const QuoteRoot = styled.div`
   `}
 `
 
-const QuoteText = styled.p`
+const QuoteText = styled.div`
   text-align: left;
   font-size: 24px;
   font-weight: bold;

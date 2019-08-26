@@ -43,7 +43,7 @@ const ImageWrapper = styled.div`
   `}
 `
 
-const Description = styled.p`
+const Description = styled.div`
   margin: ${props => props.theme.spacing(4)} 0;
   line-height: 1.25;
   color: ${props => props.color};

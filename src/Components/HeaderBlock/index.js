@@ -154,9 +154,7 @@ class HeaderBlock extends Component {
                 <Icon src={iconUrl} />
                 <Title>{title}</Title>
               </TopLeftContainer>
-              <BottomLeftContainer>
-                <p dangerouslySetInnerHTML={{ __html: body }} />
-              </BottomLeftContainer>
+              <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer>
                 <VideoThumb src={videoThumbUrl} />
                 {hasVideo && (

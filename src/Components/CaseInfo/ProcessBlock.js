@@ -38,7 +38,7 @@ const Title = styled.h4`
   line-height: 1.25em;
 `
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
   color: ${props => props.theme.palette.light};
   line-height: 1.3em;

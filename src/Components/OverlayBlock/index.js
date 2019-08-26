@@ -13,7 +13,7 @@ const Header = styled.h2`
   line-height: 1.2em;
 `
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
   line-height: 1.6em;
 `
