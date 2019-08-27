@@ -5,6 +5,7 @@ import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import Toolbox from 'Components/Toolbox'
+import ToolboxBig from 'Components/ToolboxBig'
 import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
@@ -89,6 +90,16 @@ export default (block) => {
           key={block.id}
           tools={block.tools}
           bgColor={block.bgColor && block.bgColor.hex}
+        />
+      )
+    case 'DatoCmsToolboxBig':
+      return (
+        <ToolboxBig
+          sideText={block.sideText}
+          tools={block.tools}
+          backgroundColor={block.backgroundColor.hex}
+          toolFilters={block.toolFilters}
+          smallDescription={block.smallDescription}
         />
       )
     case 'DatoCmsOverlay':

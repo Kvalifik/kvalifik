@@ -7,6 +7,7 @@ import { overlayblockPropType } from 'blockTypes/overlayBlock'
 import { caseinfoPropType } from 'blockTypes/caseinfo'
 import { percentageblockPropType } from 'blockTypes/percentageBlock'
 import { toolboxPropType } from 'blockTypes/toolbox'
+import { toolboxBigProptype } from 'blockTypes/toolboxBig'
 
 export const contentPropType = PropTypes.arrayOf(PropTypes.oneOfType([
   headerPropType,
@@ -16,5 +17,6 @@ export const contentPropType = PropTypes.arrayOf(PropTypes.oneOfType([
   overlayblockPropType,
   caseinfoPropType,
   percentageblockPropType,
-  toolboxPropType
+  toolboxPropType,
+  toolboxBigProptype // and what now?
 ]))
