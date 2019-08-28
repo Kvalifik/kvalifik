@@ -18,4 +18,37 @@ Refer to Gatsby's own docs for more information about the endless universe of Ga
 
 ## Stack
 
-We use an implementation of the JAMStack with Gatsby for rendering the front end and DatoCMS providing the content. The website will probably be served by a CDN (Netlify or similar...)
+We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
+
+* Dato CMS (API)
+* Gatsby (Javascript and markup)
+* Netlify (Static file hosting)
+
+## Documentation
+
+**Modular block**: [At the wiki](https://github.com/Kvalifik/kvalifikdk-static/wiki/Modular-setup)
+
+**Source structure**
+
+```
+./src
+├── Blocks
+├── Components
+├── graphics
+├── models
+│   ├── blocks
+│   └── page.js
+├── templates
+│   └── page.js
+└── utils
+```
+
+*Blocks* are small reusable components that are not designed to be used by themselves. *Components* are larger autonomous components (contains all blocks).
+
+*templates* are template components used in the build process.
+
+*models* are primarily prop type schemas, but might also contain other types of models.
+
+*utils* are various utility functions that are used in various places, such as within the build process or within a component.
+
+*graphics* are all graphics that *never* change and therefore doesn't have to be loaded from the Cms.
