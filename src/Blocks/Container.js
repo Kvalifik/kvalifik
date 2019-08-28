@@ -5,22 +5,22 @@ import styled from 'styled-components'
 const Root = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: ${props => props.hasSideText ? '60px' : 0} 1fr;
+  grid-template-columns: 1fr 525px 525px 1fr;
 
-  @media ${props => props.theme.media.sm} {
-    grid-template-columns: 1fr 200px 200px 1fr;
-  }
-
-  @media ${props => props.theme.media.md} {
-    grid-template-columns: 1fr 315px 315px 1fr;
-  }
-
-  @media ${props => props.theme.media.lg} {
+  @media ${props => props.theme.media.xl} {
     grid-template-columns: 1fr 435px 435px 1fr;
   }
 
-  @media ${props => props.theme.media.xl} {
-    grid-template-columns: 1fr 525px 525px 1fr;
+  @media ${props => props.theme.media.lg} {
+    grid-template-columns: 1fr 315px 315px 1fr;
+  }
+
+  @media ${props => props.theme.media.md} {
+    grid-template-columns: 1fr 200px 200px 1fr;
+  }
+
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: ${props => props.hasSideText ? '60px' : 0} 1fr;
   }
 `
 
