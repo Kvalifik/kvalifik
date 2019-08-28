@@ -65,6 +65,8 @@ const ActionBlock = ({
   buttonLabel,
   bgColor,
   textColor,
+  buttonTextColor,
+  buttonBgColor,
   galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
@@ -78,8 +80,8 @@ const ActionBlock = ({
           <Button
             type="button"
             alt={buttonLabel}
-            bgColor={textColor}
-            color={bgColor}
+            bgColor={buttonBgColor}
+            color={buttonTextColor}
           >
             {buttonLabel}
           </Button>
@@ -107,6 +109,8 @@ ActionBlock.propTypes = {
   buttonProps: PropTypes.object,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
+  buttonBgColor: PropTypes.string,
+  buttonTextColor: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
   })),

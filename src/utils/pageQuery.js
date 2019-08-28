@@ -67,8 +67,8 @@ export const query = graphql`
     tools {
       ... on DatoCmsTool {
         id
-        headline,
-        subHeadline,
+        headline
+        subHeadline
         description
         icon {
           url
@@ -95,6 +95,12 @@ export const query = graphql`
       hex
     }
     textColor {
+      hex
+    }
+    buttonBgColor {
+      hex
+    }
+    buttonTextColor {
       hex
     }
   }
@@ -148,20 +154,32 @@ export const query = graphql`
     duration
     number
   }
+  fragment QuoteBlockFragment on DatoCmsQuote {
+    id
+    author
+    quote
+    image {
+      url
+    }
+    bgColor {
+      hex
+    }
+  }
 
   fragment PageFragment on DatoCmsPage {
     title
     url
     pageSetup {
       __typename
-      ...HeaderFragment,
-      ...ActionBlockFragment,
-      ...SloganFragment,
-      ...PercentageBlockFragment,
-      ...CaseGridFragment,
-      ...CaseInfoFragment,
+      ...HeaderFragment
+      ...ActionBlockFragment
+      ...SloganFragment
+      ...PercentageBlockFragment
+      ...CaseGridFragment
+      ...CaseInfoFragment
       ...ToolboxFragment
       ...OverlayBlockFragment
+      ...QuoteBlockFragment
     }
   }
 `

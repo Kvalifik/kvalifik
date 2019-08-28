@@ -7,5 +7,17 @@ export const actionblockPropType = PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
   })),
-  imageDelay: PropTypes.number
+  imageDelay: PropTypes.number,
+  bgColor: PropTypes.shape({
+    hex: PropTypes.string
+  }),
+  textColor: PropTypes.shape({
+    hex: PropTypes.string
+  }),
+  buttonBgColor: PropTypes.shape({
+    hex: PropTypes.string
+  }),
+  buttonTextColor: PropTypes.shape({
+    hex: PropTypes.string
+  })
 })
