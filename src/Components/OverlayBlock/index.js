@@ -22,10 +22,10 @@ const Content = styled.div`
   grid-column: 2 / 3;
   padding: ${props => props.theme.spacing(0, 4, 0, 0)};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 2 / 4;
     padding: ${props => props.theme.spacing(10, 0)};
-  `}
+  }
 `
 
 const OverlayBlock = ({

@@ -9,12 +9,12 @@ import { Link } from 'gatsby'
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: calc(30px);
   padding: ${props => props.theme.padding.sm};
+  grid-template-columns: 1fr;
 
-  @media only screen and (max-width : ${props => props.theme.breakpoints.sm} ) {
-    grid-template-columns: 1fr;
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   }
 `
 

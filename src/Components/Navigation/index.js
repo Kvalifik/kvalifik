@@ -19,16 +19,16 @@ const NavDiv = styled.div`
   width: 300px;
   background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 1)};
-  `}
+  }
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
-  `}
+  }
 
   /* Mobile Nav: */
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     width: 100%;
     left: 0;
     top: calc(-100vh + ${props => props.theme.navBarWidth});
@@ -40,7 +40,7 @@ const NavDiv = styled.div`
         top: 0;
         right: calc(-100% + ${props => props.theme.navBarWidth});
       `}
-  `}
+  }
 
   /* Collapsed Nav: */
   ${props => props.collapsed && css`
@@ -81,24 +81,24 @@ const HomeLink = styled.div`
       margin: ${props => props.theme.spacing(2.5)} ${props => props.theme.spacing(1.5)};
   `}
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     left: 0;
     bottom: initial;
     right: initial;
     top: 0;
     margin: 15px;
     transform: translate(10%, 30%);
-  `}
+  }
 `
 
 const KvalfikLogo = styled.img`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   height: 30px;
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     width: 80px;
     height: initial;
-  `}
+  }
 `
 
 class Navigation extends Component {

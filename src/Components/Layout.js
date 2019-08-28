@@ -45,7 +45,6 @@ const GlobalStyle = createGlobalStyle`
     font-display: block;
   }
 
-
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,13 +60,13 @@ const App = styled.div`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  ${props => props.theme.media.lg`
-    padding-right: ${props.theme.navBarWidth};
-  `}
+  @media ${props => props.theme.media.lg} {
+    padding-right: ${props => props.theme.navBarWidth};
+  }
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     padding-right: 0;
-  `}
+  }
 `
 
 const Main = ({ children }) => {

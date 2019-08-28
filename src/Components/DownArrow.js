@@ -19,9 +19,9 @@ const DownArrowIcon = styled.div`
   width: 36px;
   height: 36px;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     display: none;
-  `}
+  }
 
   &::after {
     content: "";

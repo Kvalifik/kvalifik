@@ -12,35 +12,35 @@ const LeftContainer = styled.div`
   padding-bottom: ${props => props.theme.spacing(10)};
   align-self: center;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 2 / 4;
     grid-row: 2;
 
     padding: 30vw 0;
-  `}
+  }
 
-  ${props => props.theme.media.md`
-    padding: 30vw ${props.theme.spacing(2)};
-  `}
+  @media ${props => props.theme.media.md} {
+    padding: 30vw ${props => props.theme.spacing(2)};
+  }
 `
 
 const RightContainer = styled.div`
   grid-column: 3 / -1;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 1 / -1;
     grid-row: 1;
-  `}
+  }
 `
 
 const ImageWrapper = styled.div`
   width: 100%;
   height: 850px;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     height: 130vw;
     width: 100vw;
-  `}
+  }
 `
 
 const Description = styled.div`

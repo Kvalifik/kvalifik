@@ -36,13 +36,13 @@ const Icon = styled.img`
   padding: ${props => props.theme.spacing(4)};
   width: 150px;
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     padding: 0;
     margin: ${props => props.theme.spacing(4)};
     justify-self: center;
     align-self: center;
     width: 60%;
-  `}
+  }
 `
 
 const Text = styled.div`
@@ -50,9 +50,9 @@ const Text = styled.div`
   margin: ${props => props.theme.spacing(4)};
   padding-bottom: ${props => props.theme.spacing(4)};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 1 / -1;
-  `}
+  }
 `
 
 const LinkWrapper = styled.div`

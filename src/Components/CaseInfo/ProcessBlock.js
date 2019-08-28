@@ -14,12 +14,12 @@ const Root = styled.div`
   grid-gap: ${props => props.theme.spacing(5)};
   background-color: ${props => props.theme.palette.dark};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-template-areas:
       "block-one"
       "block-two"
       "block-three";
-  `}
+  }
 
   & ${Label} {
     color: ${props => props.color};

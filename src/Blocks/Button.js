@@ -24,13 +24,13 @@ export default styled.button`
     transform: scale(0.95);
   }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     width: 100%;
-  `}
+  }
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     padding: ${props => props.theme.spacing(2, 2)};
-  `}
+  }
 
   ${props => props.isExternal && css`
     &::after {

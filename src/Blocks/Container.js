@@ -7,19 +7,19 @@ const Root = styled.div`
   display: grid;
   grid-template-columns: ${props => props.hasSideText ? '60px' : 0} 1fr;
 
-  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     grid-template-columns: 1fr 200px 200px 1fr;
   }
 
-  @media (min-width: ${props => props.theme.breakpoints.md}) {
+  @media ${props => props.theme.media.md} {
     grid-template-columns: 1fr 315px 315px 1fr;
   }
 
-  @media (min-width: ${props => props.theme.breakpoints.lg}) {
+  @media ${props => props.theme.media.lg} {
     grid-template-columns: 1fr 435px 435px 1fr;
   }
 
-  @media (min-width: ${props => props.theme.breakpoints.xl}) {
+  @media ${props => props.theme.media.xl} {
     grid-template-columns: 1fr 525px 525px 1fr;
   }
 `
@@ -34,7 +34,7 @@ const SideText = styled.div`
 `
 
 const SideTextInner = styled.div`
-  @media (max-width: calc(576px + 80px)) {
+  @media (max-width: calc(${props => props.theme.breakpoints.sm} + 80px)) {
     padding: 0 ${props => props.theme.padding.sm} 0 0;
   }
 

@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Root = styled.div`
   padding: ${props => props.innerPadding} 0; /* Either use defined innerPadding or default 150px */
 
-  ${props => props.removeOnMedia && props.theme.media[props.removeOnMedia]`
-    padding: 0;
+  ${props => props.removeOnMedia && css`
+    @media ${props.theme.media[props.removeOnMedia]} {
+      padding: 0;
+    }
   `}
 `
 

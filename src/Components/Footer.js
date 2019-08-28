@@ -20,17 +20,17 @@ const Grid = styled.div`
   color: ${props => props.theme.palette.light};
   padding: ${props => props.theme.spacing(7)} 0 ${props => props.theme.spacing(6)};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-template-areas:
       "info"
       "feed"
       "links"
       "copyright";
 
-    gap: ${props.theme.spacing(5)} 0;
+    gap: ${props => props.theme.spacing(5)} 0;
     justify-items: center;
     justify-content: center;
-  `}
+  }
 `
 
 const Logo = styled.img`
@@ -44,9 +44,9 @@ const Subtitle = styled.h2`
   white-space: nowrap;
   color: ${props => props.theme.palette.light};
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     white-space: normal;
-  `}
+  }
 `
 
 const Separator = styled.span`
@@ -54,12 +54,12 @@ const Separator = styled.span`
   height: 100%;
   border-right: 1px solid #d1d1d1;
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     display: block;
     border-right: 0;
-    height: ${props.theme.spacing(0.5)};
+    height: ${props => props.theme.spacing(0.5)};
     margin: 0;
-  `}
+  }
 `
 
 const LinkContainer = styled.div`
@@ -87,18 +87,18 @@ const CopyrightLine = styled.div`
   white-space: nowrap;
   opacity: 0.5;
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     text-align: center;
     white-space: normal;
-  `}
+  }
 `
 
 const InfoContainer = styled.div`
   grid-area: info;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     text-align: center;
-  `}
+  }
 `
 
 const FeedContainer = styled.div`
@@ -108,18 +108,18 @@ const FeedContainer = styled.div`
   grid-template-columns: repeat(4, 75px);
   grid-gap: ${props => props.theme.spacing(1.5)};
 
-  ${props => props.theme.media.xl`
+  @media ${props => props.theme.media.xl} {
     grid-template-columns: repeat(2, 75px);
-  `}
+  }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     justify-items: center;
     grid-template-columns: repeat(4, 75px);
-  `}
+  }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     grid-template-columns: repeat(2, 75px);
-  `}
+  }
 `
 
 const LinksContainer = styled.div`

@@ -15,23 +15,23 @@ const Content = styled.div`
   grid-template-rows: 2fr 4fr;
   grid-column: 1 / -1;
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     margin-top: ${props => props.theme.navBarWidth};
-  `}
+  }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     grid-column: 1 / -1;
-  `}
+  }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 2 / 3;
     padding: ${({ theme: { spacing } }) => `${spacing(2)} 0 0`};
     grid-template-rows: auto auto;
-  `}
+  }
 
-  ${props => props.theme.media.xl`
+  @media ${props => props.theme.media.xl} {
     grid-column: 1 / -1;
-  `}
+  }
 `
 
 const TopLeftContainer = styled.div`
@@ -43,16 +43,16 @@ const TopLeftContainer = styled.div`
   justify-self: center;
   width: 70%;
 
-  ${props => props.theme.media.xl`
+  @media ${props => props.theme.media.xl} {
     width: 80%;
-  `}
+  }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     justify-self: start;
     width: auto;
     grid-column: 1 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
-  `}
+  }
 `
 
 const BottomLeftContainer = styled.div`
@@ -62,17 +62,17 @@ const BottomLeftContainer = styled.div`
   justify-self: center;
   width: 70%;
 
-  ${props => props.theme.media.xl`
+  @media ${props => props.theme.media.xl} {
     width: 80%;
-  `}
+  }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     justify-self: start;
     width: auto;
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
-  `}
+  }
 `
 
 const RightContainer = styled.div`
@@ -81,7 +81,7 @@ const RightContainer = styled.div`
   height: 145vh;
   position: relative;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-row: 2 / 3;
     grid-column: 1 / 3;
 
@@ -90,7 +90,7 @@ const RightContainer = styled.div`
     iframe, video {
       height: initial;
     }
-  `}
+  }
 `
 
 const Title = styled.div`
@@ -98,12 +98,12 @@ const Title = styled.div`
   padding: 5px 0;
   ${props => props.theme.typography.hero.mixin()};
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     font-size: 4.5vw;
-  `}
-  ${props => props.theme.media.sm`
+  }
+  @media ${props => props.theme.media.sm} {
     font-size: 7vw;
-  `}
+  }
 `
 
 class HeaderBlock extends Component {
