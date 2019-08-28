@@ -35,7 +35,7 @@ const RightContainer = styled.div`
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 60vw;
 
   @media ${props => props.theme.media.lg} {
     height: 130vw;
