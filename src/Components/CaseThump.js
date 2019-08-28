@@ -92,9 +92,10 @@ const Header = styled.h3`
   display: grid;
   align-content: center;
   margin: 0 calc(15px * 2.5);
+  font-size: ${props => props.full ? '30px' : '15px'};
 
   @media ${props => props.theme.media.lg} {
-    font-size: ${props => props.full ? '30px' : '15px'};
+    font-size: initial;
   }
 `
 
