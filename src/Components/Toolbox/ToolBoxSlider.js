@@ -30,7 +30,7 @@ const Slider = styled.div`
 const SliderElement = styled.div`
   display: grid;
   justify-content: center;
-  cursor: pointer !important;
+  cursor: pointer;
   padding: 0;
   padding-bottom: ${props => props.theme.spacing(1.5)};
   width: 100%;
@@ -40,14 +40,14 @@ const SliderElement = styled.div`
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   transition-delay: 0;
 
-  @media ${props => props.theme.breakpoints.md} {
+  @media ${props => props.theme.media.md} {
     grid-gap: 0;
     max-width: 100px;
     display: none;
   }
   ${props => (props.arrow || props.chosen) && css`
-    @media ${props => props.theme.breakpoints.md} {
-      display: block !important;
+    @media ${props => props.theme.media.md} {
+      display: block;
       justify-self:center;
     }
   `}
