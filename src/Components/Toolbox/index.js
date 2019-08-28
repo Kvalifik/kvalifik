@@ -96,7 +96,7 @@ class Toolbox extends Component {
 Toolbox.propTypes = {
   tools: PropTypes.arrayOf(PropTypes.shape({
     headline: PropTypes.string,
-    sub_headline: PropTypes.string,
+    subHeadline: PropTypes.string,
     description: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string
