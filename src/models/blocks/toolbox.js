@@ -4,6 +4,7 @@ export const toolboxPropType = PropTypes.shape({
   id: PropTypes.string,
   tools: PropTypes.shape({
     headline: PropTypes.string,
+    subHeadline: PropTypes.string,
     description: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string
