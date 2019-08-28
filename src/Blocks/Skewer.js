@@ -13,7 +13,7 @@ const Root = styled.div`
   z-index: ${props => props.layer || 'auto'};
 
   margin-top: ${props => props.marginTop}vw;
-  margin-bottom: ${props => props.marginBottom}vw;
+  margin-bottom: calc(${props => props.marginBottom}vw - 3px);
 
   &::before {
     content: "";
