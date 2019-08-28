@@ -6,7 +6,6 @@ import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   align-self: center;
-  background-color: ${props => props.color || props.theme.palette.primary.C};
   width: 100%;
   height: 250px;
   color: ${props => props.theme.palette.dark};
@@ -43,6 +42,7 @@ const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: ${props => props.theme.palette.dark};
+  overflow: hidden;
 
   @media ${props => props.theme.media.sm} {
     grid-template-columns: 1fr;
@@ -54,6 +54,7 @@ const Content = styled.div`
 const Desc = styled.div`
   display: flex;
   position: relative;
+  background-color: ${props => props.color || props.theme.palette.primary.C};
 
   @media ${props => props.theme.media.sm} {
     grid-row: 2 / 2;
@@ -86,6 +87,7 @@ const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
   background-image: url(${props => props.src});
+  transform: scale(1.001);
 `
 
 const Header = styled.h3`
@@ -109,7 +111,7 @@ const CaseThump = ({
 }) => {
   const body = (
     <Content>
-      <Desc>
+      <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
         <ProjectName>
           {name}
@@ -123,7 +125,7 @@ const CaseThump = ({
   )
 
   return (
-    <Root full={fullWidth} color={bgColor}>
+    <Root full={fullWidth}>
       {workUrl ? (
         <Link to={workUrl}>
           {body}
