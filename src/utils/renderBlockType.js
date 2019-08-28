@@ -132,5 +132,7 @@ export default (block) => {
           number={block.number}
         />
       )
+    default:
+      return null
   }
 }
