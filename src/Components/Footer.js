@@ -161,7 +161,7 @@ const FeedHeader = styled.div`
 `
 
 const Footer = ({
-  logo,
+  logoUrl,
   phoneNumber,
   emailAddress,
   copyright,
@@ -196,7 +196,7 @@ const Footer = ({
       <Container>
         <Grid>
           <InfoContainer>
-            <Logo src={logo.url} />
+            <Logo src={logoUrl} />
             <Subtitle>
               {phoneNumber}
               <Separator />
@@ -232,9 +232,7 @@ const Footer = ({
 }
 
 Footer.propTypes = {
-  logo: PropTypes.shape({
-    url: PropTypes.string
-  }),
+  logoUrl: PropTypes.string,
   phoneNumber: PropTypes.string,
   emailAddress: PropTypes.string,
   copyright: PropTypes.string,

@@ -73,9 +73,6 @@ const Main = ({ children }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
-        logo {
-          url
-        },
         emailAddress,
         copyright,
         cvr,
@@ -112,6 +109,11 @@ const Main = ({ children }) => {
           }
         }
       }
+      datoCmsGeneral {
+        logo {
+          url
+        }
+      }
     }
   `)
   return (
@@ -120,8 +122,17 @@ const Main = ({ children }) => {
       <ThemeProvider theme={theme}>
         <App>
           {children}
-          <Footer {...data.datoCmsFooter} instagramFeed={data.allInstaNode.nodes} />
-          <Navigation navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks} navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks} socialMediaLinks={data.datoCmsFooter.socialMediaLinks} />
+          <Footer
+            {...data.datoCmsFooter}
+            instagramFeed={data.allInstaNode.nodes}
+            logoUrl={data.datoCmsGeneral.logo.url}
+          />
+          <Navigation
+            navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks}
+            navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks}
+            socialMediaLinks={data.datoCmsFooter.socialMediaLinks}
+            logoUrl={data.datoCmsGeneral.logo.url}
+          />
         </App>
       </ThemeProvider>
     </>

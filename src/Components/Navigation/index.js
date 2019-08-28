@@ -6,8 +6,6 @@ import { Link } from 'gatsby'
 import NavigationContent from './NavigationContent'
 import ToggleNavButton from './ToggleNavButton'
 
-import kvalfikLogo90 from 'graphics/kvalifik_logo.svg'
-
 const NavDiv = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   color: white;
@@ -117,14 +115,15 @@ class Navigation extends Component {
     const {
       navigationItems,
       navigationLinks,
-      socialMediaLinks
+      socialMediaLinks,
+      logoUrl
     } = this.props
 
     return (
       <NavDiv collapsed={this.state.collapsed}>
         <HomeLink collapsed={this.state.collapsed}>
           <Link to="/">
-            <KvalfikLogo collapsed={this.state.collapsed} src={kvalfikLogo90} />
+            <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} />
           </Link>
         </HomeLink>
         <IconWrapper onClick={this.toggleNavigation.bind(this)} >
@@ -152,7 +151,8 @@ Navigation.propTypes = {
     link: PropTypes.string,
     isExternal: PropTypes.bool
   })),
-  socialMediaLinks: PropTypes.array
+  socialMediaLinks: PropTypes.array,
+  logoUrl: PropTypes.string
 }
 
 export default Navigation
