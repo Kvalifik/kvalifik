@@ -150,6 +150,8 @@ export const query = graphql`
   }
 
   fragment PageFragment on DatoCmsPage {
+    title
+    url
     pageSetup {
       __typename
       ...HeaderFragment,
@@ -160,12 +162,6 @@ export const query = graphql`
       ...CaseInfoFragment,
       ...ToolboxFragment
       ...OverlayBlockFragment
-    }
-  }
-
-  fragment WorkPageContentFragment on DatoCmsWork {
-    page {
-      ...PageFragment
     }
   }
 `

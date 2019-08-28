@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 
 import Layout from 'Components/Layout'
@@ -8,17 +9,24 @@ import DownArrow from 'Components/DownArrow'
 
 import { pagePropType } from 'models/page'
 import renderBlockType from 'utils/renderBlockType'
-import 'utils/contentQuery'
+import 'utils/pageQuery'
 
 const PageTemplate = ({ data }) => {
   const {
-    pageSetup
+    pageSetup,
+    title,
+    url
   } = data.datoCmsPage
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
+      </Helmet>
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
