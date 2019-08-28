@@ -9,7 +9,7 @@ import DownArrow from 'Components/DownArrow'
 
 import { pagePropType } from 'models/page'
 import renderBlockType from 'utils/renderBlockType'
-import 'utils/contentQuery'
+import 'utils/pageQuery'
 
 const PageTemplate = ({ data }) => {
   const {

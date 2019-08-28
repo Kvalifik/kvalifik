@@ -163,10 +163,4 @@ export const query = graphql`
       ...OverlayBlockFragment
     }
   }
-
-  fragment WorkPageContentFragment on DatoCmsWork {
-    page {
-      ...PageFragment
-    }
-  }
 `
