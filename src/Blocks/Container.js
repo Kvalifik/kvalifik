@@ -12,7 +12,7 @@ const Root = styled.div`
   }
 
   @media ${props => props.theme.media.lg} {
-    grid-template-columns: 1fr 315px 315px 1fr;
+    grid-template-columns: 1fr 272px 272px 1fr;
   }
 
   @media ${props => props.theme.media.md} {
