@@ -25,13 +25,14 @@ const Root = styled.div`
 
   ${props => props.full && css`
     grid-column: 1 / -1;
+    height: 350px;
 
-    @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
-      height: 350px;
+    @media ${props => props.theme.media.lg} {
+      height: 250px;
     }
   `}
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     height: 400px;
   }
 `
@@ -43,7 +44,7 @@ const Content = styled.div`
   grid-template-columns: 1fr 1fr;
   color: ${props => props.theme.palette.dark};
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
     grid-auto-flow: dense;
@@ -54,7 +55,7 @@ const Desc = styled.div`
   display: flex;
   position: relative;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     grid-row: 2 / 2;
   }
 `
@@ -67,7 +68,7 @@ const ProjectName = styled.div`
   left: 10px;
   font-size: 13px;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
+  @media ${props => props.theme.media.xs} {
     width: 50%;
   }
 `
@@ -92,7 +93,7 @@ const Header = styled.h3`
   align-content: center;
   margin: 0 calc(15px * 2.5);
 
-  @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
+  @media ${props => props.theme.media.lg} {
     font-size: ${props => props.full ? '30px' : '15px'};
   }
 `

@@ -8,7 +8,7 @@ const Root = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
+  @media ${props => props.theme.media.md} {
     color: red;
     grid-template-columns: 2% 1fr 2%;
   }
@@ -22,7 +22,7 @@ const Slider = styled.div`
   display: grid;
   grid-auto-flow: column;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
+  @media ${props => props.theme.media.md} {
     grid-gap: 0;
   }
 `
@@ -40,18 +40,17 @@ const SliderElement = styled.div`
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   transition-delay: 0;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
+  @media ${props => props.theme.breakpoints.md} {
     grid-gap: 0;
     max-width: 100px;
     display: none;
   }
-  ${props => props.arrow || props.chosen ? css`
-    @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
-        display: block !important;
-        justify-self:center;
-
+  ${props => (props.arrow || props.chosen) && css`
+    @media ${props => props.theme.breakpoints.md} {
+      display: block !important;
+      justify-self:center;
     }
-  ` : ''}
+  `}
 
   &:hover {
     transform: scale(0.95);
@@ -74,7 +73,7 @@ const SliderElement = styled.div`
     background: #49eaac;
     height: ${props => props.theme.spacing(0.5)};
   }
-  ${props => props.chosen ? css`
+  ${props => props.chosen && css`
     transform: scale(1.1) !important;
     ::after{
       content: "";
@@ -83,7 +82,7 @@ const SliderElement = styled.div`
       height: ${props => props.theme.spacing(0.5)};
       opacity: 1;
     }
-    ` : ''}
+    `}
 `
 
 const Img = styled.img`
@@ -91,17 +90,20 @@ const Img = styled.img`
   align-self: center;
   margin: 0;
   height: 35px;
-  ${props => props.arrow ? css`
+  ${props => props.arrow && css`
     height: 25px;
-  ` : css``}
-  ${props => props.reverse ? css`
+  `}
+
+  ${props => props.reverse && css`
     transform: rotate(180deg);
-  ` : css``}
-  @media only screen and (max-width: ${props => props.theme.breakpoints.md}) {
+  `}
+
+  @media ${props => props.theme.media.md} {
     width: 60%;
-    ${props => props.arrow ? css`
+
+    ${props => props.arrow && css`
       max-height: 20px;
-  ` : ''}
+    `}
   }
 `
 
