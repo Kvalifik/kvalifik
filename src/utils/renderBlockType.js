@@ -9,6 +9,7 @@ import ToolboxBig from 'Components/ToolboxBig'
 import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
+import QuoteBlock from 'Components/QuoteBlock'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -81,6 +82,8 @@ export default (block) => {
           images={block.images}
           bgColor={block.bgColor.hex}
           textColor={block.textColor.hex}
+          buttonBgColor={block.buttonBgColor.hex}
+          buttonTextColor={block.buttonTextColor.hex}
           galleryDelay={block.imageDelay}
         />
       )
@@ -143,5 +146,17 @@ export default (block) => {
           number={block.number}
         />
       )
+    case 'DatoCmsQuote':
+      return (
+        <QuoteBlock
+          key={block.id}
+          author={block.author}
+          quote={block.quote}
+          bgColor={block.bgColor.hex}
+          imageUrl={block.image.url}
+        />
+      )
+    default:
+      return null
   }
 }

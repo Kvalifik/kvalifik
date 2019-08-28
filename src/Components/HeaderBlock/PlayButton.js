@@ -24,9 +24,9 @@ const PlayButton = styled.button`
     transform: translate(-50%, -50%) scale(0.95);
   }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     top: 50%;
-  `}
+  }
 `
 
 export default PlayButton

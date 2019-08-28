@@ -6,7 +6,6 @@ import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   align-self: center;
-  background-color: ${props => props.color || props.theme.palette.primary.C};
   width: 100%;
   height: 250px;
   color: ${props => props.theme.palette.dark};
@@ -25,13 +24,14 @@ const Root = styled.div`
 
   ${props => props.full && css`
     grid-column: 1 / -1;
+    height: 350px;
 
-    @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
-      height: 350px;
+    @media ${props => props.theme.media.lg} {
+      height: 250px;
     }
   `}
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     height: 400px;
   }
 `
@@ -42,8 +42,9 @@ const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: ${props => props.theme.palette.dark};
+  overflow: hidden;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
     grid-auto-flow: dense;
@@ -53,8 +54,9 @@ const Content = styled.div`
 const Desc = styled.div`
   display: flex;
   position: relative;
+  background-color: ${props => props.color || props.theme.palette.primary.C};
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media ${props => props.theme.media.sm} {
     grid-row: 2 / 2;
   }
 `
@@ -67,7 +69,7 @@ const ProjectName = styled.div`
   left: 10px;
   font-size: 13px;
 
-  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
+  @media ${props => props.theme.media.xs} {
     width: 50%;
   }
 `
@@ -85,15 +87,17 @@ const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
   background-image: url(${props => props.src});
+  transform: scale(1.001);
 `
 
 const Header = styled.h3`
   display: grid;
   align-content: center;
   margin: 0 calc(15px * 2.5);
+  font-size: ${props => props.full ? '30px' : '15px'};
 
-  @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
-    font-size: ${props => props.full ? '30px' : '15px'};
+  @media ${props => props.theme.media.lg} {
+    font-size: initial;
   }
 `
 
@@ -107,7 +111,7 @@ const CaseThump = ({
 }) => {
   const body = (
     <Content>
-      <Desc>
+      <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
         <ProjectName>
           {name}
@@ -121,7 +125,7 @@ const CaseThump = ({
   )
 
   return (
-    <Root full={fullWidth} color={bgColor}>
+    <Root full={fullWidth}>
       {workUrl ? (
         <Link to={workUrl}>
           {body}

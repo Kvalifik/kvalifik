@@ -9,13 +9,13 @@ const QuoteRoot = styled.div`
   padding: 160px ${props => props.theme.spacing(5)};
   margin: 0 auto;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     width: 592px;
-  `}
+  }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     width: 100%;
-  `}
+  }
 `
 
 const QuoteText = styled.div`

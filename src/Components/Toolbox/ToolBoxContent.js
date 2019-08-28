@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
+  min-height: 600px;
   overflow: hidden;
   color: white;
   display: grid;
@@ -15,10 +16,8 @@ const Root = styled.div`
 
   & > * {
     opacity: 0;
-    transform: translateY(-20%);
     transition: 0.5s 0s cubic-bezier(0, 0, 0.04, 1);
     ${props => props.fadeIn && css`
-      transform: translateY(0%);
       opacity: 1;
     `}
   }
@@ -37,13 +36,13 @@ const Icon = styled.img`
   padding: ${props => props.theme.spacing(4)};
   width: 150px;
 
-  ${props => props.theme.media.sm`
+  @media ${props => props.theme.media.sm} {
     padding: 0;
     margin: ${props => props.theme.spacing(4)};
     justify-self: center;
     align-self: center;
     width: 60%;
-  `}
+  }
 `
 
 const Text = styled.div`
@@ -51,9 +50,9 @@ const Text = styled.div`
   margin: ${props => props.theme.spacing(4)};
   padding-bottom: ${props => props.theme.spacing(4)};
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 1 / -1;
-  `}
+  }
 `
 
 const LinkWrapper = styled.div`
@@ -76,11 +75,19 @@ const Arrow = styled.img`
 `
 
 const Headline = styled.h2`
-  font-size: 25px;
+  font-size: 30px;
+  margin: 0;
+`
+
+const SubHeadline = styled.h3`
+  font-size: 18px;
+  text-transform: uppercase;
+  color: ${props => props.theme.palette.primary.D};
 `
 
 const Description = styled.h3`
-  color: ${props => props.theme.palette.primary.D};
+  font-size: 16px;
+  font-weight: 100;
 `
 
 const ToolBoxContent = ({
@@ -95,6 +102,7 @@ const ToolBoxContent = ({
       <Img src={tool.image.url} />
       <Text>
         <Headline>{tool.headline}</Headline>
+        <SubHeadline>{tool.subHeadline}</SubHeadline>
         <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
         <LinkWrapper>
           <Link to="/">Learn how to do it <Arrow src={arrowImg} /></Link>
@@ -107,6 +115,7 @@ const ToolBoxContent = ({
 ToolBoxContent.propTypes = {
   tools: PropTypes.arrayOf(PropTypes.shape({
     headline: PropTypes.string,
+    subHeadline: PropTypes.string,
     description: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string

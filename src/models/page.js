@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
-import { contentPropType } from 'blockTypes/content'
 
 export const pagePropType = PropTypes.shape({
-  pageSetup: contentPropType,
+  pageSetup: PropTypes.array,
   title: PropTypes.string,
   url: PropTypes.string
 })

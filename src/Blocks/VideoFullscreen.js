@@ -18,20 +18,20 @@ const CustomContainer = styled.div`
   height: 100vh;
   width: 100vw;
 
-  ${props => props.theme.media.xl`
+  @media ${props => props.theme.media.xl} {
     grid-template-columns: 1fr 870px 1fr;
     grid-template-rows: 1fr calc(870px * 0.5625) 1fr;
-  `}
+  }
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-template-columns: 1fr 630px 1fr;
     grid-template-rows: 1fr calc(630px * 0.5625) 1fr;
-  `}
+  }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     grid-template-columns: 0 100vw 0;
     grid-template-rows: 1fr 56.25vw 1fr;
-  `}
+  }
 `
 
 const Video = styled.video`

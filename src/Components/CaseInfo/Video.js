@@ -15,15 +15,15 @@ const Root = styled.div`
   width: 650px;
   height: calc(650px * 0.5625);
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     width: 500px;
     height: calc(500px * 0.5625);
-  `}
+  }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     width: 400px;
     height: calc(400px * 0.5625);
-  `}
+  }
 `
 
 const PlayButton = styled.button`

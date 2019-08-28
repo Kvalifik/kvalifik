@@ -12,35 +12,35 @@ const LeftContainer = styled.div`
   padding-bottom: ${props => props.theme.spacing(10)};
   align-self: center;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 2 / 4;
     grid-row: 2;
 
     padding: 30vw 0;
-  `}
+  }
 
-  ${props => props.theme.media.md`
-    padding: 30vw ${props.theme.spacing(2)};
-  `}
+  @media ${props => props.theme.media.md} {
+    padding: 30vw ${props => props.theme.spacing(2)};
+  }
 `
 
 const RightContainer = styled.div`
   grid-column: 3 / -1;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     grid-column: 1 / -1;
     grid-row: 1;
-  `}
+  }
 `
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 850px;
+  height: 60vw;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     height: 130vw;
     width: 100vw;
-  `}
+  }
 `
 
 const Description = styled.div`
@@ -65,6 +65,8 @@ const ActionBlock = ({
   buttonLabel,
   bgColor,
   textColor,
+  buttonTextColor,
+  buttonBgColor,
   galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
@@ -78,8 +80,8 @@ const ActionBlock = ({
           <Button
             type="button"
             alt={buttonLabel}
-            bgColor={textColor}
-            color={bgColor}
+            bgColor={buttonBgColor}
+            color={buttonTextColor}
           >
             {buttonLabel}
           </Button>
@@ -107,6 +109,8 @@ ActionBlock.propTypes = {
   buttonProps: PropTypes.object,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
+  buttonBgColor: PropTypes.string,
+  buttonTextColor: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string
   })),

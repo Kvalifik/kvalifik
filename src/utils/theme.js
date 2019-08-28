@@ -169,11 +169,7 @@ const appendMixins = (theme) => ({
     }
   },
   media: Object.keys(theme.breakpoints).reduce((acc, label) => {
-    acc[label] = (...args) => css`
-      @media (max-width: ${theme.breakpoints[label]}) {
-        ${css(...args)};
-      }
-    `
+    acc[label] = (...args) => `(max-width: ${theme.breakpoints[label]})`
     return acc
   }, {})
 })

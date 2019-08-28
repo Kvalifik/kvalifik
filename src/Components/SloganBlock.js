@@ -34,9 +34,9 @@ const Content = styled.div`
     font-weight: 700;
   }
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
     font-size: 35px;
-  `}
+  }
 `
 
 const SloganBlock = ({

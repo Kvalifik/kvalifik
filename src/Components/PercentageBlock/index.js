@@ -18,9 +18,9 @@ const Description = styled.div`
   ${props => props.theme.typography.header.mixin()}
   font-size: 30px;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     text-align: center;
-  `}
+  }
 `
 
 const Number = styled.div`
@@ -29,9 +29,9 @@ const Number = styled.div`
   padding: ${props => props.theme.spacing(0, 5)};
   justify-self: end;
 
-  ${props => props.theme.media.lg`
+  @media ${props => props.theme.media.lg} {
     justify-self: center;
-  `}
+  }
 `
 
 const PercentageBlock = ({
