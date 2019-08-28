@@ -24,17 +24,38 @@ const Arrow = styled.img`
 `
 
 const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 6fr 4fr;
+`
+
+const IconWrapper = styled.div`
+  width: 100%;
+  display: inline-grid;
+  height: 0;
+  padding-bottom: 50%;
+  position: relative;
 `
 
 const Icon = styled.img`
-
+  width: 25%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* bottom: ${props => props.theme.spacing(2)}; */
 `
 
 const Headline = styled.p`
-
+  padding: ${props => props.theme.spacing(2)} ${props => props.theme.spacing(1)};
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+  margin-top: ${props => props.theme.spacing(1)};
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%;
 `
 
 const ToolThump = props => {
@@ -47,16 +68,15 @@ const ToolThump = props => {
     console.log({icon})
   return (
     <Root>
-      <InnerPadding>
-        <Center>
+      <Center>
+        <IconWrapper>
           <Icon src={icon.url} />
-          <Headline>
-            {headline}
-          </Headline>
-
-        </Center>
-        <Arrow src={greenSideArrow} />
-      </InnerPadding>
+        </IconWrapper>
+        <Headline>
+          {headline}
+        </Headline>
+      </Center>
+      <Arrow src={greenSideArrow} />
     </Root>
   )
 }

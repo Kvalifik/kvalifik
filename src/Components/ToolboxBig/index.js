@@ -58,6 +58,7 @@ const TopWrapper = styled.div`
 `
 
 const Filter = styled.button`
+  text-align: left;
   display: inline-flex;
   align-items: center;
   outline: none;
@@ -66,6 +67,9 @@ const Filter = styled.button`
   border: 1px solid ${props => props.theme.palette.primary.D};
   background: transparent;
   padding: ${props => props.theme.spacing(2)} ${props => props.theme.spacing(4)};
+  ${props => props.theme.media.md`
+    padding: 8px 8px;
+  `}
   margin: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
   inline-size: max-content;
   transition: 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
@@ -79,6 +83,7 @@ const Filter = styled.button`
     border: 1px solid white;
     color: white;
   }
+
   ${props => props.isChosen ?
     css`
       transform: scale(1) !important;
@@ -87,8 +92,7 @@ const Filter = styled.button`
     ` :
     css`
       cursor: pointer;
-    `
-    }
+    `}
 `
 
 const Filters = styled.div`
@@ -130,6 +134,10 @@ const ToolView = styled.div`
   display: grid;
   grid-gap: ${props => props.theme.spacing(4)};
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  ${props => props.theme.media.md`
+    grid-gap: ${props => props.theme.spacing(2)};
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  `}
 `
 
 export default class index extends Component {
@@ -162,7 +170,7 @@ export default class index extends Component {
                   {smallDescription}
                 </Description>
                 <SearchWrapper>
-                  <Searcher placeholder="Hey!" type="text" />
+                  <Searcher placeholder="Search here_" type="text" />
                 </SearchWrapper>
               </TopWrapper>
               <Filters>
@@ -187,6 +195,7 @@ export default class index extends Component {
                     icon={tool.icon}
                     image={tool.image}
                     bgColor={tool.bgColor}
+                    key={i}
                   />)
                 })}
               </ToolView>
