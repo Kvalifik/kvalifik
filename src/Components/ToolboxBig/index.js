@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import toolboxBig from 'blockTypes/toolboxBig'
 import Container from 'Blocks/Container'
 import Padder from 'Blocks/Padder'
 import Skewer from 'Blocks/Skewer'
@@ -124,7 +124,7 @@ const RemoveFilter = styled.span`
 
   ${props => props.isChosen &&
     css`
-      width: 35px; 
+      width: 35px;
   `}
 `
 
@@ -141,8 +141,6 @@ const ToolView = styled.div`
 `
 
 export default class index extends Component {
-  static propTypes = toolboxBig
-  
   state = {
     chosenFilter: -1
   }
@@ -177,7 +175,7 @@ export default class index extends Component {
                 {toolFilters.map((toolFilter, i) => {
                   const isChosen = this.state.chosenFilter === i
                   return (
-                    <Filter isChosen={isChosen} 
+                    <Filter isChosen={isChosen}
                         onClick={(i !== this.state.chosenFilter) && this.chooseFilter.bind(this, i)}
                         key={i}
                       >
@@ -205,4 +203,28 @@ export default class index extends Component {
       </Root>
     )
   }
+}
+
+index.propTypes = {
+  sideText: PropTypes.string,
+  smallDescription: PropTypes.string,
+  backgroundColor: PropTypes.shape({
+    hex: PropTypes.string
+  }),
+  toolFilters: PropTypes.shape({
+    title: PropTypes.string
+  }),
+  tools: PropTypes.shape({
+    headline: PropTypes.string,
+    description: PropTypes.string,
+    icon: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    bgColor: PropTypes.shape({
+      hex: PropTypes.string
+    })
+  })
 }
