@@ -53,6 +53,11 @@ const TopLeftContainer = styled.div`
     grid-column: 1 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   }
+
+  & > ${Icon} {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
 `
 
 const BottomLeftContainer = styled.div`
@@ -87,7 +92,8 @@ const RightContainer = styled.div`
 
     height: 55vw;
     padding: ${props => props.theme.spacing(2)};
-    iframe, video {
+
+    video {
       height: initial;
     }
   }
@@ -101,6 +107,7 @@ const Title = styled.div`
   @media ${props => props.theme.media.md} {
     font-size: 4.5vw;
   }
+
   @media ${props => props.theme.media.sm} {
     font-size: 7vw;
   }
