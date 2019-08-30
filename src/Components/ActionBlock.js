@@ -60,9 +60,7 @@ const ActionBlock = ({
   title,
   body,
   images,
-  buttonType = 'button',
-  buttonProps,
-  buttonLabel,
+  button,
   bgColor,
   textColor,
   buttonTextColor,
@@ -78,12 +76,14 @@ const ActionBlock = ({
           <Title color={textColor}>{title}</Title>
           <Description color={textColor} dangerouslySetInnerHTML={{ __html: body }} />
           <Button
-            type="button"
-            alt={buttonLabel}
+            alt={button.name}
             bgColor={buttonBgColor}
             color={buttonTextColor}
+            href={button.path}
+            as="a"
+            isExternal={button.isExternal}
           >
-            {buttonLabel}
+            {button.name}
           </Button>
         </LeftContainer>
         <RightContainer>
@@ -104,9 +104,11 @@ const ActionBlock = ({
 ActionBlock.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
-  buttonLabel: PropTypes.string,
-  buttonType: PropTypes.oneOf(['button', 'link']),
-  buttonProps: PropTypes.object,
+  button: PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string,
+    isExternal: PropTypes.bool
+  }),
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
   buttonBgColor: PropTypes.string,
