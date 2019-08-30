@@ -158,7 +158,7 @@ class HeaderBlock extends Component {
           <Container noContentWrapper>
             <Content>
               <TopLeftContainer>
-                <Icon src={iconUrl} />
+                {iconUrl && (<Icon src={iconUrl} />)}
                 <Title>{title}</Title>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
