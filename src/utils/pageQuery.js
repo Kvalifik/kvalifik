@@ -179,6 +179,9 @@ export const query = graphql`
       name
       path
     }
+    image {
+      url
+    }
   }
 
   fragment PageFragment on DatoCmsPage {

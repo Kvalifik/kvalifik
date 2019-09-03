@@ -8,10 +8,20 @@ import Button from 'Blocks/Button'
 const Root = styled.div`
   width: 100%;
   min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 4fr 5fr;
+  padding-top: ${props => props.theme.navBarWidth};
 `
 
 const Top = styled.div`
-  width: 100%;
+  grid-column: 1 / 3;
+  grid-row: 1;
+
+  @media ${props => props.theme.media.sm} {
+    justify-self: center;
+    margin: 0;
+  }
 `
 
 const Logo = styled.img`
@@ -20,8 +30,20 @@ const Logo = styled.img`
 `
 
 const Content = styled.div`
-  width: 400px;
-  margin: 15vh auto 0;
+  width: 100%;
+  max-width: 400px;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: start;
+  margin: ${props => props.theme.spacing(0, 1, 0, 12)};
+
+  @media ${props => props.theme.media.lg} {
+    justify-self: center;
+    grid-column: 1 / 3;
+    margin: 0;
+    padding: ${props => props.theme.spacing(1)};
+  }
 `
 
 const Error = styled.h2`
@@ -48,11 +70,29 @@ const Description = styled.div`
   }
 `
 
+const Image = styled.img`
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: end;
+  width: 500px;
+  margin: ${props => props.theme.spacing(0, 12, 1, 0)};
+
+  @media ${props => props.theme.media.xl} {
+    width: 380px;
+  }
+
+  @media ${props => props.theme.media.lg} {
+    display: none;
+  }
+`
+
 const NotFound = ({
   title,
   description,
   button,
-  logoUrl
+  logoUrl,
+  imageUrl
 }) => {
   return (
     <Root>
@@ -74,6 +114,9 @@ const NotFound = ({
           {button.name}
         </Button>
       </Content>
+      {imageUrl && (
+        <Image src={imageUrl} />
+      )}
     </Root>
   )
 }
@@ -86,7 +129,8 @@ NotFound.propTypes = {
     path: PropTypes.string,
     isExternal: PropTypes.bool
   }),
-  logoUrl: PropTypes.string
+  logoUrl: PropTypes.string,
+  imageUrl: PropTypes.string
 }
 
 export default NotFound

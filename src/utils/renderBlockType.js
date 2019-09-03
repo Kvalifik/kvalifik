@@ -153,6 +153,7 @@ export default (block) => {
           logoUrl={block.logo && block.logo.url}
           description={block.description}
           title={block.title}
+          imageUrl={block.image && block.image.url}
         />
       )
     default:
