@@ -7,6 +7,8 @@ import Skewer from 'Blocks/Skewer'
 import SearchIcon from 'graphics/search.svg'
 import CloseIcon from 'graphics/close.svg'
 import ToolThump from './ToolThump'
+import ToolPreview from './ToolPreview';
+
 const Root = styled.div`
   color: white;
   position: relative;
@@ -50,10 +52,11 @@ const Searcher = styled.input`
 const TopWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  ${props => props.theme.media.md`
+
+  @media ${props => props.theme.media.md} {
     grid-template-columns: 1fr;
     width: 100%;
-  `}
+  }
   grid-gap: ${props => props.theme.spacing(2)};
 `
 
@@ -66,23 +69,23 @@ const Filter = styled.button`
   color: ${props => props.theme.palette.primary.D};
   border: 1px solid ${props => props.theme.palette.primary.D};
   background: transparent;
-  padding: ${props => props.theme.spacing(2)} ${props => props.theme.spacing(4)};
-  ${props => props.theme.media.md`
-    padding: 8px 8px;
-  `}
-  margin: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
-  inline-size: max-content;
-  transition: 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  padding: ${props => props.theme.spacing(2, 4)};
 
-  ${props => props.theme.media.md`
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(1, 2)};
     width: 100%;
-  `}
+  }
+
+  inline-size: max-content;
+  transition: scale 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
   :hover {
     transform: scale(1.01);
     border: 1px solid white;
     color: white;
   }
+
+  margin: ${props => props.theme.spacing(1)};
 
   ${props => props.isChosen ?
     css`
@@ -97,12 +100,12 @@ const Filter = styled.button`
 
 const Filters = styled.div`
   margin: ${props => props.theme.spacing(2)};
-  margin-left: 0;
-  margin-right: ${props => props.theme.spacing(4)};
+  margin-left: ${props => props.theme.spacing(1)};
+  margin-right: ${props => props.theme.spacing(3)};
 `
 
 const RemoveFilter = styled.span`
-  transition: 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  transition: width 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   display: inline-flex;
   width: 0;
   overflow: hidden;
@@ -111,6 +114,7 @@ const RemoveFilter = styled.span`
   justify-content: left;
   align-items: center;
   cursor: pointer;
+  margin-right: ${props => props.theme.spacing(1)};
 
   ::before {
     content: url(${CloseIcon});
@@ -140,14 +144,82 @@ const ToolView = styled.div`
   `}
 `
 
+const PseudoPreview = styled.div`
+  position: fixed;
+  ${props => props.toolPreviewIsOpen ? css`
+    z-index: 1000;
+    top: ${props => props.theme.spacing(8)};
+    left: ${props => props.theme.spacing(8)};
+    right: ${props => props.theme.spacing(8)};
+    bottom: ${props => props.theme.spacing(8)};
+    @media ${props.theme.media.md}{
+      top: ${props => props.theme.spacing(8)};
+      left: ${props => props.theme.spacing(2)};
+      right: ${props => props.theme.spacing(2)};
+      bottom: ${props => props.theme.spacing(8)};
+    }
+    background-color: #252525;
+    opacity: 1;
+    pointer-events: all;
+    /* transition: all 0.4s linear, opacity 0s linear; */
+
+  ` : css`
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgb(33, 50, 44);
+    top: ${props => props.pseudoPreviewCoords[0]}px;
+    left: ${props => props.pseudoPreviewCoords[1]}px;
+    right: ${props => props.pseudoPreviewCoords[2]}px;
+    bottom: ${props => props.pseudoPreviewCoords[3]}px;
+  `}
+
+  z-index: 1000;
+  ${props => props.toolPreviewIsAnimating && css`
+    transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s cubic-bezier(0, 1.08, 0.34, 1.01);
+    ${props => props.toolPreviewIsOpen || css`
+      transition: all 0.4s cubic-bezier(0.26, 0.16, 0.09, 0.97), opacity 0.4s cubic-bezier(0.91, 0.01, 1, 0.08);
+    `}
+  `}
+`
+
 export default class index extends Component {
   state = {
-    chosenFilter: -1
+    chosenFilter: '',
+    searchQuery: '',
+    toolPreviewIsOpen: false,
+    toolPreviewIsAnimating: false,
+    chosenTool: 0,
+    pseudoPreviewCoords: [0, '100%', 0, '100%']
+    
   }
 
-  chooseFilter (i) {
-    console.log({chosenFilter: i})
-    this.setState({chosenFilter: i})
+  changeSearchQuery(event) {
+    this.setState({searchQuery: event.target.value})
+  }
+
+  chooseFilter (filter) {
+    this.setState({chosenFilter: filter})
+  }
+
+  openToolPreview(i, coords) {
+    this.setState({chosenTool: i})
+    const newPseudoPreviewCoords = [coords.top, coords.left, window.innerWidth - coords.right, window.innerHeight - coords.bottom ]
+    this.setState({pseudoPreviewCoords: newPseudoPreviewCoords})
+    setTimeout(()=>{
+      this.setState({toolPreviewIsOpen: true})
+      this.setState({toolPreviewIsAnimating: true})
+    }, 30)
+    setTimeout(()=>{
+      this.setState({toolPreviewIsAnimating: false})
+    }, 400)
+  }
+
+  closeToolPreview() {
+    this.setState({toolPreviewIsOpen: false})
+    this.setState({toolPreviewIsAnimating: true})
+    setTimeout(()=>{
+      this.setState({toolPreviewIsAnimating: false})
+    }, 400)
   }
 
   render() {
@@ -160,6 +232,9 @@ export default class index extends Component {
     } = this.props
     return (
       <Root>
+        <PseudoPreview onClick={this.closeToolPreview.bind(this)} pseudoPreviewCoords={this.state.pseudoPreviewCoords} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} toolPreviewIsAnimating={this.state.toolPreviewIsAnimating}>
+          {<ToolPreview tool={tools[this.state.chosenTool]} closeWindow={this.closeToolPreview.bind(this)} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} toolPreviewIsAnimating={this.state.toolPreviewIsAnimating} />}
+        </PseudoPreview>
         <Skewer bgColor={backgroundColor}>
           <Padder>
             <Container sideText={sideText} >
@@ -168,18 +243,17 @@ export default class index extends Component {
                   {smallDescription}
                 </Description>
                 <SearchWrapper>
-                  <Searcher placeholder="Search here_" type="text" />
+                  <Searcher placeholder="Search here_" type="text" value={this.state.searchQuery} onChange={this.changeSearchQuery.bind(this)} />
                 </SearchWrapper>
               </TopWrapper>
               <Filters>
                 {toolFilters.map((toolFilter, i) => {
-                  const isChosen = this.state.chosenFilter === i
+                  const isChosen = this.state.chosenFilter === toolFilter.title
                   return (
                     <Filter isChosen={isChosen}
-                        onClick={(i !== this.state.chosenFilter) && this.chooseFilter.bind(this, i)}
-                        key={i}
-                      >
-                      <RemoveFilter isChosen={isChosen} onClick={this.chooseFilter.bind(this, -1)} key={i} />
+                    onClick={!isChosen ? this.chooseFilter.bind(this, toolFilter.title) : ()=>{} }
+                    key={i} >
+                      <RemoveFilter isChosen={isChosen} onClick={this.chooseFilter.bind(this, '')} key={i} />
                       {toolFilter.title}
                     </Filter>
                   )
@@ -187,14 +261,23 @@ export default class index extends Component {
               </Filters>
               <ToolView>
                 {tools.map((tool, i) => {
-                  return (<ToolThump
-                    headline={tool.headline}
-                    description={tool.description}
-                    icon={tool.icon}
-                    image={tool.image}
-                    bgColor={tool.bgColor}
-                    key={i}
-                  />)
+                  const toolIsQueryed = tool.headline.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1 
+                    || tool.description.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1 
+
+                  const toolIsFiltered = tool.toolFilters.map(toolFilter => toolFilter.title).indexOf(this.state.chosenFilter) !== -1 || this.state.chosenFilter === ''
+                  if(toolIsFiltered && toolIsQueryed){
+                    return <ToolThump
+                      openTool={this.openToolPreview.bind(this)}
+                      headline={tool.headline}
+                      description={tool.description}
+                      icon={tool.icon}
+                      image={tool.image}
+                      bgColor={tool.bgColor}
+                      key={i}
+                      i={i}
+                      toolFilters={tool.toolFilters}
+                    />
+                  }
                 })}
               </ToolView>
             </Container>
@@ -225,6 +308,9 @@ index.propTypes = {
     }),
     bgColor: PropTypes.shape({
       hex: PropTypes.string
-    })
+    }),
+    toolFilters: PropTypes.shape({
+      title: PropTypes.string
+    }),
   })
 }

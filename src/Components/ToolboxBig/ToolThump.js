@@ -1,15 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import PropTypes, { bool } from 'prop-types'
 import styled from 'styled-components'
 import greenSideArrow from 'graphics/greenSideArrow.svg'
+import ReactDOM from "react-dom";
 
 const Root = styled.div`
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 0;
   padding-bottom: 100%;
-  background-color: ${props => props.theme.hexToRgba(props.theme.palette.primary.D, 0.1)};
+  background-color: ${props => props.theme.hexToRgba(props.theme.palette.primary.D, props.secondarySearch ? 0.03 : 0.1)};
   color: ${props => props.theme.hexToRgba(props.theme.palette.primary.D, 1)};
+  transition: transform 0.2s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+
+  :hover {
+    transform: scale(1.03);
+  }
 `
 
 const InnerPadding = styled.div`
@@ -58,42 +65,59 @@ const Headline = styled.p`
   padding-bottom: 50%;
 `
 
-const ToolThump = props => {
-  const {
-    headline,
-    description,
-    icon,
-    image,
-    bgColor } = props
-    console.log({icon})
-  return (
-    <Root>
-      <Center>
-        <IconWrapper>
-          <Icon src={icon.url} />
-        </IconWrapper>
-        <Headline>
-          {headline}
-        </Headline>
-      </Center>
-      <Arrow src={greenSideArrow} />
-    </Root>
-  )
+export default class ToolThump extends Component {
+
+  componentDidMount () {
+    // this.updateDimension()
+    // window.addEventListener("resize", () => this.updateDimension());
+  }
+
+  updateDimension () {
+    console.log(ReactDOM.findDOMNode(this).getBoundingClientRect())
+    return ReactDOM.findDOMNode(this).getBoundingClientRect()
+  }
+
+
+  static propTypes = {
+    i: PropTypes.any,
+    openTool: PropTypes.any,
+    secondarySearch: PropTypes.bool,
+    headline: PropTypes.string,
+    description: PropTypes.string,
+    icon: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    bgColor: PropTypes.shape({
+      hex: PropTypes.string
+    })
+  }
+
+
+  render() {
+    const {
+      headline,
+      description,
+      i,
+      icon,
+      image,
+      bgColor } = this.props
+      
+ 
+    return (
+      <Root onClick={() => this.props.openTool(i, this.updateDimension())}>
+        <Center>
+          <IconWrapper>
+            <Icon src={icon.url} />
+          </IconWrapper>
+          <Headline>
+            {headline}
+          </Headline>
+        </Center>
+        <Arrow src={greenSideArrow} />
+      </Root>
+    )
+  }
 }
-
-ToolThump.propTypes = {
-  headline: PropTypes.string,
-  description: PropTypes.string,
-  icon: PropTypes.shape({
-    url: PropTypes.string
-  }),
-  image: PropTypes.shape({
-    url: PropTypes.string
-  }),
-  bgColor: PropTypes.shape({
-    hex: PropTypes.string
-  })
-
-}
-
-export default ToolThump
