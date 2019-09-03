@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import theme from 'utils/theme'
 
 import Button from 'Blocks/Button'
 
@@ -14,24 +15,37 @@ const Top = styled.div`
 `
 
 const Logo = styled.img`
-
+  margin: ${props => props.theme.spacing(1.5)};
+  height: 15vh;
 `
 
 const Content = styled.div`
   width: 400px;
-  margin: 10vh auto 0;
+  margin: 15vh auto 0;
 `
 
 const Error = styled.h2`
-
+  font-size: 26px;
+  font-family: 'Semplice', monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: ${props => props.theme.spacing(2, 0)};
 `
 
 const Title = styled.h1`
-
+  ${props => props.theme.typography.hero.mixin()}
+  font-size: 40px;
+  margin: ${props => props.theme.spacing(2, 0)};
 `
 
 const Description = styled.div`
+  margin: ${props => props.theme.spacing(2, 0, 6)};
+  font-size: 14px;
+  line-height: 1.4em;
 
+  p {
+    margin: ${props => props.theme.spacing(0.5, 0)};
+  }
 `
 
 const NotFound = ({
@@ -50,8 +64,12 @@ const NotFound = ({
         <Title>{title}</Title>
         <Description dangerouslySetInnerHTML={{ __html: description }} />
         <Button
+          fullWidth
           to={button.path}
           isExternal={button.isExternal}
+          bgColor={theme.palette.dark}
+          color={theme.palette.light}
+          type="link"
         >
           {button.name}
         </Button>

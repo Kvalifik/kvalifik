@@ -167,6 +167,19 @@ export const query = graphql`
       hex
     }
   }
+  fragment NotFoundBlock on DatoCms404 {
+    id
+    title
+    description
+    logo {
+      url
+    }
+    buttonLink {
+      isExternal
+      name
+      path
+    }
+  }
 
   fragment PageFragment on DatoCmsPage {
     title
@@ -182,6 +195,7 @@ export const query = graphql`
       ...ToolboxFragment
       ...OverlayBlockFragment
       ...QuoteBlockFragment
+      ...NotFoundBlock
     }
   }
 `

@@ -11,6 +11,7 @@ const ButtonWrapper = styled.div`
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   display: inline-block;
   padding: 0;
+  width: ${props => props.fullWidth ? '100%' : 'auto'};
 
   &:hover {
     transform: scale(0.95);
@@ -25,6 +26,7 @@ const ButtonWrapper = styled.div`
     color: ${props => props.color || props.theme.palette.light};
     padding: 0;
     border: none;
+    width: 100%;
   }
 
   & > a {
@@ -32,12 +34,14 @@ const ButtonWrapper = styled.div`
     text-decoration: none;
     color: ${props => props.color || props.theme.palette.light};
     padding: 0;
+    width: 100%;
   }
 `
 
 const ButtonContent = styled.div`
   padding: ${props => props.theme.spacing(2, 8)};
   text-transform: uppercase;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
@@ -72,11 +76,12 @@ const Button = ({
   bgColor,
   color,
   onClick,
+  fullWidth,
   children,
   ...others
 }) => {
   return (
-    <ButtonWrapper color={color}>
+    <ButtonWrapper color={color} fullWidth={fullWidth}>
       {type === 'button' && (
         <button onClick={onClick} {...others}>
           <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
@@ -103,6 +108,7 @@ const Button = ({
 }
 
 Button.propTypes = {
+  fullWidth: PropTypes.bool,
   to: PropTypes.string,
   type: PropTypes.oneOf(['button', 'link']),
   isExternal: PropTypes.bool,
