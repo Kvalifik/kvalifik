@@ -86,6 +86,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     images {
       url
@@ -120,6 +121,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     labelOne
     labelTwo

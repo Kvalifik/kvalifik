@@ -1,24 +1,16 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Link } from 'gatsby'
 import targetBlankIcon from 'graphics/target_blank.svg'
 
-export default styled.button`
-  padding: ${props => props.theme.spacing(2, 8)};
-  background-color: ${props => props.bgColor || props.theme.palette.dark};
-  color: ${props => props.color || props.theme.palette.light};
-  text-transform: uppercase;
+const ButtonWrapper = styled.div`
   border: 0;
-  ${props => props.theme.typography.header.mixin()}
   font-size: 20px;
-  outline: none;
-  cursor: pointer;
   transform-origin: center;
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  text-decoration: none;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  padding: 0;
 
   &:hover {
     transform: scale(0.95);
@@ -28,9 +20,33 @@ export default styled.button`
     width: 100%;
   }
 
-  @media ${props => props.theme.media.sm} {
-    padding: ${props => props.theme.spacing(2, 2)};
+  & > button {
+    outline: none;
+    color: ${props => props.color || props.theme.palette.light};
+    padding: 0;
+    border: none;
   }
+
+  & > a {
+    ${props => props.theme.typography.header.mixin()}
+    text-decoration: none;
+    color: ${props => props.color || props.theme.palette.light};
+    padding: 0;
+  }
+`
+
+const ButtonContent = styled.div`
+  padding: ${props => props.theme.spacing(2, 8)};
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.bgColor || props.theme.palette.dark};
+  cursor: pointer;
+  color: ${props => props.color || props.theme.palette.light};
+  ${props => props.theme.typography.header.mixin()}
 
   ${props => props.isExternal && css`
     &::after {
@@ -43,4 +59,57 @@ export default styled.button`
       width: 20px;
     }
   `}
+
+  @media ${props => props.theme.media.sm} {
+    padding: ${props => props.theme.spacing(2, 2)};
+  }
 `
+
+const Button = ({
+  to,
+  type = 'button',
+  isExternal,
+  bgColor,
+  color,
+  onClick,
+  children,
+  ...others
+}) => {
+  return (
+    <ButtonWrapper color={color}>
+      {type === 'button' && (
+        <button onClick={onClick} {...others}>
+          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+            {children}
+          </ButtonContent>
+        </button>
+      )}
+      {type === 'link' && isExternal && (
+        <a href={to} target="_blank" {...others}>
+          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+            {children}
+          </ButtonContent>
+        </a>
+      )}
+      {type === 'link' && !isExternal && (
+        <Link to={to} {...others}>
+          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+            {children}
+          </ButtonContent>
+        </Link>
+      )}
+    </ButtonWrapper>
+  )
+}
+
+Button.propTypes = {
+  to: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'link']),
+  isExternal: PropTypes.bool,
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.any
+}
+
+export default Button
