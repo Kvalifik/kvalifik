@@ -16,7 +16,6 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
     console.log(`Creating page ${node.title} on ${node.url}`)
-    console.log({node})
     createPage({
       path: node.url,
       component: path.resolve(`./src/templates/page.js`),

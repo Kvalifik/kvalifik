@@ -59,7 +59,7 @@ const Headline = styled.p`
   text-align: center;
   margin: 0;
   font-size: 14px;
-  margin-top: ${props => props.theme.spacing(1)};
+  margin-top: -2px;
   width: 100%;
   height: 0;
   padding-bottom: 50%;

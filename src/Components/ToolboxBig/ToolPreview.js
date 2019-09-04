@@ -9,7 +9,6 @@ import { Link } from 'gatsby'
 const Root = styled.div`
   position: relative;
   height: 100%;
-
 `
 
 const Preview = styled.div`
@@ -39,8 +38,7 @@ const ContentWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   @media ${props => props.theme.media.lg} {
-    grid-template-rows: 200px 1fr auto;
-    min-height: 150%;
+    grid-template-rows: 200px;
     height: auto;
   }
 `
@@ -118,9 +116,9 @@ const CaseExamples = styled.div`
   grid-template-rows: auto 1fr;
   grid-auto-rows: 1fr;
   grid-gap: ${props => props.theme.spacing(2, 4)};
-  @media ${props => props.theme.media.md} {
+  @media ${props => props.theme.media.lg} {
     grid-column: -1 / 1;
-    margin: ${props => props.theme.spacing(0, 4)};
+    margin: ${props => props.theme.spacing(0, 4, 4)};
   }
 `
 
@@ -138,6 +136,9 @@ const Resource = styled(Link)`
   width: 100%;
   border: 0;
   grid-column: 2 / 3;
+  @media ${props => props.theme.media.lg} {
+    grid-column: 1 / 3;
+  }
   position: relative;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.26, 0.2, 0.09, 0.97);
@@ -164,7 +165,7 @@ const Examples = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: ${props => props.theme.spacing(0, 2)};
+  padding: ${props => props.theme.spacing(2)};
   color: white;
   background: ${props => props.theme.hexToRgba('#ffffff', 0.2)};
   text-transform: uppercase;
@@ -172,6 +173,9 @@ const Examples = styled(Link)`
   width: 100%;
   border: 0;
   grid-column: 1 / 2;
+  @media ${props => props.theme.media.lg} {
+    grid-column: 1 / 3;
+  }
   cursor: pointer;
   position: relative;
   transition: transform 0.2s cubic-bezier(0.26, 0.16, 0.09, 0.97);
@@ -198,6 +202,12 @@ const ExampleHeader = styled.h4`
   grid-column-start: ${props => props.right ? '1' : '2'};
   grid-row-start: 1;
   margin: 0;
+  justify-self: bottom;
+  align-self: self-end;
+  @media ${props => props.theme.media.lg} {
+    grid-row: auto;
+    grid-column: 1 / 3;
+  }
 `
 
 const ToolPreview = (props) => {
@@ -214,13 +224,13 @@ const ToolPreview = (props) => {
           <Image image={props.tool.image.url} />
           <CaseExamples>
             {props.tool.references.length > 0 && <ExampleHeader left>RESSOURCES</ExampleHeader>}
-            {props.tool.examples.length > 0 && <ExampleHeader right>EXAMPLES FROM OUR CASES</ExampleHeader>}
             {props.tool.references.map((reference, i) =>
               <Resource subText={reference.description || null} to={reference.path} target={reference.isExternal && '_blank'}>
                 {reference.name}
                 {reference.isExternal && <ExternalLink src={targetBlank} />}
               </Resource>
             )}
+            {props.tool.examples.length > 0 && <ExampleHeader right>EXAMPLES FROM OUR CASES</ExampleHeader>}
             {props.tool.examples.map((example, i) =>
               <Examples key={i} to={example.path} target={example.isExternal && '_blank'}>
                 {example.name}

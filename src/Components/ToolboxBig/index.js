@@ -34,7 +34,6 @@ const Overlay = styled.div`
       opacity: 0.6;
     }
   `}
-
 `
 
 const Description = styled.div`
@@ -169,6 +168,9 @@ const ToolView = styled.div`
 
 const PseudoPreview = styled.div`
   position: fixed;
+  max-width: 1300px;
+  max-height: 1000px;
+  margin: auto;
   ${props => props.toolPreviewIsOpen ? css`
     z-index: 1000;
     top: ${props => props.theme.spacing(8)};
@@ -177,6 +179,12 @@ const PseudoPreview = styled.div`
     bottom: ${props => props.theme.spacing(8)};
     @media ${props.theme.media.md} {
       top: ${props => props.theme.spacing(11)};
+      left: ${props => props.theme.spacing(11)};
+      right: ${props => props.theme.spacing(11)};
+      bottom: ${props => props.theme.spacing(11)};
+    }
+    @media ${props.theme.media.sm} {
+      top: ${props => props.theme.spacing(11)};
       left: ${props => props.theme.spacing(3)};
       right: ${props => props.theme.spacing(3)};
       bottom: ${props => props.theme.spacing(11)};
@@ -184,7 +192,6 @@ const PseudoPreview = styled.div`
     background-color: #252525;
     opacity: 1;
     pointer-events: all;
-    /* transition: all 0.4s linear, opacity 0s linear; */
 
   ` : css`
     opacity: 0;
@@ -225,6 +232,7 @@ export default class index extends Component {
   }
 
   openToolPreview(i, coords) {
+    document.body.setAttribute('style', 'overflow:hidden');
     const newPseudoPreviewCoords = [coords.top, coords.left, window.innerWidth - coords.right, window.innerHeight - coords.bottom ]
     this.setState({pseudoPreviewCoords: newPseudoPreviewCoords})
     this.setState({chosenTool: i})
@@ -241,6 +249,7 @@ export default class index extends Component {
     this.setState({toolPreviewIsOpen: false})
     this.setState({toolPreviewIsAnimating: true})
     setTimeout(()=>{
+      document.body.setAttribute('style', '');
       this.setState({toolPreviewIsAnimating: false})
     }, this.state.OpenAnimationLenght)
   }
@@ -294,7 +303,6 @@ export default class index extends Component {
 
                   const toolIsFiltered = tool.toolFilters.map(toolFilter => toolFilter.title).indexOf(this.state.chosenFilter) !== -1 || this.state.chosenFilter === ''
                   if(toolIsFiltered && toolIsQueryed){
-                    console.log({img: tool.image, name: tool.headline, tool})
                     return <ToolThump
                       openTool={this.openToolPreview.bind(this)}
                       headline={tool.headline}
