@@ -1,6 +1,6 @@
 /* eslint react/jsx-boolean-value: 0 */
 
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import cross from 'graphics/cross.svg'
@@ -86,26 +86,52 @@ const CloseButton = styled.button`
   }
 `
 
-const VideoFullscreen = ({ src, onClose }) => {
-  const handleClose = (event) => {
+class VideoFullscreen extends Component {
+  constructor (props) {
+    super(props)
+
+    this.bindedKeyHandler = this.handleCloseKey.bind(this)
+  }
+
+  componentDidMount () {
+    window.addEventListener('keydown', this.bindedKeyHandler)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this.bindedKeyHandler)
+  }
+
+  handleCloseButton (event) {
+    const { onClose } = this.props
     if (event.currentTarget === event.target) {
       onClose()
     }
   }
 
-  return (
-    <>
-      <Backdrop />
-      <CustomContainer onClick={handleClose}>
-        <Video controls={true} autoPlay>
-          <source src={src} type="video/mp4" />
-        </Video>
-        <CloseButton onClick={onClose}>
-          <img src={cross} />
-        </CloseButton>
-      </CustomContainer>
-    </>
-  )
+  handleCloseKey (event) {
+    const { onClose } = this.props
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }
+
+  render () {
+    const { src, onClose } = this.props
+
+    return (
+      <>
+        <Backdrop />
+        <CustomContainer onClick={this.handleCloseButton.bind(this)}>
+          <Video controls={true} autoPlay>
+            <source src={src} type="video/mp4" />
+          </Video>
+          <CloseButton onClick={onClose}>
+            <img src={cross} />
+          </CloseButton>
+        </CustomContainer>
+      </>
+    )
+  }
 }
 
 VideoFullscreen.propTypes = {
