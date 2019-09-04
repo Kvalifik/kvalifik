@@ -165,6 +165,26 @@ export const query = graphql`
       hex
     }
   }
+  fragment PeopleBlockFragment on DatoCmsPeopleBlock {
+    id
+    title
+    word
+    pronounce
+    description
+    employees {
+      id
+      name
+      jobTitle
+      phone
+      email
+      color {
+        hex
+      }
+      image {
+        url
+      }
+    }
+  }
 
   fragment PageFragment on DatoCmsPage {
     title
@@ -180,6 +200,7 @@ export const query = graphql`
       ...ToolboxFragment
       ...OverlayBlockFragment
       ...QuoteBlockFragment
+      ...PeopleBlockFragment
     }
   }
 `

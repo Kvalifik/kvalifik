@@ -9,6 +9,7 @@ import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
+import People from 'Components/People'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -142,6 +143,16 @@ export default (block) => {
           quote={block.quote}
           bgColor={block.bgColor.hex}
           imageUrl={block.image.url}
+        />
+      )
+    case 'DatoCmsPeopleBlock':
+      return (
+        <People
+          title={block.title}
+          description={block.description}
+          word={block.word}
+          pronounce={block.pronounce}
+          employees={block.employees}
         />
       )
     default:
