@@ -9,6 +9,7 @@ import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
+import NotFound from 'Components/NotFound'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -142,6 +143,17 @@ export default (block) => {
           quote={block.quote}
           bgColor={block.bgColor.hex}
           imageUrl={block.image.url}
+        />
+      )
+    case 'DatoCms404':
+      return (
+        <NotFound
+          key={block.id}
+          button={block.buttonLink}
+          logoUrl={block.logo && block.logo.url}
+          description={block.description}
+          title={block.title}
+          imageUrl={block.image && block.image.url}
         />
       )
     default:
