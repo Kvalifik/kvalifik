@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import theme from 'utils/theme'
+import { Link } from 'gatsby'
 
 import Button from 'Blocks/Button'
 
@@ -21,6 +22,12 @@ const Top = styled.div`
   @media ${props => props.theme.media.sm} {
     justify-self: center;
     margin: 0;
+    display: none;
+  }
+
+  a {
+    outline: none;
+    text-decoration: none;
   }
 `
 
@@ -43,6 +50,10 @@ const Content = styled.div`
     grid-column: 1 / 3;
     margin: 0;
     padding: ${props => props.theme.spacing(1)};
+  }
+
+  @media ${props => props.theme.media.sm} {
+    padding-bottom: 20vh;
   }
 `
 
@@ -97,7 +108,9 @@ const NotFound = ({
   return (
     <Root>
       <Top>
-        {logoUrl && <Logo src={logoUrl} />}
+        <Link to="/">
+          {logoUrl && <Logo src={logoUrl} />}
+        </Link>
       </Top>
       <Content>
         <Error>Error</Error>
