@@ -106,7 +106,7 @@ const PeopleBlock = ({
       </Top>
       <Employees>
         {employees.map(person => (
-          <Employee person={person} />
+          <Employee key={person.id} person={person} />
         ))}
       </Employees>
     </Container>

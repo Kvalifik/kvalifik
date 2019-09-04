@@ -185,6 +185,8 @@ export const query = graphql`
       image {
         url
       }
+    }
+  }
   fragment NotFoundBlock on DatoCms404 {
     id
     title

@@ -149,6 +149,7 @@ export default (block) => {
     case 'DatoCmsPeopleBlock':
       return (
         <People
+          key={block.id}
           title={block.title}
           description={block.description}
           word={block.word}
