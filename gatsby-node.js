@@ -16,6 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
     console.log(`Creating page ${node.title} on ${node.url}`)
+    console.log({node})
     createPage({
       path: node.url,
       component: path.resolve(`./src/templates/page.js`),
@@ -24,4 +25,13 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   })
+}
+
+exports.onCreatePage = async ({ page, actions }) => {
+  console.log({path: page.path})
+  const { createPage } = actions
+  if (page.path.match(/^\/toolbox/)) {
+    page.matchPath = '/toolbox/*'
+    createPage(page)
+  }
 }

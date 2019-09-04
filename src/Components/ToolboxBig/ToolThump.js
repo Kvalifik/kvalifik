@@ -12,7 +12,7 @@ const Root = styled.div`
   padding-bottom: 100%;
   background-color: ${props => props.theme.hexToRgba(props.theme.palette.primary.D, props.secondarySearch ? 0.03 : 0.1)};
   color: ${props => props.theme.hexToRgba(props.theme.palette.primary.D, 1)};
-  transition: transform 0.2s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  transition: transform 0.2s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
   :hover {
     transform: scale(1.03);

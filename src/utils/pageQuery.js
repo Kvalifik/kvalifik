@@ -102,6 +102,17 @@ export const query = graphql`
       icon {
         url
       }
+      references {
+        path
+        name
+        description
+        isExternal
+      }
+      examples {
+        path
+        name
+        isExternal
+      }
     }
   }
   fragment ActionBlockFragment on DatoCmsAction {
