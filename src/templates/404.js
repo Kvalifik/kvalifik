@@ -17,7 +17,7 @@ const PageTemplate = ({ data }) => {
   } = data.datoCmsPage
 
   return (
-    <Layout hideFooter>
+    <Layout hideFooter isGlitch>
       <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>

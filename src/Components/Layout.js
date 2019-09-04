@@ -69,7 +69,7 @@ const App = styled.div`
   }
 `
 
-const Main = ({ children, hideFooter }) => {
+const Main = ({ children, hideFooter, isGlitch }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -113,9 +113,13 @@ const Main = ({ children, hideFooter }) => {
         logo {
           url
         }
+        glitchLogo {
+          url
+        }
       }
     }
   `)
+
   return (
     <>
       <GlobalStyle />
@@ -133,7 +137,8 @@ const Main = ({ children, hideFooter }) => {
             navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks}
             navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks}
             socialMediaLinks={data.datoCmsFooter.socialMediaLinks}
-            logoUrl={data.datoCmsGeneral.logo.url}
+            logoUrl={isGlitch ? data.datoCmsGeneral.glitchLogo.url : data.datoCmsGeneral.logo.url}
+            isGlitch={isGlitch}
           />
         </App>
       </ThemeProvider>
@@ -143,7 +148,8 @@ const Main = ({ children, hideFooter }) => {
 
 Main.propTypes = {
   children: PropTypes.any,
-  hideFooter: PropTypes.bool
+  hideFooter: PropTypes.bool,
+  isGlitch: PropTypes.bool
 }
 
 export default Main
