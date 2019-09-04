@@ -79,8 +79,8 @@ const ActionBlock = ({
             alt={button.name}
             bgColor={buttonBgColor}
             color={buttonTextColor}
-            href={button.path}
-            as="a"
+            to={button.path}
+            type="link"
             isExternal={button.isExternal}
           >
             {button.name}

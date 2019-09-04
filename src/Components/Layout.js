@@ -69,7 +69,7 @@ const App = styled.div`
   }
 `
 
-const Main = ({ children }) => {
+const Main = ({ children, hideFooter }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -122,11 +122,13 @@ const Main = ({ children }) => {
       <ThemeProvider theme={theme}>
         <App>
           {children}
-          <Footer
-            {...data.datoCmsFooter}
-            instagramFeed={data.allInstaNode.nodes}
-            logoUrl={data.datoCmsGeneral.logo.url}
-          />
+          {!hideFooter && (
+            <Footer
+              {...data.datoCmsFooter}
+              instagramFeed={data.allInstaNode.nodes}
+              logoUrl={data.datoCmsGeneral.logo.url}
+            />
+          )}
           <Navigation
             navigationItems={data.allDatoCmsNavigation.nodes[0].mainLinks}
             navigationLinks={data.allDatoCmsNavigation.nodes[0].secondaryLinks}
@@ -140,7 +142,8 @@ const Main = ({ children }) => {
 }
 
 Main.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any,
+  hideFooter: PropTypes.bool
 }
 
 export default Main

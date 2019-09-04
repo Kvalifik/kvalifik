@@ -5,7 +5,6 @@ import Container from 'Blocks/Container'
 import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
 import Button from 'Blocks/Button'
-import { Link } from 'gatsby'
 
 const Content = styled.div`
   display: grid;
@@ -21,11 +20,7 @@ const Content = styled.div`
 const MoreWork = styled.div`
   display: flex;
   justify-content: center;
-  margin: 40px 16px;
-
-  & > a {
-    text-decoration: none;
-  }
+  margin: ${props => props.theme.spacing(5, 2)};
 `
 
 const Fader = styled.div`
@@ -63,11 +58,9 @@ const CaseGrid = (props) => {
         </Container>
         {hasMoreWork && (
           <MoreWork>
-            <Link to={moreWorkUrl}>
-              <Button bgColor="#707070" color="white">
-                More Work
-              </Button>
-            </Link>
+            <Button type="link" to={moreWorkUrl} bgColor="#707070" color="white">
+              More Work
+            </Button>
           </MoreWork>
         )}
       </Padder>

@@ -86,6 +86,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     images {
       url
@@ -120,6 +121,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     labelOne
     labelTwo
@@ -183,6 +185,20 @@ export const query = graphql`
       image {
         url
       }
+  fragment NotFoundBlock on DatoCms404 {
+    id
+    title
+    description
+    logo {
+      url
+    }
+    buttonLink {
+      isExternal
+      name
+      path
+    }
+    image {
+      url
     }
   }
 
@@ -201,6 +217,7 @@ export const query = graphql`
       ...OverlayBlockFragment
       ...QuoteBlockFragment
       ...PeopleBlockFragment
+      ...NotFoundBlock
     }
   }
 `

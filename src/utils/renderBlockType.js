@@ -10,6 +10,7 @@ import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
+import NotFound from 'Components/NotFound'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -153,6 +154,17 @@ export default (block) => {
           word={block.word}
           pronounce={block.pronounce}
           employees={block.employees}
+        />
+      )
+    case 'DatoCms404':
+      return (
+        <NotFound
+          key={block.id}
+          button={block.buttonLink}
+          logoUrl={block.logo && block.logo.url}
+          description={block.description}
+          title={block.title}
+          imageUrl={block.image && block.image.url}
         />
       )
     default:
