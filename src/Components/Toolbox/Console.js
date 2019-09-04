@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import withInsideViewport from 'utils/withInsideViewport'
 import dateformat from 'dateformat'
+import Typed from 'react-typed'
+import 'react-typed/dist/animatedCursor.css'
 
 const Root = styled.div`
   font-family: Semplice, monospace, sans-serif;
@@ -14,59 +16,34 @@ const Root = styled.div`
   min-height: calc(12px * 3 * 1.4);
 `
 
-class Console extends Component {
-  constructor (props) {
-    super(props)
+const ConsoleElement = styled.span`
+  white-space: pre;
+`
 
-    this.state = {
-      step: 0,
-      text: this.getText()
-    }
-  }
+const text = (function () {
+  const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
 
-  componentDidUpdate (prevProps) {
-    if (!prevProps.isInsideViewport && this.props.isInsideViewport) {
-      this.nextStep()
-    }
-  }
+  const dots = new Array(8).fill(0).map(() => '.').join('^400')
 
-  nextStep () {
-    const { step } = this.state
-    setTimeout(() => {
-      this.setState({
-        step: step + 1
-      })
-      if (step < this.state.text.length) {
-        this.nextStep()
-      }
-    }, Math.floor(Math.random() * 25 + 10))
-  }
+  return [[
+    'Session starting: ' + dateString,
+    '`https://kvalifik.dk:~ visiterName$` ^250_',
+    'Authorizing ' + dots + ' `Done`'
+  ].join('^1000\n')]
+})()
 
-  getText () {
-    const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
-
-    return [
-      'Session starting: ' + dateString,
-      'https://kvalifik.dk:~ visiterName$ _',
-      'Authorizing ......'
-    ].join('|')
-  }
-
-  render () {
-    const { step, text } = this.state
-    const { color } = this.props
-
-    const showText = text.substring(0, step)
-
-    return (
-      <Root color={color}>
-        {showText.split('|').map((snippet, i) => (
-          <div key={i}>{snippet}</div>
-        ))}
-      </Root>
-    )
-  }
-}
+const Console = React.forwardRef(({ color, isInsideViewport }, ref) => (
+  <Root color={color} ref={ref}>
+    {isInsideViewport && (
+      <Typed
+        strings={text}
+        typeSpeed={20}
+      >
+        <ConsoleElement />
+      </Typed>
+    )}
+  </Root>
+))
 
 Console.propTypes = {
   isInsideViewport: PropTypes.bool,
