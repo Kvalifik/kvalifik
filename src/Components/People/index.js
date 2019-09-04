@@ -13,12 +13,25 @@ import theme from 'utils/theme'
 const Top = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: ${props => props.theme.spacing(10)};
+  margin: ${props => props.theme.spacing(10, 0)};
+
+  @media ${props => props.theme.media.sm} {
+    margin: ${props => props.theme.spacing(10, 1)};
+  }
+
+  @media ${props => props.theme.media.lg} {
+    grid-template-columns: 1fr;
+  }
 `
 
 const Employees = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  margin: ${props => props.theme.spacing(-2, -2, 8)};
+
+  @media ${props => props.theme.media.sm} {
+    margin: ${props => props.theme.spacing(-0.5, -1, 9.5)};
+  }
 `
 
 const Title = styled.h2`
