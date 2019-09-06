@@ -1,6 +1,8 @@
 import { css } from 'styled-components'
+import gridFactory from 'ie-grid-mixins'
 
 const theme = {
+  grid: gridFactory(css),
   navBarWidth: '65px',
   padding: {
     sm: '15px'

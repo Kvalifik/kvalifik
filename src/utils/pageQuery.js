@@ -80,6 +80,7 @@ export const query = graphql`
     }
   }
   fragment ToolboxBigFragment on DatoCmsToolboxBig {
+    id
     sideText
     smallDescription
     backgroundColor {
@@ -184,10 +185,10 @@ export const query = graphql`
     }
   }
   fragment PercentageBlockFragment on DatoCmsPercentage {
+    id
     bgColor {
       hex
     }
-    id
     description
     duration
     number
@@ -223,7 +224,7 @@ export const query = graphql`
       }
     }
   }
-  fragment NotFoundBlock on DatoCms404 {
+  fragment NotFoundBlockFragment on DatoCms404 {
     id
     title
     description
@@ -237,6 +238,16 @@ export const query = graphql`
     }
     image {
       url
+    }
+  }
+  fragment ServicesBlockFragment on DatoCmsServicesBlock {
+    id
+    services {
+      id
+      label
+      icon {
+        url
+      }
     }
   }
 
@@ -256,7 +267,8 @@ export const query = graphql`
       ...OverlayBlockFragment
       ...QuoteBlockFragment
       ...PeopleBlockFragment
-      ...NotFoundBlock
+      ...NotFoundBlockFragment
+      ...ServicesBlockFragment
     }
   }
 `

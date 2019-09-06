@@ -12,10 +12,11 @@ import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
+import ServicesBlock from 'Components/ServicesBlock'
 import theme from 'utils/theme'
 
 export default (block) => {
-  switch (block.__typename) {
+  switch (block && block.__typename) {
     case 'DatoCmsHeader': {
       const mediaType = block.media ? block.media.__typename : null
       let imageUrl = null
@@ -178,6 +179,15 @@ export default (block) => {
           imageUrl={block.image && block.image.url}
         />
       )
+    case 'DatoCmsServicesBlock': {
+      return (
+        <ServicesBlock
+          key={block.id}
+          bgColor={theme.palette.primary.E}
+          services={block.services}
+        />
+      )
+    }
     default:
       return null
   }
