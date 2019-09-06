@@ -238,7 +238,7 @@ const ToolPreview = ({
             )}
             {tool.references.map((reference, i) =>
               <Resource
-                subText={reference.description || 'none'}
+                subText={reference.description || null}
                 to={reference.path}
                 target={reference.isExternal && '_blank'}
                 onClick={enableScroll}
