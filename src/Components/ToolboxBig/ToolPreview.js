@@ -12,13 +12,13 @@ const Root = styled.div`
 `
 
 const Preview = styled.div`
-  /* overflow-x: scroll; */
   height: 100%;
   min-width: 700px;
-  /* padding: ${props => props.theme.spacing(8, 4)}; */
   transition: opacity 0.2s linear;
   opacity: 0;
   color: white;
+  overflow-x: scroll;
+
   ${props => (props.toolPreviewIsOpen && !props.toolPreviewIsAnimating) && css`
       transition: opacity 0.2s linear;
       opacity: 1;
@@ -28,8 +28,6 @@ const Preview = styled.div`
     right: 0;
     min-width: 150px;
   }
-  overflow-x: scroll;
-  /* height: 100%; */
 `
 
 const ContentWrapper = styled.div`
@@ -37,6 +35,7 @@ const ContentWrapper = styled.div`
   height: 100%;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+
   @media ${props => props.theme.media.lg} {
     grid-template-rows: 200px;
     height: auto;
@@ -49,6 +48,7 @@ const Description = styled.div`
     text-transform: uppercase;
     font-size: 16px;
   }
+
   @media ${props => props.theme.media.lg} {
     grid-row: 2 / -1;
   }
@@ -66,6 +66,7 @@ const Left = styled.div`
   padding: ${props => props.theme.spacing(4)};
   grid-column: 1 / 2;
   grid-row: 1 / -1;
+
   @media ${props => props.theme.media.lg} {
     grid-row: 2 / 3;
     grid-column: 1 / -1;
@@ -80,6 +81,7 @@ const Image = styled.div`
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: center;
+
   @media ${props => props.theme.media.lg} {
     grid-column: -1 / 1;
   }
@@ -101,8 +103,6 @@ const CloseIcon = styled.img`
   }
 
   ${props => props.toolPreviewIsOpen && css`
-    /* right: -${props => props.theme.spacing(8)};
-    top: -${props => props.theme.spacing(8)}; */
     opacity: 1;
   `}
 `
@@ -116,6 +116,7 @@ const CaseExamples = styled.div`
   grid-template-rows: auto 1fr;
   grid-auto-rows: 1fr;
   grid-gap: ${props => props.theme.spacing(2, 4)};
+
   @media ${props => props.theme.media.lg} {
     grid-column: -1 / 1;
     margin: ${props => props.theme.spacing(0, 4, 4)};
@@ -136,12 +137,13 @@ const Resource = styled(Link)`
   width: 100%;
   border: 0;
   grid-column: 2 / 3;
-  @media ${props => props.theme.media.lg} {
-    grid-column: 1 / 3;
-  }
   position: relative;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.26, 0.2, 0.09, 0.97);
+
+  @media ${props => props.theme.media.lg} {
+    grid-column: 1 / 3;
+  }
 
   &:hover {
     transform: scale(0.98);
@@ -173,6 +175,7 @@ const Examples = styled(Link)`
   width: 100%;
   border: 0;
   grid-column: 1 / 2;
+
   @media ${props => props.theme.media.lg} {
     grid-column: 1 / 3;
   }
@@ -204,45 +207,59 @@ const ExampleHeader = styled.h4`
   margin: 0;
   justify-self: bottom;
   align-self: self-end;
+
   @media ${props => props.theme.media.lg} {
     grid-row: auto;
     grid-column: 1 / 3;
   }
 `
 
-const ToolPreview = (props) => {
-  return (
-    <Root>
-      <CloseIcon toolPreviewIsOpen={props.toolPreviewIsOpen} src={closeIcon} onClick={props.closeWindow} />
-      <Preview toolPreviewIsOpen={props.toolPreviewIsOpen} toolPreviewIsAnimating={props.toolPreviewIsAnimating} >
-        {(props.toolPreviewIsOpen && !props.toolPreviewIsAnimating) && <ContentWrapper>
+const ToolPreview = ({
+  toolPreviewIsOpen,
+  toolPreviewIsAnimating,
+  closeWindow,
+  tool
+}) => (
+  <Root>
+    <CloseIcon toolPreviewIsOpen={toolPreviewIsOpen} src={closeIcon} onClick={closeWindow} />
+    <Preview toolPreviewIsOpen={toolPreviewIsOpen} toolPreviewIsAnimating={toolPreviewIsAnimating} >
+      {(toolPreviewIsOpen && !toolPreviewIsAnimating) && (
+        <ContentWrapper>
           <Left>
-            <HeaderImage src={props.tool.icon.url} />
-            <Header tool={props.tool}>{props.tool.headline} </Header>
-            <Description dangerouslySetInnerHTML={{ __html: props.tool.description }} />
+            <HeaderImage src={tool.icon && tool.icon.url} />
+            <Header tool={tool}>{tool.headline} </Header>
+            <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
           </Left>
-          <Image image={props.tool.image.url} />
+          <Image image={tool.image.url} />
           <CaseExamples>
-            {props.tool.references.length > 0 && <ExampleHeader left>RESSOURCES</ExampleHeader>}
-            {props.tool.references.map((reference, i) =>
-              <Resource subText={reference.description || null} to={reference.path} target={reference.isExternal && '_blank'}>
+            {tool.references.length > 0 && (
+              <ExampleHeader left>RESSOURCES</ExampleHeader>
+            )}
+            {tool.references.map((reference, i) =>
+              <Resource
+                subText={reference.description || 'none'}
+                to={reference.path}
+                target={reference.isExternal && '_blank'}
+              >
                 {reference.name}
                 {reference.isExternal && <ExternalLink src={targetBlank} />}
               </Resource>
             )}
-            {props.tool.examples.length > 0 && <ExampleHeader right>EXAMPLES FROM OUR CASES</ExampleHeader>}
-            {props.tool.examples.map((example, i) =>
+            {tool.examples.length > 0 && (
+              <ExampleHeader right>EXAMPLES FROM OUR CASES</ExampleHeader>
+            )}
+            {tool.examples.map((example, i) => (
               <Examples key={i} to={example.path} target={example.isExternal && '_blank'}>
                 {example.name}
                 <InlineArrow src={rightArrow} />
               </Examples>
-            )}
+            ))}
           </CaseExamples>
-        </ContentWrapper>}
-      </Preview>
-    </Root>
-  )
-}
+        </ContentWrapper>
+      )}
+    </Preview>
+  </Root>
+)
 
 ToolPreview.propTypes = {
   tool: PropTypes.any,

@@ -7,7 +7,8 @@ import Skewer from 'Blocks/Skewer'
 import SearchIcon from 'graphics/search.svg'
 import CloseIcon from 'graphics/close.svg'
 import ToolThump from './ToolThump'
-import ToolPreview from './ToolPreview';
+import ToolPreview from './ToolPreview'
+import { disableScroll, enableScroll } from 'utils/modal'
 
 const Root = styled.div`
   color: white;
@@ -25,7 +26,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   pointer-events: none;
-  transition: all ${props => props.OpenAnimationLenght / 1000}s cubic-bezier(0.71, 1, 0.15, 1);
+  transition: all ${props => props.openAnimationLength / 1000}s cubic-bezier(0.71, 1, 0.15, 1);
 
   ${props => props.toolPreviewIsOpen && css`
     pointer-events: all;
@@ -108,13 +109,13 @@ const Filter = styled.button`
 
   margin: ${props => props.theme.spacing(1)};
 
-  ${props => props.isChosen ?
-    css`
+  ${props => props.isChosen
+    ? css`
       transform: scale(1) !important;
       color: white;
       border: 1px solid white;
-    ` :
-    css`
+    `
+    : css`
       cursor: pointer;
     `}
 `
@@ -171,28 +172,31 @@ const PseudoPreview = styled.div`
   max-width: 1300px;
   max-height: 1000px;
   margin: auto;
+  z-index: 1000;
+
   ${props => props.toolPreviewIsOpen ? css`
     z-index: 1000;
+    background-color: #252525;
+    opacity: 1;
+    pointer-events: all;
     top: ${props => props.theme.spacing(8)};
     left: ${props => props.theme.spacing(17)};
     right: ${props => props.theme.spacing(17)};
     bottom: ${props => props.theme.spacing(8)};
+
     @media ${props.theme.media.md} {
       top: ${props => props.theme.spacing(11)};
       left: ${props => props.theme.spacing(11)};
       right: ${props => props.theme.spacing(11)};
       bottom: ${props => props.theme.spacing(11)};
     }
+
     @media ${props.theme.media.sm} {
       top: ${props => props.theme.spacing(11)};
       left: ${props => props.theme.spacing(3)};
       right: ${props => props.theme.spacing(3)};
       bottom: ${props => props.theme.spacing(11)};
     }
-    background-color: #252525;
-    opacity: 1;
-    pointer-events: all;
-
   ` : css`
     opacity: 0;
     pointer-events: none;
@@ -203,16 +207,19 @@ const PseudoPreview = styled.div`
     bottom: ${props => props.pseudoPreviewCoords[3]}px;
   `}
 
-  z-index: 1000;
   ${props => props.toolPreviewIsAnimating && css`
-    transition: all ${props => props.OpenAnimationLenght / 1000}s cubic-bezier(0.4, 0, 0, 1), opacity ${props => props.OpenAnimationLenght / 1000}s cubic-bezier(0, 1.08, 0.34, 1.01);
-    ${props => props.toolPreviewIsOpen || css`
-      transition: all ${props => (props.OpenAnimationLenght - 100) / 1000}s 0.1s cubic-bezier(0.6, 0, 0, 1), opacity ${props => props.OpenAnimationLenght / 1000}s cubic-bezier(0.91, 0.01, 1, 0.08);
+    transition:
+      all ${props => props.openAnimationLength / 1000}s cubic-bezier(0.4, 0, 0, 1),
+      opacity ${props => props.openAnimationLength / 1000}s cubic-bezier(0, 1.08, 0.34, 1.01);
+    ${props => !props.toolPreviewIsOpen && css`
+      transition:
+        all ${props => (props.openAnimationLength - 100) / 1000}s 0.1s cubic-bezier(0.6, 0, 0, 1),
+        opacity ${props => props.openAnimationLength / 1000}s cubic-bezier(0.91, 0.01, 1, 0.08);
     `}
   `}
 `
 
-export default class index extends Component {
+class ToolboxBig extends Component {
   state = {
     chosenFilter: '',
     searchQuery: '',
@@ -220,41 +227,101 @@ export default class index extends Component {
     toolPreviewIsAnimating: false,
     chosenTool: 0,
     pseudoPreviewCoords: [0, '100%', 0, '100%'],
-    OpenAnimationLenght: 500
+    openAnimationLength: 500
   }
 
-  changeSearchQuery(event) {
-    this.setState({searchQuery: event.target.value})
+  changeSearchQuery (event) {
+    this.setState({ searchQuery: event.target.value })
   }
 
   chooseFilter (filter) {
-    this.setState({chosenFilter: filter})
+    this.setState({ chosenFilter: filter })
   }
 
-  openToolPreview(i, coords) {
-    document.body.setAttribute('style', 'overflow:hidden');
-    const newPseudoPreviewCoords = [coords.top, coords.left, window.innerWidth - coords.right, window.innerHeight - coords.bottom ]
-    this.setState({pseudoPreviewCoords: newPseudoPreviewCoords})
-    this.setState({chosenTool: i})
-    setTimeout(()=>{
-      this.setState({ toolPreviewIsOpen: true })
-      this.setState({toolPreviewIsAnimating: true})
+  openToolPreview (i, coords) {
+    disableScroll()
+    const newPseudoPreviewCoords = [
+      coords.top,
+      coords.left,
+      window.innerWidth - coords.right,
+      window.innerHeight - coords.bottom
+    ]
+    this.setState({
+      pseudoPreviewCoords: newPseudoPreviewCoords,
+      chosenTool: i
+    })
+    setTimeout(() => {
+      this.setState({
+        toolPreviewIsOpen: true,
+        toolPreviewIsAnimating: true
+      })
     }, 10)
-    setTimeout(()=>{
-      this.setState({toolPreviewIsAnimating: false})
-    }, this.state.OpenAnimationLenght)
+    setTimeout(() => {
+      this.setState({ toolPreviewIsAnimating: false })
+    }, this.state.openAnimationLength)
   }
 
-  closeToolPreview() {
-    this.setState({toolPreviewIsOpen: false})
-    this.setState({toolPreviewIsAnimating: true})
-    setTimeout(()=>{
-      document.body.setAttribute('style', '');
-      this.setState({toolPreviewIsAnimating: false})
-    }, this.state.OpenAnimationLenght)
+  closeToolPreview () {
+    this.setState({ toolPreviewIsOpen: false })
+    this.setState({ toolPreviewIsAnimating: true })
+    setTimeout(() => {
+      enableScroll()
+      this.setState({ toolPreviewIsAnimating: false })
+    }, this.state.openAnimationLength)
   }
 
-  render() {
+  renderTool (tool, i) {
+    const { headline, description } = tool
+    const searchBy = this.state.searchQuery.toUpperCase()
+
+    const toolIsQueryed = headline.toUpperCase().search(searchBy) !== -1 ||
+      description.toUpperCase().search(searchBy) !== -1
+
+    const toolIsFiltered = (tool.toolFilters
+      .map(toolFilter => toolFilter.title)
+      .indexOf(this.state.chosenFilter) !== -1) || this.state.chosenFilter === ''
+
+    if (toolIsFiltered && toolIsQueryed) {
+      return (
+        <ToolThump
+          openTool={this.openToolPreview.bind(this)}
+          headline={tool.headline}
+          description={tool.description}
+          icon={tool.icon}
+          image={tool.image}
+          bgColor={tool.bgColor}
+          key={i}
+          id={i}
+          toolFilters={tool.toolFilters}
+        />
+      )
+    }
+
+    return null
+  }
+
+  renderToolFilter (toolFilter, i) {
+    const isChosen = this.state.chosenFilter === toolFilter.title
+    return (
+      <Filter isChosen={isChosen}
+        onClick={
+          !isChosen
+            ? this.chooseFilter.bind(this, toolFilter.title)
+            : () => null
+        }
+        key={i}
+      >
+        <RemoveFilter
+          isChosen={isChosen}
+          onClick={this.chooseFilter.bind(this, '')}
+          key={i}
+        />
+        {toolFilter.title}
+      </Filter>
+    )
+  }
+
+  render () {
     const {
       sideText,
       smallDescription,
@@ -263,17 +330,33 @@ export default class index extends Component {
       tools
     } = this.props
 
-    console.log(this.state)
+    const {
+      toolPreviewIsOpen,
+      openAnimationLength,
+      pseudoPreviewCoords,
+      toolPreviewIsAnimating,
+      chosenTool,
+      searchQuery
+    } = this.state
 
     return (
       <Root>
-        <Overlay onClick={this.closeToolPreview.bind(this)} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} OpenAnimationLenght={this.state.OpenAnimationLenght} />
+        <Overlay
+          onClick={this.closeToolPreview.bind(this)}
+          toolPreviewIsOpen={toolPreviewIsOpen}
+          openAnimationLength={openAnimationLength}
+        />
         <PseudoPreview
-          OpenAnimationLenght={this.state.OpenAnimationLenght}
-          pseudoPreviewCoords={this.state.pseudoPreviewCoords}
-          toolPreviewIsOpen={this.state.toolPreviewIsOpen}
-          toolPreviewIsAnimating={this.state.toolPreviewIsAnimating}>
-          {<ToolPreview tool={tools[this.state.chosenTool]} closeWindow={this.closeToolPreview.bind(this)} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} toolPreviewIsAnimating={this.state.toolPreviewIsAnimating} />}
+          openAnimationLength={openAnimationLength}
+          pseudoPreviewCoords={pseudoPreviewCoords}
+          toolPreviewIsOpen={toolPreviewIsOpen}
+          toolPreviewIsAnimating={toolPreviewIsAnimating}>
+          <ToolPreview
+            tool={tools[chosenTool]}
+            closeWindow={this.closeToolPreview.bind(this)}
+            toolPreviewIsOpen={toolPreviewIsOpen}
+            toolPreviewIsAnimating={toolPreviewIsAnimating}
+          />
         </PseudoPreview>
         <Skewer bgColor={backgroundColor}>
           <Padder>
@@ -283,42 +366,19 @@ export default class index extends Component {
                   {smallDescription}
                 </Description>
                 <SearchWrapper>
-                  <Searcher placeholder="Search here_" type="text" value={this.state.searchQuery} onChange={this.changeSearchQuery.bind(this)} />
+                  <Searcher
+                    placeholder="Search here_"
+                    type="text"
+                    value={searchQuery}
+                    onChange={this.changeSearchQuery.bind(this)}
+                  />
                 </SearchWrapper>
               </TopWrapper>
               <Filters>
-                {toolFilters.map((toolFilter, i) => {
-                  const isChosen = this.state.chosenFilter === toolFilter.title
-                  return (
-                    <Filter isChosen={isChosen}
-                    onClick={!isChosen ? this.chooseFilter.bind(this, toolFilter.title) : ()=>{} }
-                    key={i} >
-                      <RemoveFilter isChosen={isChosen} onClick={this.chooseFilter.bind(this, '')} key={i} />
-                      {toolFilter.title}
-                    </Filter>
-                  )
-                })}
+                {toolFilters.map(this.renderToolFilter.bind(this))}
               </Filters>
               <ToolView>
-                {tools.map((tool, i) => {
-                  const toolIsQueryed = tool.headline.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1
-                    || tool.description.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1
-
-                  const toolIsFiltered = tool.toolFilters.map(toolFilter => toolFilter.title).indexOf(this.state.chosenFilter) !== -1 || this.state.chosenFilter === ''
-                  if(toolIsFiltered && toolIsQueryed){
-                    return <ToolThump
-                      openTool={this.openToolPreview.bind(this)}
-                      headline={tool.headline}
-                      description={tool.description}
-                      icon={tool.icon}
-                      image={tool.image}
-                      bgColor={tool.bgColor}
-                      key={i}
-                      i={i}
-                      toolFilters={tool.toolFilters}
-                    />
-                  }
-                })}
+                {tools.map(this.renderTool.bind(this))}
               </ToolView>
             </Container>
           </Padder>
@@ -328,16 +388,14 @@ export default class index extends Component {
   }
 }
 
-index.propTypes = {
+ToolboxBig.propTypes = {
   sideText: PropTypes.string,
   smallDescription: PropTypes.string,
-  backgroundColor: PropTypes.shape({
-    hex: PropTypes.string
-  }),
-  toolFilters: PropTypes.shape({
+  backgroundColor: PropTypes.string,
+  toolFilters: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string
-  }),
-  tools: PropTypes.shape({
+  })),
+  tools: PropTypes.arrayOf(PropTypes.shape({
     headline: PropTypes.string,
     description: PropTypes.string,
     icon: PropTypes.shape({
@@ -349,16 +407,18 @@ index.propTypes = {
     bgColor: PropTypes.shape({
       hex: PropTypes.string
     }),
-    references: PropTypes.shape({
+    references: PropTypes.arrayOf(PropTypes.shape({
       path: PropTypes.string,
       description: PropTypes.string,
       isExternal: PropTypes.bool,
       name: PropTypes.string
-    }),
-    examples: PropTypes.shape({
+    })),
+    examples: PropTypes.arrayOf(PropTypes.shape({
       path: PropTypes.string,
       isExternal: PropTypes.bool,
       name: PropTypes.string
-    }),
-  })
+    }))
+  }))
 }
+
+export default ToolboxBig

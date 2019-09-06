@@ -100,7 +100,7 @@ export default (block) => {
           key={block.id}
           sideText={block.sideText}
           tools={block.tools}
-          backgroundColor={block.backgroundColor.hex}
+          backgroundColor={block.backgroundColor && block.backgroundColor.hex}
           toolFilters={block.toolFilters}
           smallDescription={block.smallDescription}
         />
