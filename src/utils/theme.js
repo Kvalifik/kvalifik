@@ -3,6 +3,13 @@ import gridFactory from 'ie-grid-mixins'
 
 const theme = {
   grid: gridFactory(css),
+  clearfix: () => css`
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  `,
   navBarWidth: '65px',
   padding: {
     sm: '15px'

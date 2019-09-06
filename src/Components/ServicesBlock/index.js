@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import ServiceList from './ServiceList'
+import ServicePreview from './ServicePreview'
 
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
@@ -47,6 +48,9 @@ class ServicesBlock extends Component {
               services={services}
               selected={selected}
               onSelect={this.handleSelect.bind(this)}
+              renderPreview={(service) => (
+                <ServicePreview service={service} />
+              )}
             />
           </Content>
         </Container>

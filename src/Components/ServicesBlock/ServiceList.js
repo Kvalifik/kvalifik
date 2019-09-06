@@ -1,20 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import PropTypes from 'prop-types'
+import { servicePropType } from 'models/service'
 
 const Root = styled.div`
-  ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 2fr 3fr'
-  ])}
-
   min-height: 100vh;
-`
-
-const ListWrapper = styled.div`
-  ${props => props.theme.grid('grid-column: 1')}
-
-  margin-right: ${props => props.theme.spacing(5)};
+  position: relative;
 `
 
 const Icon = styled.img`
@@ -34,17 +25,23 @@ const ListItem = styled.div`
     : props.theme.palette.dark};
 
   padding: ${props => props.theme.spacing(1.5)};
+  height: 64px;
+  width: 40%;
+
+  position: absolute;
+  top: ${props => `calc(${props.index} * (64px + ${props.theme.spacing(1)}))`};
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: start;
 
   font-weight: bold;
-  margin-bottom: ${props => props.theme.spacing(1.5)};
   transform-origin: center;
   transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   transform: ${props => props.selected ? 'none !important' : 'none'};
   cursor: ${props => props.selected ? 'default' : 'pointer'};
+  outline: none;
 
   & > ${Icon} {
     filter: ${props => props.selected ? 'invert(1)' : 'none'};
@@ -67,33 +64,82 @@ const ListItem = styled.div`
       transform: translate3d(-7px, 0, 0);
     }
   }
+
+  @media ${props => props.theme.media.md} {
+    position: static;
+    width: 100%;
+    margin-bottom: ${props => props.theme.spacing(1)};
+    font-size: 0.8em;
+  }
+`
+
+const grow = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
+const Preview = styled.div`
+  float: right;
+  width: 60%;
+  overflow: hidden;
+
+  transform-origin: top center;
+  animation: ${grow} 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: initial;
+  padding-left: ${props => props.theme.spacing(5)};
+
+  @media ${props => props.theme.media.md} {
+    position: static;
+    top: initial;
+    right: initial;
+    bottom: initial;
+    width: 100%;
+    margin: ${props => props.theme.spacing(0, 0, 3)};
+    padding-left: 0;
+  }
 `
 
 const ServiceList = ({
   services,
   selected,
-  onSelect
-}) => console.log(services.length) || (
+  onSelect,
+  renderPreview
+}) => (
   <Root>
-    <ListWrapper>
-      {services.map((service, index) => (
-        <ListItem selected={selected === index} onClick={() => onSelect(index)}>
+    {services.map((service, index) => (
+      <>
+        <ListItem
+          selected={selected === index}
+          onClick={() => onSelect(index)}
+          index={index}
+        >
           <Icon src={service.icon && service.icon.url} />
           {service.label}
         </ListItem>
-      ))}
-    </ListWrapper>
+        {selected === index && (
+          <Preview>
+            {renderPreview(service)}
+          </Preview>
+        )}
+      </>
+    ))}
   </Root>
 )
 
 ServiceList.propTypes = {
-  services: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    icon: PropTypes.shape({
-      url: PropTypes.string
-    })
-  })),
-  selected: PropTypes.number
+  services: PropTypes.arrayOf(servicePropType),
+  selected: PropTypes.number,
+  onSelect: PropTypes.func,
+  renderPreview: PropTypes.func
 }
 
 export default ServiceList
