@@ -10,8 +10,12 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "lint": "eslint . && stylelint 'src/**/*.js'",
-    "pre-push": "eslint ."
+    "lint": "eslint . && stylelint 'src/**/*.js'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "eslint ."
+    }
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
