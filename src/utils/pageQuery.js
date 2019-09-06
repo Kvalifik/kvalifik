@@ -79,6 +79,42 @@ export const query = graphql`
       }
     }
   }
+  fragment ToolboxBigFragment on DatoCmsToolboxBig {
+    sideText
+    smallDescription
+    backgroundColor {
+      hex
+    }
+    toolFilters {
+      title
+    }
+    tools {
+      headline
+      id
+      description
+      image {
+        url
+      }
+      subHeadline
+      toolFilters {
+        title
+      }
+      icon {
+        url
+      }
+      references {
+        path
+        name
+        description
+        isExternal
+      }
+      examples {
+        path
+        name
+        isExternal
+      }
+    }
+  }
   fragment ActionBlockFragment on DatoCmsAction {
     id
     title
@@ -216,6 +252,7 @@ export const query = graphql`
       ...CaseGridFragment
       ...CaseInfoFragment
       ...ToolboxFragment
+      ...ToolboxBigFragment
       ...OverlayBlockFragment
       ...QuoteBlockFragment
       ...PeopleBlockFragment

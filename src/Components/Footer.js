@@ -185,9 +185,8 @@ const Footer = ({
       return -1
     } else if (a.timestamp < b.timestamp) {
       return 1
-    } else {
-      return 0
     }
+    return 0
   })
   const slicedFeed = mappedFeed.slice(0, 4)
 

@@ -33,22 +33,20 @@ const OverlayBlock = ({
   title,
   imageUrl,
   description
-}) => {
-  return (
-    <Skewer noPadding bgImageUrl={imageUrl} layer={1200}>
-      <Padder removeOnMedia="lg">
-        <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
-          <Container noContentWrapper>
-            <Content>
-              <Header>{title}</Header>
-              <Description dangerouslySetInnerHTML={{ __html: description }} />
-            </Content>
-          </Container>
-        </Skewer>
-      </Padder>
-    </Skewer>
-  )
-}
+}) => (
+  <Skewer noPadding bgImageUrl={imageUrl} layer={1200}>
+    <Padder removeOnMedia="lg">
+      <Skewer bgColor={theme.hexToRgba(bgColor, 0.9)} half>
+        <Container noContentWrapper>
+          <Content>
+            <Header>{title}</Header>
+            <Description dangerouslySetInnerHTML={{ __html: description }} />
+          </Content>
+        </Container>
+      </Skewer>
+    </Padder>
+  </Skewer>
+)
 
 OverlayBlock.propTypes = {
   bgColor: PropTypes.string,

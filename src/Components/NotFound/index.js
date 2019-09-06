@@ -104,35 +104,33 @@ const NotFound = ({
   button,
   logoUrl,
   imageUrl
-}) => {
-  return (
-    <Root>
-      <Top>
-        <Link to="/">
-          {logoUrl && <Logo src={logoUrl} />}
-        </Link>
-      </Top>
-      <Content>
-        <Error>Error</Error>
-        <Title>{title}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: description }} />
-        <Button
-          fullWidth
-          to={button.path}
-          isExternal={button.isExternal}
-          bgColor={theme.palette.dark}
-          color={theme.palette.light}
-          type="link"
-        >
-          {button.name}
-        </Button>
-      </Content>
-      {imageUrl && (
-        <Image src={imageUrl} />
-      )}
-    </Root>
-  )
-}
+}) => (
+  <Root>
+    <Top>
+      <Link to="/">
+        {logoUrl && <Logo src={logoUrl} />}
+      </Link>
+    </Top>
+    <Content>
+      <Error>Error</Error>
+      <Title>{title}</Title>
+      <Description dangerouslySetInnerHTML={{ __html: description }} />
+      <Button
+        fullWidth
+        to={button.path}
+        isExternal={button.isExternal}
+        bgColor={theme.palette.dark}
+        color={theme.palette.light}
+        type="link"
+      >
+        {button.name}
+      </Button>
+    </Content>
+    {imageUrl && (
+      <Image src={imageUrl} />
+    )}
+  </Root>
+)
 
 NotFound.propTypes = {
   title: PropTypes.string,

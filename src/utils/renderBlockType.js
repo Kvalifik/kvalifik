@@ -5,6 +5,7 @@ import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import Toolbox from 'Components/Toolbox'
+import ToolboxBig from 'Components/ToolboxBig'
 import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
@@ -53,19 +54,17 @@ export default (block) => {
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
         >
-          {block.cases.map(work => {
-            return (
-              <CaseThump
-                key={work.id}
-                name={work.forWho}
-                description={work.description}
-                bgUrl={work.image.url}
-                bgColor={work.color.hex}
-                fullWidth={work.fullSize}
-                workUrl={work.page && work.page.url}
-              />
-            )
-          })}
+          {block.cases.map(work => (
+            <CaseThump
+              key={work.id}
+              name={work.forWho}
+              description={work.description}
+              bgUrl={work.image.url}
+              bgColor={work.color.hex}
+              fullWidth={work.fullSize}
+              workUrl={work.page && work.page.url}
+            />
+          ))}
         </CaseGrid>
       )
     case 'DatoCmsSlogan':
@@ -93,6 +92,17 @@ export default (block) => {
           key={block.id}
           tools={block.tools}
           bgColor={block.bgColor && block.bgColor.hex}
+        />
+      )
+    case 'DatoCmsToolboxBig':
+      return (
+        <ToolboxBig
+          key={block.id}
+          sideText={block.sideText}
+          tools={block.tools}
+          backgroundColor={block.backgroundColor && block.backgroundColor.hex}
+          toolFilters={block.toolFilters}
+          smallDescription={block.smallDescription}
         />
       )
     case 'DatoCmsOverlay':

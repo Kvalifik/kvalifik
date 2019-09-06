@@ -1,3 +1,5 @@
+/* eslint max-len: 0 */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
@@ -6,7 +8,10 @@ import theme from 'utils/theme'
 const Root = styled.div`
   overflow: hidden;
   position: ${props => props.position || 'relative'};
-  height: ${props => props.height ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)` : 'auto'};
+  height:
+    ${props => props.height
+    ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)`
+    : 'auto'};
   width: 100%;
   transform-origin: 0%;
   transform: skewY(${props => props.angle}deg);

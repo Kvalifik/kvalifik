@@ -67,20 +67,18 @@ const Cross = styled.div`
   }
 `
 
-const ToggleNavButton = props => {
-  return (
-    <Root collapsed={props.collapsed}>
-      <Burger collapsed={props.collapsed}>
-        <IconChild1 />
-        <IconChild2 />
-      </Burger>
-      <Cross collapsed={props.collapsed}>
-        <IconChild1 />
-        <IconChild2 />
-      </Cross>
-    </Root>
-  )
-}
+const ToggleNavButton = props => (
+  <Root collapsed={props.collapsed}>
+    <Burger collapsed={props.collapsed}>
+      <IconChild1 />
+      <IconChild2 />
+    </Burger>
+    <Cross collapsed={props.collapsed}>
+      <IconChild1 />
+      <IconChild2 />
+    </Cross>
+  </Root>
+)
 
 ToggleNavButton.propTypes = {
   collapsed: PropTypes.bool

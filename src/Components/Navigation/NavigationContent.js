@@ -137,7 +137,12 @@ const NavigationContent = props => {
         <SocialIcons>
           {
             socialMediaLinks.map((socialMediaLink, i) =>
-              <SocialIcon href={socialMediaLink.linkUrl} collapsed={collapsed} key={i} index={i + navigationItems.length}>
+              <SocialIcon
+                href={socialMediaLink.linkUrl}
+                collapsed={collapsed}
+                key={i}
+                index={i + navigationItems.length}
+              >
                 <img src={socialMediaLink.icon.url} />
               </SocialIcon>
             )
