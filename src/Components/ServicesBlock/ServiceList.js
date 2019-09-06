@@ -69,6 +69,9 @@ const ListItem = styled.div`
     position: static;
     width: 100%;
     margin-bottom: ${props => props.theme.spacing(1)};
+  }
+
+  @media ${props => props.theme.media.lg} {
     font-size: 0.8em;
   }
 `
