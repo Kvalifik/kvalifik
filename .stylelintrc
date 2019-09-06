@@ -6,6 +6,8 @@
   ],
   "syntax": "scss",
   "rules": {
-    "declaration-empty-line-before": null
+    "declaration-empty-line-before": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null
   }
 }

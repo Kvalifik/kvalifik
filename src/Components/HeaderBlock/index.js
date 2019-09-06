@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
@@ -9,8 +9,29 @@ import VideoFullscreen from 'Blocks/VideoFullscreen'
 import PlayButton from './PlayButton'
 import ThumbImage from './ThumbImage'
 
+const IEContent = css`
+  display: -ms-grid;
+  -ms-grid-columns: 3fr 4fr;
+  -ms-grid-rows: 2fr 4fr;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+
+  @media ${props => props.theme.media.lg} {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    -ms-grid-columns: 1fr;
+  }
+
+  @media ${props => props.theme.media.xl} {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+`
+
 const Content = styled.div`
+  ${IEContent}
   display: grid;
+
   grid-template-columns: 3fr 4fr;
   grid-template-rows: 2fr 4fr;
   grid-column: 1 / -1;
@@ -34,7 +55,23 @@ const Content = styled.div`
   }
 `
 
+const IETopLeftContainer = css`
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-row-align: end;
+  -ms-grid-column-align: center;
+
+  @media ${props => props.theme.media.lg} {
+    -ms-grid-column-align: start;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+`
+
 const TopLeftContainer = styled.div`
+  ${IETopLeftContainer}
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   padding: 0 ${props => props.theme.spacing(6)};
@@ -53,9 +90,31 @@ const TopLeftContainer = styled.div`
     grid-column: 1 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
   }
+
+  & > ${Icon} {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+`
+
+const IEBottomLeftContainer = css`
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  -ms-grid-column-align: center;
+
+  @media ${props => props.theme.media.lg} {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    -ms-grid-column-align: start;
+  }
 `
 
 const BottomLeftContainer = styled.div`
+  ${IEBottomLeftContainer}
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   padding: 0 ${props => props.theme.spacing(6)};
@@ -75,7 +134,22 @@ const BottomLeftContainer = styled.div`
   }
 `
 
+const IERightContainer = css`
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+
+  @media ${props => props.theme.media.lg} {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+  }
+`
+
 const RightContainer = styled.div`
+  ${IERightContainer}
   grid-column: 2 / 3;
   grid-row: 1 / -1;
   height: 145vh;
@@ -87,7 +161,8 @@ const RightContainer = styled.div`
 
     height: 55vw;
     padding: ${props => props.theme.spacing(2)};
-    iframe, video {
+
+    video {
       height: initial;
     }
   }
@@ -101,6 +176,7 @@ const Title = styled.div`
   @media ${props => props.theme.media.md} {
     font-size: 4.5vw;
   }
+
   @media ${props => props.theme.media.sm} {
     font-size: 7vw;
   }
@@ -151,7 +227,7 @@ class HeaderBlock extends Component {
           <Container noContentWrapper>
             <Content>
               <TopLeftContainer>
-                <Icon src={iconUrl} />
+                {iconUrl && (<Icon src={iconUrl} />)}
                 <Title>{title}</Title>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />

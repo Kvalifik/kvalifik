@@ -92,10 +92,14 @@ const HomeLink = styled.div`
 const KvalfikLogo = styled.img`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   height: 30px;
+  display: none;
 
   @media ${props => props.theme.media.sm} {
-    width: 80px;
+    display: block;
+    width: ${props => props.isGlitch ? '110px' : '80px'};
     height: initial;
+    margin: ${props => props.isGlitch ? '-10px -15px' : 0};
+    filter: ${props => props.isGlitch ? 'invert(1)' : 'none'};
   }
 `
 
@@ -116,14 +120,15 @@ class Navigation extends Component {
       navigationItems,
       navigationLinks,
       socialMediaLinks,
-      logoUrl
+      logoUrl,
+      isGlitch
     } = this.props
 
     return (
       <NavDiv collapsed={this.state.collapsed}>
         <HomeLink collapsed={this.state.collapsed}>
           <Link to="/">
-            <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} />
+            <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} isGlitch={isGlitch} />
           </Link>
         </HomeLink>
         <IconWrapper onClick={this.toggleNavigation.bind(this)} >
@@ -152,7 +157,8 @@ Navigation.propTypes = {
     isExternal: PropTypes.bool
   })),
   socialMediaLinks: PropTypes.array,
-  logoUrl: PropTypes.string
+  logoUrl: PropTypes.string,
+  isGlitch: PropTypes.bool
 }
 
 export default Navigation

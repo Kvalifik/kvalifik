@@ -122,6 +122,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     images {
       url
@@ -156,6 +157,7 @@ export const query = graphql`
     buttonLink {
       name
       path
+      isExternal
     }
     labelOne
     labelTwo
@@ -201,6 +203,42 @@ export const query = graphql`
       hex
     }
   }
+  fragment PeopleBlockFragment on DatoCmsPeopleBlock {
+    id
+    title
+    word
+    pronounce
+    description
+    employees {
+      id
+      name
+      jobTitle
+      phone
+      email
+      color {
+        hex
+      }
+      image {
+        url
+      }
+    }
+  }
+  fragment NotFoundBlock on DatoCms404 {
+    id
+    title
+    description
+    logo {
+      url
+    }
+    buttonLink {
+      isExternal
+      name
+      path
+    }
+    image {
+      url
+    }
+  }
 
   fragment PageFragment on DatoCmsPage {
     title
@@ -217,6 +255,8 @@ export const query = graphql`
       ...ToolboxBigFragment
       ...OverlayBlockFragment
       ...QuoteBlockFragment
+      ...PeopleBlockFragment
+      ...NotFoundBlock
     }
   }
 `
