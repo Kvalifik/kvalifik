@@ -92,7 +92,7 @@ const HomeLink = styled.div`
 const KvalfikLogo = styled.img`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
   height: 30px;
-  display: none;
+  display: ${props => props.isGlitch ? 'none' : 'block'};
 
   @media ${props => props.theme.media.sm} {
     display: block;
