@@ -262,13 +262,16 @@ export default class index extends Component {
       toolFilters,
       tools
     } = this.props
+
+    console.log(this.state)
+
     return (
       <Root>
         <Overlay onClick={this.closeToolPreview.bind(this)} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} OpenAnimationLenght={this.state.OpenAnimationLenght} />
-        <PseudoPreview 
-          OpenAnimationLenght={this.state.OpenAnimationLenght} 
-          pseudoPreviewCoords={this.state.pseudoPreviewCoords} 
-          toolPreviewIsOpen={this.state.toolPreviewIsOpen} 
+        <PseudoPreview
+          OpenAnimationLenght={this.state.OpenAnimationLenght}
+          pseudoPreviewCoords={this.state.pseudoPreviewCoords}
+          toolPreviewIsOpen={this.state.toolPreviewIsOpen}
           toolPreviewIsAnimating={this.state.toolPreviewIsAnimating}>
           {<ToolPreview tool={tools[this.state.chosenTool]} closeWindow={this.closeToolPreview.bind(this)} toolPreviewIsOpen ={this.state.toolPreviewIsOpen} toolPreviewIsAnimating={this.state.toolPreviewIsAnimating} />}
         </PseudoPreview>
@@ -298,8 +301,8 @@ export default class index extends Component {
               </Filters>
               <ToolView>
                 {tools.map((tool, i) => {
-                  const toolIsQueryed = tool.headline.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1 
-                    || tool.description.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1 
+                  const toolIsQueryed = tool.headline.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1
+                    || tool.description.toUpperCase().search((this.state.searchQuery.toUpperCase())) !== -1
 
                   const toolIsFiltered = tool.toolFilters.map(toolFilter => toolFilter.title).indexOf(this.state.chosenFilter) !== -1 || this.state.chosenFilter === ''
                   if(toolIsFiltered && toolIsQueryed){

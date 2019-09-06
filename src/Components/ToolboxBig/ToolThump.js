@@ -104,8 +104,7 @@ export default class ToolThump extends Component {
       icon,
       image,
       bgColor } = this.props
-      
- 
+
     return (
       <Root onClick={() => this.props.openTool(i, this.updateDimension())}>
         <Center>

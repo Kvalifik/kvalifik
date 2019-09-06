@@ -99,6 +99,7 @@ export default (block) => {
     case 'DatoCmsToolboxBig':
       return (
         <ToolboxBig
+          key={block.id}
           sideText={block.sideText}
           tools={block.tools}
           backgroundColor={block.backgroundColor.hex}
