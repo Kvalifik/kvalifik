@@ -112,29 +112,27 @@ const ToolBoxSlider = ({
   onChooseTool,
   tools,
   chosenTool
-}) => {
-  return (
-    <Root>
-      <Slider>
-        <SliderElement arrow onClick={() => onSlideTool(-1)}>
-          <Img src={leftArrow} arrow />
+}) => (
+  <Root>
+    <Slider>
+      <SliderElement arrow onClick={() => onSlideTool(-1)}>
+        <Img src={leftArrow} arrow />
+      </SliderElement>
+      {tools.map((tool, i) => (
+        <SliderElement
+          onClick={() => onChooseTool(i)}
+          key={tool.id}
+          chosen={(chosenTool === i)}
+        >
+          <Img src={tools[i].icon.url} />
         </SliderElement>
-        {tools.map((tool, i) => (
-          <SliderElement
-            onClick={() => onChooseTool(i)}
-            key={tool.id}
-            chosen={(chosenTool === i)}
-          >
-            <Img src={tools[i].icon.url} />
-          </SliderElement>
-        ))}
-        <SliderElement arrow onClick={() => onSlideTool(1)}>
-          <Img src={leftArrow} reverse arrow />
-        </SliderElement>
-      </Slider>
-    </Root>
-  )
-}
+      ))}
+      <SliderElement arrow onClick={() => onSlideTool(1)}>
+        <Img src={leftArrow} reverse arrow />
+      </SliderElement>
+    </Slider>
+  </Root>
+)
 
 ToolBoxSlider.propTypes = {
   tools: PropTypes.array,

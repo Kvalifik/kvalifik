@@ -79,33 +79,31 @@ const Button = ({
   fullWidth,
   children,
   ...others
-}) => {
-  return (
-    <ButtonWrapper color={color} fullWidth={fullWidth}>
-      {type === 'button' && (
-        <button onClick={onClick} {...others}>
-          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
-            {children}
-          </ButtonContent>
-        </button>
-      )}
-      {type === 'link' && isExternal && (
-        <a href={to} target="_blank" {...others}>
-          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
-            {children}
-          </ButtonContent>
-        </a>
-      )}
-      {type === 'link' && !isExternal && (
-        <Link to={to} {...others}>
-          <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
-            {children}
-          </ButtonContent>
-        </Link>
-      )}
-    </ButtonWrapper>
-  )
-}
+}) => (
+  <ButtonWrapper color={color} fullWidth={fullWidth}>
+    {type === 'button' && (
+      <button onClick={onClick} {...others}>
+        <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+          {children}
+        </ButtonContent>
+      </button>
+    )}
+    {type === 'link' && isExternal && (
+      <a href={to} target="_blank" {...others}>
+        <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+          {children}
+        </ButtonContent>
+      </a>
+    )}
+    {type === 'link' && !isExternal && (
+      <Link to={to} {...others}>
+        <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
+          {children}
+        </ButtonContent>
+      </Link>
+    )}
+  </ButtonWrapper>
+)
 
 Button.propTypes = {
   fullWidth: PropTypes.bool,

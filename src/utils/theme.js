@@ -123,7 +123,7 @@ const appendMixins = (theme) => ({
   skewer: {
     ...theme.skewer,
     calculateOffset: (type) => {
-      let angle = theme.skewer[type + 'Angle']
+      const angle = theme.skewer[type + 'Angle']
       let offset = 0
 
       // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique

@@ -14,6 +14,15 @@ const Root = styled.div`
   background-color: ${props => props.bgColor};
 `
 
+const loop = (value, min, max) => {
+  if (value > max) {
+    value = min
+  } else if (value < min) {
+    value = max
+  }
+  return value
+}
+
 class Toolbox extends Component {
   constructor (props) {
     super(props)
@@ -39,21 +48,12 @@ class Toolbox extends Component {
     })
   }
 
-  loop (value, min, max) {
-    if (value > max) {
-      value = min
-    } else if (value < min) {
-      value = max
-    }
-    return value
-  }
-
   slideTool (direction) {
     const { tools } = this.props
 
     this.changeFadeState(() => {
       this.setState({
-        chosenTool: this.loop(
+        chosenTool: loop(
           this.state.chosenTool + direction,
           0,
           tools.length - 1

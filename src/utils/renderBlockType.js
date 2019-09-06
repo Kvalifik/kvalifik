@@ -54,19 +54,17 @@ export default (block) => {
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
         >
-          {block.cases.map(work => {
-            return (
-              <CaseThump
-                key={work.id}
-                name={work.forWho}
-                description={work.description}
-                bgUrl={work.image.url}
-                bgColor={work.color.hex}
-                fullWidth={work.fullSize}
-                workUrl={work.page && work.page.url}
-              />
-            )
-          })}
+          {block.cases.map(work => (
+            <CaseThump
+              key={work.id}
+              name={work.forWho}
+              description={work.description}
+              bgUrl={work.image.url}
+              bgColor={work.color.hex}
+              fullWidth={work.fullSize}
+              workUrl={work.page && work.page.url}
+            />
+          ))}
         </CaseGrid>
       )
     case 'DatoCmsSlogan':

@@ -237,7 +237,7 @@ export default class index extends Component {
     this.setState({pseudoPreviewCoords: newPseudoPreviewCoords})
     this.setState({chosenTool: i})
     setTimeout(()=>{
-      this.setState({toolPreviewIsOpen: true})
+      this.setState({ toolPreviewIsOpen: true })
       this.setState({toolPreviewIsAnimating: true})
     }, 10)
     setTimeout(()=>{

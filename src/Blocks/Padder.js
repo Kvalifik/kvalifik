@@ -12,13 +12,11 @@ const Root = styled.div`
   `}
 `
 
-const Padder = ({ innerPadding = '150px', removeOnMedia, children }) => {
-  return (
-    <Root innerPadding={innerPadding} removeOnMedia={removeOnMedia}>
-      {children}
-    </Root>
-  )
-}
+const Padder = ({ innerPadding = '150px', removeOnMedia, children }) => (
+  <Root innerPadding={innerPadding} removeOnMedia={removeOnMedia}>
+    {children}
+  </Root>
+)
 
 Padder.propTypes = {
   innerPadding: PropTypes.string,
