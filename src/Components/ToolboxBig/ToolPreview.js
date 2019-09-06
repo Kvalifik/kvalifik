@@ -5,6 +5,7 @@ import closeIcon from 'graphics/cross.svg'
 import rightArrow from 'graphics/rightArrow.svg'
 import targetBlank from 'graphics/target_blank.svg'
 import { Link } from 'gatsby'
+import { enableScroll } from 'utils/modal'
 
 const Root = styled.div`
   position: relative;
@@ -17,7 +18,7 @@ const Preview = styled.div`
   transition: opacity 0.2s linear;
   opacity: 0;
   color: white;
-  overflow-x: scroll;
+  overflow-x: hidden;
 
   ${props => (props.toolPreviewIsOpen && !props.toolPreviewIsAnimating) && css`
       transition: opacity 0.2s linear;
@@ -240,6 +241,7 @@ const ToolPreview = ({
                 subText={reference.description || 'none'}
                 to={reference.path}
                 target={reference.isExternal && '_blank'}
+                onClick={enableScroll}
               >
                 {reference.name}
                 {reference.isExternal && <ExternalLink src={targetBlank} />}
@@ -249,7 +251,12 @@ const ToolPreview = ({
               <ExampleHeader right>EXAMPLES FROM OUR CASES</ExampleHeader>
             )}
             {tool.examples.map((example, i) => (
-              <Examples key={i} to={example.path} target={example.isExternal && '_blank'}>
+              <Examples
+                key={i}
+                to={example.path}
+                target={example.isExternal && '_blank'}
+                onClick={enableScroll}
+              >
                 {example.name}
                 <InlineArrow src={rightArrow} />
               </Examples>

@@ -45,7 +45,6 @@ const DownArrow = ({ color }) => {
     )
 
     function timeoutHandler () {
-      console.log(target, window.scrollY)
       if (target - window.scrollY > 20 && target > window.scrollY) {
         setTimeout(timeoutHandler, 10)
 
