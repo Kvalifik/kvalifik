@@ -39,7 +39,10 @@ const DownArrowIcon = styled.div`
 const DownArrow = ({ color }) => {
   function handleScroll () {
     const skewerOffset = theme.skewer.calculateOffset('large') * window.innerWidth / 100
-    const target = Math.min(window.innerHeight * 1.5, document.body.clientHeight - window.innerHeight - skewerOffset)
+    const target = Math.min(
+      window.innerHeight * 1.5,
+      document.body.clientHeight - window.innerHeight - skewerOffset
+    )
 
     function timeoutHandler () {
       console.log(target, window.scrollY)
