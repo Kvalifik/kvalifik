@@ -58,7 +58,7 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services">
+          <Container sideText="Services" fluid>
             <Content>
               <ServiceList
                 services={services}
