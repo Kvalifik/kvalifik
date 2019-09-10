@@ -51,7 +51,6 @@ const Icon = styled.img`
   left: 0;
   right: 0;
   bottom: 0;
-  /* bottom: ${props => props.theme.spacing(2)}; */
 `
 
 const Headline = styled.p`
@@ -65,11 +64,7 @@ const Headline = styled.p`
   padding-bottom: 50%;
 `
 
-export default class ToolThump extends Component {
-  updateDimension () {
-    return ReactDOM.findDOMNode(this).getBoundingClientRect()
-  }
-
+export default class ToolThumb extends Component {
   static propTypes = {
     id: PropTypes.number,
     openTool: PropTypes.any,
@@ -85,15 +80,26 @@ export default class ToolThump extends Component {
     })
   }
 
+  getDimensions () {
+    return ReactDOM.findDOMNode(this).getBoundingClientRect()
+  }
+
+  handleOpenTool () {
+    const { openTool, id } = this.props
+
+    if (typeof openTool === 'function') {
+      openTool(id, this.getDimensions())
+    }
+  }
+
   render () {
     const {
       headline,
-      id,
       icon
     } = this.props
 
     return (
-      <Root onClick={() => this.props.openTool(id, this.updateDimension())}>
+      <Root onClick={this.handleOpenTool.bind(this)}>
         <Center>
           <IconWrapper>
             <Icon src={icon.url} />

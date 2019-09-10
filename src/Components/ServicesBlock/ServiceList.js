@@ -26,7 +26,7 @@ const ListItem = styled.div`
 
   padding: ${props => props.theme.spacing(1.5)};
   height: 64px;
-  width: 40%;
+  width: 35%;
 
   position: absolute;
   top: ${props => `calc(${props.index} * (64px + ${props.theme.spacing(1)}))`};
@@ -88,7 +88,7 @@ const grow = keyframes`
 
 const Preview = styled.div`
   float: right;
-  width: 60%;
+  width: 65%;
   overflow: hidden;
 
   transform-origin: top center;
@@ -98,7 +98,7 @@ const Preview = styled.div`
   top: 0;
   right: 0;
   bottom: initial;
-  padding-left: ${props => props.theme.spacing(5)};
+  padding-left: ${props => props.theme.spacing(2)};
 
   @media ${props => props.theme.media.md} {
     position: static;
@@ -119,10 +119,10 @@ const ServiceList = ({
 }) => (
   <Root>
     {services.map((service, index) => (
-      <>
+      <React.Fragment key={index}>
         <ListItem
           selected={selected === index}
-          onClick={() => onSelect(index)}
+          onClick={(ev) => onSelect(ev, index)}
           index={index}
         >
           <Icon src={service.icon && service.icon.url} />
@@ -133,7 +133,7 @@ const ServiceList = ({
             {renderPreview(service)}
           </Preview>
         )}
-      </>
+      </React.Fragment>
     ))}
   </Root>
 )

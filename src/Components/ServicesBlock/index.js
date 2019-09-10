@@ -17,13 +17,26 @@ class ServicesBlock extends Component {
     super(props)
 
     this.state = {
-      selected: -1
+      selected: -1,
+      selectedEl: null
     }
   }
 
-  handleSelect (next) {
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.selected !== this.state.selected) {
+      const topY = this.state.selectedEl.getBoundingClientRect().top
+      const scrollY = window.scrollY
+
+      if (topY < 0) {
+        window.scrollTo(0, scrollY + topY - 16)
+      }
+    }
+  }
+
+  handleSelect (ev, next) {
     this.setState({
-      selected: next
+      selected: next,
+      selectedEl: ev.currentTarget
     })
   }
 

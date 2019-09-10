@@ -245,6 +245,19 @@ export const query = graphql`
       icon {
         url
       }
+      image {
+        url
+      }
+      title
+      description
+      relatedTools {
+        ...on DatoCmsTool {
+          headline
+          icon {
+            url
+          }
+        }
+      }
     }
   }
 
