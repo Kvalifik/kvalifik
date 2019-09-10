@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
+  overflow: hidden;
   position: ${props => props.position || 'relative'};
   height:
     ${props => props.height
@@ -13,7 +14,7 @@ const Root = styled.div`
     : 'auto'};
   width: 100%;
   transform-origin: 0%;
-  /* transform: skewY(${props => props.angle}deg); */
+  transform: skewY(${props => props.angle}deg);
   z-index: ${props => props.layer || 'auto'};
 
   margin-top: ${props => props.marginTop}vw;
@@ -58,7 +59,7 @@ const Root = styled.div`
 `
 
 const Inner = styled.div`
-  /* transform: skewY(${props => -props.angle}deg); */
+  transform: skewY(${props => -props.angle}deg);
   margin-top: ${props => props.paddingTop}vw;
   margin-bottom: ${props => props.paddingBottom}vw;
 `
