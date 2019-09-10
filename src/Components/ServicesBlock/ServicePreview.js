@@ -17,6 +17,11 @@ const Root = styled.div`
 `
 
 const TextContainer = styled.div`
+  ${props => props.theme.grid.all([
+    'grid-column: 1',
+    'grid-row: 1'
+  ])}
+
   padding: ${props => props.theme.spacing(2, 2, 2, 4)};
 
   @media ${props => props.theme.media.lg} {
@@ -25,6 +30,11 @@ const TextContainer = styled.div`
 `
 
 const Media = styled.div`
+  ${props => props.theme.grid.all([
+    'grid-column: 2',
+    'grid-row: 1'
+  ])}
+
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
@@ -82,11 +92,11 @@ const Tools = styled.div`
   > * {
     ${props => props.theme.grid('grid-row: 1')}
 
-    &:nth-child(even) {
+    &:nth-child(odd) {
       ${props => props.theme.grid('grid-column: 1')}
     }
 
-    &:nth-child(odd) {
+    &:nth-child(even) {
       ${props => props.theme.grid('grid-column: 3')}
     }
   }

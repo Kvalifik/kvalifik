@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { servicePropType } from 'models/service'
 
 const Root = styled.div`
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
 `
 
