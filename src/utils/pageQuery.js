@@ -154,6 +154,9 @@ export const query = graphql`
   }
   fragment FiftyFifty on DatoCmsFiftyFifty {
     description
+    bgColor {
+      hex
+    }
     flip
     header
     media {

@@ -80,6 +80,7 @@ export default (block) => {
       return (
         <FiftyFifty
           key={block.id}
+          bgColor={block.bgColor && block.bgColor.hex}
           description={block.description}
           flip={block.flip}
           header={block.header}
