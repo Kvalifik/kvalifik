@@ -39,11 +39,11 @@ const Logo = styled.img`
 const Content = styled.div`
   width: 100%;
   max-width: 400px;
-  grid-column: 1;
+  grid-column: ${props => props.center ? '1 / 3' : '1'};
   grid-row: 1 / 3;
   align-self: center;
-  justify-self: start;
-  margin: ${props => props.theme.spacing(0, 1, 0, 12)};
+  justify-self: ${props => props.center ? 'center' : 'start'};
+  margin: ${props => props.center ? 0 : props.theme.spacing(0, 1, 0, 12)};
 
   @media ${props => props.theme.media.lg} {
     justify-self: center;
@@ -111,7 +111,7 @@ const NotFound = ({
         {logoUrl && <Logo src={logoUrl} />}
       </Link>
     </Top>
-    <Content>
+    <Content center={!imageUrl}>
       <Error>Error</Error>
       <Title>{title}</Title>
       <Description dangerouslySetInnerHTML={{ __html: description }} />
