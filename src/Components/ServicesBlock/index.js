@@ -21,6 +21,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+  margin-top: ${props => props.theme.spacing(5)};
 `
 
 class ServicesBlock extends Component {

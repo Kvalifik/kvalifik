@@ -39,7 +39,7 @@ const ButtonWrapper = styled.div`
 `
 
 const ButtonContent = styled.div`
-  padding: ${props => props.theme.spacing(2, 8)};
+  padding: ${props => props.theme.spacing(2)};
   text-transform: uppercase;
   width: 100%;
   display: flex;
