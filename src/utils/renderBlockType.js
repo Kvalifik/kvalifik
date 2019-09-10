@@ -12,7 +12,8 @@ import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
-import ServicesBlock from 'Components/ServicesBlock'
+import ServicesBlock from 'Components/Services/ServicesBlock'
+import ServicesBig from 'Components/Services/ServicesBig'
 import theme from 'utils/theme'
 
 export default (block) => {
@@ -190,6 +191,14 @@ export default (block) => {
           services={block.services}
           buttonLink={block.buttonLink}
           bgColor={block.bgColor && block.bgColor.hex}
+        />
+      )
+    }
+    case 'DatoCmsServicesBig': {
+      return (
+        <ServicesBig
+          key={block.id}
+          services={block.services}
         />
       )
     }

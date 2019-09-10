@@ -265,6 +265,29 @@ export const query = graphql`
       }
     }
   }
+  fragment ServicesBigFragment on DatoCmsServicesBig {
+    id
+    services {
+      id
+      label
+      icon {
+        url
+      }
+      image {
+        url
+      }
+      title
+      description
+      relatedTools {
+        ...on DatoCmsTool {
+          headline
+          icon {
+            url
+          }
+        }
+      }
+    }
+  }
 
   fragment PageFragment on DatoCmsPage {
     title
@@ -287,6 +310,7 @@ export const query = graphql`
       ...PeopleBlockFragment
       ...NotFoundBlockFragment
       ...ServicesBlockFragment
+      ...ServicesBigFragment
     }
   }
 `
