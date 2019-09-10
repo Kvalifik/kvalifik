@@ -13,6 +13,7 @@ import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
 import theme from 'utils/theme'
+import FiftyFifty from 'Components/FiftyFifty'
 
 export default (block) => {
   switch (block.__typename) {
@@ -69,7 +70,21 @@ export default (block) => {
       )
     case 'DatoCmsSlogan':
       return (
-        <SloganBlock bgColor={block.bgColor.hex} content={block.punchline} key={block.id} />
+        <SloganBlock
+          bgColor={block.bgColor && block.bgColor.hex}
+          content={block.punchline}
+          key={block.id}
+        />
+      )
+    case 'DatoCmsFiftyFifty':
+      return (
+        <FiftyFifty
+          key={block.id}
+          description={block.description}
+          flip={block.flip}
+          header={block.header}
+          mediaUrl={block.media.url}
+        />
       )
     case 'DatoCmsAction':
       return (
