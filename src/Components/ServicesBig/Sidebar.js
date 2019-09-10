@@ -1,11 +1,11 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { servicePropType } from 'models/service'
 
 const Root = styled.div`
-  min-height: 65vh;
-  position: relative;
+  position: sticky;
+  top: ${props => props.theme.spacing(2)};
 `
 
 const Icon = styled.img`
@@ -16,20 +16,16 @@ const Icon = styled.img`
 
 const ListItem = styled.div`
   background-color:
-    ${props => props.selected
+    ${props => !props.selected
     ? props.theme.palette.dark
     : props.theme.palette.light};
   color:
-    ${props => props.selected
+    ${props => !props.selected
     ? props.theme.palette.light
     : props.theme.palette.dark};
 
   padding: ${props => props.theme.spacing(1.5)};
-  height: 64px;
-  width: 35%;
-
-  position: absolute;
-  top: ${props => `calc(${props.index} * (64px + ${props.theme.spacing(1)}))`};
+  margin-bottom: ${props => props.theme.spacing(1)};
 
   display: flex;
   flex-direction: row;
@@ -44,7 +40,7 @@ const ListItem = styled.div`
   outline: none;
 
   & > ${Icon} {
-    filter: ${props => props.selected ? 'invert(1)' : 'none'};
+    filter: ${props => !props.selected ? 'invert(1)' : 'none'};
   }
 
   :last-child {
@@ -76,76 +72,30 @@ const ListItem = styled.div`
   }
 `
 
-const grow = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`
-
-const Preview = styled.div`
-  width: 65%;
-  overflow: hidden;
-
-  transform-origin: top center;
-  animation: ${grow} 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: initial;
-  padding-left: ${props => props.theme.spacing(2)};
-
-  @media ${props => props.theme.media.md} {
-    position: static;
-    top: initial;
-    right: initial;
-    bottom: initial;
-    width: 100%;
-    margin: ${props => props.theme.spacing(0, 0, 3)};
-    padding-left: 0;
-  }
-`
-
-const ServiceList = ({
+const Sidebar = ({
   services,
   selected,
-  onSelect,
-  renderPreview
-}) => {
-  const canRenderPreview = typeof renderPreview === 'function'
+  onSelect
+}) => (
+  <Root>
+    {services.map((service, index) => (
+      <ListItem
+        selected={selected === index}
+        onClick={(ev) => onSelect(ev, index)}
+        index={index}
+        key={index}
+      >
+        <Icon src={service.icon && service.icon.url} />
+        {service.label}
+      </ListItem>
+    ))}
+  </Root>
+)
 
-  return (
-    <Root>
-      {services.map((service, index) => (
-        <React.Fragment key={index}>
-          <ListItem
-            selected={selected === index}
-            onClick={(ev) => onSelect(ev, index)}
-            index={index}
-          >
-            <Icon src={service.icon && service.icon.url} />
-            {service.label}
-          </ListItem>
-          {selected === index && canRenderPreview && (
-            <Preview>
-              {renderPreview(service)}
-            </Preview>
-          )}
-        </React.Fragment>
-      ))}
-    </Root>
-  )
-}
-
-ServiceList.propTypes = {
+Sidebar.propTypes = {
   services: PropTypes.arrayOf(servicePropType),
   selected: PropTypes.number,
-  onSelect: PropTypes.func,
-  renderPreview: PropTypes.func
+  onSelect: PropTypes.func
 }
 
-export default ServiceList
+export default Sidebar

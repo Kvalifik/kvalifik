@@ -38,8 +38,8 @@ const ListItem = styled.div`
 
   font-weight: bold;
   transform-origin: center;
-  transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  transform: ${props => props.selected ? 'none !important' : 'none'};
+  transition: margin-left 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  margin-left: 0;
   cursor: ${props => props.selected ? 'default' : 'pointer'};
   outline: none;
 
@@ -52,17 +52,7 @@ const ListItem = styled.div`
   }
 
   :hover {
-    :nth-child(3n) {
-      transform: translate3d(-10px, 0, 0);
-    }
-
-    :nth-child(3n + 1) {
-      transform: translate3d(-13px, 0, 0);
-    }
-
-    :nth-child(3n + 2) {
-      transform: translate3d(-7px, 0, 0);
-    }
+    margin-left: -10px;
   }
 
   @media ${props => props.theme.media.md} {

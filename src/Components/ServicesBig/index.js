@@ -13,6 +13,20 @@ import theme from 'utils/theme'
 
 const Content = styled.div`
   padding: ${props => props.theme.spacing(2)};
+
+  ${props => props.theme.clearfix()}
+`
+
+const ServiceContainer = styled.div`
+  float: right;
+  padding-left: ${props => props.theme.spacing(4)};
+  width: calc(100% - 380px);
+`
+
+const SidebarWrapper = styled.div`
+  float: left;
+  width: 380px;
+  height: 800vh;
 `
 
 class ServicesBlock extends Component {
@@ -60,17 +74,21 @@ class ServicesBlock extends Component {
         <Padder padding={theme.spacing(10)}>
           <Container sideText="Services" fluid>
             <Content>
-              <Sidebar
-                services={services}
-                selected={selected}
-                onSelect={this.handleSelect.bind(this)}
-              />
-              {services && services.map((service, index) => (
-                <Service
-                  key={index}
-                  service={service}
+              <SidebarWrapper>
+                <Sidebar
+                  services={services}
+                  selected={selected}
+                  onSelect={this.handleSelect.bind(this)}
                 />
-              ))}
+              </SidebarWrapper>
+              <ServiceContainer>
+                {services && services.map((service, index) => (
+                  <Service
+                    key={index}
+                    service={service}
+                  />
+                ))}
+              </ServiceContainer>
             </Content>
           </Container>
         </Padder>
