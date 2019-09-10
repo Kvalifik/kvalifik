@@ -87,7 +87,6 @@ const grow = keyframes`
 `
 
 const Preview = styled.div`
-  float: right;
   width: 65%;
   overflow: hidden;
 
