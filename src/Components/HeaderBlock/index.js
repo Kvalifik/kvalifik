@@ -232,10 +232,16 @@ class HeaderBlock extends Component {
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer>
-                <ThumbImage src={imageUrl} />
-                {hasVideo && (
-                  <PlayButton onClick={this.handlePlay.bind(this)} />
-                )}
+                <Skewer
+                  height="100%"
+                  renderBgImage={() => (
+                    <ThumbImage src={imageUrl} />
+                  )}
+                >
+                  {hasVideo && (
+                    <PlayButton onClick={this.handlePlay.bind(this)} />
+                  )}
+                </Skewer>
               </RightContainer>
             </Content>
           </Container>

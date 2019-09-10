@@ -87,14 +87,7 @@ const ActionBlock = ({
           </Button>
         </LeftContainer>
         <RightContainer>
-          <Skewer noPadding>
-            <ImageWrapper>
-              <Gallery
-                images={imageUrls}
-                delay={galleryDelay}
-              />
-            </ImageWrapper>
-          </Skewer>
+          <Skewer bgImageUrl={imageUrls[0]} height="60vw" />
         </RightContainer>
       </Container>
     </Skewer>
