@@ -12,8 +12,8 @@ import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
-import ServicesBlock from 'Components/Services/ServicesBlock'
-import ServicesBig from 'Components/Services/ServicesBig'
+import ServicesBlock from 'Components/ServicesBlock'
+import ServicesBig from 'Components/ServicesBig'
 import theme from 'utils/theme'
 
 export default (block) => {

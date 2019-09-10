@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import ServiceList from './ServiceList'
-import ServicePreview from './ServicePreview'
+import Sidebar from './Sidebar'
+import Service from './Service'
 
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
@@ -60,14 +60,17 @@ class ServicesBlock extends Component {
         <Padder padding={theme.spacing(10)}>
           <Container sideText="Services" fluid>
             <Content>
-              <ServiceList
+              <Sidebar
                 services={services}
                 selected={selected}
                 onSelect={this.handleSelect.bind(this)}
-                renderPreview={(service) => (
-                  <ServicePreview service={service} />
-                )}
               />
+              {services && services.map((service, index) => (
+                <Service
+                  key={index}
+                  service={service}
+                />
+              ))}
             </Content>
           </Container>
         </Padder>

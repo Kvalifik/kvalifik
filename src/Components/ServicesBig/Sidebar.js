@@ -115,27 +115,31 @@ const ServiceList = ({
   selected,
   onSelect,
   renderPreview
-}) => (
-  <Root>
-    {services.map((service, index) => (
-      <React.Fragment key={index}>
-        <ListItem
-          selected={selected === index}
-          onClick={(ev) => onSelect(ev, index)}
-          index={index}
-        >
-          <Icon src={service.icon && service.icon.url} />
-          {service.label}
-        </ListItem>
-        {selected === index && (
-          <Preview>
-            {renderPreview(service)}
-          </Preview>
-        )}
-      </React.Fragment>
-    ))}
-  </Root>
-)
+}) => {
+  const canRenderPreview = typeof renderPreview === 'function'
+
+  return (
+    <Root>
+      {services.map((service, index) => (
+        <React.Fragment key={index}>
+          <ListItem
+            selected={selected === index}
+            onClick={(ev) => onSelect(ev, index)}
+            index={index}
+          >
+            <Icon src={service.icon && service.icon.url} />
+            {service.label}
+          </ListItem>
+          {selected === index && canRenderPreview && (
+            <Preview>
+              {renderPreview(service)}
+            </Preview>
+          )}
+        </React.Fragment>
+      ))}
+    </Root>
+  )
+}
 
 ServiceList.propTypes = {
   services: PropTypes.arrayOf(servicePropType),
