@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "kvalifikdk-static",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Kvalifik.dk built with Gatsby and Dato CMS!",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
