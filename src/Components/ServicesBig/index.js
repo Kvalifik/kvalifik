@@ -14,20 +14,17 @@ import theme from 'utils/theme'
 const Content = styled.div`
   padding: ${props => props.theme.spacing(2)};
 
-  ${props => props.theme.clearfix()}
+  ${props => props.theme.grid.all([
+    'display: grid',
+    'grid-template-columns: 380px 1fr'
+  ])}
 `
 
 const ServiceContainer = styled.div`
-  float: right;
   padding-left: ${props => props.theme.spacing(4)};
-  width: calc(100% - 380px);
 `
 
-const SidebarWrapper = styled.div`
-  float: left;
-  width: 380px;
-  height: 800vh;
-`
+const SidebarWrapper = styled.div``
 
 class ServicesBlock extends Component {
   constructor (props) {
