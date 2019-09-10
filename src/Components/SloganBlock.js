@@ -44,7 +44,7 @@ const SloganBlock = ({
   content
 }) => (
   <Root>
-    <Skewer bgColor={bgColor} layer={300} position="absolute">
+    <Skewer bgColor={bgColor || 'transparent'} layer={300} position="absolute">
       <Container overflowLeft overflowRight>
         <Padder>
           <Content />

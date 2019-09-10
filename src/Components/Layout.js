@@ -67,9 +67,11 @@ const App = styled.div`
   @media ${props => props.theme.media.sm} {
     padding-right: 0;
   }
+
+  background-color: ${props => props.bgColor || 'white'};
 `
 
-const Main = ({ children, hideFooter, isGlitch }) => {
+const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -124,7 +126,7 @@ const Main = ({ children, hideFooter, isGlitch }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <App>
+        <App bgColor={bgColor}>
           {children}
           {!hideFooter && (
             <Footer
@@ -149,7 +151,8 @@ const Main = ({ children, hideFooter, isGlitch }) => {
 Main.propTypes = {
   children: PropTypes.any,
   hideFooter: PropTypes.bool,
-  isGlitch: PropTypes.bool
+  isGlitch: PropTypes.bool,
+  bgColor: PropTypes.string
 }
 
 export default Main

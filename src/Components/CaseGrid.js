@@ -6,6 +6,8 @@ import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
 import Button from 'Blocks/Button'
 
+import theme from 'utils/theme'
+
 const Content = styled.div`
   display: grid;
   grid-gap: calc(30px);
@@ -58,7 +60,12 @@ const CaseGrid = (props) => {
         </Container>
         {hasMoreWork && (
           <MoreWork>
-            <Button type="link" to={moreWorkUrl} bgColor="#707070" color="white">
+            <Button
+              type="link"
+              to={moreWorkUrl}
+              bgColor={theme.hexToRgba(theme.palette.light, 0.2)}
+              color={theme.palette.light}
+            >
               More Work
             </Button>
           </MoreWork>

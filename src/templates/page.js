@@ -15,13 +15,16 @@ const PageTemplate = ({ data }) => {
   const {
     pageSetup,
     title,
-    url
+    url,
+    bgColor: {
+      hex: bgColor
+    } = {}
   } = data.datoCmsPage
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
-    <Layout>
+    <Layout bgColor={bgColor}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>

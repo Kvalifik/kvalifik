@@ -7,9 +7,20 @@ import ServicePreview from './ServicePreview'
 
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
+import Button from 'Blocks/Button'
+import Padder from 'Blocks/Padder'
+
+import theme from 'utils/theme'
 
 const Content = styled.div`
   padding: ${props => props.theme.spacing(2)};
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 `
 
 class ServicesBlock extends Component {
@@ -17,7 +28,7 @@ class ServicesBlock extends Component {
     super(props)
 
     this.state = {
-      selected: -1,
+      selected: 0,
       selectedEl: null
     }
   }
@@ -43,7 +54,8 @@ class ServicesBlock extends Component {
   render () {
     const {
       bgColor,
-      services
+      services,
+      buttonLink
     } = this.props
 
     const {
@@ -52,21 +64,36 @@ class ServicesBlock extends Component {
 
     return (
       <Skewer
-        bgColor={bgColor}
+        bgColor={bgColor || 'transparent'}
         layer={1200}
       >
-        <Container sideText="Services">
-          <Content>
-            <ServiceList
-              services={services}
-              selected={selected}
-              onSelect={this.handleSelect.bind(this)}
-              renderPreview={(service) => (
-                <ServicePreview service={service} />
+        <Padder padding={theme.spacing(10)}>
+          <Container sideText="Services">
+            <Content>
+              <ServiceList
+                services={services}
+                selected={selected}
+                onSelect={this.handleSelect.bind(this)}
+                renderPreview={(service) => (
+                  <ServicePreview service={service} />
+                )}
+              />
+              {buttonLink && (
+                <ButtonWrapper>
+                  <Button
+                    to={buttonLink.path}
+                    type="link"
+                    isExternal={buttonLink.isExternal}
+                    bgColor={theme.hexToRgba(theme.palette.light, 0.2)}
+                    color={theme.palette.light}
+                  >
+                    {buttonLink.name}
+                  </Button>
+                </ButtonWrapper>
               )}
-            />
-          </Content>
-        </Container>
+            </Content>
+          </Container>
+        </Padder>
       </Skewer>
     )
   }
@@ -74,7 +101,12 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   bgColor: PropTypes.string,
-  services: PropTypes.array
+  services: PropTypes.array,
+  buttonLink: PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string,
+    isExternal: PropTypes.bool
+  })
 }
 
 export default ServicesBlock

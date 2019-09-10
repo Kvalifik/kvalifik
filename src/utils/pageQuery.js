@@ -239,6 +239,11 @@ export const query = graphql`
   }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
+    buttonLink {
+      path
+      name
+      isExternal
+    }
     services {
       id
       label
@@ -264,6 +269,9 @@ export const query = graphql`
   fragment PageFragment on DatoCmsPage {
     title
     url
+    bgColor {
+      hex
+    }
     pageSetup {
       __typename
       ...HeaderFragment
