@@ -40,7 +40,8 @@ export default (block) => {
           title={block.title}
           body={block.description}
           iconUrl={block.icon && block.icon.url}
-          bgColor={block.bgColor.hex}
+          bgColor={block.bgColor && block.bgColor.hex}
+          textColor={block.textColor && block.textColor.hex}
           videoUrl={videoUrl}
           imageUrl={imageUrl}
         />
