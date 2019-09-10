@@ -228,9 +228,6 @@ export const query = graphql`
     id
     title
     description
-    logo {
-      url
-    }
     buttonLink {
       isExternal
       name
