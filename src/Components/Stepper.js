@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Skewer from 'Blocks/Skewer'
 import Padder from 'Blocks/Padder'
 import Container from 'Blocks/Container'
+import theme from 'utils/theme'
 
 const Root = styled.div`
   position: relative;
@@ -37,7 +38,7 @@ const StepNumber = styled.div`
 `
 
 const StepDescription = styled.p`
-  color: #ddd;
+  color: ${props => props.theme.hexToRgba(props.theme.palette.light, 0.8)};
   font-size: 15px;
 `
 
@@ -51,7 +52,7 @@ const Stepper = props => {
   const { steps } = props
   return (
     <Root>
-      <Skewer bgColor="#1d1d1d">
+      <Skewer bgColor={theme.palette.dark}>
         <Container>
           <Padder>
             <Content>
@@ -61,7 +62,7 @@ const Stepper = props => {
                   <Step key={i}>
                     <StepNumber>{i + 1}</StepNumber>
                     <StepTitle>{title}</StepTitle>
-                    <StepDescription>{description}</StepDescription>
+                    <StepDescription dangerouslySetInnerHTML={{ __html: description }} />
                   </Step>
                 )
               })}
