@@ -5,30 +5,6 @@ import styled from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
-<<<<<<< HEAD
-  overflow: hidden;
-  position: ${props => props.position || 'relative'};
-  height:
-    ${props => props.height
-    ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)`
-    : 'auto'};
-  width: 100%;
-  transform-origin: 0%;
-  transform: skewY(${props => props.angle}deg);
-  z-index: ${props => props.layer || 'auto'};
-
-  margin-top: ${props => props.marginTop}vw;
-  margin-bottom: calc(${props => props.marginBottom}vw - 3px);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    transform: skewY(${props => props.angle}deg);
-    margin-top: ${props => -props.offset}vw;
-=======
   position: relative;
   margin-top: ${props => -props.offset}vw;
   margin-bottom: 0;
@@ -37,17 +13,11 @@ const Root = styled.div`
   z-index: ${props => props.layer};
 
   &:last-child {
->>>>>>> SkewerFix
     margin-bottom: ${props => -props.offset}vw;
   }
 `
 
 const Inner = styled.div`
-<<<<<<< HEAD
-  transform: skewY(${props => -props.angle}deg);
-  margin-top: ${props => props.paddingTop}vw;
-  margin-bottom: ${props => props.paddingBottom}vw;
-=======
   position: relative;
 
   ${Root} {
@@ -89,7 +59,6 @@ const Image = styled.div`
 
   width: 100%;
   height: 100%;
->>>>>>> SkewerFix
 `
 
 const angles = {
