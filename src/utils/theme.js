@@ -1,6 +1,15 @@
 import { css } from 'styled-components'
+import gridFactory from 'ie-grid-mixins'
 
 const theme = {
+  grid: gridFactory(css),
+  clearfix: () => css`
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  `,
   navBarWidth: '65px',
   padding: {
     sm: '15px'
@@ -128,7 +137,7 @@ const appendMixins = (theme) => ({
 
       // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
       const rad = angle / 180 * Math.PI
-      offset = Math.tan(rad) * 50
+      offset = Math.tan(rad) * 100
 
       return offset
     }

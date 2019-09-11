@@ -11,10 +11,12 @@ const QuoteRoot = styled.div`
 
   @media ${props => props.theme.media.lg} {
     width: 592px;
+    padding: 100px ${props => props.theme.spacing(2)};
   }
 
   @media ${props => props.theme.media.md} {
     width: 100%;
+    padding: 60px ${props => props.theme.spacing(2)};
   }
 `
 
@@ -25,6 +27,10 @@ const QuoteText = styled.div`
   font-style: italic;
   color: ${props => props.theme.palette.dark};
   line-height: 1.4em;
+
+  @media ${props => props.theme.media.lg} {
+    font-size: 14px;
+  }
 `
 
 const QuoteAuthor = styled.p`
@@ -32,6 +38,10 @@ const QuoteAuthor = styled.p`
   font-size: 18px;
   color: ${props => props.theme.palette.dark};
   line-height: 1.6em;
+
+  @media ${props => props.theme.media.lg} {
+    font-size: 14px;
+  }
 
   &::before {
     content: "-";

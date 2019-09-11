@@ -1,4 +1,5 @@
 import React from 'react'
+
 import CaseGrid from 'Components/CaseGrid'
 import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
@@ -12,11 +13,15 @@ import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
-import theme from 'utils/theme'
+import ServicesBlock from 'Components/ServicesBlock'
+import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
+import FiftyFifty from 'Components/FiftyFifty'
+
+import theme from 'utils/theme'
 
 export default (block) => {
-  switch (block.__typename) {
+  switch (block && block.__typename) {
     case 'DatoCmsHeader': {
       const mediaType = block.media ? block.media.__typename : null
       let imageUrl = null
@@ -71,7 +76,22 @@ export default (block) => {
       )
     case 'DatoCmsSlogan':
       return (
-        <SloganBlock bgColor={block.bgColor.hex} content={block.punchline} key={block.id} />
+        <SloganBlock
+          bgColor={block.bgColor && block.bgColor.hex}
+          content={block.punchline}
+          key={block.id}
+        />
+      )
+    case 'DatoCmsFiftyFifty':
+      return (
+        <FiftyFifty
+          key={block.id}
+          bgColor={block.bgColor && block.bgColor.hex}
+          description={block.description}
+          flip={block.flip}
+          header={block.header}
+          mediaUrl={block.media && block.media.url}
+        />
       )
     case 'DatoCmsAction':
       return (
@@ -174,7 +194,6 @@ export default (block) => {
         <NotFound
           key={block.id}
           button={block.buttonLink}
-          logoUrl={block.logo && block.logo.url}
           description={block.description}
           title={block.title}
           imageUrl={block.image && block.image.url}
@@ -187,6 +206,24 @@ export default (block) => {
           steps={block.steps}
         />
       )
+    case 'DatoCmsServicesBlock': {
+      return (
+        <ServicesBlock
+          key={block.id}
+          services={block.services}
+          buttonLink={block.buttonLink}
+          bgColor={block.bgColor && block.bgColor.hex}
+        />
+      )
+    }
+    case 'DatoCmsServicesBig': {
+      return (
+        <ServicesBig
+          key={block.id}
+          services={block.services}
+        />
+      )
+    }
     default:
       return null
   }

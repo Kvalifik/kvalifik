@@ -9,9 +9,13 @@ import EasingNumber from './EasingNumber'
 const Content = styled.div`
   display: grid;
   padding: 150px 0;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   color: ${props => props.theme.palette.light};
+
+  @media ${props => props.theme.media.lg} {
+    grid-template-columns: 1fr;
+  }
 `
 
 const Description = styled.div`
@@ -20,6 +24,7 @@ const Description = styled.div`
 
   @media ${props => props.theme.media.lg} {
     text-align: center;
+    font-size: 26px;
   }
 `
 
@@ -31,6 +36,8 @@ const Number = styled.div`
 
   @media ${props => props.theme.media.lg} {
     justify-self: center;
+    font-size: 80px;
+    padding: 0;
   }
 `
 
