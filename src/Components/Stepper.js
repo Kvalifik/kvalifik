@@ -32,7 +32,6 @@ const StepNumber = styled.div`
   text-align: right;
   align-self: top;
   padding-right: ${props => props.theme.spacing(4)};
-
   font-size: 100px;
   grid-row: 1 / -1;
 `
@@ -50,7 +49,6 @@ const StepTitle = styled.div`
 
 const Stepper = props => {
   const { steps } = props
-  console.log({ steps })
   return (
     <Root>
       <Skewer bgColor="#1d1d1d">
