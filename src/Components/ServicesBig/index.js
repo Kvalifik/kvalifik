@@ -35,7 +35,47 @@ class ServicesBlock extends Component {
     super(props)
 
     this.state = {
-      selected: 0
+      selected: 0,
+      scrolling: false
+    }
+
+    this._handleScroll = this.handleScroll.bind(this)
+  }
+
+  componentDidMount () {
+    window.addEventListener('scroll', this._handleScroll)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this._handleScroll)
+  }
+
+  handleScroll () {
+    if (this.state.scrolling) return
+
+    const { services } = this.props
+
+    let serviceId = 0
+
+    for (let i = 0; i < services.length; i++) {
+      const s = services[i]
+      const el = document.getElementById(idFromLabel(s.label))
+
+      if (el) {
+        const y = window.scrollY + el.getBoundingClientRect().top + window.innerHeight / 5
+
+        if (y > window.scrollY + window.innerHeight) {
+          break
+        }
+      }
+
+      serviceId = i
+    }
+
+    if (this.state.selected !== serviceId) {
+      this.setState({
+        selected: serviceId
+      })
     }
   }
 
@@ -47,7 +87,15 @@ class ServicesBlock extends Component {
     const el = document.getElementById(id)
 
     if (el) {
-      smoothScrollTo(window.scrollY + el.getBoundingClientRect().top - 10)
+      this.setState({
+        scrolling: true
+      })
+
+      smoothScrollTo(window.scrollY + el.getBoundingClientRect().top - 10, () => {
+        this.setState({
+          scrolling: false
+        })
+      })
     }
   }
 
