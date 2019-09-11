@@ -6,12 +6,15 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   position: relative;
-  margin-top: calc(${props => -props.offset}vw - 1px);
-  margin-bottom: 0;
+  margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 1px)`};
+  margin-bottom: 0 ${props => props.half && '!important'};
   height: ${props => props.height};
   z-index: ${props => props.layer};
   padding-top: ${props => props.noPadding ? 0 : props.offset}vw;
-  padding-bottom: ${props => (props.flushBottom || props.noPadding) ? 0 : props.offset}vw;
+  padding-bottom:
+    ${props => (props.flushBottom || props.noPadding)
+    ? 0
+    : (props.half ? props.offset * 1.5 : props.offset)}vw;
 `
 
 const Inner = styled.div`
@@ -43,10 +46,6 @@ const Background = styled.div`
     height: calc(100% + ${props => props.offset}vw);
   }
 
-  @media ${props => props.theme.media.lg} {
-    background: ${props => props.bgColor};
-  }
-
   &::after {
     content: "";
     background:
@@ -63,6 +62,10 @@ const Background = styled.div`
     bottom: ${props => props.offset}vw;
     left: 0;
     right: 0;
+
+    @media ${props => props.theme.media.lg} {
+      background: ${props => props.bgColor};
+    }
   }
 `
 
@@ -101,6 +104,7 @@ const Skewer = ({
       noPadding={noPadding}
       height={height}
       flushBottom={flushBottom}
+      half={half}
     >
       <Background
         angle={angle}
