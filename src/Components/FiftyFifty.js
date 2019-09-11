@@ -10,14 +10,16 @@ const Root = styled.div`
 `
 
 const Content = styled.div`
-  padding: ${props => props.theme.spacing(2)};
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  display: grid;
+  ${props => props.theme.grid.all([
+    'display: grid',
+    'grid-template-rows: auto auto',
+    'grid-template-columns: 1fr 1fr'
+  ])}
   grid-gap: ${props => props.theme.spacing(4)};
+  padding: ${props => props.theme.spacing(2)};
 
   @media ${props => props.theme.media.lg} {
-    grid-template-columns: 1fr;
+    ${props => props.theme.grid('grid-template-columns: 1fr')}
   }
 `
 
@@ -48,8 +50,6 @@ const FiftyFifty = (props) => {
     mediaUrl,
     bgColor
   } = props
-
-  console.log(mediaUrl)
 
   return (
     <Root>
