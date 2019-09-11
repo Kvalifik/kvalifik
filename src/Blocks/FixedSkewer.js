@@ -30,7 +30,7 @@ const FixedSkewer = ({
   if (reverse) {
     angle *= -1
   }
-  const offset = -theme.skewer.calculateOffset(type)
+  const offset = -theme.skewer.calculateOffset(type) / 2
 
   return (
     <Root

@@ -1,67 +1,62 @@
-/* eslint max-len: 0 */
-
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+
 import theme from 'utils/theme'
 
 const Root = styled.div`
-  overflow: hidden;
-  position: ${props => props.position || 'relative'};
-  height:
-    ${props => props.height
-    ? `calc(${props.height} + ${-props.marginTop}vw + ${-props.marginBottom}vw)`
-    : 'auto'};
-  width: 100%;
-  transform-origin: 0%;
-  transform: skewY(${props => props.angle}deg);
-  z-index: ${props => props.layer || 'auto'};
-
-  margin-top: ${props => props.marginTop}vw;
-  margin-bottom: calc(${props => props.marginBottom}vw - 3px);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    transform: skewY(${props => -props.angle}deg);
-    margin-top: ${props => -props.offset}vw;
-    margin-bottom: ${props => -props.offset}vw;
-
-    ${props => props.bgImage ? css`
-      background:
-        ${props.half
-    ? `linear-gradient(to right, ${props.theme.hexToRgba(props.bgColor, 0.9)} 50%, transparent 50%)`
-    : `linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)})`},
-        url(${props.bgImage});
-      background-size: cover, cover;
-      background-repeat: no-repeat, no-repeat;
-      background-position: center, center;
-    ` : css`
-      background: ${props.half ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)` : props.bgColor};
-    `}
-
-    @media ${props => props.theme.media.lg} {
-      ${props => props.bgImage ? css`
-        background:
-          linear-gradient(0deg, ${props.theme.hexToRgba(props.bgColor, 0.9)}, ${props.theme.hexToRgba(props.bgColor, 0.9)}),
-          url(${props.bgImage});
-        background-size: cover, cover;
-        background-repeat: no-repeat, no-repeat;
-        background-position: center, center;
-      ` : css`
-        background: ${props.bgColor};
-      `}
-    }
-  }
+  position: relative;
+  margin-top: calc(${props => -props.offset}vw - 1px);
+  margin-bottom: 0;
+  height: ${props => props.height};
+  z-index: ${props => props.layer};
+  padding-top: ${props => props.noPadding ? 0 : props.offset}vw;
+  padding-bottom: ${props => (props.flushBottom || props.noPadding) ? 0 : props.offset}vw;
 `
 
 const Inner = styled.div`
-  transform: skewY(${props => -props.angle}deg);
-  margin-top: ${props => props.paddingTop}vw;
-  margin-bottom: ${props => props.paddingBottom}vw;
+  position: relative;
+
+  ${Root} {
+    margin-top: calc(${props => props.offset / 2}vw - 1px);
+    margin-bottom: ${props => -props.offset}vw;
+  }
+`
+
+const Background = styled.div`
+  background:
+    ${props => props.half
+    ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)`
+    : props.bgColor};
+  overflow: hidden;
+
+  position: absolute;
+  top: 0;
+  bottom: ${props => props.offset}vw;
+  left: 0;
+  right: 0;
+
+  transform-origin: left;
+  transform: skewY(${props => props.angle}deg);
+
+  & > * {
+    transform-origin: left;
+    transform: skewY(${props => -props.angle}deg);
+  }
+
+  @media ${props => props.theme.media.lg} {
+    background: ${props => props.bgColor};
+  }
+`
+
+const Image = styled.div`
+  background-image: url(${props => props.bgImage});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  height: 100%;
 `
 
 const angles = {
@@ -70,72 +65,38 @@ const angles = {
 }
 
 const Skewer = ({
-  bgColor = 'transparent',
-  bgImageUrl,
   angle: type = 'small',
   children,
-  reverse,
+  bgImageUrl,
+  renderBgImage,
+  bgColor,
   noPadding,
-  flushTop,
-  flushBottom,
   half,
   height,
   layer,
-  position
+  flushBottom
 }) => {
-  let angle = angles[type]
-  if (reverse) {
-    angle *= -1
-  }
   const offset = theme.skewer.calculateOffset(type)
-  let marginTop = 0
-  let marginBottom = 0
-  let paddingTop = 0
-  let paddingBottom = 0
-
-  if (flushTop) {
-    marginTop = -offset * 2
-  }
-
-  if (flushBottom) {
-    marginBottom = -offset * 2
-  }
-
-  if (noPadding && !flushTop) {
-    paddingTop = -offset
-  } else {
-    paddingTop = offset
-  }
-
-  if (noPadding && !flushBottom) {
-    paddingBottom = -offset
-  } else {
-    paddingBottom = offset
-  }
-
-  if (half) {
-    paddingBottom += offset
-    marginBottom = 2 * offset
-  }
+  const angle = angles[type]
 
   return (
     <Root
-      angle={angle}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-      height={height}
-      half={half}
-      bgColor={bgColor}
-      bgImage={bgImageUrl}
       offset={offset}
       layer={layer}
-      position={position}
+      noPadding={noPadding}
+      height={height}
+      flushBottom={flushBottom}
     >
-      <Inner
+      <Background
         angle={angle}
-        paddingTop={paddingTop}
-        paddingBottom={paddingBottom}
+        offset={offset}
+        bgColor={bgColor}
+        half={half}
       >
+        {bgImageUrl && <Image bgImage={bgImageUrl} />}
+        {renderBgImage && renderBgImage()}
+      </Background>
+      <Inner offset={offset}>
         {children}
       </Inner>
     </Root>
@@ -143,18 +104,16 @@ const Skewer = ({
 }
 
 Skewer.propTypes = {
-  bgImageUrl: PropTypes.string,
-  height: PropTypes.string,
-  bgColor: PropTypes.string,
-  half: PropTypes.bool,
+  angle: PropTypes.string,
   children: PropTypes.any,
-  angle: PropTypes.oneOf(['small', 'large']),
-  reverse: PropTypes.bool,
+  bgImageUrl: PropTypes.string,
+  renderBgImage: PropTypes.func,
+  bgColor: PropTypes.string,
   noPadding: PropTypes.bool,
-  flushTop: PropTypes.bool,
-  flushBottom: PropTypes.bool,
+  half: PropTypes.bool,
+  height: PropTypes.string,
   layer: PropTypes.number,
-  position: PropTypes.string
+  flushBottom: PropTypes.bool
 }
 
 export default Skewer

@@ -94,7 +94,7 @@ const TopLeftContainer = styled.div`
   }
 
   & > ${Icon} {
-    transform: scale(1.2);
+    transform: scale(1.4);
     transform-origin: center;
   }
 `
@@ -226,7 +226,7 @@ class HeaderBlock extends Component {
         {playing && hasVideo && (
           <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer flushTop bgColor={bgColor} noPadding height="130vh" layer={800}>
+        <Skewer bgColor={bgColor} height="130vh" layer={800}>
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>

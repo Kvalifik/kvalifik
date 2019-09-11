@@ -64,7 +64,7 @@ const ButtonContent = styled.div`
     }
   `}
 
-  @media ${props => props.theme.media.sm} {
+  @media ${props => props.theme.media.md} {
     padding: ${props => props.theme.spacing(2, 2)};
   }
 `

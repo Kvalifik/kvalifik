@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import downArrow from 'graphics/down-arrow.svg'
-import theme from 'utils/theme'
+import { smoothScrollTo } from 'utils/scroll'
 
 const DownArrowIcon = styled.div`
   position: absolute;
@@ -38,21 +38,7 @@ const DownArrowIcon = styled.div`
 
 const DownArrow = ({ color }) => {
   function handleScroll () {
-    const skewerOffset = theme.skewer.calculateOffset('large') * window.innerWidth / 100
-    const target = Math.min(
-      window.innerHeight * 1.5,
-      document.body.clientHeight - window.innerHeight - skewerOffset
-    )
-
-    function timeoutHandler () {
-      if (target - window.scrollY > 20 && target > window.scrollY) {
-        setTimeout(timeoutHandler, 10)
-
-        window.scrollTo(0, (target - window.scrollY) / 10 + window.scrollY)
-      }
-    }
-
-    timeoutHandler()
+    smoothScrollTo(window.innerHeight * 1.3)
   }
 
   return (

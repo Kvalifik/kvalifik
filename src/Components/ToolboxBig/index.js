@@ -6,7 +6,7 @@ import Padder from 'Blocks/Padder'
 import Skewer from 'Blocks/Skewer'
 import SearchIcon from 'graphics/search.svg'
 import CloseIcon from 'graphics/close.svg'
-import ToolThump from './ToolThump'
+import ToolThumb from 'Components/Shared/ToolThumb'
 import ToolPreview from './ToolPreview'
 import { disableScroll, enableScroll } from 'utils/modal'
 
@@ -283,7 +283,7 @@ class ToolboxBig extends Component {
 
     if (toolIsFiltered && toolIsQueryed) {
       return (
-        <ToolThump
+        <ToolThumb
           openTool={this.openToolPreview.bind(this)}
           headline={tool.headline}
           description={tool.description}
