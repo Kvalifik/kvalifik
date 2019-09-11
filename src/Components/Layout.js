@@ -6,6 +6,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
+import { Helmet } from 'react-helmet'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -119,10 +120,13 @@ const Main = ({ children, hideFooter, isGlitch }) => {
       }
     }
   `)
-
   return (
     <>
       <GlobalStyle />
+      <Helmet>
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+      </Helmet>
       <ThemeProvider theme={theme}>
         <App>
           {children}
