@@ -33,6 +33,12 @@ const Root = styled.div`
   ${props => props.fluid && !props.hasSideText && css`
     ${props => props.theme.grid('grid-template-columns: 0 1fr 0')};
   `}
+
+  @media ${props => props.theme.media.sm} {
+    ${props => props.fluid && props.hasSideText && css`
+      ${props => props.theme.grid('grid-template-columns: 60px 1fr')};
+    `}
+  }
 `
 
 const SideText = styled.div`
@@ -50,11 +56,15 @@ const SideTextSticky = styled.div`
 
   position: sticky;
   top: 0;
+
+  @media ${props => props.theme.media.sm} {
+    top: calc(8px + ${props => props.theme.navBarWidth});
+  }
 `
 
 const SideTextInner = styled.div`
   @media (max-width: calc(${props => props.theme.breakpoints.sm} + 80px)) {
-    padding: 0 ${props => props.theme.padding.sm} 0 0;
+    padding: 0 ${props => props.theme.spacing(2)} 0 0;
   }
 
   padding: ${props => `0px ${props.theme.padding.sm} ${props.theme.padding.sm} 0`};

@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { servicePropType } from 'models/service'
+
 import ToolsThumb from 'Components/Shared/ToolThumb'
 import CaseLink from './CaseLink'
+import Icon from './Icon'
+
+import { servicePropType } from 'models/service'
 
 const Root = styled.div`
   @media ${props => props.theme.media.lg} {
@@ -13,6 +16,37 @@ const Root = styled.div`
   background-color: ${props => props.theme.palette.dark};
   margin-bottom: 40vh;
   padding-top: 10px;
+`
+
+const Header = styled.h2`
+  display: none;
+
+  color: ${props => props.theme.palette.light};
+
+  margin: ${props => props.theme.spacing(0, 0, 4)};
+
+  text-decoration: none;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 24px;
+  font-weight: bold;
+  transform-origin: center;
+  transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  transform: ${props => props.selected ? 'none !important' : 'none'};
+  cursor: ${props => props.selected ? 'default' : 'pointer'};
+  outline: none;
+
+  & > ${Icon} {
+    filter: ${props => !props.selected ? 'invert(1)' : 'none'};
+  }
+
+  @media ${props => props.theme.media.lg} {
+    font-size: 18px;
+    display: flex;
+  }
 `
 
 const TextContainer = styled.div`
@@ -82,11 +116,19 @@ const ServicePreview = ({
     description,
     image,
     relatedTools,
-    exampleCases
+    exampleCases,
+    icon,
+    label
   },
   id
 }) => (
   <Root id={id}>
+    <Header
+      onClick={(ev) => { ev.preventDefault() }}
+    >
+      {label}
+      <Icon src={icon && icon.url} right />
+    </Header>
     <Media src={image ? image.url : ''} />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />

@@ -19,11 +19,19 @@ const Content = styled.div`
     'display: grid',
     'grid-template-columns: 380px 1fr'
   ])}
+
+  @media ${props => props.theme.media.lg} {
+    display: block;
+  }
 `
 
 const ServiceContainer = styled.div`
   padding-left: ${props => props.theme.spacing(4)};
   margin-top: -10px;
+
+  @media ${props => props.theme.media.lg} {
+    padding-left: 0;
+  }
 `
 
 const SidebarWrapper = styled.div``
