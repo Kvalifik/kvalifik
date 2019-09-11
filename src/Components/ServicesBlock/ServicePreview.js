@@ -117,7 +117,7 @@ const ServicePreview = ({
       <Description dangerouslySetInnerHTML={{ __html: description }} />
       <ToolsHeader>Related tools</ToolsHeader>
       <Tools>
-        {relatedTools.map((tool, index) => (
+        {relatedTools.slice(0, 2).map((tool, index) => (
           <ToolsThumb
             key={index}
             headline={tool.headline}

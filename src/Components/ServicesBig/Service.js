@@ -2,13 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { servicePropType } from 'models/service'
 import ToolsThumb from 'Components/Shared/ToolThumb'
+import CaseLink from './CaseLink'
 
 const Root = styled.div`
-  ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 5fr 4fr'
-  ])}
-
   @media ${props => props.theme.media.lg} {
     display: block;
   }
@@ -18,33 +14,16 @@ const Root = styled.div`
 `
 
 const TextContainer = styled.div`
-  ${props => props.theme.grid.all([
-    'grid-column: 1',
-    'grid-row: 1'
-  ])}
-
-  padding: ${props => props.theme.spacing(2, 2, 2, 4)};
-
-  @media ${props => props.theme.media.lg} {
-    padding: ${props => props.theme.spacing(2)};
-  }
+  padding-top: ${props => props.theme.spacing(2)};
 `
 
 const Media = styled.div`
-  ${props => props.theme.grid.all([
-    'grid-column: 2',
-    'grid-row: 1'
-  ])}
-
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  @media ${props => props.theme.media.lg} {
-    height: 200px;
-    width: 100%;
-  }
+  height: 400px;
+  width: 100%;
 `
 
 const Title = styled.h2`
@@ -86,20 +65,12 @@ const ToolsHeader = styled.h3`
 
 const Tools = styled.div`
   ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 1fr 16px 1fr'
+    'display: grid'
   ])}
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr) 16px);
 
   > * {
-    ${props => props.theme.grid('grid-row: 1')}
-
-    &:nth-child(odd) {
-      ${props => props.theme.grid('grid-column: 1')}
-    }
-
-    &:nth-child(even) {
-      ${props => props.theme.grid('grid-column: 3')}
-    }
+    margin-bottom: 16px;
   }
 `
 
@@ -108,7 +79,8 @@ const ServicePreview = ({
     title,
     description,
     image,
-    relatedTools
+    relatedTools,
+    exampleCases
   }
 }) => (
   <Root>
@@ -116,16 +88,38 @@ const ServicePreview = ({
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />
-      <ToolsHeader>Related tools</ToolsHeader>
-      <Tools>
-        {relatedTools.map((tool, index) => (
-          <ToolsThumb
-            key={index}
-            headline={tool.headline}
-            icon={tool.icon}
-          />
-        ))}
-      </Tools>
+      {exampleCases && exampleCases.length > 0 && (
+        <>
+          <ToolsHeader>Examples from our cases</ToolsHeader>
+          <Tools>
+            {exampleCases.map((work, index) => console.log(work) || (
+              <React.Fragment key={index}>
+                <CaseLink
+                  headline={work.forWho}
+                  to={work.page && work.page.url}
+                />
+                <span />
+              </React.Fragment>
+            ))}
+          </Tools>
+        </>
+      )}
+      {relatedTools && relatedTools.length > 0 && (
+        <>
+          <ToolsHeader>Related tools</ToolsHeader>
+          <Tools>
+            {relatedTools.map((tool, index) => (
+              <React.Fragment key={index}>
+                <ToolsThumb
+                  headline={tool.headline}
+                  icon={tool.icon}
+                />
+                <span />
+              </React.Fragment>
+            ))}
+          </Tools>
+        </>
+      )}
     </TextContainer>
   </Root>
 )
