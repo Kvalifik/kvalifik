@@ -67,6 +67,11 @@ export const query = graphql`
     bgColor {
       hex
     }
+    moreToolsButton {
+      path
+      isExternal
+      name
+    }
     tools {
       ... on DatoCmsTool {
         id
@@ -310,9 +315,9 @@ export const query = graphql`
       }
     }
   }
-
   fragment Stepper on DatoCmsStepper {
-    steps{
+    id
+    steps {
       title
       description
     }
