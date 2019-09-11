@@ -310,8 +310,8 @@ export const query = graphql`
       }
     }
   }
-
   fragment Stepper on DatoCmsStepper {
+    id
     steps {
       title
       description

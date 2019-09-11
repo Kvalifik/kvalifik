@@ -57,11 +57,13 @@ const Stepper = props => {
             <Content>
               {steps.map((step, i) => {
                 const { title, description } = step
-                return <Step key={i} >
-                  <StepNumber>{i + 1}</StepNumber>
-                  <StepTitle>{title}</StepTitle>
-                  <StepDescription>{description}</StepDescription>
-                </Step>
+                return (
+                  <Step key={i}>
+                    <StepNumber>{i + 1}</StepNumber>
+                    <StepTitle>{title}</StepTitle>
+                    <StepDescription>{description}</StepDescription>
+                  </Step>
+                )
               })}
             </Content>
           </Padder>
@@ -72,11 +74,11 @@ const Stepper = props => {
 }
 
 Stepper.propTypes = {
-  steps: PropTypes.shape({
+  steps: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
     map: PropTypes.func
-  })
+  }))
 }
 
 export default Stepper

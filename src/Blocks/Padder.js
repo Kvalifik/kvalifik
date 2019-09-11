@@ -19,7 +19,7 @@ const Padder = ({ innerPadding = '150px', removeOnMedia, children }) => (
 )
 
 Padder.propTypes = {
-  innerPadding: PropTypes.string,
+  innerPadding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.any,
   removeOnMedia: PropTypes.string
 }
