@@ -93,7 +93,8 @@ const Description = styled.h3`
 const ToolBoxContent = ({
   tools,
   chosenTool,
-  fadeIn
+  fadeIn,
+  toolboxPath
 }) => {
   const tool = tools[chosenTool]
   const id = idFromLabel(tool.headline)
@@ -106,7 +107,7 @@ const ToolBoxContent = ({
         <SubHeadline>{tool.subHeadline}</SubHeadline>
         <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
         <LinkWrapper>
-          <Link to={'/toolbox#' + id}>Learn how to do it <Arrow src={arrowImg} /></Link>
+          <Link to={`${toolboxPath}#${id}`}>Learn how to do it <Arrow src={arrowImg} /></Link>
         </LinkWrapper>
       </Text>
     </Root>
@@ -126,7 +127,8 @@ ToolBoxContent.propTypes = {
     })
   })),
   chosenTool: PropTypes.number,
-  fadeIn: PropTypes.bool
+  fadeIn: PropTypes.bool,
+  toolboxPath: PropTypes.string
 }
 
 export default ToolBoxContent

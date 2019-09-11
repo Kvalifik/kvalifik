@@ -111,6 +111,7 @@ export default (block) => {
           key={block.id}
           tools={block.tools}
           bgColor={block.bgColor && block.bgColor.hex}
+          moreToolsButton={block.moreToolsButton}
         />
       )
     case 'DatoCmsToolboxBig':

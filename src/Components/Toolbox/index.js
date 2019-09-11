@@ -9,9 +9,19 @@ import Padder from 'Blocks/Padder'
 import ToolBoxSlider from './ToolBoxSlider'
 import ToolBoxContent from './ToolBoxContent'
 import Console from './Console'
+import Button from 'Blocks/Button'
+import theme from 'utils/theme'
 
 const Root = styled.div`
   background-color: ${props => props.bgColor};
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-top: ${props => props.theme.spacing(5)};
 `
 
 const loop = (value, min, max) => {
@@ -65,7 +75,8 @@ class Toolbox extends Component {
   render () {
     const {
       tools,
-      bgColor
+      bgColor,
+      moreToolsButton
     } = this.props
 
     return (
@@ -78,6 +89,7 @@ class Toolbox extends Component {
                 tools={tools}
                 chosenTool={this.state.chosenTool}
                 fadeIn={this.state.fadeIn}
+                toolboxPath={moreToolsButton && moreToolsButton.path}
               />
               <ToolBoxSlider
                 tools={tools}
@@ -86,6 +98,19 @@ class Toolbox extends Component {
                 onSlideTool={this.slideTool.bind(this)}
               />
             </Container>
+            {moreToolsButton && (
+              <ButtonWrapper>
+                <Button
+                  to={moreToolsButton.path}
+                  type="link"
+                  isExternal={moreToolsButton.isExternal}
+                  bgColor={theme.hexToRgba(theme.palette.light, 0.2)}
+                  color={theme.palette.light}
+                >
+                  {moreToolsButton.name}
+                </Button>
+              </ButtonWrapper>
+            )}
           </Padder>
         </Skewer>
       </Root>
@@ -105,7 +130,12 @@ Toolbox.propTypes = {
       url: PropTypes.string
     })
   })),
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
+  moreToolsButton: PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string,
+    isExternal: PropTypes.bool
+  })
 }
 
 export default Toolbox
