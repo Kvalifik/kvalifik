@@ -301,7 +301,9 @@ export const query = graphql`
   }
 
   fragment Stepper on DatoCmsStepper {
-    steps
+    steps {
+      id
+    }
   }
 
   fragment PageFragment on DatoCmsPage {
@@ -326,7 +328,7 @@ export const query = graphql`
       ...NotFoundBlockFragment
       ...ServicesBlockFragment
       ...ServicesBigFragment
-      ...NotFoundBlock
+      ...NotFoundBlockFragment
       ...Stepper
       ...ServicesBlockFragment
       ...ServicesBigFragment
