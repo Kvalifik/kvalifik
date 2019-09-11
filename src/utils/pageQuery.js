@@ -67,6 +67,11 @@ export const query = graphql`
     bgColor {
       hex
     }
+    moreToolsButton {
+      path
+      isExternal
+      name
+    }
     tools {
       ... on DatoCmsTool {
         id
