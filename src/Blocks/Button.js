@@ -39,7 +39,7 @@ const ButtonWrapper = styled.div`
 `
 
 const ButtonContent = styled.div`
-  padding: ${props => props.theme.spacing(2)};
+  padding: ${props => props.theme.spacing(2, 8)};
   text-transform: uppercase;
   width: 100%;
   display: flex;
@@ -64,7 +64,7 @@ const ButtonContent = styled.div`
     }
   `}
 
-  @media ${props => props.theme.media.sm} {
+  @media ${props => props.theme.media.md} {
     padding: ${props => props.theme.spacing(2, 2)};
   }
 `

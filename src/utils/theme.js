@@ -137,7 +137,7 @@ const appendMixins = (theme) => ({
 
       // https://github.com/Kvalifik/kvalifikdk-static/wiki/Skewing-technique
       const rad = angle / 180 * Math.PI
-      offset = Math.tan(rad) * 50
+      offset = Math.tan(rad) * 100
 
       return offset
     }

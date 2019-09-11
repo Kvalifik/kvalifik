@@ -87,7 +87,11 @@ const ActionBlock = ({
           </Button>
         </LeftContainer>
         <RightContainer>
-          <Skewer bgImageUrl={imageUrls[0]} height="60vw" />
+          <Skewer
+            bgImageUrl={imageUrls[0]}
+            height="60vw"
+            noPadding
+          />
         </RightContainer>
       </Container>
     </Skewer>
