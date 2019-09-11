@@ -36,6 +36,8 @@ const Content = styled.div`
   grid-template-rows: 2fr 4fr;
   grid-column: 1 / -1;
 
+  color: ${props => props.textColor || 'black'};
+
   @media ${props => props.theme.media.sm} {
     margin-top: ${props => props.theme.navBarWidth};
   }
@@ -74,7 +76,7 @@ const TopLeftContainer = styled.div`
   ${IETopLeftContainer}
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  padding: 0 ${props => props.theme.spacing(6)};
+  padding: ${props => props.theme.spacing(4, 6, 1, 6)};
   align-self: end;
   line-height: 1.25;
   justify-self: center;
@@ -211,6 +213,7 @@ class HeaderBlock extends Component {
       title,
       body,
       bgColor,
+      textColor,
       videoUrl,
       iconUrl,
       imageUrl
@@ -225,7 +228,7 @@ class HeaderBlock extends Component {
         )}
         <Skewer flushTop bgColor={bgColor} noPadding height="130vh" layer={800}>
           <Container noContentWrapper>
-            <Content>
+            <Content textColor={textColor}>
               <TopLeftContainer>
                 {iconUrl && (<Icon src={iconUrl} />)}
                 <Title>{title}</Title>
@@ -249,6 +252,7 @@ HeaderBlock.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
   bgColor: PropTypes.string,
+  textColor: PropTypes.string,
   videoUrl: PropTypes.string,
   iconUrl: PropTypes.string,
   imageUrl: PropTypes.string
