@@ -69,7 +69,11 @@ export default (block) => {
       )
     case 'DatoCmsSlogan':
       return (
-        <SloganBlock bgColor={block.bgColor.hex} content={block.punchline} key={block.id} />
+        <SloganBlock
+          bgColor={block.bgColor && block.bgColor.hex}
+          content={block.punchline}
+          key={block.id}
+        />
       )
     case 'DatoCmsAction':
       return (
