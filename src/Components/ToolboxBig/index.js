@@ -9,6 +9,8 @@ import CloseIcon from 'graphics/close.svg'
 import ToolThumb from 'Components/Shared/ToolThumb'
 import ToolPreview from './ToolPreview'
 import { disableScroll, enableScroll } from 'utils/modal'
+import idFromLabel from 'utils/idFromLabel'
+import { scrollToId } from 'utils/scroll'
 
 const Root = styled.div`
   color: white;
@@ -238,7 +240,7 @@ class ToolboxBig extends Component {
     this.setState({ chosenFilter: filter })
   }
 
-  openToolPreview (i, coords) {
+  openToolPreview (i, coords, scrollDown = false) {
     disableScroll()
     const newPseudoPreviewCoords = [
       coords.top,
@@ -259,6 +261,14 @@ class ToolboxBig extends Component {
     setTimeout(() => {
       this.setState({ toolPreviewIsAnimating: false })
     }, this.state.openAnimationLength)
+
+    if (scrollDown) {
+      scrollToId('ToolBoxBig', null, () => {
+        history.replaceState(null, null, '#' + idFromLabel(this.props.tools[i].headline))
+      })
+    } else {
+      history.replaceState(null, null, '#' + idFromLabel(this.props.tools[i].headline))
+    }
   }
 
   closeToolPreview () {
@@ -268,6 +278,23 @@ class ToolboxBig extends Component {
       enableScroll()
       this.setState({ toolPreviewIsAnimating: false })
     }, this.state.openAnimationLength)
+    history.replaceState(null, null, '#')
+  }
+
+  componentDidMount () {
+    if (window && window.location && window.location.hash) {
+      this.props.tools.find((tool, index) => {
+        if ('#' + idFromLabel(tool.headline) === window.location.hash) {
+          this.openToolPreview(index, this.state.pseudoPreviewCoords, true)
+          return true
+        }
+        return false
+      })
+    }
+  }
+
+  componentWillUnmount () {
+    enableScroll()
   }
 
   renderTool (tool, i) {
@@ -340,7 +367,7 @@ class ToolboxBig extends Component {
     } = this.state
 
     return (
-      <Root>
+      <Root id="ToolBoxBig">
         <Overlay
           onClick={this.closeToolPreview.bind(this)}
           toolPreviewIsOpen={toolPreviewIsOpen}

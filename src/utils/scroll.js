@@ -45,3 +45,12 @@ export const smoothScrollTo = (y, options, callback) => {
 
   timeoutHandler()
 }
+
+export const scrollToId = (anchor, options, callback) => {
+  if (document.getElementById(anchor)) {
+    const scrollTo = document.getElementById(anchor).getBoundingClientRect().top + window.scrollY
+    smoothScrollTo(scrollTo, options, callback)
+  } else {
+    console.error('Could not find id anchor')
+  }
+}

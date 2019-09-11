@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
+import idFromLabel from 'utils/idFromLabel'
 
 const Root = styled.div`
   min-height: 600px;
@@ -95,6 +96,7 @@ const ToolBoxContent = ({
   fadeIn
 }) => {
   const tool = tools[chosenTool]
+  const id = idFromLabel(tool.headline)
   return (
     <Root fadeIn={fadeIn}>
       <Icon src={tool.icon.url} />
@@ -104,7 +106,7 @@ const ToolBoxContent = ({
         <SubHeadline>{tool.subHeadline}</SubHeadline>
         <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
         <LinkWrapper>
-          <Link to="/">Learn how to do it <Arrow src={arrowImg} /></Link>
+          <Link to={'/toolbox#' + id}>Learn how to do it <Arrow src={arrowImg} /></Link>
         </LinkWrapper>
       </Text>
     </Root>
