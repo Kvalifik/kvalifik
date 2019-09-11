@@ -14,7 +14,7 @@ const Icon = styled.img`
   margin-right: ${props => props.theme.spacing(2)};
 `
 
-const ListItem = styled.div`
+const ListItem = styled.a`
   background-color:
     ${props => !props.selected
     ? props.theme.palette.dark
@@ -26,6 +26,8 @@ const ListItem = styled.div`
 
   padding: ${props => props.theme.spacing(1.5)};
   margin-bottom: ${props => props.theme.spacing(1)};
+
+  text-decoration: none;
 
   display: flex;
   flex-direction: row;
@@ -82,7 +84,8 @@ const Sidebar = ({
     {services.map((service, index) => (
       <ListItem
         selected={selected === index}
-        onClick={() => onSelect(index, createId(service.label))}
+        href={`#${createId(service.label)}`}
+        onClick={(ev) => onSelect(ev, index, createId(service.label))}
         index={index}
         key={index}
       >

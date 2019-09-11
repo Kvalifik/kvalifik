@@ -49,7 +49,7 @@ class ServicesBlock extends Component {
     if (window && window.location && window.location.hash) {
       this.props.services.find((service, index) => {
         if ('#' + idFromLabel(service.label) === window.location.hash) {
-          this.handleSelect(index, idFromLabel(service.label), true)
+          this.handleSelect(null, index, idFromLabel(service.label), true)
           return true
         }
         return false
@@ -90,7 +90,11 @@ class ServicesBlock extends Component {
     }
   }
 
-  handleSelect (next, id, quick) {
+  handleSelect (ev, next, id, quick) {
+    if (ev) {
+      ev.preventDefault()
+    }
+
     this.setState({
       selected: next
     })
