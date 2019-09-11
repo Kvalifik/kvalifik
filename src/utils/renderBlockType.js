@@ -12,11 +12,13 @@ import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
+import ServicesBlock from 'Components/ServicesBlock'
+import ServicesBig from 'Components/ServicesBig'
 import theme from 'utils/theme'
 import FiftyFifty from 'Components/FiftyFifty'
 
 export default (block) => {
-  switch (block.__typename) {
+  switch (block && block.__typename) {
     case 'DatoCmsHeader': {
       const mediaType = block.media ? block.media.__typename : null
       let imageUrl = null
@@ -41,7 +43,8 @@ export default (block) => {
           title={block.title}
           body={block.description}
           iconUrl={block.icon && block.icon.url}
-          bgColor={block.bgColor.hex}
+          bgColor={block.bgColor && block.bgColor.hex}
+          textColor={block.textColor && block.textColor.hex}
           videoUrl={videoUrl}
           imageUrl={imageUrl}
         />
@@ -188,12 +191,29 @@ export default (block) => {
         <NotFound
           key={block.id}
           button={block.buttonLink}
-          logoUrl={block.logo && block.logo.url}
           description={block.description}
           title={block.title}
           imageUrl={block.image && block.image.url}
         />
       )
+    case 'DatoCmsServicesBlock': {
+      return (
+        <ServicesBlock
+          key={block.id}
+          services={block.services}
+          buttonLink={block.buttonLink}
+          bgColor={block.bgColor && block.bgColor.hex}
+        />
+      )
+    }
+    case 'DatoCmsServicesBig': {
+      return (
+        <ServicesBig
+          key={block.id}
+          services={block.services}
+        />
+      )
+    }
     default:
       return null
   }

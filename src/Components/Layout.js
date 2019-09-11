@@ -6,6 +6,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
+import { Helmet } from 'react-helmet'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -67,9 +68,11 @@ const App = styled.div`
   @media ${props => props.theme.media.sm} {
     padding-right: 0;
   }
+
+  background-color: ${props => props.bgColor || 'white'};
 `
 
-const Main = ({ children, hideFooter, isGlitch }) => {
+const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -119,12 +122,15 @@ const Main = ({ children, hideFooter, isGlitch }) => {
       }
     }
   `)
-
   return (
     <>
       <GlobalStyle />
+      <Helmet>
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+      </Helmet>
       <ThemeProvider theme={theme}>
-        <App>
+        <App bgColor={bgColor}>
           {children}
           {!hideFooter && (
             <Footer
@@ -149,7 +155,8 @@ const Main = ({ children, hideFooter, isGlitch }) => {
 Main.propTypes = {
   children: PropTypes.any,
   hideFooter: PropTypes.bool,
-  isGlitch: PropTypes.bool
+  isGlitch: PropTypes.bool,
+  bgColor: PropTypes.string
 }
 
 export default Main

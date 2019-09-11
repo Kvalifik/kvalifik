@@ -11,6 +11,9 @@ export const query = graphql`
     icon {
       url
     }
+    textColor{
+      hex
+    }
     media {
       __typename
       ... on DatoCmsVideo {
@@ -80,6 +83,7 @@ export const query = graphql`
     }
   }
   fragment ToolboxBigFragment on DatoCmsToolboxBig {
+    id
     sideText
     smallDescription
     backgroundColor {
@@ -195,10 +199,10 @@ export const query = graphql`
     }
   }
   fragment PercentageBlockFragment on DatoCmsPercentage {
+    id
     bgColor {
       hex
     }
-    id
     description
     duration
     number
@@ -234,7 +238,7 @@ export const query = graphql`
       }
     }
   }
-  fragment NotFoundBlock on DatoCms404 {
+  fragment NotFoundBlockFragment on DatoCms404 {
     id
     title
     description
@@ -247,9 +251,79 @@ export const query = graphql`
       url
     }
   }
+  fragment ServicesBlockFragment on DatoCmsServicesBlock {
+    id
+    buttonLink {
+      path
+      name
+      isExternal
+    }
+    services {
+      id
+      label
+      icon {
+        url
+      }
+      image {
+        url
+      }
+      title
+      description
+      relatedTools {
+        ...on DatoCmsTool {
+          headline
+          icon {
+            url
+          }
+        }
+      }
+    }
+  }
+  fragment ServicesBigFragment on DatoCmsServicesBig {
+    id
+    services {
+      id
+      label
+      icon {
+        url
+      }
+      image {
+        url
+      }
+      title
+      description
+      relatedTools {
+        ...on DatoCmsTool {
+          headline
+          icon {
+            url
+          }
+        }
+      }
+      exampleCases {
+        ...on DatoCmsWork {
+          forWho
+          page {
+            url
+          }
+        }
+      }
+    }
+  }
+
+  fragment Stepper on DatoCmsStepper {
+    steps{
+      title
+      description
+    }
+  }
+
   fragment PageFragment on DatoCmsPage {
     title
     url
+    bgColor {
+      hex
+    }
     pageSetup {
       __typename
       ...HeaderFragment
@@ -264,7 +338,13 @@ export const query = graphql`
       ...FiftyFifty
       ...QuoteBlockFragment
       ...PeopleBlockFragment
+      ...NotFoundBlockFragment
+      ...ServicesBlockFragment
+      ...ServicesBigFragment
       ...NotFoundBlock
+      ...Stepper
+      ...ServicesBlockFragment
+      ...ServicesBigFragment
     }
   }
 `
