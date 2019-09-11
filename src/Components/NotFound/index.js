@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import theme from 'utils/theme'
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 
 import Button from 'Blocks/Button'
 
@@ -33,7 +33,7 @@ const Top = styled.div`
 
 const Logo = styled.img`
   margin: ${props => props.theme.spacing(1.5)};
-  height: 15vh;
+  height: 7vh;
 `
 
 const Content = styled.div`
@@ -104,33 +104,45 @@ const NotFound = ({
   button,
   logoUrl,
   imageUrl
-}) => (
-  <Root>
-    <Top>
-      <Link to="/">
-        {logoUrl && <Logo src={logoUrl} />}
-      </Link>
-    </Top>
-    <Content center={!imageUrl}>
-      <Error>Error</Error>
-      <Title>{title}</Title>
-      <Description dangerouslySetInnerHTML={{ __html: description }} />
-      <Button
-        fullWidth
-        to={button.path}
-        isExternal={button.isExternal}
-        bgColor={theme.palette.dark}
-        color={theme.palette.light}
-        type="link"
-      >
-        {button.name}
-      </Button>
-    </Content>
-    {imageUrl && (
-      <Image src={imageUrl} />
-    )}
-  </Root>
-)
+}) => {
+  const data = useStaticQuery(graphql`
+    query {
+      datoCmsGeneral {
+        glitchLogo {
+          url
+        }
+      }
+    }
+  `)
+
+  return (
+    <Root>
+      <Top>
+        <Link to="/">
+          {data.datoCmsGeneral.glitchLogo && <Logo src={data.datoCmsGeneral.glitchLogo.url} />}
+        </Link>
+      </Top>
+      <Content center={!imageUrl}>
+        <Error>Error</Error>
+        <Title>{title}</Title>
+        <Description dangerouslySetInnerHTML={{ __html: description }} />
+        <Button
+          fullWidth
+          to={button.path}
+          isExternal={button.isExternal}
+          bgColor={theme.palette.dark}
+          color={theme.palette.light}
+          type="link"
+        >
+          {button.name}
+        </Button>
+      </Content>
+      {imageUrl && (
+        <Image src={imageUrl} />
+      )}
+    </Root>
+  )
+}
 
 NotFound.propTypes = {
   title: PropTypes.string,
