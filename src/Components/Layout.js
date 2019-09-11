@@ -119,6 +119,14 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
         glitchLogo {
           url
         }
+        noIeDescription
+        noIeHeadline
+        enableIeWarning
+        recommendedBrowsersHeadline
+        recommendedBrowser {
+          path
+          name
+        }
       }
     }
   `)
