@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { servicePropType } from 'models/service'
 import LinkThumb from 'Components/Shared/LinkThumb'
 
+import idFromLabel from 'utils/idFromLabel'
 import theme from 'utils/theme'
 
 const Root = styled.div`
@@ -125,6 +126,7 @@ const ServicePreview = ({
             headline={tool.headline}
             iconUrl={tool.icon && tool.icon.url}
             color={theme.palette.primary.D}
+            to={`/toolbox#${idFromLabel(tool.headline)}`}
           />
         ))}
       </Tools>
