@@ -11,6 +11,9 @@ export const query = graphql`
     icon {
       url
     }
+    textColor{
+      hex
+    }
     media {
       __typename
       ... on DatoCmsVideo {
@@ -297,6 +300,10 @@ export const query = graphql`
     }
   }
 
+  fragment Stepper on DatoCmsStepper {
+    steps
+  }
+
   fragment PageFragment on DatoCmsPage {
     title
     url
@@ -317,6 +324,10 @@ export const query = graphql`
       ...QuoteBlockFragment
       ...PeopleBlockFragment
       ...NotFoundBlockFragment
+      ...ServicesBlockFragment
+      ...ServicesBigFragment
+      ...NotFoundBlock
+      ...Stepper
       ...ServicesBlockFragment
       ...ServicesBigFragment
     }
