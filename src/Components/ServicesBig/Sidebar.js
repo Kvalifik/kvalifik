@@ -75,13 +75,14 @@ const ListItem = styled.div`
 const Sidebar = ({
   services,
   selected,
-  onSelect
+  onSelect,
+  createId
 }) => (
   <Root>
     {services.map((service, index) => (
       <ListItem
         selected={selected === index}
-        onClick={(ev) => onSelect(ev, index)}
+        onClick={() => onSelect(index, createId(service.label))}
         index={index}
         key={index}
       >
@@ -95,7 +96,8 @@ const Sidebar = ({
 Sidebar.propTypes = {
   services: PropTypes.arrayOf(servicePropType),
   selected: PropTypes.number,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  createId: PropTypes.func
 }
 
 export default Sidebar

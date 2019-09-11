@@ -10,6 +10,7 @@ import Container from 'Blocks/Container'
 import Padder from 'Blocks/Padder'
 
 import theme from 'utils/theme'
+import { smoothScrollTo } from 'utils/scroll'
 
 const Content = styled.div`
   padding: ${props => props.theme.spacing(2)};
@@ -26,32 +27,28 @@ const ServiceContainer = styled.div`
 
 const SidebarWrapper = styled.div``
 
+const idFromLabel = (label) =>
+  label.toLowerCase().replace(/\s*/g, '-').replace(/[^\w-]/g, '')
+
 class ServicesBlock extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      selected: 0,
-      selectedEl: null
+      selected: 0
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState.selected !== this.state.selected) {
-      const topY = this.state.selectedEl.getBoundingClientRect().top
-      const scrollY = window.scrollY
-
-      if (topY < 0) {
-        window.scrollTo(0, scrollY + topY - 16)
-      }
-    }
-  }
-
-  handleSelect (ev, next) {
+  handleSelect (next, id) {
     this.setState({
-      selected: next,
-      selectedEl: ev.currentTarget
+      selected: next
     })
+
+    const el = document.getElementById(id)
+
+    if (el) {
+      smoothScrollTo(window.scrollY + el.getBoundingClientRect().top - 10)
+    }
   }
 
   render () {
@@ -75,6 +72,7 @@ class ServicesBlock extends Component {
                 <Sidebar
                   services={services}
                   selected={selected}
+                  createId={idFromLabel}
                   onSelect={this.handleSelect.bind(this)}
                 />
               </SidebarWrapper>
@@ -83,6 +81,7 @@ class ServicesBlock extends Component {
                   <Service
                     key={index}
                     service={service}
+                    id={idFromLabel(service.label)}
                   />
                 ))}
               </ServiceContainer>

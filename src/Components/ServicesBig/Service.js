@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { servicePropType } from 'models/service'
 import ToolsThumb from 'Components/Shared/ToolThumb'
@@ -81,9 +82,10 @@ const ServicePreview = ({
     image,
     relatedTools,
     exampleCases
-  }
+  },
+  id
 }) => (
-  <Root>
+  <Root id={id}>
     <Media src={image ? image.url : ''} />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
@@ -92,7 +94,7 @@ const ServicePreview = ({
         <>
           <ToolsHeader>Examples from our cases</ToolsHeader>
           <Tools>
-            {exampleCases.map((work, index) => console.log(work) || (
+            {exampleCases.map((work, index) => (
               <React.Fragment key={index}>
                 <CaseLink
                   headline={work.forWho}
@@ -125,7 +127,8 @@ const ServicePreview = ({
 )
 
 ServicePreview.propTypes = {
-  service: servicePropType
+  service: servicePropType,
+  id: PropTypes.string
 }
 
 export default ServicePreview
