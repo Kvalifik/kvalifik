@@ -6,9 +6,10 @@ import Padder from 'Blocks/Padder'
 import Skewer from 'Blocks/Skewer'
 import SearchIcon from 'graphics/search.svg'
 import CloseIcon from 'graphics/close.svg'
-import ToolThumb from 'Components/Shared/ToolThumb'
+import LinkThumb from 'Components/Shared/LinkThumb'
 import ToolPreview from './ToolPreview'
 import { disableScroll, enableScroll } from 'utils/modal'
+import theme from 'utils/theme'
 
 const Root = styled.div`
   color: white;
@@ -165,6 +166,10 @@ const ToolView = styled.div`
     grid-gap: ${props => props.theme.spacing(2)};
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
+
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: 1fr;
+  }
 `
 
 const PseudoPreview = styled.div`
@@ -238,7 +243,9 @@ class ToolboxBig extends Component {
     this.setState({ chosenFilter: filter })
   }
 
-  openToolPreview (i, coords) {
+  openToolPreview (ev, i) {
+    const coords = ev.currentTarget.getBoundingClientRect()
+
     disableScroll()
     const newPseudoPreviewCoords = [
       coords.top,
@@ -283,16 +290,13 @@ class ToolboxBig extends Component {
 
     if (toolIsFiltered && toolIsQueryed) {
       return (
-        <ToolThumb
-          openTool={this.openToolPreview.bind(this)}
+        <LinkThumb
+          onClick={this.openToolPreview.bind(this)}
           headline={tool.headline}
-          description={tool.description}
-          icon={tool.icon}
-          image={tool.image}
-          bgColor={tool.bgColor}
+          iconUrl={tool.icon && tool.icon.url}
+          color={theme.palette.primary.D}
           key={i}
           id={i}
-          toolFilters={tool.toolFilters}
         />
       )
     }

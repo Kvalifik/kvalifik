@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { servicePropType } from 'models/service'
-import ToolsThumb from 'Components/Shared/ToolThumb'
+import LinkThumb from 'Components/Shared/LinkThumb'
+
+import theme from 'utils/theme'
 
 const Root = styled.div`
   ${props => props.theme.grid.all([
@@ -118,10 +120,11 @@ const ServicePreview = ({
       <ToolsHeader>Related tools</ToolsHeader>
       <Tools>
         {relatedTools.slice(0, 2).map((tool, index) => (
-          <ToolsThumb
+          <LinkThumb
             key={index}
             headline={tool.headline}
-            icon={tool.icon}
+            iconUrl={tool.icon && tool.icon.url}
+            color={theme.palette.primary.D}
           />
         ))}
       </Tools>

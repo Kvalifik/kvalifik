@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import ToolsThumb from 'Components/Shared/ToolThumb'
-import CaseLink from './CaseLink'
+import LinkThumb from 'Components/Shared/LinkThumb'
 import Icon from './Icon'
 
+import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
 
 const Root = styled.div`
@@ -139,9 +139,10 @@ const ServicePreview = ({
           <Tools>
             {exampleCases.map((work, index) => (
               <React.Fragment key={index}>
-                <CaseLink
+                <LinkThumb
                   headline={work.forWho}
                   to={work.page && work.page.url}
+                  color={theme.palette.light}
                 />
                 <span />
               </React.Fragment>
@@ -155,9 +156,10 @@ const ServicePreview = ({
           <Tools>
             {relatedTools.map((tool, index) => (
               <React.Fragment key={index}>
-                <ToolsThumb
+                <LinkThumb
                   headline={tool.headline}
-                  icon={tool.icon}
+                  iconUrl={tool.icon.url}
+                  color={theme.palette.primary.D}
                 />
                 <span />
               </React.Fragment>
