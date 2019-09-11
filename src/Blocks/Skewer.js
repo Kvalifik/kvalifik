@@ -6,7 +6,7 @@ import theme from 'utils/theme'
 
 const Root = styled.div`
   position: relative;
-  margin-top: ${props => -props.offset}vw;
+  margin-top: calc(${props => -props.offset}vw - 1px);
   margin-bottom: 0;
   padding: ${props => props.noPadding ? 0 : props.offset}vw 0;
   height: ${props => props.height};
