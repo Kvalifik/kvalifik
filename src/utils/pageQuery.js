@@ -315,9 +315,9 @@ export const query = graphql`
       }
     }
   }
-
   fragment Stepper on DatoCmsStepper {
-    steps{
+    id
+    steps {
       title
       description
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import CaseGrid from 'Components/CaseGrid'
 import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
@@ -14,8 +15,10 @@ import People from 'Components/People'
 import NotFound from 'Components/NotFound'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
-import theme from 'utils/theme'
+import Stepper from 'Components/Stepper'
 import FiftyFifty from 'Components/FiftyFifty'
+
+import theme from 'utils/theme'
 
 export default (block) => {
   switch (block && block.__typename) {
@@ -195,6 +198,13 @@ export default (block) => {
           description={block.description}
           title={block.title}
           imageUrl={block.image && block.image.url}
+        />
+      )
+    case 'DatoCmsStepper':
+      return (
+        <Stepper
+          key={block.id}
+          steps={block.steps}
         />
       )
     case 'DatoCmsServicesBlock': {

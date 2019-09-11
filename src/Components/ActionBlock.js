@@ -5,6 +5,7 @@ import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Gallery from 'Blocks/Gallery'
 import Button from 'Blocks/Button'
+import Padder from 'Blocks/Padder'
 
 const LeftContainer = styled.div`
   grid-column: 2 / 3;
@@ -68,38 +69,41 @@ const ActionBlock = ({
   galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
-
   return (
     <Skewer bgColor={bgColor} noPadding layer={1200}>
-      <Container noContentWrapper>
-        <LeftContainer>
-          <Title color={textColor}>{title}</Title>
-          <Description color={textColor} dangerouslySetInnerHTML={{ __html: body }} />
-          <Button
-            alt={button.name}
-            bgColor={buttonBgColor}
-            color={buttonTextColor}
-            to={button.path}
-            type="link"
-            isExternal={button.isExternal}
-          >
-            {button.name}
-          </Button>
-        </LeftContainer>
-        <RightContainer>
-          <Skewer
-            height="60vw"
-            renderBgImage={() => (
-              <ImageWrapper>
-                <Gallery
-                  images={imageUrls}
-                  delay={galleryDelay}
-                />
-              </ImageWrapper>
-            )}
-          />
-        </RightContainer>
-      </Container>
+      <Padder innerPadding={images.length > 0 ? 0 : '150px'}>
+        <Container noContentWrapper>
+          <LeftContainer>
+            <Title color={textColor}>{title}</Title>
+            <Description color={textColor} dangerouslySetInnerHTML={{ __html: body }} />
+            <Button
+              alt={button.name}
+              bgColor={buttonBgColor}
+              color={buttonTextColor}
+              to={button.path}
+              type="link"
+              isExternal={button.isExternal}
+            >
+              {button.name}
+            </Button>
+          </LeftContainer>
+          {images.length > 0 && (
+            <RightContainer>
+              <Skewer
+                height="60vw"
+                renderBgImage={() => (
+                  <ImageWrapper>
+                    <Gallery
+                      images={imageUrls}
+                      delay={galleryDelay}
+                    />
+                  </ImageWrapper>
+                )}
+              />
+            </RightContainer>
+          )}
+        </Container>
+      </Padder>
     </Skewer>
   )
 }
