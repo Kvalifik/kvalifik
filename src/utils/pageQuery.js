@@ -156,6 +156,17 @@ export const query = graphql`
       hex
     }
   }
+  fragment FiftyFifty on DatoCmsFiftyFifty {
+    description
+    bgColor {
+      hex
+    }
+    flip
+    header
+    media {
+      url
+    }
+  }
   fragment CaseInfoFragment on DatoCmsCaseInfo {
     id
     buttonLink {
@@ -301,8 +312,9 @@ export const query = graphql`
   }
 
   fragment Stepper on DatoCmsStepper {
-    steps {
-      id
+    steps{
+      title
+      description
     }
   }
 
@@ -323,6 +335,7 @@ export const query = graphql`
       ...ToolboxFragment
       ...ToolboxBigFragment
       ...OverlayBlockFragment
+      ...FiftyFifty
       ...QuoteBlockFragment
       ...PeopleBlockFragment
       ...NotFoundBlockFragment
