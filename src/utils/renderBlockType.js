@@ -15,6 +15,7 @@ import NotFound from 'Components/NotFound'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import theme from 'utils/theme'
+import FiftyFifty from 'Components/FiftyFifty'
 
 export default (block) => {
   switch (block && block.__typename) {
@@ -76,6 +77,17 @@ export default (block) => {
           bgColor={block.bgColor && block.bgColor.hex}
           content={block.punchline}
           key={block.id}
+        />
+      )
+    case 'DatoCmsFiftyFifty':
+      return (
+        <FiftyFifty
+          key={block.id}
+          bgColor={block.bgColor && block.bgColor.hex}
+          description={block.description}
+          flip={block.flip}
+          header={block.header}
+          mediaUrl={block.media && block.media.url}
         />
       )
     case 'DatoCmsAction':
