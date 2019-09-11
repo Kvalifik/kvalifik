@@ -13,6 +13,7 @@ import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
 import NotFound from 'Components/NotFound'
 import theme from 'utils/theme'
+import Stepper from 'Components/Stepper'
 
 export default (block) => {
   switch (block.__typename) {
@@ -177,6 +178,13 @@ export default (block) => {
           description={block.description}
           title={block.title}
           imageUrl={block.image && block.image.url}
+        />
+      )
+    case 'DatoCmsStepper':
+      return (
+        <Stepper
+          key={block.id}
+          steps={block.steps}
         />
       )
     default:

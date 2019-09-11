@@ -241,7 +241,10 @@ export const query = graphql`
   }
 
   fragment Stepper on DatoCmsStepper {
-    steps
+    steps {
+      title
+      description 
+    }
   }
 
   fragment PageFragment on DatoCmsPage {
