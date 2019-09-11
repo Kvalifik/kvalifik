@@ -5,6 +5,7 @@
     "eslint-config-esnext"
   ],
   "rules": {
+    "class-methods-use-this": 0,
     "jsx-quotes": [
       "error",
       "prefer-double"
