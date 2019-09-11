@@ -30,6 +30,10 @@ const Root = styled.div`
     top: 0;
     bottom: 0;
     right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 
@@ -44,9 +48,6 @@ const Headline = styled.p`
   padding: 0;
   margin: 0;
   font-size: 14px;
-  margin-top: 50%;
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
   color: ${props => props.theme.palette.light};
   text-decoration: none;
 `
