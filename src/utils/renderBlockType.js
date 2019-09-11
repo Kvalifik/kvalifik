@@ -87,7 +87,7 @@ export default (block) => {
           description={block.description}
           flip={block.flip}
           header={block.header}
-          mediaUrl={block.media.url}
+          mediaUrl={block.media && block.media.url}
         />
       )
     case 'DatoCmsAction':
