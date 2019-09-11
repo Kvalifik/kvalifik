@@ -42,6 +42,14 @@ const SideText = styled.div`
   font-size: 40px;
   font-weight: bold;
   grid-column: 1 / 2;
+  padding-bottom: 200px;
+`
+
+const SideTextSticky = styled.div`
+  width: 100%;
+
+  position: sticky;
+  top: 0;
 `
 
 const SideTextInner = styled.div`
@@ -85,11 +93,15 @@ const Container = ({
   fluid
 }) => (
   <Root hasSideText={!!sideText} fluid={fluid}>
-    <SideText>
-      <SideTextInner>
-        {sideText}
-      </SideTextInner>
-    </SideText>
+    {!!sideText && (
+      <SideText>
+        <SideTextSticky>
+          <SideTextInner>
+            {sideText}
+          </SideTextInner>
+        </SideTextSticky>
+      </SideText>
+    )}
     {noContentWrapper ? (
       children
     ) : (
