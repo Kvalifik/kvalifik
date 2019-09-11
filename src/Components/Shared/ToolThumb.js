@@ -28,6 +28,10 @@ const Arrow = styled.img`
   right: ${props => props.theme.spacing(2)};
   bottom: ${props => props.theme.spacing(2)};
   width: ${props => props.theme.spacing(1)};
+
+  @media ${props => props.theme.media.lg} {
+    display: none;
+  }
 `
 
 const Center = styled.div`

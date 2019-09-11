@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { servicePropType } from 'models/service'
 
 const Root = styled.div`
-  min-height: 65vh;
+  ${props => props.theme.clearfix()}
   position: relative;
 `
 
@@ -83,10 +83,8 @@ const Preview = styled.div`
   transform-origin: top center;
   animation: ${grow} 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: initial;
+  position: relative;
+  float: right;
   padding-left: ${props => props.theme.spacing(2)};
 
   @media ${props => props.theme.media.md} {
