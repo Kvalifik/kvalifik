@@ -161,7 +161,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
             logoUrl={isGlitch ? data.datoCmsGeneral.glitchLogo.url : data.datoCmsGeneral.logo.url}
             isGlitch={isGlitch}
           />
-          {(data.datoCmsGeneral.enableIeWarning && !browser.ie) &&
+          {(browser.ie && data.datoCmsGeneral.enableIeWarning) &&
             <NoIe
               noIeDescription={data.datoCmsGeneral.noIeDescription}
               noIeHeadline={data.datoCmsGeneral.noIeHeadline}

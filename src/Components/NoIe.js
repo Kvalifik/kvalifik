@@ -1,18 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Button from 'Blocks/Button'
+
+const ButtonInnerWrapper = styled.span`
+  margin: ${props => props.theme.spacing(1)};
+`
 
 const Root = styled.div`
   color: white;
   position: fixed;
   height: 500px;
-  width: 800px;
+  width: 900px;
   margin: auto;
 
   @media ${props => props.theme.media.md} {
     width: 90%;
     height: 75%;
   }
+
   background: #252525;
   z-index: 2000;
   top: 0;
@@ -22,11 +28,15 @@ const Root = styled.div`
   padding: ${props => props.theme.spacing(4)};
 `
 
-const Headline = styled.h2`
+const Headline = styled.h2``
+const Desc = styled.p``
 
+const Headline2 = styled.h3`
+  color: ${props => props.theme.palette.primary.D};
 `
-const Desc = styled.p`
-  
+
+const ButtonWrapper = styled.div`
+  display: block;
 `
 
 const NoIe = props => {
@@ -40,8 +50,18 @@ const NoIe = props => {
         {noIeHeadline}
       </Headline>
       <Desc dangerouslySetInnerHTML={{ __html: noIeDescription }} />
-      {recommendedBrowsersHeadline}
-      {/* {recommendedBrowser} */}
+      <Headline2>
+        {recommendedBrowsersHeadline}
+      </Headline2>
+      <ButtonWrapper>
+        {
+          recommendedBrowser.map((browser, i) =>
+            <ButtonInnerWrapper>
+              <Button key={i} type="link" to={browser.path} isExternal>{browser.name}</Button>
+            </ButtonInnerWrapper>
+          )
+        }
+      </ButtonWrapper>
     </Root>
   )
 }
