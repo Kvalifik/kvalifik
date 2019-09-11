@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
+  overflow: hidden;
   position: relative;
   margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 1px)`};
   margin-bottom: 0 ${props => props.half && '!important'};
