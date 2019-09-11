@@ -23,12 +23,13 @@ const Content = styled.div`
 
 const ServiceContainer = styled.div`
   padding-left: ${props => props.theme.spacing(4)};
+  margin-top: -10px;
 `
 
 const SidebarWrapper = styled.div``
 
 const idFromLabel = (label) =>
-  label.toLowerCase().replace(/\s*/g, '-').replace(/[^\w-]/g, '')
+  label.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
 
 class ServicesBlock extends Component {
   constructor (props) {
@@ -44,6 +45,16 @@ class ServicesBlock extends Component {
 
   componentDidMount () {
     window.addEventListener('scroll', this._handleScroll)
+
+    if (window && window.location && window.location.hash) {
+      this.props.services.find((service, index) => {
+        if ('#' + idFromLabel(service.label) === window.location.hash) {
+          this.handleSelect(index, idFromLabel(service.label), true)
+          return true
+        }
+        return false
+      })
+    }
   }
 
   componentWillUnmount () {
@@ -79,7 +90,7 @@ class ServicesBlock extends Component {
     }
   }
 
-  handleSelect (next, id) {
+  handleSelect (next, id, quick) {
     this.setState({
       selected: next
     })
@@ -91,11 +102,18 @@ class ServicesBlock extends Component {
         scrolling: true
       })
 
-      smoothScrollTo(window.scrollY + el.getBoundingClientRect().top - 10, () => {
-        this.setState({
-          scrolling: false
+      smoothScrollTo(
+        window.scrollY + el.getBoundingClientRect().top,
+        {
+          quick
+        },
+        () => {
+          this.setState({
+            scrolling: false
+          })
+
+          window.location.hash = id
         })
-      })
     }
   }
 

@@ -12,6 +12,7 @@ const Root = styled.div`
 
   background-color: ${props => props.theme.palette.dark};
   margin-bottom: 40vh;
+  padding-top: 10px;
 `
 
 const TextContainer = styled.div`
