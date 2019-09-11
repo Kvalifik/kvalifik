@@ -24,10 +24,6 @@ const Inner = styled.div`
 `
 
 const Background = styled.div`
-  background:
-    ${props => props.half
-    ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)`
-    : props.bgColor};
   overflow: hidden;
 
   position: absolute;
@@ -42,10 +38,31 @@ const Background = styled.div`
   & > * {
     transform-origin: left;
     transform: skewY(${props => -props.angle}deg);
+
+    width: 100%;
+    height: calc(100% + ${props => props.offset}vw);
   }
 
   @media ${props => props.theme.media.lg} {
     background: ${props => props.bgColor};
+  }
+
+  &::after {
+    content: "";
+    background:
+      ${props => props.half
+    ? `linear-gradient(to right, ${props.bgColor} 50%, transparent 50%)`
+    : props.bgColor};
+    background-size: cover;
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    bottom: ${props => props.offset}vw;
+    left: 0;
+    right: 0;
   }
 `
 
@@ -54,9 +71,6 @@ const Image = styled.div`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
-  width: 100%;
-  height: 100%;
 `
 
 const angles = {
@@ -78,6 +92,7 @@ const Skewer = ({
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
+  const hasBgImage = bgImageUrl || renderBgImage
 
   return (
     <Root
@@ -90,7 +105,7 @@ const Skewer = ({
       <Background
         angle={angle}
         offset={offset}
-        bgColor={bgColor}
+        bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.7 : 1)}
         half={half}
       >
         {bgImageUrl && <Image bgImage={bgImageUrl} />}
