@@ -55,7 +55,7 @@ const Stepper = props => {
         <Container>
           <Padder>
             <Content>
-              {props.steps.map((step, i) => {
+              {steps.map((step, i) => {
                 const { title, description } = step
                 return <Step key={i} >
                   <StepNumber>{i + 1}</StepNumber>
