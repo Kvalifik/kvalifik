@@ -57,7 +57,6 @@ const Text = styled.div`
 
 const LinkWrapper = styled.div`
   a {
-    display: none; /* Temporary */
     position: absolute;
     bottom: 0;
     color: white;

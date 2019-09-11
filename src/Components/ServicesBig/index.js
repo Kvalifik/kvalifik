@@ -11,6 +11,7 @@ import Padder from 'Blocks/Padder'
 
 import theme from 'utils/theme'
 import { smoothScrollTo } from 'utils/scroll'
+import idFromLabel from 'utils/idFromLabel'
 
 const Content = styled.div`
   padding: ${props => props.theme.spacing(2)};
@@ -35,9 +36,6 @@ const ServiceContainer = styled.div`
 `
 
 const SidebarWrapper = styled.div``
-
-const idFromLabel = (label) =>
-  label.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
 
 class ServicesBlock extends Component {
   constructor (props) {
