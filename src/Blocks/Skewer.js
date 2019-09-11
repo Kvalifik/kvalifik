@@ -8,13 +8,10 @@ const Root = styled.div`
   position: relative;
   margin-top: calc(${props => -props.offset}vw - 1px);
   margin-bottom: 0;
-  padding: ${props => props.noPadding ? 0 : props.offset}vw 0;
   height: ${props => props.height};
   z-index: ${props => props.layer};
-
-  &:last-child {
-    margin-bottom: ${props => -props.offset}vw;
-  }
+  padding-top: ${props => props.noPadding ? 0 : props.offset}vw;
+  padding-bottom: ${props => (props.flushBottom || props.noPadding) ? 0 : props.offset}vw;
 `
 
 const Inner = styled.div`
@@ -22,6 +19,7 @@ const Inner = styled.div`
 
   ${Root} {
     margin-top: calc(${props => props.offset / 2}vw - 1px);
+    margin-bottom: ${props => -props.offset}vw;
   }
 `
 
@@ -75,7 +73,8 @@ const Skewer = ({
   noPadding,
   half,
   height,
-  layer
+  layer,
+  flushBottom
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
@@ -86,6 +85,7 @@ const Skewer = ({
       layer={layer}
       noPadding={noPadding}
       height={height}
+      flushBottom={flushBottom}
     >
       <Background
         angle={angle}
@@ -112,7 +112,8 @@ Skewer.propTypes = {
   noPadding: PropTypes.bool,
   half: PropTypes.bool,
   height: PropTypes.string,
-  layer: PropTypes.number
+  layer: PropTypes.number,
+  flushBottom: PropTypes.bool
 }
 
 export default Skewer
