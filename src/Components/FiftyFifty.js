@@ -29,11 +29,9 @@ const Left = styled.div``
 
 const Right = styled.div`
   ${props => props.flip && css`
-    grid-column-start: 1;
-    grid-row-start: 1;
+    ${props => props.theme.grid.all(['grid-column: 1', 'grid-row: 1'])}
     @media ${props => props.theme.media.lg}{
-      grid-column-start: auto;
-      grid-row-start: auto;
+      ${props => props.theme.grid.all(['grid-column: auto', 'grid-row: auto'])}
     }
   `}
 `
@@ -53,7 +51,7 @@ const FiftyFifty = (props) => {
 
   return (
     <Root>
-      <Skewer bgColor={bgColor}>
+      <Skewer bgColor={bgColor} layer={1000} >
         <Padder>
           <Container>
             <Content>
@@ -73,11 +71,11 @@ const FiftyFifty = (props) => {
 }
 
 FiftyFifty.propTypes = {
-  description: PropTypes.any,
+  description: PropTypes.string,
   flip: PropTypes.bool,
-  header: PropTypes.any,
-  mediaUrl: PropTypes.any,
-  bgColor: PropTypes.any
+  header: PropTypes.string,
+  mediaUrl: PropTypes.string,
+  bgColor: PropTypes.string
 }
 
 export default FiftyFifty

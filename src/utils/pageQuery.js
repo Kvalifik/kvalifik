@@ -341,7 +341,7 @@ export const query = graphql`
       ...NotFoundBlockFragment
       ...ServicesBlockFragment
       ...ServicesBigFragment
-      ...NotFoundBlock
+      ...NotFoundBlockFragment
       ...Stepper
       ...ServicesBlockFragment
       ...ServicesBigFragment
