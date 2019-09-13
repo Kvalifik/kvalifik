@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import closeIcon from 'graphics/cross.svg'
 import rightArrow from 'graphics/rightArrow.svg'
 import targetBlank from 'graphics/target_blank.svg'
-import { Link } from 'gatsby'
+import UniversalLink from 'Components/Shared/UniversalLink'
 import { enableScroll } from 'utils/modal'
 
 const Root = styled.div`
@@ -124,7 +124,7 @@ const CaseExamples = styled.div`
   }
 `
 
-const Resource = styled(Link)`
+const Resource = styled(UniversalLink)`
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -162,7 +162,7 @@ const Resource = styled(Link)`
   `}
 `
 
-const Examples = styled(Link)`
+const Examples = styled(UniversalLink)`
   text-decoration: none;
   max-height: 80px;
   display: flex;
@@ -238,9 +238,8 @@ const ToolPreview = ({
             )}
             {tool.references.map((reference, i) =>
               <Resource
-                subText={reference.description || null}
                 to={reference.path}
-                target={reference.isExternal ? '_blank' : ''}
+                isExternal={reference.isExternal}
                 onClick={enableScroll}
                 key={i}
               >
@@ -255,7 +254,7 @@ const ToolPreview = ({
               <Examples
                 key={i}
                 to={example.path}
-                target={example.isExternal ? '_blank' : ''}
+                isExternal={example.isExternal}
                 onClick={enableScroll}
               >
                 {example.name}
