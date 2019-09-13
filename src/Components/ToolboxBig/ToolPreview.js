@@ -240,8 +240,9 @@ const ToolPreview = ({
               <Resource
                 subText={reference.description || null}
                 to={reference.path}
-                target={reference.isExternal && '_blank'}
+                target={reference.isExternal ? '_blank' : ''}
                 onClick={enableScroll}
+                key={i}
               >
                 {reference.name}
                 {reference.isExternal && <ExternalLink src={targetBlank} />}
@@ -254,7 +255,7 @@ const ToolPreview = ({
               <Examples
                 key={i}
                 to={example.path}
-                target={example.isExternal && '_blank'}
+                target={example.isExternal ? '_blank' : ''}
                 onClick={enableScroll}
               >
                 {example.name}

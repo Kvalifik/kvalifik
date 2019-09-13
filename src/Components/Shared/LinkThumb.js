@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import greenSideArrow from 'graphics/greenSideArrow.svg'
 import { Link } from 'gatsby'
 
-const Root = styled.a`
+const Root = styled.div`
   cursor: pointer;
   position: relative;
   width: 100%;

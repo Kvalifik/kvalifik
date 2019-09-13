@@ -7,6 +7,7 @@ import Icon from './Icon'
 
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
+import idFromLabel from 'utils/idFromLabel'
 
 const Root = styled.div`
   @media ${props => props.theme.media.lg} {
@@ -120,6 +121,7 @@ const ServicePreview = ({
     icon,
     label
   },
+  toolboxPageUrl,
   id
 }) => (
   <Root id={id}>
@@ -160,6 +162,7 @@ const ServicePreview = ({
                   headline={tool.headline}
                   iconUrl={tool.icon.url}
                   color={theme.palette.primary.D}
+                  to={`${toolboxPageUrl}#${idFromLabel(tool.headline)}`}
                 />
                 <span />
               </React.Fragment>
@@ -173,7 +176,8 @@ const ServicePreview = ({
 
 ServicePreview.propTypes = {
   service: servicePropType,
-  id: PropTypes.string
+  id: PropTypes.string,
+  toolboxPageUrl: PropTypes.string
 }
 
 export default ServicePreview
