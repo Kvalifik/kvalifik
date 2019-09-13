@@ -334,7 +334,8 @@ class ToolboxBig extends Component {
   renderToolFilter (toolFilter, i) {
     const isChosen = this.state.chosenFilter === toolFilter.title
     return (
-      <Filter isChosen={isChosen}
+      <Filter
+        isChosen={isChosen}
         onClick={
           !isChosen
             ? this.chooseFilter.bind(this, toolFilter.title)
@@ -381,7 +382,8 @@ class ToolboxBig extends Component {
           openAnimationLength={openAnimationLength}
           pseudoPreviewCoords={pseudoPreviewCoords}
           toolPreviewIsOpen={toolPreviewIsOpen}
-          toolPreviewIsAnimating={toolPreviewIsAnimating}>
+          toolPreviewIsAnimating={toolPreviewIsAnimating}
+        >
           <ToolPreview
             tool={tools[chosenTool]}
             closeWindow={this.closeToolPreview.bind(this)}
@@ -391,7 +393,7 @@ class ToolboxBig extends Component {
         </PseudoPreview>
         <Skewer bgColor={backgroundColor}>
           <Padder>
-            <Container sideText={sideText} >
+            <Container sideText={sideText}>
               <TopWrapper>
                 <Description>
                   {smallDescription}

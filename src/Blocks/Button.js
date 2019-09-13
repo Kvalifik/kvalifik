@@ -89,7 +89,7 @@ const Button = ({
       </button>
     )}
     {type === 'link' && isExternal && (
-      <a href={to} target="_blank" {...others}>
+      <a href={to} target="_blank" rel="noopener noreferrer" {...others}>
         <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
           {children}
         </ButtonContent>
