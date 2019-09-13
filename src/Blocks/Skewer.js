@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
+  overflow: ${props => props.flushBottom ? 'hidden' : 'unset'};
   position: relative;
   margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 1px)`};
   margin-bottom: 0 ${props => props.half && '!important'};
@@ -31,7 +32,7 @@ const Background = styled.div`
 
   position: absolute;
   top: 0;
-  bottom: ${props => props.offset}vw;
+  bottom: ${props => props.flushBottom ? 0 : props.offset}vw;
   left: 0;
   right: 0;
 
@@ -111,6 +112,7 @@ const Skewer = ({
         offset={offset}
         bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.7 : 1)}
         half={half}
+        flushBottom={flushBottom}
       >
         {bgImageUrl && <Image bgImage={bgImageUrl} />}
         {renderBgImage && renderBgImage()}
