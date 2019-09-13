@@ -56,8 +56,8 @@ const NoIe = props => {
       <ButtonWrapper>
         {
           recommendedBrowser.map((browser, i) =>
-            <ButtonInnerWrapper>
-              <Button key={i} type="link" to={browser.path} isExternal>{browser.name}</Button>
+            <ButtonInnerWrapper key={i}>
+              <Button type="link" to={browser.path} isExternal>{browser.name}</Button>
             </ButtonInnerWrapper>
           )
         }
