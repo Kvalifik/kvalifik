@@ -110,7 +110,7 @@ const Skewer = ({
       <Background
         angle={angle}
         offset={offset}
-        bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.7 : 1)}
+        bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.9 : 1)}
         half={half}
         flushBottom={flushBottom}
       >
