@@ -10,9 +10,11 @@ const Li = styled.li`
   ${props => props.collapsed
     ? css`
       padding-left: calc(200px + (${props => props.index * 10 + 'px'}) );
+      opacity: 0;
       `
     : css`
       padding-left: 0px;
+      opacity: 1;
     `}
 `
 
