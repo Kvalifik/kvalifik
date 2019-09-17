@@ -18,6 +18,10 @@ const Root = styled.div`
   grid-gap: 80px;
   justify-items: center;
   padding: ${props => props.theme.spacing(4, 0, 12)};
+
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(5, 2)};
+  }
 `
 
 class CaseInfo extends Component {

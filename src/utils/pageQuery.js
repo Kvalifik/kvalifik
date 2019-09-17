@@ -286,6 +286,9 @@ export const query = graphql`
   }
   fragment ServicesBigFragment on DatoCmsServicesBig {
     id
+    toolboxPage {
+      url
+    }
     services {
       id
       label

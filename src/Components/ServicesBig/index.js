@@ -129,7 +129,8 @@ class ServicesBlock extends Component {
 
   render () {
     const {
-      services
+      services,
+      toolboxPage
     } = this.props
 
     const {
@@ -157,6 +158,7 @@ class ServicesBlock extends Component {
                   <Service
                     key={index}
                     service={service}
+                    toolboxPageUrl={toolboxPage && toolboxPage.url}
                     id={idFromLabel(service.label)}
                   />
                 ))}
@@ -170,7 +172,10 @@ class ServicesBlock extends Component {
 }
 
 ServicesBlock.propTypes = {
-  services: PropTypes.array
+  services: PropTypes.array,
+  toolboxPage: PropTypes.shape({
+    url: PropTypes.string
+  })
 }
 
 export default ServicesBlock

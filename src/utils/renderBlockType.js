@@ -222,6 +222,7 @@ export default (block) => {
         <ServicesBig
           key={block.id}
           services={block.services}
+          toolboxPage={block.toolboxPage}
         />
       )
     }
