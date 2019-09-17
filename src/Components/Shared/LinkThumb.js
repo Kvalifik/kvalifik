@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import greenSideArrow from 'graphics/greenRightArrow.svg'
+import arrow from 'graphics/rightArrow.svg'
 import { Link } from 'gatsby'
 import LazyImage from 'Components/Shared/LazyImage'
+import Svg from 'react-inlinesvg'
 
 const Root = styled.div`
   cursor: pointer;
@@ -31,11 +32,15 @@ const Root = styled.div`
   }
 `
 
-const Arrow = styled(LazyImage)`
+const Arrow = styled(Svg)`
   position: absolute;
   right: ${props => props.theme.spacing(2)};
   bottom: ${props => props.theme.spacing(2)};
   width: ${props => props.theme.spacing(1)};
+
+  path {
+    fill: ${props => props.color};
+  }
 
   @media ${props => props.theme.media.sm} {
     right: ${props => props.theme.spacing(2)};
@@ -114,7 +119,7 @@ export default class ToolThumb extends Component {
             <Link to={to}>
               <Icon src={iconUrl} />
               <Headline>{headline}</Headline>
-              <Arrow src={greenSideArrow} />
+              <Arrow color={color} src={arrow} />
             </Link>
           </Center>
         )}
@@ -122,7 +127,7 @@ export default class ToolThumb extends Component {
           <Center color={color}>
             <Icon src={iconUrl} />
             <Headline>{headline}</Headline>
-            <Arrow src={greenSideArrow} />
+            <Arrow color={color} src={arrow} />
           </Center>
         )}
       </Root>
