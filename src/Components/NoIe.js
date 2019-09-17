@@ -40,10 +40,12 @@ const ButtonWrapper = styled.div`
 `
 
 const NoIe = props => {
-  const { noIeDescription,
+  const {
+    noIeDescription,
     noIeHeadline,
     recommendedBrowsersHeadline,
-    recommendedBrowser } = props
+    recommendedBrowser
+  } = props
   return (
     <Root>
       <Headline>

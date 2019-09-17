@@ -131,7 +131,7 @@ class Navigation extends Component {
             <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} isGlitch={isGlitch} />
           </Link>
         </HomeLink>
-        <IconWrapper onClick={this.toggleNavigation.bind(this)} >
+        <IconWrapper onClick={this.toggleNavigation.bind(this)}>
           <ToggleNavButton collapsed={this.state.collapsed} />
         </IconWrapper>
         <NavigationContent

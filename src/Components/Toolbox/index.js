@@ -83,7 +83,7 @@ class Toolbox extends Component {
       <Root>
         <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
-            <Container sideText={'Toolbox'} >
+            <Container sideText="Toolbox">
               <Console />
               <ToolBoxContent
                 tools={tools}
