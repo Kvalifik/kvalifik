@@ -71,7 +71,7 @@ const theme = {
     largeAngle: 11
   },
   breakpoints: {
-    sm: '576px',
+    sm: '567px',
     md: '768px',
     lg: '992px',
     xl: '1200px'
