@@ -29,7 +29,7 @@ const QuoteText = styled.div`
   line-height: 1.4em;
 
   @media ${props => props.theme.media.lg} {
-    font-size: 14px;
+    font-size: 18px;
   }
 `
 
@@ -40,7 +40,7 @@ const QuoteAuthor = styled.p`
   line-height: 1.6em;
 
   @media ${props => props.theme.media.lg} {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   &::before {

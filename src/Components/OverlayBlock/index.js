@@ -26,6 +26,10 @@ const Content = styled.div`
     grid-column: 2 / 4;
     padding: ${props => props.theme.spacing(10, 0)};
   }
+
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(5, 2)};
+  }
 `
 
 const OverlayBlock = ({

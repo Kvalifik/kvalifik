@@ -7,7 +7,7 @@ import { smoothScrollTo } from 'utils/scroll'
 const DownArrowIcon = styled.div`
   position: absolute;
   border-radius: 100%;
-  top: 90vh;
+  bottom: ${props => props.theme.skewer.calculateOffset('large') / 4}vw;
   left: 50%;
   transform: translateX(-50%);
   background-color: ${props => props.color};

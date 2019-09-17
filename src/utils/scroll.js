@@ -15,8 +15,6 @@ export const smoothScrollTo = (y, options, callback) => {
     document.body.clientHeight - window.innerHeight - skewerOffset
   )
 
-  console.log(y, target, options)
-
   if (options && options.quick) {
     window.scrollTo(0, target)
     scrolling = false
