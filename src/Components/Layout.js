@@ -7,6 +7,12 @@ import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
 import { Helmet } from 'react-helmet'
+import NoIe from 'Components/NoIe'
+import { detect } from 'detect-browser'
+
+const browser = detect()
+
+// handle the case where we don't detect the browser
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -119,9 +125,18 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
         glitchLogo {
           url
         }
+        noIeDescription
+        noIeHeadline
+        enableIeWarning
+        recommendedBrowsersHeadline
+        recommendedBrowser {
+          path
+          name
+        }
       }
     }
   `)
+
   return (
     <>
       <GlobalStyle />
@@ -146,6 +161,14 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
             logoUrl={isGlitch ? data.datoCmsGeneral.glitchLogo.url : data.datoCmsGeneral.logo.url}
             isGlitch={isGlitch}
           />
+          {(browser.name === 'ie' && data.datoCmsGeneral.enableIeWarning) &&
+            <NoIe
+              noIeDescription={data.datoCmsGeneral.noIeDescription}
+              noIeHeadline={data.datoCmsGeneral.noIeHeadline}
+              recommendedBrowsersHeadline={data.datoCmsGeneral.recommendedBrowsersHeadline}
+              recommendedBrowser={data.datoCmsGeneral.recommendedBrowser}
+            />
+          }
         </App>
       </ThemeProvider>
     </>

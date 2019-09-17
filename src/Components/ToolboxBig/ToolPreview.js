@@ -223,7 +223,7 @@ const ToolPreview = ({
 }) => (
   <Root>
     <CloseIcon toolPreviewIsOpen={toolPreviewIsOpen} src={closeIcon} onClick={closeWindow} />
-    <Preview toolPreviewIsOpen={toolPreviewIsOpen} toolPreviewIsAnimating={toolPreviewIsAnimating} >
+    <Preview toolPreviewIsOpen={toolPreviewIsOpen} toolPreviewIsAnimating={toolPreviewIsAnimating}>
       {(toolPreviewIsOpen && !toolPreviewIsAnimating) && (
         <ContentWrapper>
           <Left>

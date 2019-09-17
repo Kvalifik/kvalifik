@@ -51,7 +51,7 @@ const FiftyFifty = (props) => {
 
   return (
     <Root>
-      <Skewer bgColor={bgColor} layer={1000} >
+      <Skewer bgColor={bgColor} layer={1000}>
         <Padder>
           <Container>
             <Content>

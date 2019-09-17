@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import targetBlankIcon from 'graphics/target_blank.svg'
-import SVG from 'react-inlinesvg'
+import Svg from 'react-inlinesvg'
 
 const ButtonWrapper = styled.div`
   border: 0;
@@ -81,7 +81,7 @@ class Button extends Component {
       <ButtonContent color={color} bgColor={bgColor} isExternal={isExternal}>
         {children}
         {isExternal && (
-          <SVG src={targetBlankIcon} />
+          <Svg src={targetBlankIcon} />
         )}
       </ButtonContent>
     )
@@ -108,7 +108,7 @@ class Button extends Component {
           </button>
         )}
         {type === 'link' && isExternal && (
-          <a href={to} target="_blank" {...others}>
+          <a href={to} target="_blank" rel="noopener noreferrer" {...others}>
             {this.renderContent()}
           </a>
         )}
