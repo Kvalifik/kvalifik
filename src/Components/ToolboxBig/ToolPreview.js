@@ -223,7 +223,7 @@ const ToolPreview = ({
 }) => (
   <Root>
     <CloseIcon toolPreviewIsOpen={toolPreviewIsOpen} src={closeIcon} onClick={closeWindow} />
-    <Preview toolPreviewIsOpen={toolPreviewIsOpen} toolPreviewIsAnimating={toolPreviewIsAnimating} >
+    <Preview toolPreviewIsOpen={toolPreviewIsOpen} toolPreviewIsAnimating={toolPreviewIsAnimating}>
       {(toolPreviewIsOpen && !toolPreviewIsAnimating) && (
         <ContentWrapper>
           <Left>
@@ -238,6 +238,7 @@ const ToolPreview = ({
             )}
             {tool.references.map((reference, i) =>
               <Resource
+                key={i}
                 subText={reference.description || null}
                 to={reference.path}
                 target={reference.isExternal && '_blank'}

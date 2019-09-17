@@ -206,7 +206,7 @@ const Footer = ({
           <LinksContainer>
             <LinkHeader>{socialMediaHeader}</LinkHeader>
             {mappedLinks.map(link => (
-              <a key={link.href} href={link.href} target="_blank">
+              <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
                 <ExtendedIcon src={link.iconUrl} />
               </a>
             ))}

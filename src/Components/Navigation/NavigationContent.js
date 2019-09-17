@@ -111,7 +111,13 @@ const NavigationContent = props => {
             <Li collapsed={collapsed} key={i} index={i}>
               <NavItem isExternal={navigationItem.isExternal}>
                 {navigationItem.isExternal ? (
-                  <a href={navigationItem.path} target="_blank">{navigationItem.name}</a>
+                  <a
+                    href={navigationItem.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {navigationItem.name}
+                  </a>
                 ) : (
                   <Link to={navigationItem.path}>{navigationItem.name}</Link>
                 )}
@@ -126,7 +132,13 @@ const NavigationContent = props => {
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
               <FooterItem isExternal={navigationItem.isExternal}>
                 {navigationItem.isExternal ? (
-                  <a href={navigationItem.path} target="_blank">{navigationItem.name}</a>
+                  <a
+                    href={navigationItem.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {navigationItem.name}
+                  </a>
                 ) : (
                   <Link to={navigationItem.path}>{navigationItem.name}</Link>
                 )}
