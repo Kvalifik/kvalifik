@@ -192,10 +192,10 @@ const PseudoPreview = styled.div`
     bottom: ${props => props.theme.spacing(8)};
 
     @media ${props.theme.media.md} {
-      top: ${props => props.theme.spacing(11)};
+      top: ${props => props.theme.spacing(3)};
       left: ${props => props.theme.spacing(11)};
       right: ${props => props.theme.spacing(11)};
-      bottom: ${props => props.theme.spacing(11)};
+      bottom: ${props => props.theme.spacing(3)};
     }
 
     @media ${props.theme.media.sm} {
