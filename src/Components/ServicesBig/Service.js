@@ -35,9 +35,6 @@ const Header = styled.h2`
 
   font-size: 24px;
   font-weight: bold;
-  transform-origin: center;
-  transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  transform: ${props => props.selected ? 'none !important' : 'none'};
   cursor: ${props => props.selected ? 'default' : 'pointer'};
   outline: none;
 
@@ -117,9 +114,7 @@ const ServicePreview = ({
   id
 }) => (
   <Root id={id}>
-    <Header
-      onClick={(ev) => { ev.preventDefault() }}
-    >
+    <Header>
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
