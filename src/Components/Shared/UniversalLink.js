@@ -13,14 +13,19 @@ const UniversalLink = ({
       <a
         href={to}
         target="_blank"
+        rel="noopener noreferrer"
         {...props}
-      >{children}</a>
+      >
+        {children}
+      </a>
     )
     : (
       <Link
         to={to}
         {...props}
-      >{children}</Link>
+      >
+        {children}
+      </Link>
     )
 
 UniversalLink.propTypes = {
