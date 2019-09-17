@@ -34,16 +34,6 @@ const RightContainer = styled.div`
   }
 `
 
-const ImageWrapper = styled.div`
-  width: 100%;
-  height: 60vw;
-
-  @media ${props => props.theme.media.lg} {
-    height: 130vw;
-    width: 100vw;
-  }
-`
-
 const Description = styled.div`
   margin: ${props => props.theme.spacing(4)} 0;
   line-height: 1.25;
@@ -90,14 +80,12 @@ const ActionBlock = ({
           {images.length > 0 && (
             <RightContainer>
               <Skewer
-                height="60vw"
+                height="60vh"
                 renderBgImage={() => (
-                  <ImageWrapper>
-                    <Gallery
-                      images={imageUrls}
-                      delay={galleryDelay}
-                    />
-                  </ImageWrapper>
+                  <Gallery
+                    images={imageUrls}
+                    delay={galleryDelay}
+                  />
                 )}
               />
             </RightContainer>
