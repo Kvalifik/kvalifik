@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
-
+import { TransitionPortal } from 'gatsby-plugin-transition-link'
 import NavigationContent from './NavigationContent'
 import ToggleNavButton from './ToggleNavButton'
+import UniversalLink from '../Shared/UniversalLink'
 
 const NavDiv = styled.div`
   transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -125,22 +125,24 @@ class Navigation extends Component {
     } = this.props
 
     return (
-      <NavDiv collapsed={this.state.collapsed}>
-        <HomeLink collapsed={this.state.collapsed}>
-          <Link to="/">
-            <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} isGlitch={isGlitch} />
-          </Link>
-        </HomeLink>
-        <IconWrapper onClick={this.toggleNavigation.bind(this)}>
-          <ToggleNavButton collapsed={this.state.collapsed} />
-        </IconWrapper>
-        <NavigationContent
-          collapsed={this.state.collapsed}
-          navigationItems={navigationItems}
-          navigationLinks={navigationLinks}
-          socialMediaLinks={socialMediaLinks}
-        />
-      </NavDiv>
+      <TransitionPortal>
+        <NavDiv collapsed={this.state.collapsed}>
+          <HomeLink collapsed={this.state.collapsed}>
+            <UniversalLink to="/">
+              <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} isGlitch={isGlitch} />
+            </UniversalLink>
+          </HomeLink>
+          <IconWrapper onClick={this.toggleNavigation.bind(this)}>
+            <ToggleNavButton collapsed={this.state.collapsed} />
+          </IconWrapper>
+          <NavigationContent
+            collapsed={this.state.collapsed}
+            navigationItems={navigationItems}
+            navigationLinks={navigationLinks}
+            socialMediaLinks={socialMediaLinks}
+          />
+        </NavDiv>
+      </TransitionPortal>
     )
   }
 }

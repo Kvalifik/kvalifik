@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
 import targetBlankIcon from 'graphics/target_blank.svg'
+import UniversalLink from 'Components/Shared/UniversalLink'
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -121,7 +121,7 @@ const NavigationContent = props => {
                     {navigationItem.name}
                   </a>
                 ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
+                  <UniversalLink to={navigationItem.path}>{navigationItem.name}</UniversalLink>
                 )}
               </NavItem>
             </Li>
@@ -142,7 +142,7 @@ const NavigationContent = props => {
                     {navigationItem.name}
                   </a>
                 ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
+                  <UniversalLink to={navigationItem.path}>{navigationItem.name}</UniversalLink>
                 )}
               </FooterItem>
             </Li>

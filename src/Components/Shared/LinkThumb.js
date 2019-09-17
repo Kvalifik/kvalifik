@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import greenSideArrow from 'graphics/greenSideArrow.svg'
 import { Link } from 'gatsby'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 const Root = styled.div`
   cursor: pointer;
@@ -110,11 +111,11 @@ export default class ToolThumb extends Component {
       <Root onClick={(ev) => onClick && onClick(ev, id)} color={color}>
         {!!to && (
           <Center color={color}>
-            <Link to={to}>
+            <AniLink to={to} paintDrip>
               <Icon src={iconUrl} />
               <Headline>{headline}</Headline>
               <Arrow src={greenSideArrow} />
-            </Link>
+            </AniLink>
           </Center>
         )}
         {!to && (
