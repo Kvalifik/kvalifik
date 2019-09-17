@@ -80,7 +80,7 @@ const ActionBlock = ({
           {images.length > 0 && (
             <RightContainer>
               <Skewer
-                height="60vh"
+                height="60vw"
                 renderBgImage={() => (
                   <Gallery
                     images={imageUrls}
