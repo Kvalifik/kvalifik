@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import greenSideArrow from 'graphics/greenSideArrow.svg'
-import { Link } from 'gatsby'
 import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 const Root = styled.div`
