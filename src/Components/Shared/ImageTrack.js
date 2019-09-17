@@ -116,7 +116,10 @@ class ImageTrack extends Component {
       this.setState({
         trackSpace: width - maxWidth,
         canScrollRight: maxWidth < width,
-        imageSizes
+        imageSizes,
+        position: 0,
+        offset: 0,
+        canScrollLeft: false
       })
     }
   }

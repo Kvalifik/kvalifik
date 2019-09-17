@@ -101,6 +101,10 @@ class ServicesBlock extends Component {
       ev.preventDefault()
     }
 
+    if (this.state.scrolling) {
+      return
+    }
+
     this.setState({
       selected: next
     })
@@ -112,6 +116,7 @@ class ServicesBlock extends Component {
         scrolling: true
       })
 
+      history.replaceState(null, null, '#' + id)
       smoothScrollTo(
         window.scrollY + el.getBoundingClientRect().top,
         {
@@ -121,8 +126,6 @@ class ServicesBlock extends Component {
           this.setState({
             scrolling: false
           })
-
-          window.location.hash = id
         })
     }
   }
