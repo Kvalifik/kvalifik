@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import LinkThumb from 'Components/Shared/LinkThumb'
 import Icon from './Icon'
+import ImageTrack from 'Components/Shared/ImageTrack'
 
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
@@ -52,15 +53,6 @@ const Header = styled.h2`
 
 const TextContainer = styled.div`
   padding-top: ${props => props.theme.spacing(2)};
-`
-
-const Media = styled.div`
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 400px;
-  width: 100%;
 `
 
 const Title = styled.h2`
@@ -131,7 +123,10 @@ const ServicePreview = ({
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
-    <Media src={image ? image.url : ''} />
+    <ImageTrack
+      height="400px"
+      images={image && [image.url]}
+    />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />

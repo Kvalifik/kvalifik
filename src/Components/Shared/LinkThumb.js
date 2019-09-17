@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import greenSideArrow from 'graphics/greenSideArrow.svg'
+import greenSideArrow from 'graphics/greenRightArrow.svg'
 import { Link } from 'gatsby'
 
 const Root = styled.div`
