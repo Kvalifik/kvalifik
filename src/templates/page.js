@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 
 import Layout from 'Components/Layout'
@@ -14,20 +13,13 @@ import 'utils/pageQuery'
 const PageTemplate = ({ data }) => {
   const {
     pageSetup,
-    title,
-    url,
     bgColor
   } = data.datoCmsPage
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
-    <Layout bgColor={bgColor && bgColor.hex}>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{title}</title>
-        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
-      </Helmet>
+    <Layout bgColor={bgColor && bgColor.hex} page={data.datoCmsPage}>
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
