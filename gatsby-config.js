@@ -17,7 +17,8 @@ module.exports = {
       resolve: 'gatsby-plugin-polyfill-io',
       options: {
         features: [
-          'Promise'
+          'Promise',
+          'EventSource'
         ]
       }
     },

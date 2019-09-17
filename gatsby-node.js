@@ -38,7 +38,6 @@ exports.createPages = async ({ graphql, actions }) => {
 }
 
 exports.onCreatePage = async ({ page, actions }) => {
-  console.log({path: page.path})
   const { createPage } = actions
   if (page.path.match(/^\/toolbox/)) {
     page.matchPath = '/toolbox/*'

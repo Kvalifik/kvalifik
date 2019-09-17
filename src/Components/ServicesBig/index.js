@@ -72,11 +72,13 @@ class ServicesBlock extends Component {
 
     const { services } = this.props
 
-    let serviceId = 0
+    let serviceIndex = 0
+    let serviceId = ''
 
     for (let i = 0; i < services.length; i++) {
       const s = services[i]
-      const el = document.getElementById(idFromLabel(s.label))
+      const id = idFromLabel(s.label)
+      const el = document.getElementById(id)
 
       if (el) {
         const y = window.scrollY + el.getBoundingClientRect().top + window.innerHeight / 5
@@ -86,19 +88,25 @@ class ServicesBlock extends Component {
         }
       }
 
-      serviceId = i
+      serviceIndex = i
+      serviceId = id
     }
 
     if (this.state.selected !== serviceId) {
       this.setState({
-        selected: serviceId
+        selected: serviceIndex
       })
+      history.replaceState(null, null, '#' + serviceId)
     }
   }
 
   handleSelect (ev, next, id, quick) {
     if (ev) {
       ev.preventDefault()
+    }
+
+    if (this.state.scrolling) {
+      return
     }
 
     this.setState({
@@ -112,6 +120,7 @@ class ServicesBlock extends Component {
         scrolling: true
       })
 
+      history.replaceState(null, null, '#' + id)
       smoothScrollTo(
         window.scrollY + el.getBoundingClientRect().top,
         {
@@ -121,8 +130,6 @@ class ServicesBlock extends Component {
           this.setState({
             scrolling: false
           })
-
-          window.location.hash = id
         })
     }
   }

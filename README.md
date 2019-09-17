@@ -29,7 +29,7 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 
 ## Documentation
 
-[**Modular block setup**](https://github.com/Kvalifik/kvalifikdk-static/wiki/Modular-setup)
+[**Modular block setup**](https://github.com/Kvalifik/kvalifik/wiki/Modular-setup)
 
 **Source structure**
 
