@@ -85,11 +85,6 @@ const Icon = styled(LazyImage)`
 
 const Headline = styled.p`
   font-size: 14px;
-  margin: ${props => props.theme.spacing(2, 0, 0)};
-
-  @media ${props => props.theme.media.sm} {
-    margin: ${props => props.theme.spacing(0)};
-  }
 `
 
 export default class ToolThumb extends Component {
