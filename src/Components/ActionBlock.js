@@ -69,7 +69,6 @@ const ActionBlock = ({
   galleryDelay
 }) => {
   const imageUrls = images.map(image => image.url)
-  console.log(images.length)
   return (
     <Skewer bgColor={bgColor} noPadding={images.length > 0} layer={1200}>
       <Padder innerPadding={images.length > 0 ? 0 : '50px'}>
