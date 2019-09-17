@@ -8,6 +8,9 @@ We use **npm** for all development. Make sure you have the Gatsby development to
 
 `npm install`
 
+The app needs an API key to Dato CMS. Acquire this API key (read-only is sufficient) and assign it to environment variable `KVALIFIK_API_KEY`. This should be done in your bash settings, and **should not be checked into git**.
+[Check this article how to set global variables in bash](https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255)
+
 Then
 
 `npm run start`
@@ -26,7 +29,7 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 
 ## Documentation
 
-**Modular block setup**: [At the wiki](https://github.com/Kvalifik/kvalifik/wiki/Modular-setup)
+[**Modular block setup**](https://github.com/Kvalifik/kvalifik/wiki/Modular-setup)
 
 **Source structure**
 
