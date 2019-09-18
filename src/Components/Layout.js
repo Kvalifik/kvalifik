@@ -94,7 +94,11 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         cvr,
         address,
         phoneNumber,
-        links,
+        links {
+          path
+          name
+          isExternal
+        },
         socialMediaLinks {
           linkUrl,
           icon {
