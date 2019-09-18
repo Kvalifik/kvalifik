@@ -87,22 +87,9 @@ const ToolsHeader = styled.h3`
 `
 
 const Tools = styled.div`
-  ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 1fr 16px 1fr'
-  ])}
-
-  > * {
-    ${props => props.theme.grid('grid-row: 1')}
-
-    &:nth-child(odd) {
-      ${props => props.theme.grid('grid-column: 1')}
-    }
-
-    &:nth-child(even) {
-      ${props => props.theme.grid('grid-column: 3')}
-    }
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 16px;
 `
 
 const ServicePreview = ({

@@ -93,11 +93,8 @@ const Tools = styled.div`
   ${props => props.theme.grid.all([
     'display: grid'
   ])}
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr) 16px);
-
-  > * {
-    margin-bottom: 16px;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 16px;
 `
 
 const ServicePreview = ({
@@ -130,14 +127,12 @@ const ServicePreview = ({
           <ToolsHeader>Examples from our cases</ToolsHeader>
           <Tools>
             {exampleCases.map((work, index) => (
-              <React.Fragment key={index}>
-                <LinkThumb
-                  headline={work.forWho}
-                  to={work.page && work.page.url}
-                  color={theme.palette.light}
-                />
-                <span />
-              </React.Fragment>
+              <LinkThumb
+                key={index}
+                headline={work.forWho}
+                to={work.page && work.page.url}
+                color={theme.palette.light}
+              />
             ))}
           </Tools>
         </>
@@ -147,15 +142,13 @@ const ServicePreview = ({
           <ToolsHeader>Related tools</ToolsHeader>
           <Tools>
             {relatedTools.map((tool, index) => (
-              <React.Fragment key={index}>
-                <LinkThumb
-                  headline={tool.headline}
-                  iconUrl={tool.icon.url}
-                  color={theme.palette.primary.D}
-                  to={`${toolboxPageUrl}#${idFromLabel(tool.headline)}`}
-                />
-                <span />
-              </React.Fragment>
+              <LinkThumb
+                key={index}
+                headline={tool.headline}
+                iconUrl={tool.icon.url}
+                color={theme.palette.primary.D}
+                to={`${toolboxPageUrl}#${idFromLabel(tool.headline)}`}
+              />
             ))}
           </Tools>
         </>
