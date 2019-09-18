@@ -13,15 +13,9 @@ import idFromLabel from 'utils/idFromLabel'
 import { scrollToId } from 'utils/scroll'
 import theme from 'utils/theme'
 
-const Root = styled.div`
-  color: white;
-  position: relative;
-  z-index: 2000; /* ??? */
-`
-
 const Overlay = styled.div`
   position: fixed;
-  z-index: 100;
+  z-index: 5000;
   background-color: black;
   opacity: 0;
   top: 0;
@@ -42,6 +36,7 @@ const Overlay = styled.div`
 
 const Description = styled.div`
   margin: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
+  color: ${props => props.theme.palette.light};
 `
 
 const SearchWrapper = styled.div`
@@ -179,10 +174,9 @@ const PseudoPreview = styled.div`
   max-width: 1300px;
   max-height: 1000px;
   margin: auto;
-  z-index: 1000;
+  z-index: 5000;
 
   ${props => props.toolPreviewIsOpen ? css`
-    z-index: 1000;
     background-color: #252525;
     opacity: 1;
     pointer-events: all;
@@ -192,17 +186,17 @@ const PseudoPreview = styled.div`
     bottom: ${props => props.theme.spacing(8)};
 
     @media ${props.theme.media.md} {
-      top: ${props => props.theme.spacing(11)};
+      top: ${props => props.theme.spacing(3)};
       left: ${props => props.theme.spacing(11)};
       right: ${props => props.theme.spacing(11)};
-      bottom: ${props => props.theme.spacing(11)};
+      bottom: ${props => props.theme.spacing(3)};
     }
 
     @media ${props.theme.media.sm} {
-      top: ${props => props.theme.spacing(11)};
+      top: ${props => props.theme.spacing(3)};
       left: ${props => props.theme.spacing(3)};
       right: ${props => props.theme.spacing(3)};
-      bottom: ${props => props.theme.spacing(11)};
+      bottom: ${props => props.theme.spacing(3)};
     }
   ` : css`
     opacity: 0;
@@ -372,7 +366,7 @@ class ToolboxBig extends Component {
     } = this.state
 
     return (
-      <Root id="ToolBoxBig">
+      <>
         <Overlay
           onClick={this.closeToolPreview.bind(this)}
           toolPreviewIsOpen={toolPreviewIsOpen}
@@ -391,7 +385,7 @@ class ToolboxBig extends Component {
             toolPreviewIsAnimating={toolPreviewIsAnimating}
           />
         </PseudoPreview>
-        <Skewer bgColor={backgroundColor}>
+        <Skewer bgColor={backgroundColor} id="ToolBoxBig" layer={1200}>
           <Padder>
             <Container sideText={sideText}>
               <TopWrapper>
@@ -416,7 +410,7 @@ class ToolboxBig extends Component {
             </Container>
           </Padder>
         </Skewer>
-      </Root>
+      </>
     )
   }
 }

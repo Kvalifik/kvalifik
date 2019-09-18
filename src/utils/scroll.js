@@ -26,7 +26,18 @@ export const smoothScrollTo = (y, options, callback) => {
     return
   }
 
+  let lastY = window.scrollY
+
   function timeoutHandler () {
+    if (lastY !== window.scrollY) {
+      scrolling = false
+
+      if (typeof callback === 'function') {
+        callback()
+      }
+      return
+    }
+
     if (Math.abs(target - window.scrollY) > 5) {
       setTimeout(timeoutHandler, 10)
 
@@ -39,6 +50,8 @@ export const smoothScrollTo = (y, options, callback) => {
         callback()
       }
     }
+
+    lastY = window.scrollY
   }
 
   timeoutHandler()

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import greenSideArrow from 'graphics/greenSideArrow.svg'
+import greenSideArrow from 'graphics/greenRightArrow.svg'
 import { Link } from 'gatsby'
+import LazyImage from 'Components/Shared/LazyImage'
 
 const Root = styled.div`
   cursor: pointer;
@@ -30,7 +31,7 @@ const Root = styled.div`
   }
 `
 
-const Arrow = styled.img`
+const Arrow = styled(LazyImage)`
   position: absolute;
   right: ${props => props.theme.spacing(2)};
   bottom: ${props => props.theme.spacing(2)};
@@ -67,7 +68,7 @@ const Center = styled.div`
   }
 `
 
-const Icon = styled.img`
+const Icon = styled(LazyImage)`
   display: ${props => props.src ? 'block' : 'none'};
   width: 25%;
 

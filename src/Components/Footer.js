@@ -44,6 +44,11 @@ const Subtitle = styled.h2`
   white-space: nowrap;
   color: ${props => props.theme.palette.light};
 
+  a {
+    color: ${props => props.theme.palette.light};
+    text-decoration: none;
+  }
+
   @media ${props => props.theme.media.md} {
     white-space: normal;
   }

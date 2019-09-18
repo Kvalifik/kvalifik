@@ -24,6 +24,10 @@ const Inner = styled.div`
   ${Root} {
     margin-top: calc(${props => props.offset / 2}vw - 1px);
     margin-bottom: ${props => -props.offset}vw;
+
+    @media ${props => props.theme.media.lg} {
+      margin-top: 0;
+    }
   }
 `
 
@@ -92,7 +96,8 @@ const Skewer = ({
   half,
   height,
   layer,
-  flushBottom
+  flushBottom,
+  id
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
@@ -100,6 +105,7 @@ const Skewer = ({
 
   return (
     <Root
+      id={id}
       offset={offset}
       layer={layer}
       noPadding={noPadding}
@@ -134,7 +140,8 @@ Skewer.propTypes = {
   half: PropTypes.bool,
   height: PropTypes.string,
   layer: PropTypes.number,
-  flushBottom: PropTypes.bool
+  flushBottom: PropTypes.bool,
+  id: PropTypes.string
 }
 
 export default Skewer

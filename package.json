@@ -1,5 +1,5 @@
 {
-  "name": "kvalifikdk-static",
+  "name": "kvalifik",
   "private": true,
   "description": "Kvalifik.dk built with Gatsby and Dato CMS!",
   "version": "0.1.0",
@@ -58,10 +58,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/Kvalifik/kvalifik"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Kvalifik/kvalifik/issues"
   },
   "browserslist": [
     ">0.25%",

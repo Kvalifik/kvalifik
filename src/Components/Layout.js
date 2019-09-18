@@ -75,6 +75,12 @@ const App = styled.div`
     padding-right: 0;
   }
 
+  @media ${props => props.theme.media.md} {
+    @media (max-height: 550px) {
+      padding-right: 0;
+    }
+  }
+
   background-color: ${props => props.bgColor || 'white'};
 `
 
@@ -143,9 +149,10 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
       <Helmet>
         <link rel="icon" type="image/png" href="favicon.png" />
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <meta name="format-detection" content="telephone=no" />
       </Helmet>
       <ThemeProvider theme={theme}>
-        <App bgColor={bgColor}>
+        <App bgColor={bgColor} x-ms-format-detection="none">
           {children}
           {!hideFooter && (
             <Footer

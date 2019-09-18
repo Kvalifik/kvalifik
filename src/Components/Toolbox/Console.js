@@ -16,10 +16,6 @@ const Root = styled.div`
   min-height: calc(12px * 3 * 1.4);
 `
 
-const ConsoleElement = styled.span`
-  white-space: pre;
-`
-
 const text = (function () {
   const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
 
@@ -39,7 +35,7 @@ const Console = React.forwardRef(({ color, isInsideViewport }, ref) => (
         strings={text}
         typeSpeed={20}
       >
-        <ConsoleElement />
+        <span />
       </Typed>
     )}
   </Root>
