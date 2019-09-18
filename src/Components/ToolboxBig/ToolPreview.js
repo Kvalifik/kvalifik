@@ -44,10 +44,8 @@ const ContentWrapper = styled.div`
 `
 
 const Description = styled.div`
-  h3 {
-    color: ${props => props.theme.palette.primary.D};
-    text-transform: uppercase;
-    font-size: 16px;
+  p {
+    margin: ${props => props.theme.spacing(2, 0)};
   }
 
   @media ${props => props.theme.media.lg} {
@@ -55,12 +53,21 @@ const Description = styled.div`
   }
 `
 const HeaderImage = styled.img`
-  margin-bottom: ${props => props.theme.spacing(2)};
+  margin-bottom: ${props => props.theme.spacing(4)};
   height: 70px;
+  display: block;
+
+  @media ${props => props.theme.media.md} {
+    margin-bottom: ${props => props.theme.spacing(2)};
+  }
 `
 
 const Header = styled.h3`
   font-size: 30px;
+
+  @media ${props => props.theme.media.md} {
+    margin: ${props => props.theme.spacing(2, 0)};
+  }
 `
 
 const Left = styled.div`
