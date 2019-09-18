@@ -52,13 +52,14 @@ const Description = styled.div`
     grid-row: 2 / -1;
   }
 `
-const HeaderImage = styled.img`
+const HeaderIcon = styled.img`
   margin-bottom: ${props => props.theme.spacing(4)};
   height: 70px;
   display: block;
 
   @media ${props => props.theme.media.md} {
     margin-bottom: ${props => props.theme.spacing(2)};
+    height: 50px;
   }
 `
 
@@ -234,7 +235,7 @@ const ToolPreview = ({
       {(toolPreviewIsOpen && !toolPreviewIsAnimating) && (
         <ContentWrapper>
           <Left>
-            <HeaderImage src={tool.icon && tool.icon.url} />
+            <HeaderIcon src={tool.icon && tool.icon.url} />
             <Header tool={tool}>{tool.headline} </Header>
             <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
           </Left>
