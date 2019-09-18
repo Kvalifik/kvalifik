@@ -24,6 +24,10 @@ const Inner = styled.div`
   ${Root} {
     margin-top: calc(${props => props.offset / 2}vw - 1px);
     margin-bottom: ${props => -props.offset}vw;
+
+    @media ${props => props.theme.media.lg} {
+      margin-top: 0;
+    }
   }
 `
 

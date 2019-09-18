@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import LinkThumb from 'Components/Shared/LinkThumb'
 import Icon from './Icon'
+import ImageTrack from 'Components/Shared/ImageTrack'
 
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
@@ -34,9 +35,6 @@ const Header = styled.h2`
 
   font-size: 24px;
   font-weight: bold;
-  transform-origin: center;
-  transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  transform: ${props => props.selected ? 'none !important' : 'none'};
   cursor: ${props => props.selected ? 'default' : 'pointer'};
   outline: none;
 
@@ -52,15 +50,6 @@ const Header = styled.h2`
 
 const TextContainer = styled.div`
   padding-top: ${props => props.theme.spacing(2)};
-`
-
-const Media = styled.div`
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 400px;
-  width: 100%;
 `
 
 const Title = styled.h2`
@@ -125,13 +114,14 @@ const ServicePreview = ({
   id
 }) => (
   <Root id={id}>
-    <Header
-      onClick={(ev) => { ev.preventDefault() }}
-    >
+    <Header>
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
-    <Media src={image ? image.url : ''} />
+    <ImageTrack
+      height="400px"
+      images={image && [image.url]}
+    />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />

@@ -143,9 +143,10 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
       <Helmet>
         <link rel="icon" type="image/png" href="favicon.png" />
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <meta name="format-detection" content="telephone=no" />
       </Helmet>
       <ThemeProvider theme={theme}>
-        <App bgColor={bgColor}>
+        <App bgColor={bgColor} x-ms-format-detection="none">
           {children}
           {!hideFooter && (
             <Footer
