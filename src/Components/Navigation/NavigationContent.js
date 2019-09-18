@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import UniversalLink from 'Components/Shared/UniversalLink'
@@ -40,7 +40,7 @@ const NavItems = styled.div`
   }
 `
 
-const NavItem = styled(UniversalLink)`
+const NavItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest} />)`
   color: white;
   text-decoration: none;
   line-height: ${props => props.theme.spacing(5)};
@@ -65,7 +65,7 @@ const NavItem = styled(UniversalLink)`
   `}
 `
 
-const FooterItem = styled(UniversalLink)`
+const FooterItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest} />)`
   display: flex;
   align-items: center;
   line-height: ${props => props.theme.spacing(3)};
@@ -127,59 +127,79 @@ const SocialIcon = styled.a`
     `}
 `
 
-const NavigationContent = props => {
-  const { navigationItems, navigationLinks, collapsed, socialMediaLinks } = props
+class NavigationContent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      currentRoute: ''
+    }
+  }
 
-  const currentRoute = window && window.location && window.location.pathname
+  componentDidMount () {
+    this.setState({
+      currentRoute: window.location.pathname
+    })
+  }
 
-  return (
-    <Root>
-      <NavItems>
-        {
-          navigationItems.map((navigationItem, i) => (
-            <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem
-                isExternal={navigationItem.isExternal}
-                to={navigationItem.path}
-                isCurrentRoute={currentRoute.includes(navigationItem.path)}
-              >
-                {navigationItem.name}
-              </NavItem>
-            </Li>
-          ))
-        }
-      </NavItems>
-      <NavItems>
-        {
-          navigationLinks.map((navigationItem, i) => (
-            <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem
-                isExternal={navigationItem.isExternal}
-                to={navigationItem.path}
-                isCurrentRoute={currentRoute.includes(navigationItem.path)}
-              >
-                {navigationItem.name}
-              </FooterItem>
-            </Li>
-          ))
-        }
-        <SocialIcons>
+  render () {
+    const {
+      navigationItems,
+      navigationLinks,
+      collapsed,
+      socialMediaLinks
+    } = this.props
+
+    const currentRoute = this.state.currentRoute
+
+    return (
+      <Root>
+        <NavItems>
           {
-            socialMediaLinks.map((socialMediaLink, i) =>
-              <SocialIcon
-                href={socialMediaLink.linkUrl}
-                collapsed={collapsed}
-                key={i}
-                index={i + navigationItems.length}
-              >
-                <img src={socialMediaLink.icon.url} />
-              </SocialIcon>
-            )
+            navigationItems.map((navigationItem, i) => (
+              <Li collapsed={collapsed} key={i} index={i}>
+                <NavItem
+                  isExternal={navigationItem.isExternal}
+                  to={navigationItem.path}
+                  isCurrentRoute={currentRoute.includes(navigationItem.path)}
+                >
+                  {navigationItem.name}
+                </NavItem>
+              </Li>
+            ))
           }
-        </SocialIcons>
-      </NavItems>
-    </Root>
-  )
+        </NavItems>
+        <NavItems>
+          {
+            navigationLinks.map((navigationItem, i) => (
+              <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
+                <FooterItem
+                  isExternal={navigationItem.isExternal}
+                  to={navigationItem.path}
+                  isCurrentRoute={currentRoute.includes(navigationItem.path)}
+                >
+                  {navigationItem.name}
+                </FooterItem>
+              </Li>
+            ))
+          }
+          <SocialIcons>
+            {
+              socialMediaLinks.map((socialMediaLink, i) =>
+                <SocialIcon
+                  href={socialMediaLink.linkUrl}
+                  collapsed={collapsed}
+                  key={i}
+                  index={i + navigationItems.length}
+                >
+                  <img src={socialMediaLink.icon.url} />
+                </SocialIcon>
+              )
+            }
+          </SocialIcons>
+        </NavItems>
+      </Root>
+    )
+  }
 }
 
 NavigationContent.propTypes = {
