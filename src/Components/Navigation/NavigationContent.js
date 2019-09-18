@@ -132,11 +132,6 @@ const NavigationContent = props => {
 
   const currentRoute = window && window.location && window.location.pathname
 
-  console.log(
-    currentRoute,
-    navigationItems.map(item => item.path)
-  )
-
   return (
     <Root>
       <NavItems>
