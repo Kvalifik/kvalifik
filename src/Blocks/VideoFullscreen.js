@@ -1,9 +1,31 @@
 /* eslint react/jsx-boolean-value: 0 */
 
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import PropTypes from 'prop-types'
 import cross from 'graphics/cross.svg'
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+`
+
+const fadeInAndSlide = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`
 
 const CustomContainer = styled.div`
   display: grid;
@@ -18,10 +40,7 @@ const CustomContainer = styled.div`
   height: 100vh;
   width: 100vw;
 
-  transition: opacity 0.2s linear;
-  transition: transform 0.4s cubic-bezier(0, 0.35, 0.08, 0.99);
-  opacity: ${props => props.opened ? 1 : 0};
-  transform: ${props => props.opened ? 'translate3d(0, 0, 0)' : 'translate3d(0, -20%, 0)'};
+  animation: ${fadeInAndSlide} 0.4s cubic-bezier(0, 0.35, 0.08, 0.99);
 
   @media ${props => props.theme.media.xl} {
     grid-template-columns: 1fr 870px 1fr;
@@ -57,8 +76,7 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
 
-  transition: opacity 0.6s linear;
-  opacity: ${props => props.opened ? 0.9 : 0};
+  animation: ${fadeIn} 0.6s linear;
 `
 
 const CloseButton = styled.button`
@@ -105,15 +123,9 @@ class VideoFullscreen extends Component {
   constructor (props) {
     super(props)
     this.bindedKeyHandler = this.handleCloseKey.bind(this)
-    this.state = {
-      opened: false
-    }
   }
 
   componentDidMount () {
-    setTimeout(() =>
-      this.setState({ opened: true })
-    , 10)
     window.addEventListener('keydown', this.bindedKeyHandler)
   }
 
@@ -140,8 +152,8 @@ class VideoFullscreen extends Component {
 
     return (
       <>
-        <Backdrop opened={this.state.opened} />
-        <CustomContainer opened={this.state.opened} onClick={this.handleCloseButton.bind(this)}>
+        <Backdrop />
+        <CustomContainer onClick={this.handleCloseButton.bind(this)}>
           <Video fullscreen controls={true} autoPlay>
             <source src={src} type="video/mp4" />
           </Video>
