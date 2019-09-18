@@ -154,7 +154,7 @@ class VideoFullscreen extends Component {
       <>
         <Backdrop />
         <CustomContainer onClick={this.handleCloseButton.bind(this)}>
-          <Video fullscreen controls={true} autoPlay>
+          <Video controls={true} autoPlay>
             <source src={src} type="video/mp4" />
           </Video>
           <CloseButton onClick={onClose}>
