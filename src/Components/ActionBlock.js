@@ -34,16 +34,6 @@ const RightContainer = styled.div`
   }
 `
 
-const ImageWrapper = styled.div`
-  width: 100%;
-  height: 60vw;
-
-  @media ${props => props.theme.media.lg} {
-    height: 130vw;
-    width: 100vw;
-  }
-`
-
 const Description = styled.div`
   margin: ${props => props.theme.spacing(4)} 0;
   line-height: 1.25;
@@ -70,8 +60,8 @@ const ActionBlock = ({
 }) => {
   const imageUrls = images.map(image => image.url)
   return (
-    <Skewer bgColor={bgColor} noPadding layer={1200}>
-      <Padder innerPadding={images.length > 0 ? 0 : '150px'}>
+    <Skewer bgColor={bgColor} noPadding={images.length > 0} layer={1200}>
+      <Padder innerPadding={images.length > 0 ? 0 : '50px'}>
         <Container noContentWrapper>
           <LeftContainer>
             <Title color={textColor}>{title}</Title>
@@ -92,12 +82,10 @@ const ActionBlock = ({
               <Skewer
                 height="60vw"
                 renderBgImage={() => (
-                  <ImageWrapper>
-                    <Gallery
-                      images={imageUrls}
-                      delay={galleryDelay}
-                    />
-                  </ImageWrapper>
+                  <Gallery
+                    images={imageUrls}
+                    delay={galleryDelay}
+                  />
                 )}
               />
             </RightContainer>

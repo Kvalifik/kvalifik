@@ -6,6 +6,9 @@ import theme from 'utils/theme'
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
+import UniversalLink from 'Components/Shared/UniversalLink'
+import targetBlank from 'graphics/target_blank.svg'
+import Svg from 'react-inlinesvg'
 
 const Grid = styled.div`
   display: grid;
@@ -44,6 +47,11 @@ const Subtitle = styled.h2`
   white-space: nowrap;
   color: ${props => props.theme.palette.light};
 
+  a {
+    color: ${props => props.theme.palette.light};
+    text-decoration: none;
+  }
+
   @media ${props => props.theme.media.md} {
     white-space: normal;
   }
@@ -65,18 +73,30 @@ const Separator = styled.span`
 const LinkContainer = styled.div`
   margin-top: ${props => props.theme.spacing(3)};
 
-  a {
-    ${props => props.theme.typography.body.mixin()}
-    font-size: ${props => props.theme.typography.fontSize.sm};
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    width: 50%;
-    color: ${props => props.theme.palette.light};
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  p {
-    margin: 0;
+  @media ${props => props.theme.media.lg} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+const LinkItem = styled(UniversalLink)`
+  ${props => props.theme.typography.body.mixin()}
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: ${props => props.theme.palette.light};
+  line-height: 1.4em;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `
 
@@ -140,7 +160,7 @@ const LinkHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing(1.5)};
 `
 
-const FeedItem = styled.div`
+const FeedItem = styled.a`
   width: 75px;
   height: 75px;
   background-image: url(${props => props.src});
@@ -178,7 +198,8 @@ const Footer = ({
   }))
   const mappedFeed = instagramFeed.map(node => ({
     src: node.thumbnails[3].src,
-    timestamp: node.timestamp
+    timestamp: node.timestamp,
+    id: node.id
   }))
   mappedFeed.sort((a, b) => {
     if (a.timestamp > b.timestamp) {
@@ -201,7 +222,20 @@ const Footer = ({
               <Separator />
               {emailAddress}
             </Subtitle>
-            <LinkContainer dangerouslySetInnerHTML={{ __html: links }} />
+            <LinkContainer>
+              {links.map((link, i) => (
+                <LinkItem
+                  key={i}
+                  to={link.path}
+                  isExternal={link.isExternal}
+                >
+                  {link.name}
+                  {link.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
+                </LinkItem>
+              ))}
+            </LinkContainer>
           </InfoContainer>
           <LinksContainer>
             <LinkHeader>{socialMediaHeader}</LinkHeader>
@@ -213,9 +247,15 @@ const Footer = ({
           </LinksContainer>
           <FeedContainer>
             <FeedHeader>Follow us on Instagram</FeedHeader>
-            {slicedFeed.map(item => (
-              <FeedItem key={item.src} src={item.src} />
-            ))}
+            {slicedFeed.map(item =>
+              <FeedItem
+                key={item.src}
+                src={item.src}
+                href={`https://instagram.com/p/${item.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            )}
           </FeedContainer>
           <CopyrightLine>
             {copyright}
@@ -237,7 +277,11 @@ Footer.propTypes = {
   copyright: PropTypes.string,
   cvr: PropTypes.string,
   address: PropTypes.string,
-  links: PropTypes.string,
+  links: PropTypes.arrayOf(PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string,
+    isExternal: PropTypes.bool
+  })),
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
     linkUrl: PropTypes.string,
     icon: PropTypes.shape({

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import theme from 'utils/theme'
 
 const Root = styled.div`
+  overflow: ${props => props.flushBottom ? 'hidden' : 'unset'};
   position: relative;
   margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 1px)`};
   margin-bottom: 0 ${props => props.half && '!important'};
@@ -23,6 +24,10 @@ const Inner = styled.div`
   ${Root} {
     margin-top: calc(${props => props.offset / 2}vw - 1px);
     margin-bottom: ${props => -props.offset}vw;
+
+    @media ${props => props.theme.media.lg} {
+      margin-top: 0;
+    }
   }
 `
 
@@ -31,7 +36,7 @@ const Background = styled.div`
 
   position: absolute;
   top: 0;
-  bottom: ${props => props.offset}vw;
+  bottom: ${props => props.flushBottom ? 0 : props.offset}vw;
   left: 0;
   right: 0;
 
@@ -91,7 +96,8 @@ const Skewer = ({
   half,
   height,
   layer,
-  flushBottom
+  flushBottom,
+  id
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
@@ -99,6 +105,7 @@ const Skewer = ({
 
   return (
     <Root
+      id={id}
       offset={offset}
       layer={layer}
       noPadding={noPadding}
@@ -109,8 +116,9 @@ const Skewer = ({
       <Background
         angle={angle}
         offset={offset}
-        bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.7 : 1)}
+        bgColor={theme.hexToRgba(bgColor, hasBgImage ? 0.9 : 1)}
         half={half}
+        flushBottom={flushBottom}
       >
         {bgImageUrl && <Image bgImage={bgImageUrl} />}
         {renderBgImage && renderBgImage()}
@@ -132,7 +140,8 @@ Skewer.propTypes = {
   half: PropTypes.bool,
   height: PropTypes.string,
   layer: PropTypes.number,
-  flushBottom: PropTypes.bool
+  flushBottom: PropTypes.bool,
+  id: PropTypes.string
 }
 
 export default Skewer

@@ -12,7 +12,7 @@ const Root = styled.div`
     'grid-template-columns: 5fr 4fr'
   ])}
 
-  @media ${props => props.theme.media.lg} {
+  @media ${props => props.theme.media.xl} {
     display: block;
   }
 
@@ -27,7 +27,7 @@ const TextContainer = styled.div`
 
   padding: ${props => props.theme.spacing(2, 2, 2, 4)};
 
-  @media ${props => props.theme.media.lg} {
+  @media ${props => props.theme.media.xl} {
     padding: ${props => props.theme.spacing(2)};
   }
 `
@@ -42,6 +42,11 @@ const Media = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media ${props => props.theme.media.xl} {
+    height: 300px;
+    width: 100%;
+  }
 
   @media ${props => props.theme.media.lg} {
     height: 200px;
@@ -87,21 +92,12 @@ const ToolsHeader = styled.h3`
 `
 
 const Tools = styled.div`
-  ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 1fr 16px 1fr'
-  ])}
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 130px);
+  grid-gap: 16px;
 
-  > * {
-    ${props => props.theme.grid('grid-row: 1')}
-
-    &:nth-child(odd) {
-      ${props => props.theme.grid('grid-column: 1')}
-    }
-
-    &:nth-child(even) {
-      ${props => props.theme.grid('grid-column: 3')}
-    }
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: 1fr;
   }
 `
 
@@ -109,12 +105,12 @@ const ServicePreview = ({
   service: {
     title,
     description,
-    image,
+    images,
     relatedTools
   }
 }) => (
   <Root>
-    <Media src={image ? image.url : ''} />
+    <Media src={images && images.length > 0 ? images[0].url : ''} />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />

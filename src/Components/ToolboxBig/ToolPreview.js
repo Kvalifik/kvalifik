@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import closeIcon from 'graphics/cross.svg'
 import rightArrow from 'graphics/rightArrow.svg'
 import targetBlank from 'graphics/target_blank.svg'
-import { Link } from 'gatsby'
+import UniversalLink from 'Components/Shared/UniversalLink'
 import { enableScroll } from 'utils/modal'
 
 const Root = styled.div`
@@ -44,23 +44,31 @@ const ContentWrapper = styled.div`
 `
 
 const Description = styled.div`
-  h3 {
-    color: ${props => props.theme.palette.primary.D};
-    text-transform: uppercase;
-    font-size: 16px;
+  p {
+    margin: ${props => props.theme.spacing(2, 0)};
   }
 
   @media ${props => props.theme.media.lg} {
     grid-row: 2 / -1;
   }
 `
-const HeaderImage = styled.img`
-  margin-bottom: ${props => props.theme.spacing(2)};
+const HeaderIcon = styled.img`
+  margin-bottom: ${props => props.theme.spacing(4)};
   height: 70px;
+  display: block;
+
+  @media ${props => props.theme.media.md} {
+    margin-bottom: ${props => props.theme.spacing(2)};
+    height: 50px;
+  }
 `
 
 const Header = styled.h3`
   font-size: 30px;
+
+  @media ${props => props.theme.media.md} {
+    margin: ${props => props.theme.spacing(2, 0)};
+  }
 `
 
 const Left = styled.div`
@@ -124,7 +132,7 @@ const CaseExamples = styled.div`
   }
 `
 
-const Resource = styled(Link)`
+const Resource = styled(UniversalLink)`
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -162,7 +170,7 @@ const Resource = styled(Link)`
   `}
 `
 
-const Examples = styled(Link)`
+const Examples = styled(UniversalLink)`
   text-decoration: none;
   max-height: 80px;
   display: flex;
@@ -227,7 +235,7 @@ const ToolPreview = ({
       {(toolPreviewIsOpen && !toolPreviewIsAnimating) && (
         <ContentWrapper>
           <Left>
-            <HeaderImage src={tool.icon && tool.icon.url} />
+            <HeaderIcon src={tool.icon && tool.icon.url} />
             <Header tool={tool}>{tool.headline} </Header>
             <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
           </Left>
@@ -238,11 +246,10 @@ const ToolPreview = ({
             )}
             {tool.references.map((reference, i) =>
               <Resource
-                key={i}
-                subText={reference.description || null}
                 to={reference.path}
-                target={reference.isExternal && '_blank'}
+                isExternal={reference.isExternal}
                 onClick={enableScroll}
+                key={i}
               >
                 {reference.name}
                 {reference.isExternal && <ExternalLink src={targetBlank} />}
@@ -255,7 +262,7 @@ const ToolPreview = ({
               <Examples
                 key={i}
                 to={example.path}
-                target={example.isExternal && '_blank'}
+                isExternal={example.isExternal}
                 onClick={enableScroll}
               >
                 {example.name}

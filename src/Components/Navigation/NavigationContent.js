@@ -10,9 +10,11 @@ const Li = styled.li`
   ${props => props.collapsed
     ? css`
       padding-left: calc(200px + (${props => props.index * 10 + 'px'}) );
+      opacity: 0;
       `
     : css`
       padding-left: 0px;
+      opacity: 1;
     `}
 `
 
@@ -22,7 +24,19 @@ const NavItems = styled.div`
   align-self: center;
 
   &:first-of-type {
-    margin-top: ${props => props.theme.navBarWidth};
+    @media screen and (min-height: 500px) {
+      margin-top: ${props => props.theme.navBarWidth};
+    }
+  }
+
+  @media ${props => props.theme.media.md} {
+    @media screen and (max-height: 500px) {
+      margin-top: 65px;
+
+      @media screen and (min-height: 400px) {
+        margin-top: 125px;
+      }
+    }
   }
 `
 
@@ -72,6 +86,12 @@ const Root = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
+
+  @media ${props => props.theme.media.md} {
+    @media screen and (max-height: 500px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 `
 
 const SocialIcons = styled.div`

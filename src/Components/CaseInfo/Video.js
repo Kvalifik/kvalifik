@@ -21,7 +21,7 @@ const Root = styled.div`
   }
 
   @media ${props => props.theme.media.md} {
-    width: 400px;
+    width: 100%;
     height: calc(400px * 0.5625);
   }
 `

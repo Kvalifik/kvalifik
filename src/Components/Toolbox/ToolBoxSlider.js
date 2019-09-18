@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import leftArrow from 'graphics/leftArrow.svg'
+import leftArrow from 'graphics/greenLeftArrow.svg'
 
 const Root = styled.div`
   color: white;

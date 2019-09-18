@@ -9,6 +9,7 @@ import theme from 'utils/theme'
 import { Helmet } from 'react-helmet'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
+import { pagePropType } from 'models/page'
 
 const browser = detect()
 
@@ -75,10 +76,16 @@ const App = styled.div`
     padding-right: 0;
   }
 
+  @media ${props => props.theme.media.md} {
+    @media (max-height: 500px) {
+      padding-right: 0;
+    }
+  }
+
   background-color: ${props => props.bgColor || 'white'};
 `
 
-const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
+const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
       datoCmsFooter {
@@ -87,7 +94,11 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
         cvr,
         address,
         phoneNumber,
-        links,
+        links {
+          path
+          name
+          isExternal
+        },
         socialMediaLinks {
           linkUrl,
           icon {
@@ -102,6 +113,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
             src
           }
           timestamp
+          id
         }
       }
       allDatoCmsNavigation {
@@ -137,15 +149,30 @@ const Main = ({ children, hideFooter, isGlitch, bgColor }) => {
     }
   `)
 
+  const {
+    url,
+    title,
+    pageSetup
+  } = page
+
+  const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+
   return (
     <>
       <GlobalStyle />
       <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
         <link rel="icon" type="image/png" href="favicon.png" />
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        <meta name="format-detection" content="telephone=no" />
+        {headerBlock && headerBlock.bgColor && (
+          <meta name="theme-color" content={headerBlock.bgColor.hex} />
+        )}
       </Helmet>
       <ThemeProvider theme={theme}>
-        <App bgColor={bgColor}>
+        <App bgColor={bgColor} x-ms-format-detection="none">
           {children}
           {!hideFooter && (
             <Footer
@@ -179,7 +206,8 @@ Main.propTypes = {
   children: PropTypes.any,
   hideFooter: PropTypes.bool,
   isGlitch: PropTypes.bool,
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
+  page: pagePropType
 }
 
 export default Main

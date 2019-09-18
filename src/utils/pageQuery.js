@@ -269,7 +269,7 @@ export const query = graphql`
       icon {
         url
       }
-      image {
+      images {
         url
       }
       title
@@ -286,13 +286,16 @@ export const query = graphql`
   }
   fragment ServicesBigFragment on DatoCmsServicesBig {
     id
+    toolboxPage {
+      url
+    }
     services {
       id
       label
       icon {
         url
       }
-      image {
+      images {
         url
       }
       title

@@ -4,9 +4,11 @@ import styled from 'styled-components'
 
 import LinkThumb from 'Components/Shared/LinkThumb'
 import Icon from './Icon'
+import ImageTrack from 'Components/Shared/ImageTrack'
 
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
+import idFromLabel from 'utils/idFromLabel'
 
 const Root = styled.div`
   @media ${props => props.theme.media.lg} {
@@ -33,9 +35,6 @@ const Header = styled.h2`
 
   font-size: 24px;
   font-weight: bold;
-  transform-origin: center;
-  transition: transform 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  transform: ${props => props.selected ? 'none !important' : 'none'};
   cursor: ${props => props.selected ? 'default' : 'pointer'};
   outline: none;
 
@@ -51,15 +50,6 @@ const Header = styled.h2`
 
 const TextContainer = styled.div`
   padding-top: ${props => props.theme.spacing(2)};
-`
-
-const Media = styled.div`
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 400px;
-  width: 100%;
 `
 
 const Title = styled.h2`
@@ -103,33 +93,33 @@ const Tools = styled.div`
   ${props => props.theme.grid.all([
     'display: grid'
   ])}
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr) 16px);
-
-  > * {
-    margin-bottom: 16px;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 16px;
 `
 
 const ServicePreview = ({
   service: {
     title,
     description,
-    image,
+    images,
     relatedTools,
     exampleCases,
     icon,
     label
   },
+  toolboxPageUrl,
   id
 }) => (
   <Root id={id}>
-    <Header
-      onClick={(ev) => { ev.preventDefault() }}
-    >
+    <Header>
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
-    <Media src={image ? image.url : ''} />
+    <ImageTrack
+      height="400px"
+      images={images.map(image => image.url)}
+      gutter="16px"
+    />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />
@@ -138,14 +128,12 @@ const ServicePreview = ({
           <ToolsHeader>Examples from our cases</ToolsHeader>
           <Tools>
             {exampleCases.map((work, index) => (
-              <React.Fragment key={index}>
-                <LinkThumb
-                  headline={work.forWho}
-                  to={work.page && work.page.url}
-                  color={theme.palette.light}
-                />
-                <span />
-              </React.Fragment>
+              <LinkThumb
+                key={index}
+                headline={work.forWho}
+                to={work.page && work.page.url}
+                color={theme.palette.light}
+              />
             ))}
           </Tools>
         </>
@@ -155,14 +143,13 @@ const ServicePreview = ({
           <ToolsHeader>Related tools</ToolsHeader>
           <Tools>
             {relatedTools.map((tool, index) => (
-              <React.Fragment key={index}>
-                <LinkThumb
-                  headline={tool.headline}
-                  iconUrl={tool.icon.url}
-                  color={theme.palette.primary.D}
-                />
-                <span />
-              </React.Fragment>
+              <LinkThumb
+                key={index}
+                headline={tool.headline}
+                iconUrl={tool.icon.url}
+                color={theme.palette.primary.D}
+                to={`${toolboxPageUrl}#${idFromLabel(tool.headline)}`}
+              />
             ))}
           </Tools>
         </>
@@ -173,7 +160,8 @@ const ServicePreview = ({
 
 ServicePreview.propTypes = {
   service: servicePropType,
-  id: PropTypes.string
+  id: PropTypes.string,
+  toolboxPageUrl: PropTypes.string
 }
 
 export default ServicePreview
