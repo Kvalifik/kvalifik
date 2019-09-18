@@ -75,6 +75,12 @@ const App = styled.div`
     padding-right: 0;
   }
 
+  @media ${props => props.theme.media.md} {
+    @media (max-height: 578px) {
+      padding-right: 0;
+    }
+  }
+
   background-color: ${props => props.bgColor || 'white'};
 `
 
