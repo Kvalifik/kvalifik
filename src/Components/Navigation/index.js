@@ -26,7 +26,7 @@ const NavDiv = styled.div`
   }
 
   @media ${props => props.theme.media.md} {
-    @media (max-height: 550px) {
+    @media (max-height: 500px) {
       background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
     }
   }
@@ -46,7 +46,7 @@ const NavDiv = styled.div`
       `}
   }
   @media ${props => props.theme.media.md} {
-    @media (max-height: 550px) {
+    @media (max-height: 500px) {
       width: 100%;
       left: 0;
       top: calc(-100vh + ${props => props.theme.navBarWidth});
@@ -110,7 +110,7 @@ const HomeLink = styled.div`
   }
 
   @media ${props => props.theme.media.md} {
-    @media (max-height: 550px) {
+    @media (max-height: 500px) {
       left: 0;
       bottom: initial;
       right: initial;
@@ -135,7 +135,7 @@ const KvalfikLogo = styled.img`
   }
 
   @media ${props => props.theme.media.md} {
-    @media (max-height: 550px) {
+    @media (max-height: 500px) {
       display: block;
       width: ${props => props.isGlitch ? '110px' : '80px'};
       height: initial;

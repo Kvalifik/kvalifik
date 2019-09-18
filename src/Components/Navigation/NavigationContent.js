@@ -24,13 +24,13 @@ const NavItems = styled.div`
   align-self: center;
 
   &:first-of-type {
-    @media screen and (min-height: 550px) {
+    @media screen and (min-height: 500px) {
       margin-top: ${props => props.theme.navBarWidth};
     }
   }
 
   @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 550px) {
+    @media screen and (max-height: 500px) {
       margin-top: 65px;
 
       @media screen and (min-height: 400px) {
@@ -88,7 +88,7 @@ const Root = styled.div`
   grid-template-rows: 1fr 1fr;
 
   @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 550px) {
+    @media screen and (max-height: 500px) {
       grid-template-columns: 1fr 1fr;
     }
   }
