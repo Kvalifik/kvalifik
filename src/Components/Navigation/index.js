@@ -151,6 +151,30 @@ class Navigation extends Component {
     this.state = {
       collapsed: true
     }
+    this.ref = React.createRef()
+    this._handleOutsideClick = this.handleOutsideClick.bind(this)
+  }
+
+  componentDidMount () {
+    document.addEventListener('click', this._handleOutsideClick)
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('click', this._handleOutsideClick)
+  }
+
+  handleOutsideClick (ev) {
+    if (this.state.collapsed) {
+      return
+    }
+
+    if (this.ref && this.ref.current) {
+      if (!this.ref.current.contains(ev.target)) {
+        this.setState({
+          collapsed: true
+        })
+      }
+    }
   }
 
   toggleNavigation () {
@@ -167,7 +191,7 @@ class Navigation extends Component {
     } = this.props
 
     return (
-      <NavDiv collapsed={this.state.collapsed}>
+      <NavDiv collapsed={this.state.collapsed} ref={this.ref}>
         <HomeLink collapsed={this.state.collapsed}>
           <Link to="/">
             <KvalfikLogo collapsed={this.state.collapsed} src={logoUrl} isGlitch={isGlitch} />
