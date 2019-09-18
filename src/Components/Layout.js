@@ -109,6 +109,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
             src
           }
           timestamp
+          id
         }
       }
       allDatoCmsNavigation {
