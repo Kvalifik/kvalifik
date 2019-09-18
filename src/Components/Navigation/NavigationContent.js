@@ -24,14 +24,17 @@ const NavItems = styled.div`
   align-self: center;
 
   &:first-of-type {
-    @media screen and (min-height: 400px) {
+    @media screen and (min-height: 578px) {
       margin-top: ${props => props.theme.navBarWidth};
     }
   }
 
-  @media ${props => props.theme.media.sm} {
-    @media screen and (max-height: 400px) {
+  @media ${props => props.theme.media.md} {
+    @media screen and (max-height: 578px) {
       margin-top: 65px;
+    }
+    @media screen and (min-height: 400px) {
+      margin-top: 125px;
     }
   }
 `
@@ -83,8 +86,8 @@ const Root = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
 
-  @media ${props => props.theme.media.sm} {
-    @media screen and (max-height: 400px) {
+  @media ${props => props.theme.media.md} {
+    @media screen and (max-height: 578px) {
       grid-template-columns: 1fr 1fr;
     }
   }
