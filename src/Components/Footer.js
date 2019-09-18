@@ -145,7 +145,7 @@ const LinkHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing(1.5)};
 `
 
-const FeedItem = styled.div`
+const FeedItem = styled.a`
   width: 75px;
   height: 75px;
   background-image: url(${props => props.src});
@@ -183,7 +183,8 @@ const Footer = ({
   }))
   const mappedFeed = instagramFeed.map(node => ({
     src: node.thumbnails[3].src,
-    timestamp: node.timestamp
+    timestamp: node.timestamp,
+    id: node.id
   }))
   mappedFeed.sort((a, b) => {
     if (a.timestamp > b.timestamp) {
@@ -219,7 +220,13 @@ const Footer = ({
           <FeedContainer>
             <FeedHeader>Follow us on Instagram</FeedHeader>
             {slicedFeed.map(item =>
-              <FeedItem key={item.src} src={item.src} />
+              <FeedItem
+                key={item.src}
+                src={item.src}
+                href={`https://instagram.com/p/${item.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
             )}
           </FeedContainer>
           <CopyrightLine>
