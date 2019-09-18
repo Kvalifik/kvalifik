@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import UniversalLink from 'Components/Shared/UniversalLink'
+import Svg from 'react-inlinesvg'
+
 import rightArrow from 'graphics/rightArrow.svg'
+import targetBlank from 'graphics/target_blank.svg'
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -63,6 +66,11 @@ const NavItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest}
       transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
     }
   `}
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `
 
 const FooterItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest} />)`
@@ -86,6 +94,11 @@ const FooterItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...re
       transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
     }
   `}
+
+  svg {
+    width: 23px;
+    height: 23px;
+  }
 `
 
 const Root = styled.div`
@@ -163,6 +176,9 @@ class NavigationContent extends Component {
                   isCurrentRoute={currentRoute.includes(navigationItem.path)}
                 >
                   {navigationItem.name}
+                  {navigationItem.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
                 </NavItem>
               </Li>
             ))
@@ -178,6 +194,9 @@ class NavigationContent extends Component {
                   isCurrentRoute={currentRoute.includes(navigationItem.path)}
                 >
                   {navigationItem.name}
+                  {navigationItem.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
                 </FooterItem>
               </Li>
             ))
