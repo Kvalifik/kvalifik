@@ -6,6 +6,9 @@ import theme from 'utils/theme'
 import Skewer from 'Blocks/Skewer'
 import Container from 'Blocks/Container'
 import Icon from 'Blocks/Icon'
+import UniversalLink from 'Components/Shared/UniversalLink'
+import targetBlank from 'graphics/target_blank.svg'
+import Svg from 'react-inlinesvg'
 
 const Grid = styled.div`
   display: grid;
@@ -70,18 +73,30 @@ const Separator = styled.span`
 const LinkContainer = styled.div`
   margin-top: ${props => props.theme.spacing(3)};
 
-  a {
-    ${props => props.theme.typography.body.mixin()}
-    font-size: ${props => props.theme.typography.fontSize.sm};
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    width: 50%;
-    color: ${props => props.theme.palette.light};
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  p {
-    margin: 0;
+  @media ${props => props.theme.media.lg} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+const LinkItem = styled(UniversalLink)`
+  ${props => props.theme.typography.body.mixin()}
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: ${props => props.theme.palette.light};
+  line-height: 1.4em;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `
 
@@ -207,7 +222,20 @@ const Footer = ({
               <Separator />
               {emailAddress}
             </Subtitle>
-            <LinkContainer dangerouslySetInnerHTML={{ __html: links }} />
+            <LinkContainer>
+              {links.map((link, i) => (
+                <LinkItem
+                  key={i}
+                  to={link.path}
+                  isExternal={link.isExternal}
+                >
+                  {link.name}
+                  {link.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
+                </LinkItem>
+              ))}
+            </LinkContainer>
           </InfoContainer>
           <LinksContainer>
             <LinkHeader>{socialMediaHeader}</LinkHeader>
