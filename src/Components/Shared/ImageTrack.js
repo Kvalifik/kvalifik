@@ -6,6 +6,12 @@ import leftArrow from 'graphics/leftArrow.svg'
 
 const ImageItem = styled.img`
   height: ${props => props.height || '400px'};
+
+  margin-right: ${props => props.gutter || 0};
+
+  &:last-child {
+    margin-right: 0;
+  }
 `
 
 const Track = styled.div`
@@ -202,7 +208,8 @@ class ImageTrack extends Component {
   render () {
     const {
       images = [],
-      height
+      height,
+      gutter
     } = this.props
     const {
       offset,
@@ -221,6 +228,7 @@ class ImageTrack extends Component {
                 key={index}
                 ref={this.imageRefs[index]}
                 onLoad={this.updateTrackSize.bind(this)}
+                gutter={gutter}
               />
             )
             : null
@@ -239,7 +247,8 @@ class ImageTrack extends Component {
 
 ImageTrack.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),
-  height: PropTypes.string
+  height: PropTypes.string,
+  gutter: PropTypes.string
 }
 
 export default ImageTrack

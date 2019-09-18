@@ -96,12 +96,12 @@ const ServicePreview = ({
   service: {
     title,
     description,
-    image,
+    images,
     relatedTools
   }
 }) => (
   <Root>
-    <Media src={image ? image.url : ''} />
+    <Media src={images && images.length > 0 ? images[0].url : ''} />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />
       <Description dangerouslySetInnerHTML={{ __html: description }} />
