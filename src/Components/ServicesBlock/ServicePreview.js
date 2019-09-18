@@ -12,7 +12,7 @@ const Root = styled.div`
     'grid-template-columns: 5fr 4fr'
   ])}
 
-  @media ${props => props.theme.media.lg} {
+  @media ${props => props.theme.media.xl} {
     display: block;
   }
 
@@ -27,7 +27,7 @@ const TextContainer = styled.div`
 
   padding: ${props => props.theme.spacing(2, 2, 2, 4)};
 
-  @media ${props => props.theme.media.lg} {
+  @media ${props => props.theme.media.xl} {
     padding: ${props => props.theme.spacing(2)};
   }
 `
@@ -42,6 +42,11 @@ const Media = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media ${props => props.theme.media.xl} {
+    height: 300px;
+    width: 100%;
+  }
 
   @media ${props => props.theme.media.lg} {
     height: 200px;
@@ -88,8 +93,12 @@ const ToolsHeader = styled.h3`
 
 const Tools = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, 130px);
   grid-gap: 16px;
+
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: 1fr;
+  }
 `
 
 const ServicePreview = ({
