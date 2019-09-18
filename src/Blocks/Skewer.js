@@ -96,7 +96,8 @@ const Skewer = ({
   half,
   height,
   layer,
-  flushBottom
+  flushBottom,
+  id
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
@@ -104,6 +105,7 @@ const Skewer = ({
 
   return (
     <Root
+      id={id}
       offset={offset}
       layer={layer}
       noPadding={noPadding}
@@ -138,7 +140,8 @@ Skewer.propTypes = {
   half: PropTypes.bool,
   height: PropTypes.string,
   layer: PropTypes.number,
-  flushBottom: PropTypes.bool
+  flushBottom: PropTypes.bool,
+  id: PropTypes.string
 }
 
 export default Skewer

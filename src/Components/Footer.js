@@ -218,9 +218,9 @@ const Footer = ({
           </LinksContainer>
           <FeedContainer>
             <FeedHeader>Follow us on Instagram</FeedHeader>
-            {slicedFeed.map(item => (
+            {slicedFeed.map(item =>
               <FeedItem key={item.src} src={item.src} />
-            ))}
+            )}
           </FeedContainer>
           <CopyrightLine>
             {copyright}
