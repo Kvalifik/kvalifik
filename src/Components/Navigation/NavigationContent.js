@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
-import targetBlankIcon from 'graphics/target_blank.svg'
+import UniversalLink from 'Components/Shared/UniversalLink'
+import rightArrow from 'graphics/rightArrow.svg'
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -40,45 +40,52 @@ const NavItems = styled.div`
   }
 `
 
-const NavItem = styled.div`
-  ${props => props.isExternal && css`
-    a:after{
-      content: url('${targetBlankIcon}');
+const NavItem = styled(UniversalLink)`
+  color: white;
+  text-decoration: none;
+  line-height: ${props => props.theme.spacing(5)};
+  height: 100%;
+  font-weight: 700;
+  font-size: ${props => props.theme.typography.fontSize.menuItem};
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  ${props => props.isCurrentRoute && css`
+    &::before {
+      content: "";
+      width: 15px;
+      height: 15px;
+      background: url(${rightArrow}) center no-repeat;
+      background-size: cover;
+      position: absolute;
+      transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
     }
   `}
-
-  a {
-    color: white;
-    text-decoration: none;
-    line-height: ${props => props.theme.spacing(5)};
-    height: 100%;
-    font-weight: 700;
-    font-size: ${props => props.theme.typography.fontSize.menuItem};
-    text-transform: uppercase;
-  }
 `
 
-const FooterItem = styled.div`
-  ${props => props.isExternal && css`
-    a {
-      display:flex;
+const FooterItem = styled(UniversalLink)`
+  display: flex;
+  align-items: center;
+  line-height: ${props => props.theme.spacing(3)};
+  color: white;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
+  text-transform: uppercase;
 
-      &:after {
-        margin-top: -3px;
-        margin-left: 5px;
-        content: url('${targetBlankIcon}');
-      }
+  ${props => props.isCurrentRoute && css`
+    &::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: url(${rightArrow}) center no-repeat;
+      background-size: cover;
+      position: absolute;
+      transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
     }
   `}
-
-  a {
-    line-height: ${props => props.theme.spacing(3)};
-    color: white;
-    text-decoration: none;
-    font-weight: 300;
-    font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
-    text-transform: uppercase;
-  }
 `
 
 const Root = styled.div`
@@ -123,24 +130,25 @@ const SocialIcon = styled.a`
 const NavigationContent = props => {
   const { navigationItems, navigationLinks, collapsed, socialMediaLinks } = props
 
+  const currentRoute = window && window.location && window.location.pathname
+
+  console.log(
+    currentRoute,
+    navigationItems.map(item => item.path)
+  )
+
   return (
     <Root>
       <NavItems>
         {
           navigationItems.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem isExternal={navigationItem.isExternal}>
-                {navigationItem.isExternal ? (
-                  <a
-                    href={navigationItem.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {navigationItem.name}
-                  </a>
-                ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
-                )}
+              <NavItem
+                isExternal={navigationItem.isExternal}
+                to={navigationItem.path}
+                isCurrentRoute={currentRoute.includes(navigationItem.path)}
+              >
+                {navigationItem.name}
               </NavItem>
             </Li>
           ))
@@ -150,18 +158,12 @@ const NavigationContent = props => {
         {
           navigationLinks.map((navigationItem, i) => (
             <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem isExternal={navigationItem.isExternal}>
-                {navigationItem.isExternal ? (
-                  <a
-                    href={navigationItem.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {navigationItem.name}
-                  </a>
-                ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
-                )}
+              <FooterItem
+                isExternal={navigationItem.isExternal}
+                to={navigationItem.path}
+                isCurrentRoute={currentRoute.includes(navigationItem.path)}
+              >
+                {navigationItem.name}
               </FooterItem>
             </Li>
           ))
