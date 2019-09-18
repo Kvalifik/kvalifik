@@ -101,7 +101,7 @@ const ServicePreview = ({
   service: {
     title,
     description,
-    image,
+    images,
     relatedTools,
     exampleCases,
     icon,
@@ -117,7 +117,8 @@ const ServicePreview = ({
     </Header>
     <ImageTrack
       height="400px"
-      images={image && [image.url]}
+      images={images.map(image => image.url)}
+      gutter="16px"
     />
     <TextContainer>
       <Title dangerouslySetInnerHTML={{ __html: title }} />

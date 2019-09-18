@@ -269,7 +269,7 @@ export const query = graphql`
       icon {
         url
       }
-      image {
+      images {
         url
       }
       title
@@ -295,7 +295,7 @@ export const query = graphql`
       icon {
         url
       }
-      image {
+      images {
         url
       }
       title

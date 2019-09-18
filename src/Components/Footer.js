@@ -277,7 +277,11 @@ Footer.propTypes = {
   copyright: PropTypes.string,
   cvr: PropTypes.string,
   address: PropTypes.string,
-  links: PropTypes.string,
+  links: PropTypes.arrayOf(PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string,
+    isExternal: PropTypes.bool
+  })),
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
     linkUrl: PropTypes.string,
     icon: PropTypes.shape({
