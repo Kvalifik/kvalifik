@@ -76,7 +76,7 @@ const App = styled.div`
   }
 
   @media ${props => props.theme.media.md} {
-    @media (max-height: 578px) {
+    @media (max-height: 550px) {
       padding-right: 0;
     }
   }
