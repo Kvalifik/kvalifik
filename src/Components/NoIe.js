@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Button from 'Blocks/Button'
+import Button from 'Components/Shared/Button'
 
 const ButtonInnerWrapper = styled.span`
   margin: ${props => props.theme.spacing(1)};

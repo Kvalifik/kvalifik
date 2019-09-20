@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import theme from 'utils/theme'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 
-import Button from 'Blocks/Button'
+import Button from 'Components/Shared/Button'
 
 const Root = styled.div`
   width: 100%;

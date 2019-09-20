@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from 'Components/Layout'
-import FixedSkewer from 'Blocks/FixedSkewer'
+import FixedSkewer from 'Components/Shared/FixedSkewer'
 import DownArrow from 'Components/DownArrow'
 
 import { pagePropType } from 'models/page'
