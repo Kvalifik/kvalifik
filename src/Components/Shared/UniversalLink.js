@@ -6,10 +6,21 @@ const UniversalLink = ({
   to,
   isExternal,
   children,
+  disabled,
   ...props
-}) =>
-  isExternal
-    ? (
+}) => {
+  if (disabled) {
+    return (
+      <span
+        {...props}
+      >
+        {children}
+      </span>
+    )
+  }
+
+  if (isExternal) {
+    return (
       <a
         href={to}
         target="_blank"
@@ -19,19 +30,23 @@ const UniversalLink = ({
         {children}
       </a>
     )
-    : (
-      <Link
-        to={to}
-        {...props}
-      >
-        {children}
-      </Link>
-    )
+  }
+
+  return (
+    <Link
+      to={to}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
+}
 
 UniversalLink.propTypes = {
   to: PropTypes.string,
   isExternal: PropTypes.bool,
-  children: PropTypes.any
+  children: PropTypes.any,
+  disabled: PropTypes.bool
 }
 
 export default UniversalLink

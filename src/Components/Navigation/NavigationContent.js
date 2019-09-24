@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import UniversalLink from 'Components/Shared/UniversalLink'
 import Svg from 'react-inlinesvg'
 
-import rightArrow from 'graphics/rightArrow.svg'
 import targetBlank from 'graphics/target_blank.svg'
 
 const Li = styled.li`
@@ -50,15 +49,7 @@ const NavItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest}
   position: relative;
 
   ${props => props.isCurrentRoute && css`
-    &::before {
-      content: "";
-      width: 15px;
-      height: 15px;
-      background: url(${rightArrow}) center no-repeat;
-      background-size: cover;
-      position: absolute;
-      transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
-    }
+    font-weight: 900;
   `}
 
   svg {
@@ -78,15 +69,7 @@ const FooterItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...re
   text-transform: uppercase;
 
   ${props => props.isCurrentRoute && css`
-    &::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: url(${rightArrow}) center no-repeat;
-      background-size: cover;
-      position: absolute;
-      transform: translateX(calc(-100% + ${props => props.theme.spacing(-1)}));
-    }
+    font-weight: 600;
   `}
 
   svg {
@@ -166,6 +149,7 @@ class NavigationContent extends Component {
                   isExternal={navigationItem.isExternal}
                   to={navigationItem.path}
                   isCurrentRoute={currentRoute.includes(navigationItem.path)}
+                  disabled={currentRoute.includes(navigationItem.path)}
                 >
                   {navigationItem.name}
                   {navigationItem.isExternal && (
@@ -184,6 +168,7 @@ class NavigationContent extends Component {
                   isExternal={navigationItem.isExternal}
                   to={navigationItem.path}
                   isCurrentRoute={currentRoute.includes(navigationItem.path)}
+                  disabled={currentRoute.includes(navigationItem.path)}
                 >
                   {navigationItem.name}
                   {navigationItem.isExternal && (
