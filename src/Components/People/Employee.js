@@ -16,7 +16,7 @@ const Media = styled.div`
   background-image: url(${props => props.imageSrc});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: top center;
 `
 
 const Root = styled.div`
