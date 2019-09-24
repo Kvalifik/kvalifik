@@ -294,9 +294,7 @@ export const query = graphql`
       exampleCases {
         ...on DatoCmsWork {
           forWho
-          page {
-            url
-          }
+          url
         }
       }
     }
