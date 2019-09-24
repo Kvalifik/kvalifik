@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
 import targetBlankIcon from 'graphics/target_blank.svg'
+import UniversalLink from 'Components/Shared/UniversalLink'
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -94,7 +95,7 @@ const SocialIcons = styled.div`
   width: 100%;
 `
 
-const SocialIcon = styled.a`
+const SocialIcon = styled(UniversalLink)`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
 
   img {
@@ -162,12 +163,13 @@ const NavigationContent = props => {
           {
             socialMediaLinks.map((socialMediaLink, i) =>
               <SocialIcon
-                href={socialMediaLink.linkUrl}
+                to={socialMediaLink.path}
                 collapsed={collapsed}
                 key={i}
                 index={i + navigationItems.length}
+                isExternal={socialMediaLink.isExternal}
               >
-                <img src={socialMediaLink.icon.url} />
+                <img src={socialMediaLink.icon && socialMediaLink.icon.url} />
               </SocialIcon>
             )
           }

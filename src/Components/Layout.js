@@ -99,12 +99,14 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           isExternal
         },
         socialMediaLinks {
-          linkUrl,
+          path,
+          isExternal,
           icon {
             url
           }
         },
         socialMediaHeader
+        instagramFeedTitle
       }
       allInstaNode {
         nodes {
