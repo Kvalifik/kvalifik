@@ -22,22 +22,8 @@ import theme from 'utils/theme'
 export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
-      const mediaType = block.media ? block.media.__typename : null
-      let imageUrl = null
-      let videoUrl = null
-
-      switch (mediaType) {
-        case 'DatoCmsImage':
-          imageUrl = block.media.image.url
-          break
-        case 'DatoCmsVideo':
-          imageUrl = block.media.thumbnail.url
-          videoUrl = block.media.video.url
-          break
-        default:
-          imageUrl = null
-          videoUrl = null
-      }
+      const imageUrl = block.media.image.url
+      const videoUrl = block.media.video && block.media.video.url
 
       return (
         <HeaderBlock
@@ -150,7 +136,7 @@ export default (block) => {
         <CaseInfoBlock
           key={block.id}
           button={block.buttonLink}
-          thumbnailUrl={video ? video.thumbnail.url : ''}
+          thumbnailUrl={video ? video.image.url : ''}
           videoUrl={video ? video.video.url : ''}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}

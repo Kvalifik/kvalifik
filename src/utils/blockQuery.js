@@ -16,16 +16,11 @@ export const query = graphql`
     }
     media {
       __typename
-      ... on DatoCmsVideo {
-        thumbnail {
+      ... on DatoCmsMediaItem {
+        image {
           url
         }
         video {
-          url
-        }
-      }
-      ... on DatoCmsImage {
-        image {
           url
         }
       }
@@ -191,7 +186,7 @@ export const query = graphql`
       hex
     }
     video {
-      thumbnail {
+      image {
         url
       }
       video {
