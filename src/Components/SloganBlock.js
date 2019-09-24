@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Padder from 'Blocks/Padder'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Padder from 'Components/Shared/Padder'
 
 const Root = styled.div`
   &::after {

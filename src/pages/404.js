@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
-import theme from 'utils/theme'
-import { Link, useStaticQuery, graphql } from 'gatsby'
 
-import Button from 'Blocks/Button'
+import Layout from 'Components/Layout'
+
+import theme from 'utils/theme'
+
+import Button from 'Components/Shared/Button'
 
 const Root = styled.div`
   width: 100%;
@@ -98,62 +101,96 @@ const Image = styled.img`
   }
 `
 
-const NotFound = ({
-  title,
-  description,
-  button,
-  logoUrl,
-  imageUrl
-}) => {
-  const data = useStaticQuery(graphql`
-    query {
-      datoCmsGeneral {
-        glitchLogo {
-          url
-        }
-      }
-    }
-  `)
+const NotFoundPage = ({ data }) => {
+  const {
+    title,
+    description,
+    image,
+    buttonLink: button
+  } = data.datoCms404Page
+  const {
+    glitchLogo
+  } = data.datoCmsGeneral
+
+  const pageSettings = {
+    title: '404 - Not Found'
+  }
+
+  const imageUrl = image && image.url
 
   return (
-    <Root>
-      <Top>
-        <Link to="/">
-          {data.datoCmsGeneral.glitchLogo && <Logo src={data.datoCmsGeneral.glitchLogo.url} />}
-        </Link>
-      </Top>
-      <Content center={!imageUrl}>
-        <Error>Error</Error>
-        <Title>{title}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: description }} />
-        <Button
-          fullWidth
-          to={button.path}
-          isExternal={button.isExternal}
-          bgColor={theme.palette.dark}
-          color={theme.palette.light}
-          type="link"
-        >
-          {button.name}
-        </Button>
-      </Content>
-      {imageUrl && (
-        <Image src={imageUrl} />
-      )}
-    </Root>
+    <Layout hideFooter isGlitch page={pageSettings}>
+      <Root>
+        <Top>
+          <Link to="/">
+            {glitchLogo && <Logo src={glitchLogo.url} />}
+          </Link>
+        </Top>
+        <Content center={!imageUrl}>
+          <Error>Error</Error>
+          <Title>{title}</Title>
+          <Description dangerouslySetInnerHTML={{ __html: description }} />
+          <Button
+            fullWidth
+            to={button.path}
+            isExternal={button.isExternal}
+            bgColor={theme.palette.dark}
+            color={theme.palette.light}
+            type="link"
+          >
+            {button.name}
+          </Button>
+        </Content>
+        {imageUrl && (
+          <Image src={imageUrl} />
+        )}
+      </Root>
+    </Layout>
   )
 }
 
-NotFound.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  button: PropTypes.shape({
-    name: PropTypes.string,
-    path: PropTypes.string,
-    isExternal: PropTypes.bool
-  }),
-  logoUrl: PropTypes.string,
-  imageUrl: PropTypes.string
+export const query = graphql`
+  query NotFoundQuery {
+    datoCms404Page {
+      title
+      description
+      image {
+        url
+      }
+      buttonLink {
+        path
+        name
+        isExternal
+      }
+    }
+    datoCmsGeneral {
+      glitchLogo {
+        url
+      }
+    }
+  }
+`
+
+NotFoundPage.propTypes = {
+  data: PropTypes.shape({
+    datoCms404Page: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      image: PropTypes.shape({
+        url: PropTypes.string
+      }),
+      buttonLink: PropTypes.shape({
+        path: PropTypes.string,
+        name: PropTypes.string,
+        isExternal: PropTypes.bool
+      })
+    }),
+    datoCmsGeneral: PropTypes.shape({
+      glitchLogo: PropTypes.shape({
+        url: PropTypes.string
+      })
+    })
+  })
 }
 
-export default NotFound
+export default NotFoundPage

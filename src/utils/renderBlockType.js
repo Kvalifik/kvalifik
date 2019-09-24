@@ -12,7 +12,6 @@ import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
-import NotFound from 'Components/NotFound'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
@@ -23,22 +22,8 @@ import theme from 'utils/theme'
 export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
-      const mediaType = block.media ? block.media.__typename : null
-      let imageUrl = null
-      let videoUrl = null
-
-      switch (mediaType) {
-        case 'DatoCmsImage':
-          imageUrl = block.media.image.url
-          break
-        case 'DatoCmsVideo':
-          imageUrl = block.media.thumbnail.url
-          videoUrl = block.media.video.url
-          break
-        default:
-          imageUrl = null
-          videoUrl = null
-      }
+      const imageUrl = block.media.image.url
+      const videoUrl = block.media.video && block.media.video.url
 
       return (
         <HeaderBlock
@@ -69,7 +54,7 @@ export default (block) => {
               bgUrl={work.image.url}
               bgColor={work.color.hex}
               fullWidth={work.fullSize}
-              workUrl={work.page && work.page.url}
+              workUrl={work.url}
             />
           ))}
         </CaseGrid>
@@ -151,7 +136,7 @@ export default (block) => {
         <CaseInfoBlock
           key={block.id}
           button={block.buttonLink}
-          thumbnailUrl={video ? video.thumbnail.url : ''}
+          thumbnailUrl={video ? video.image.url : ''}
           videoUrl={video ? video.video.url : ''}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}
@@ -188,16 +173,6 @@ export default (block) => {
           word={block.word}
           pronounce={block.pronounce}
           employees={block.employees}
-        />
-      )
-    case 'DatoCms404':
-      return (
-        <NotFound
-          key={block.id}
-          button={block.buttonLink}
-          description={block.description}
-          title={block.title}
-          imageUrl={block.image && block.image.url}
         />
       )
     case 'DatoCmsStepper':

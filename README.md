@@ -31,11 +31,12 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 
 [**Modular block setup**](https://github.com/Kvalifik/kvalifik/wiki/Modular-setup)
 
+[**Content management guide**](https://github.com/Kvalifik/kvalifik/wiki/Content-management-guide)
+
 **Source structure**
 
 ```
 ./src
-├── Blocks
 ├── Components
 ├── graphics
 ├── models
@@ -46,7 +47,7 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 └── utils
 ```
 
-*Blocks* are small reusable components that are not designed to be used by themselves. *Components* are larger autonomous components (contains all blocks).
+*Components* are usually larger autonomous components, but also contains *Components/Shared* which are smaller reusable components.
 
 *templates* are template components used in the build process.
 

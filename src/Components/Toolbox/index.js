@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Container from 'Blocks/Container'
-import Skewer from 'Blocks/Skewer'
-import Padder from 'Blocks/Padder'
+import Container from 'Components/Shared/Container'
+import Skewer from 'Components/Shared/Skewer'
+import Padder from 'Components/Shared/Padder'
 
 import ToolBoxSlider from './ToolBoxSlider'
 import ToolBoxContent from './ToolBoxContent'
 import Console from './Console'
-import Button from 'Blocks/Button'
+import Button from 'Components/Shared/Button'
 import theme from 'utils/theme'
 
 const Root = styled.div`

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Skewer from 'Blocks/Skewer'
+import Skewer from 'Components/Shared/Skewer'
 
 const QuoteRoot = styled.div`
   width: 704px;

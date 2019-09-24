@@ -9,7 +9,6 @@ import theme from 'utils/theme'
 import { Helmet } from 'react-helmet'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
-import { pagePropType } from 'models/page'
 
 const browser = detect()
 
@@ -100,12 +99,14 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           isExternal
         },
         socialMediaLinks {
-          linkUrl,
+          path,
+          isExternal,
           icon {
             url
           }
         },
         socialMediaHeader
+        instagramFeedTitle
       }
       allInstaNode {
         nodes {
@@ -155,17 +156,21 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
     pageSetup
   } = page
 
-  const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+  const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <>
       <GlobalStyle />
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{title}</title>
-        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
-        <link rel="icon" type="image/png" href="favicon.png" />
-        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        {title && (
+          <title>{title}</title>
+        )}
+        {url && (
+          <link rel="canonical" href={`https://kvalifik.dk${url}`} />
+        )}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <meta name="format-detection" content="telephone=no" />
         {headerBlock && headerBlock.bgColor && (
           <meta name="theme-color" content={headerBlock.bgColor.hex} />
@@ -207,7 +212,11 @@ Main.propTypes = {
   hideFooter: PropTypes.bool,
   isGlitch: PropTypes.bool,
   bgColor: PropTypes.string,
-  page: pagePropType
+  page: PropTypes.shape({
+    url: PropTypes.string,
+    title: PropTypes.string,
+    pageSetup: PropTypes.array
+  })
 }
 
 export default Main

@@ -27,19 +27,13 @@ const NavItems = styled.div`
   align-self: center;
 
   &:first-of-type {
-    @media screen and (min-height: 500px) {
+    @media screen and (orientation: portrait) {
       margin-top: ${props => props.theme.navBarWidth};
     }
   }
 
-  @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 500px) {
-      margin-top: 65px;
-
-      @media screen and (min-height: 400px) {
-        margin-top: 125px;
-      }
-    }
+  @media ${props => props.theme.media.landscape} {
+    margin-top: 30vh;
   }
 `
 
@@ -107,10 +101,8 @@ const Root = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
 
-  @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 500px) {
-      grid-template-columns: 1fr 1fr;
-    }
+  @media ${props => props.theme.media.landscape} {
+    grid-template-columns: 1fr 1fr;
   }
 `
 
@@ -122,7 +114,7 @@ const SocialIcons = styled.div`
   width: 100%;
 `
 
-const SocialIcon = styled.a`
+const SocialIcon = styled(UniversalLink)`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
 
   img {
@@ -205,12 +197,13 @@ class NavigationContent extends Component {
             {
               socialMediaLinks.map((socialMediaLink, i) =>
                 <SocialIcon
-                  href={socialMediaLink.linkUrl}
+                  to={socialMediaLink.path}
                   collapsed={collapsed}
                   key={i}
                   index={i + navigationItems.length}
+                  isExternal={socialMediaLink.isExternal}
                 >
-                  <img src={socialMediaLink.icon.url} />
+                  <img src={socialMediaLink.icon && socialMediaLink.icon.url} />
                 </SocialIcon>
               )
             }

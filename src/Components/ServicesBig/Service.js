@@ -131,7 +131,7 @@ const ServicePreview = ({
               <LinkThumb
                 key={index}
                 headline={work.forWho}
-                to={work.page && work.page.url}
+                to={work.url}
                 color={theme.palette.light}
               />
             ))}

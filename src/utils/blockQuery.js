@@ -16,16 +16,11 @@ export const query = graphql`
     }
     media {
       __typename
-      ... on DatoCmsVideo {
-        thumbnail {
+      ... on DatoCmsMediaItem {
+        image {
           url
         }
         video {
-          url
-        }
-      }
-      ... on DatoCmsImage {
-        image {
           url
         }
       }
@@ -41,17 +36,13 @@ export const query = graphql`
       description
       id
       forWho
+      url
       fullSize
       color {
         hex
       }
       image{
         url
-      }
-      page {
-        ... on DatoCmsPage {
-          url
-        }
       }
     }
   }
@@ -195,7 +186,7 @@ export const query = graphql`
       hex
     }
     video {
-      thumbnail {
+      image {
         url
       }
       video {
@@ -241,19 +232,6 @@ export const query = graphql`
       image {
         url
       }
-    }
-  }
-  fragment NotFoundBlockFragment on DatoCms404 {
-    id
-    title
-    description
-    buttonLink {
-      isExternal
-      name
-      path
-    }
-    image {
-      url
     }
   }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
@@ -311,9 +289,7 @@ export const query = graphql`
       exampleCases {
         ...on DatoCmsWork {
           forWho
-          page {
-            url
-          }
+          url
         }
       }
     }
@@ -323,36 +299,6 @@ export const query = graphql`
     steps {
       title
       description
-    }
-  }
-
-  fragment PageFragment on DatoCmsPage {
-    title
-    url
-    bgColor {
-      hex
-    }
-    pageSetup {
-      __typename
-      ...HeaderFragment
-      ...ActionBlockFragment
-      ...SloganFragment
-      ...PercentageBlockFragment
-      ...CaseGridFragment
-      ...CaseInfoFragment
-      ...ToolboxFragment
-      ...ToolboxBigFragment
-      ...OverlayBlockFragment
-      ...FiftyFifty
-      ...QuoteBlockFragment
-      ...PeopleBlockFragment
-      ...NotFoundBlockFragment
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
-      ...NotFoundBlockFragment
-      ...Stepper
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
     }
   }
 `

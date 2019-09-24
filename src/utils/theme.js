@@ -178,9 +178,12 @@ const appendMixins = (theme) => ({
     }
   },
   media: Object.keys(theme.breakpoints).reduce((acc, label) => {
-    acc[label] = (...args) => `(max-width: ${theme.breakpoints[label]})`
+    acc[label] = `screen and (max-width: ${theme.breakpoints[label]})`
     return acc
-  }, {})
+  }, {
+    // eslint-disable-next-line max-len
+    landscape: `screen and (max-width: ${theme.breakpoints.md}) and (orientation: landscape), screen and (max-height: 500px) and (orientation: landscape)`
+  })
 })
 
 export default appendMixins(theme)
