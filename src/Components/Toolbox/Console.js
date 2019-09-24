@@ -20,22 +20,23 @@ const ConsoleContent = styled.span`
   white-space: pre-wrap;
 `
 
-const text = (function (consoleText) {
-  console.log({ consoleText })
+const text = function (consoleText) {
   const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
   const dots = new Array(8).fill(0).map(() => '.').join('^400')
-  return [[
-    'Session starting: ' + dateString,
-    '`https://kvalifik.dk:~ visiterName$` ^250_',
-    'Authorizing ' + dots + ' `Done`'
-  ].join('^1000\n')]
-})()
+  const output = [consoleText
+    .replace(/%DATE/g, dateString)
+    .replace(/%DOTS/g, dots)
+    .split(/\n/)
+    .join('^1000\n')
+  ]
+  return output
+}
 
 const Console = React.forwardRef(({ color, isInsideViewport, consoleText }, ref) => (
   <Root color={color} ref={ref}>
     {isInsideViewport && (
       <Typed
-        strings={() => text(consoleText)}
+        strings={text(consoleText)}
         typeSpeed={20}
       >
         <ConsoleContent />
