@@ -5,8 +5,6 @@ import styled from 'styled-components'
 
 import Layout from 'Components/Layout'
 
-import 'utils/pageQuery'
-
 import theme from 'utils/theme'
 
 import Button from 'Components/Shared/Button'

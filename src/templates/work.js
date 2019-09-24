@@ -12,13 +12,13 @@ import 'utils/blockQuery'
 const PageTemplate = ({ data }) => {
   const {
     pageSetup,
-    bgColor
-  } = data.datoCmsPage
+    color
+  } = data.datoCmsWork
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
-    <Layout bgColor={bgColor && bgColor.hex} page={data.datoCmsPage}>
+    <Layout bgColor={color && color.hex} page={data.datoCmsWork}>
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
@@ -41,11 +41,11 @@ const PageTemplate = ({ data }) => {
 
 PageTemplate.propTypes = {
   data: PropTypes.shape({
-    datoCmsPage: PropTypes.shape({
+    datoCmsWork: PropTypes.shape({
       pageSetup: PropTypes.array,
       title: PropTypes.string,
       url: PropTypes.string,
-      bgColor: PropTypes.shape({
+      color: PropTypes.shape({
         hex: PropTypes.string
       })
     })
@@ -54,10 +54,10 @@ PageTemplate.propTypes = {
 
 export const query = graphql`
   query($url: String!) {
-    datoCmsPage(url: { eq: $url }) {
+    datoCmsWork(url: { eq: $url }) {
       title
       url
-      bgColor {
+      color {
         hex
       }
       pageSetup {
@@ -65,14 +65,10 @@ export const query = graphql`
         ...HeaderFragment
         ...ActionBlockFragment
         ...SloganFragment
-        ...CaseGridFragment
-        ...ToolboxFragment
-        ...ToolboxBigFragment
-        ...FiftyFifty
-        ...PeopleBlockFragment
-        ...ServicesBlockFragment
-        ...ServicesBigFragment
-        ...Stepper
+        ...PercentageBlockFragment
+        ...CaseInfoFragment
+        ...OverlayBlockFragment
+        ...QuoteBlockFragment
       }
     }
   }

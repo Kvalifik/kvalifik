@@ -68,7 +68,7 @@ export default (block) => {
               bgUrl={work.image.url}
               bgColor={work.color.hex}
               fullWidth={work.fullSize}
-              workUrl={work.page && work.page.url}
+              workUrl={work.url}
             />
           ))}
         </CaseGrid>

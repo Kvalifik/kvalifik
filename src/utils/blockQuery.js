@@ -41,17 +41,13 @@ export const query = graphql`
       description
       id
       forWho
+      url
       fullSize
       color {
         hex
       }
       image{
         url
-      }
-      page {
-        ... on DatoCmsPage {
-          url
-        }
       }
     }
   }
@@ -310,34 +306,6 @@ export const query = graphql`
     steps {
       title
       description
-    }
-  }
-
-  fragment PageFragment on DatoCmsPage {
-    title
-    url
-    bgColor {
-      hex
-    }
-    pageSetup {
-      __typename
-      ...HeaderFragment
-      ...ActionBlockFragment
-      ...SloganFragment
-      ...PercentageBlockFragment
-      ...CaseGridFragment
-      ...CaseInfoFragment
-      ...ToolboxFragment
-      ...ToolboxBigFragment
-      ...OverlayBlockFragment
-      ...FiftyFifty
-      ...QuoteBlockFragment
-      ...PeopleBlockFragment
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
-      ...Stepper
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
     }
   }
 `
