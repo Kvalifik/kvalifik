@@ -20,11 +20,10 @@ const ConsoleContent = styled.span`
   white-space: pre-wrap;
 `
 
-const text = (function () {
+const text = (function (consoleText) {
+  console.log({ consoleText })
   const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
-
   const dots = new Array(8).fill(0).map(() => '.').join('^400')
-
   return [[
     'Session starting: ' + dateString,
     '`https://kvalifik.dk:~ visiterName$` ^250_',
@@ -32,11 +31,11 @@ const text = (function () {
   ].join('^1000\n')]
 })()
 
-const Console = React.forwardRef(({ color, isInsideViewport }, ref) => (
+const Console = React.forwardRef(({ color, isInsideViewport, consoleText }, ref) => (
   <Root color={color} ref={ref}>
     {isInsideViewport && (
       <Typed
-        strings={text}
+        strings={() => text(consoleText)}
         typeSpeed={20}
       >
         <ConsoleContent />
@@ -47,7 +46,8 @@ const Console = React.forwardRef(({ color, isInsideViewport }, ref) => (
 
 Console.propTypes = {
   isInsideViewport: PropTypes.bool,
-  color: PropTypes.string
+  color: PropTypes.string,
+  consoleText: PropTypes.string
 }
 
 export default withInsideViewport(Console)

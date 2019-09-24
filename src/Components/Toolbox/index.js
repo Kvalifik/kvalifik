@@ -76,6 +76,7 @@ class Toolbox extends Component {
     const {
       tools,
       bgColor,
+      consoleText,
       moreToolsButton
     } = this.props
 
@@ -84,7 +85,7 @@ class Toolbox extends Component {
         <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
             <Container sideText="Toolbox">
-              <Console />
+              <Console consoleText={consoleText} />
               <ToolBoxContent
                 tools={tools}
                 chosenTool={this.state.chosenTool}
@@ -131,6 +132,7 @@ Toolbox.propTypes = {
     })
   })),
   bgColor: PropTypes.string,
+  consoleText: PropTypes.string,
   moreToolsButton: PropTypes.shape({
     path: PropTypes.string,
     name: PropTypes.string,
