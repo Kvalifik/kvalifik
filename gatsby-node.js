@@ -17,23 +17,13 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
     console.log(`Creating page ${node.title} on ${node.url}`)
 
-    if (/404/.test(node.url)) {
-      createPage({
-        path: node.url,
-        component: path.resolve(`./src/templates/404.js`),
-        context: {
-          url: node.url
-        }
-      })
-    } else {
-      createPage({
-        path: node.url,
-        component: path.resolve(`./src/templates/page.js`),
-        context: {
-          url: node.url
-        }
-      })
-    }
+    createPage({
+      path: node.url,
+      component: path.resolve(`./src/templates/page.js`),
+      context: {
+        url: node.url
+      }
+    })
   })
 }
 

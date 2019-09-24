@@ -155,15 +155,19 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
     pageSetup
   } = page
 
-  const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+  const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <>
       <GlobalStyle />
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{title}</title>
-        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
+        {title && (
+          <title>{title}</title>
+        )}
+        {url && (
+          <link rel="canonical" href={`https://kvalifik.dk${url}`} />
+        )}
         <link rel="icon" type="image/png" href="favicon.png" />
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
         <meta name="format-detection" content="telephone=no" />

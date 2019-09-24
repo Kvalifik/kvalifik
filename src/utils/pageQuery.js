@@ -243,19 +243,6 @@ export const query = graphql`
       }
     }
   }
-  fragment NotFoundBlockFragment on DatoCms404 {
-    id
-    title
-    description
-    buttonLink {
-      isExternal
-      name
-      path
-    }
-    image {
-      url
-    }
-  }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
     buttonLink {
@@ -346,10 +333,8 @@ export const query = graphql`
       ...FiftyFifty
       ...QuoteBlockFragment
       ...PeopleBlockFragment
-      ...NotFoundBlockFragment
       ...ServicesBlockFragment
       ...ServicesBigFragment
-      ...NotFoundBlockFragment
       ...Stepper
       ...ServicesBlockFragment
       ...ServicesBigFragment

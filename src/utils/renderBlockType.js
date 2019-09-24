@@ -12,7 +12,6 @@ import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
-import NotFound from 'Components/NotFound'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
@@ -188,16 +187,6 @@ export default (block) => {
           word={block.word}
           pronounce={block.pronounce}
           employees={block.employees}
-        />
-      )
-    case 'DatoCms404':
-      return (
-        <NotFound
-          key={block.id}
-          button={block.buttonLink}
-          description={block.description}
-          title={block.title}
-          imageUrl={block.image && block.image.url}
         />
       )
     case 'DatoCmsStepper':
