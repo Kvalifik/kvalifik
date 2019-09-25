@@ -60,6 +60,7 @@ class CaseInfo extends Component {
       showButtonLink,
       showImageGrid,
       showMediaComponent,
+      imageGridRows,
       ...process
     } = this.props
 
@@ -105,7 +106,7 @@ class CaseInfo extends Component {
               {gridImages && gridImages.length > 0 && showImageGrid && (
                 <JustifiedGrid
                   images={mappedGridImages}
-                  rows={2}
+                  rows={imageGridRows}
                   gutter="16px"
                 />
               )}
@@ -164,7 +165,8 @@ CaseInfo.propTypes = {
     url: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number
-  }))
+  })),
+  imageGridRows: PropTypes.number
 }
 
 export default CaseInfo

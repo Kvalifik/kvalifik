@@ -43,33 +43,45 @@ const ImageItem = styled.div`
   }
 `
 
-const normalizeWidth = (width, height) => width / height * 200
-
 const JustifiedGrid = ({
   images,
   rows,
   gutter = '16px'
 }) => {
   const filledRows = React.useMemo(() => {
-    const itemsInEach = new Array(rows).fill(0).map((val, index) => {
+    const cursors = new Array(rows).fill(0).reduce((acc, index) => {
+      let len
       if (index < rows - 1) {
-        return Math.floor(images.length / rows)
+        len = Math.floor(images.length / rows)
+      } else {
+        len = Math.ceil(images.length / rows)
       }
-      return Math.ceil(images.length / rows)
-    })
-    const rowWidths = itemsInEach.map(
-      (val, index) => images
-        .slice(itemsInEach[index - 1] || 0, (itemsInEach[index - 1] || 0) + val)
-        .reduce((sum, img) => sum + normalizeWidth(img.width, img.height), 0)
+
+      let last = 0
+      if (acc[acc.length - 1]) {
+        last = acc[acc.length - 1].end
+      }
+
+      acc[acc.length] = {
+        start: last,
+        end: len + last
+      }
+      return acc
+    }, [])
+    const rowWidths = cursors.map(
+      (cursor, index) => images
+        .slice(cursor.start, cursor.end)
+        .reduce((sum, img) => sum + img.width / img.height, 0)
     )
-    return itemsInEach.map(
-      (val, index) => ({
+
+    return cursors.map(
+      (cursor, index) => ({
         width: rowWidths[index],
         images: images
-          .slice(itemsInEach[index - 1] || 0, (itemsInEach[index - 1] || 0) + val)
+          .slice(cursor.start, cursor.end)
           .map(img => ({
             ...img,
-            basis: normalizeWidth(img.width, img.height) / rowWidths[index],
+            basis: (img.width / img.height) / rowWidths[index],
             aspect: img.height / img.width
           }))
       })

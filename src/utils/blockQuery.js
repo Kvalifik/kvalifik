@@ -202,6 +202,7 @@ export const query = graphql`
       }
     }
     showImageGrid
+    imageGridRows
     gridImages {
       url
       width
