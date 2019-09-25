@@ -6,9 +6,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
-import { Helmet } from 'react-helmet'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
+import { HelmetDatoCms } from 'gatsby-source-datocms'
 
 const browser = detect()
 
@@ -147,6 +147,11 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           name
         }
       }
+      datoCmsSite {
+        faviconMetaTags {
+          ...GatsbyDatoCmsFaviconMetaTags
+        }
+      }
     }
   `)
 
@@ -161,7 +166,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   return (
     <>
       <GlobalStyle />
-      <Helmet>
+      <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags}>
         <meta charSet="utf-8" />
         {title && (
           <title>{title}</title>
@@ -169,13 +174,11 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         {url && (
           <link rel="canonical" href={`https://kvalifik.dk${url}`} />
         )}
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <meta name="format-detection" content="telephone=no" />
         {headerBlock && headerBlock.bgColor && (
           <meta name="theme-color" content={headerBlock.bgColor.hex} />
         )}
-      </Helmet>
+      </HelmetDatoCms>
       <ThemeProvider theme={theme}>
         <App bgColor={bgColor} x-ms-format-detection="none">
           {children}
