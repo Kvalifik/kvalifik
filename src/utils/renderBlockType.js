@@ -98,6 +98,7 @@ export default (block) => {
         <Toolbox
           key={block.id}
           tools={block.tools}
+          consoleText={block.consoleText}
           bgColor={block.bgColor && block.bgColor.hex}
           moreToolsButton={block.moreToolsButton}
         />

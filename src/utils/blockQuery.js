@@ -58,6 +58,7 @@ export const query = graphql`
     bgColor {
       hex
     }
+    consoleText
     moreToolsButton {
       path
       isExternal
