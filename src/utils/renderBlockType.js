@@ -44,6 +44,7 @@ export default (block) => {
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
           cases={block.cases}
+          sideText={block.sideText}
         />
       )
     case 'DatoCmsSlogan':

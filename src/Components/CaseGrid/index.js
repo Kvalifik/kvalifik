@@ -30,14 +30,15 @@ const CaseGrid = (props) => {
   const {
     bgColor,
     cases,
-    moreWorkUrl
+    moreWorkUrl,
+    sideText
   } = props
   const hasMoreWork = !!moreWorkUrl
 
   return (
     <Skewer bgColor={bgColor} layer={1200}>
       <Padder>
-        <Container sideText="Cases" bgColor={bgColor}>
+        <Container sideText={sideText} bgColor={bgColor}>
           <Content fadeBottom={hasMoreWork}>
             {cases.map(work => (
               <CaseThumb
@@ -71,8 +72,19 @@ const CaseGrid = (props) => {
 
 CaseGrid.propTypes = {
   cases: PropTypes.arrayOf(PropTypes.shape({
-
+    id: PropTypes.string,
+    forWho: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    color: PropTypes.shape({
+      hex: PropTypes.string
+    }),
+    fullSize: PropTypes.string,
+    url: PropTypes.string
   })),
+  sideText: PropTypes.string,
   bgColor: PropTypes.string.isRequired,
   moreWorkUrl: PropTypes.string
 }

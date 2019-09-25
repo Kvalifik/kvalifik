@@ -29,6 +29,7 @@ export const query = graphql`
   }
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
+    sideText
     moreWorkPage {
       url
     }
