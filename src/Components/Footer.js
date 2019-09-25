@@ -41,7 +41,7 @@ const Logo = styled.img`
   margin: 0 0 ${props => props.theme.spacing(1)};
 `
 
-const Subtitle = styled.h2`
+const Subtitle = styled.div`
   ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.sm};
   white-space: nowrap;
@@ -163,14 +163,15 @@ const LinkHeader = styled.div`
 const FeedItem = styled.a`
   width: 75px;
   height: 75px;
-  background-image: url(${props => props.src});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: hidden;
   display: inline-block;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  & > img {
+    width: 100%;
   }
 `
 
@@ -246,12 +247,13 @@ const Footer = ({
             <FeedHeader>{instagramFeedTitle}</FeedHeader>
             {slicedFeed.map(item =>
               <FeedItem
-                key={item.src}
-                src={item.src}
+                key={item.id}
                 href={`https://instagram.com/p/${item.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-              />
+              >
+                <img src={item.src} alt={item.caption} />
+              </FeedItem>
             )}
           </FeedContainer>
           <CopyrightLine>
@@ -291,7 +293,8 @@ Footer.propTypes = {
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
       timestamp: PropTypes.number
-    }))
+    })),
+    caption: PropTypes.string
   })),
   instagramFeedTitle: PropTypes.string
 }

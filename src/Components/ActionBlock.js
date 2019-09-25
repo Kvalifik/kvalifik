@@ -40,7 +40,7 @@ const Description = styled.div`
   color: ${props => props.color};
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
   ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.md};
   margin: 0 0 ${props => props.theme.spacing(4)};

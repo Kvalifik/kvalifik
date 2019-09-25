@@ -30,7 +30,7 @@ const Block = styled.div`
   grid-area: block-${props => props.name};
 `
 
-const Title = styled.h4`
+const Title = styled.h2`
   font-size: 24px;
   margin: 0 0 ${props => props.theme.spacing(2)};
   color: ${props => props.theme.palette.light};
