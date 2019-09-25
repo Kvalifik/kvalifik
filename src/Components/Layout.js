@@ -71,6 +71,10 @@ const App = styled.div`
     padding-right: ${props => props.theme.navBarWidth};
   }
 
+  @media ${props => props.theme.media.landscape} {
+    padding-right: 0;
+  }
+
   @media ${props => props.theme.media.sm} {
     padding-right: 0;
   }

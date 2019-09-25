@@ -1,7 +1,6 @@
 import React from 'react'
 
 import CaseGrid from 'Components/CaseGrid'
-import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
@@ -44,19 +43,10 @@ export default (block) => {
           hasMoreWork={!!block.moreWorkPage}
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
-        >
-          {block.cases.map(work => (
-            <CaseThump
-              key={work.id}
-              name={work.forWho}
-              description={work.description}
-              bgUrl={work.image.url}
-              bgColor={work.color.hex}
-              fullWidth={work.fullSize}
-              workUrl={work.url}
-            />
-          ))}
-        </CaseGrid>
+          moreWorkLabel={block.moreWorkLabel}
+          cases={block.cases}
+          sideText={block.sideText}
+        />
       )
     case 'DatoCmsSlogan':
       return (
@@ -100,6 +90,7 @@ export default (block) => {
           consoleText={block.consoleText}
           bgColor={block.bgColor && block.bgColor.hex}
           moreToolsButton={block.moreToolsButton}
+          sideText={block.sideText}
         />
       )
     case 'DatoCmsToolboxBig':
@@ -189,6 +180,8 @@ export default (block) => {
           services={block.services}
           buttonLink={block.buttonLink}
           bgColor={block.bgColor && block.bgColor.hex}
+          sideText={block.sideText}
+          toolboxPage={block.toolboxPage}
         />
       )
     }
@@ -198,6 +191,7 @@ export default (block) => {
           key={block.id}
           services={block.services}
           toolboxPage={block.toolboxPage}
+          sideText={block.sideText}
         />
       )
     }

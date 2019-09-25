@@ -101,7 +101,7 @@ const Header = styled.h3`
   }
 `
 
-const CaseThump = ({
+const CaseThumb = ({
   name,
   description,
   bgColor,
@@ -135,7 +135,7 @@ const CaseThump = ({
   )
 }
 
-CaseThump.propTypes = {
+CaseThumb.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   bgColor: PropTypes.string,
@@ -144,4 +144,4 @@ CaseThump.propTypes = {
   workUrl: PropTypes.string
 }
 
-export default CaseThump
+export default CaseThumb

@@ -77,14 +77,15 @@ class Toolbox extends Component {
       tools,
       bgColor,
       consoleText,
-      moreToolsButton
+      moreToolsButton,
+      sideText
     } = this.props
 
     return (
       <Root>
         <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
-            <Container sideText="Toolbox">
+            <Container sideText={sideText}>
               <Console consoleText={consoleText} />
               <ToolBoxContent
                 tools={tools}
@@ -133,6 +134,7 @@ Toolbox.propTypes = {
   })),
   bgColor: PropTypes.string,
   consoleText: PropTypes.string,
+  sideText: PropTypes.string,
   moreToolsButton: PropTypes.shape({
     path: PropTypes.string,
     name: PropTypes.string,

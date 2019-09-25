@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { servicePropType } from 'models/service'
 import LinkThumb from 'Components/Shared/LinkThumb'
@@ -107,7 +108,8 @@ const ServicePreview = ({
     description,
     images,
     relatedTools
-  }
+  },
+  toolboxUrl
 }) => (
   <Root>
     <Media src={images && images.length > 0 ? images[0].url : ''} />
@@ -122,7 +124,7 @@ const ServicePreview = ({
             headline={tool.headline}
             iconUrl={tool.icon && tool.icon.url}
             color={theme.palette.primary.D}
-            to={`/toolbox#${idFromLabel(tool.headline)}`}
+            to={`${toolboxUrl}#${idFromLabel(tool.headline)}`}
           />
         ))}
       </Tools>
@@ -131,7 +133,8 @@ const ServicePreview = ({
 )
 
 ServicePreview.propTypes = {
-  service: servicePropType
+  service: servicePropType,
+  toolboxUrl: PropTypes.string
 }
 
 export default ServicePreview

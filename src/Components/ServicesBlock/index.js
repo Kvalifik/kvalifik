@@ -56,12 +56,16 @@ class ServicesBlock extends Component {
     const {
       bgColor,
       services,
-      buttonLink
+      buttonLink,
+      sideText,
+      toolboxPage
     } = this.props
 
     const {
       selected
     } = this.state
+
+    const toolboxUrl = toolboxPage ? toolboxPage.url : ''
 
     return (
       <Skewer
@@ -69,14 +73,17 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services">
+          <Container sideText={sideText}>
             <Content>
               <ServiceList
                 services={services}
                 selected={selected}
                 onSelect={this.handleSelect.bind(this)}
                 renderPreview={(service) => (
-                  <ServicePreview service={service} />
+                  <ServicePreview
+                    service={service}
+                    toolboxUrl={toolboxUrl}
+                  />
                 )}
               />
               {buttonLink && (
@@ -102,11 +109,15 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   bgColor: PropTypes.string,
+  sideText: PropTypes.string,
   services: PropTypes.array,
   buttonLink: PropTypes.shape({
     path: PropTypes.string,
     name: PropTypes.string,
     isExternal: PropTypes.bool
+  }),
+  toolboxPage: PropTypes.shape({
+    url: PropTypes.string
   })
 }
 

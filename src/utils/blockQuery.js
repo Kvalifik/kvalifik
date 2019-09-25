@@ -29,9 +29,11 @@ export const query = graphql`
   }
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
+    sideText
     moreWorkPage {
       url
     }
+    moreWorkLabel
     cases {
       title
       description
@@ -65,6 +67,7 @@ export const query = graphql`
       isExternal
       name
     }
+    sideText
     tools {
       ... on DatoCmsTool {
         id
@@ -239,10 +242,14 @@ export const query = graphql`
   }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
+    sideText
     buttonLink {
       path
       name
       isExternal
+    }
+    toolboxPage {
+      url
     }
     services {
       id
@@ -270,6 +277,7 @@ export const query = graphql`
     toolboxPage {
       url
     }
+    sideText
     services {
       id
       label

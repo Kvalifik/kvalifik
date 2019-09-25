@@ -42,6 +42,10 @@ const Content = styled.div`
     margin-top: ${props => props.theme.navBarWidth};
   }
 
+  @media ${props => props.theme.media.landscape} {
+    margin-top: ${props => props.theme.navBarWidth};
+  }
+
   @media ${props => props.theme.media.md} {
     grid-column: 1 / -1;
   }
