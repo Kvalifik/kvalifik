@@ -33,6 +33,7 @@ export const query = graphql`
     moreWorkPage {
       url
     }
+    moreWorkLabel
     cases {
       title
       description

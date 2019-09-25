@@ -31,6 +31,7 @@ const CaseGrid = (props) => {
     bgColor,
     cases,
     moreWorkUrl,
+    moreWorkLabel,
     sideText
   } = props
   const hasMoreWork = !!moreWorkUrl
@@ -61,7 +62,7 @@ const CaseGrid = (props) => {
               bgColor={theme.hexToRgba(theme.palette.light, 0.2)}
               color={theme.palette.light}
             >
-              More Work
+              {moreWorkLabel}
             </Button>
           </MoreWork>
         )}
@@ -86,7 +87,8 @@ CaseGrid.propTypes = {
   })),
   sideText: PropTypes.string,
   bgColor: PropTypes.string.isRequired,
-  moreWorkUrl: PropTypes.string
+  moreWorkUrl: PropTypes.string,
+  moreWorkLabel: PropTypes.string
 }
 
 export default CaseGrid

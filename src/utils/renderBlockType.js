@@ -43,6 +43,7 @@ export default (block) => {
           hasMoreWork={!!block.moreWorkPage}
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
+          moreWorkLabel={block.moreWorkLabel}
           cases={block.cases}
           sideText={block.sideText}
         />
