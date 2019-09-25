@@ -106,9 +106,7 @@ class CaseInfo extends Component {
                 <JustifiedGrid
                   images={mappedGridImages}
                   rows={2}
-                  maxRowHeight={200}
-                  gutter={1}
-                  showIncompleteRow
+                  gutter="16px"
                 />
               )}
               {media && showMediaComponent && media.video && (
