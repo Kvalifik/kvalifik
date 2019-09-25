@@ -112,14 +112,10 @@ const NotFoundPage = ({ data }) => {
     glitchLogo
   } = data.datoCmsGeneral
 
-  const pageSettings = {
-    title: '404 - Not Found'
-  }
-
   const imageUrl = image && image.url
 
   return (
-    <Layout hideFooter isGlitch page={pageSettings}>
+    <Layout hideFooter isGlitch page={data.datoCms404Page}>
       <Root>
         <Top>
           <Link to="/">
@@ -161,6 +157,9 @@ export const query = graphql`
         path
         name
         isExternal
+      }
+      seoMetaTags {
+        tags
       }
     }
     datoCmsGeneral {

@@ -70,6 +70,9 @@ export const query = graphql`
         ...OverlayBlockFragment
         ...QuoteBlockFragment
       }
+      seoMetaTags {
+        tags
+      }
     }
   }
 `
