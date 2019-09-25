@@ -8,7 +8,6 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             url
-            title
           }
         }
       }
@@ -16,14 +15,13 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             url
-            title
           }
         }
       }
     }
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
-    console.log(`Creating page ${node.title} on ${node.url}`)
+    console.log(`Creating page ${node.url}`)
 
     createPage({
       path: node.url,
@@ -38,7 +36,7 @@ exports.createPages = async ({ graphql, actions }) => {
       return
     }
 
-    console.log(`Creating work page ${node.title} on ${node.url}`)
+    console.log(`Creating work page ${node.url}`)
 
     createPage({
       path: node.url,

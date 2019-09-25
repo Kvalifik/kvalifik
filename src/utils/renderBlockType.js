@@ -116,19 +116,14 @@ export default (block) => {
       )
     case 'DatoCmsCaseInfo': {
       const {
-        buttonLink,
         id,
         bgColor,
-        video,
         accentColor,
         ...others
       } = block
       return (
         <CaseInfoBlock
           key={block.id}
-          button={block.buttonLink}
-          thumbnailUrl={video ? video.image.url : ''}
-          video={video.video}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}
           {...others}

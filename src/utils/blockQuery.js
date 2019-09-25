@@ -35,7 +35,6 @@ export const query = graphql`
     }
     moreWorkLabel
     cases {
-      title
       description
       id
       forWho
@@ -170,11 +169,13 @@ export const query = graphql`
   }
   fragment CaseInfoFragment on DatoCmsCaseInfo {
     id
+    showButtonLink
     buttonLink {
       name
       path
       isExternal
     }
+    showProcessComponent
     labelOne
     labelTwo
     labelThree
@@ -190,7 +191,8 @@ export const query = graphql`
     accentColor {
       hex
     }
-    video {
+    showMediaComponent
+    media {
       image {
         url
       }
@@ -198,6 +200,12 @@ export const query = graphql`
         provider
         providerUid
       }
+    }
+    showImageGrid
+    gridImages {
+      url
+      width
+      height
     }
   }
   fragment PercentageBlockFragment on DatoCmsPercentage {

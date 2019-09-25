@@ -34,7 +34,7 @@ class CaseInfo extends Component {
   }
 
   handlePlay () {
-    if (this.props.video) {
+    if (this.props.media) {
       this.setState({
         playing: true
       })
@@ -51,48 +51,54 @@ class CaseInfo extends Component {
     const {
       bgColor,
       accentColor,
-      video,
-      thumbnailUrl,
-      button: {
-        path,
-        name: buttonText,
-        isExternal
-      },
+      media,
+      buttonLink,
+      gridImages,
+      showProcessComponent,
+      showButtonLink,
+      showImageGrid,
+      showMediaComponent,
       ...process
     } = this.props
 
     return (
       <>
-        {this.state.playing && !!video && (
+        {this.state.playing && media && showMediaComponent && (
           <VideoFullscreen
-            video={video}
+            video={media.video}
             onClose={this.handleClose.bind(this)}
           />
         )}
         <Skewer bgColor={bgColor} layer={1200}>
           <Container>
             <Root>
-              <Button
-                bgColor={theme.hexToRgba(
-                  theme.contrastColor(
-                    bgColor,
-                    theme.palette.light,
-                    theme.palette.dark
-                  ),
-                  0.2
-                )}
-                isExternal={isExternal}
-                to={path}
-                type="link"
-              >
-                {buttonText}
-              </Button>
-              <ProcessBlock {...process} color={accentColor} />
-              <Video
-                thumbnailUrl={thumbnailUrl}
-                color={accentColor}
-                onOpen={this.handlePlay.bind(this)}
-              />
+              {buttonLink && showButtonLink && (
+                <Button
+                  bgColor={theme.hexToRgba(
+                    theme.contrastColor(
+                      bgColor,
+                      theme.palette.light,
+                      theme.palette.dark
+                    ),
+                    0.2
+                  )}
+                  isExternal={buttonLink.isExternal}
+                  to={buttonLink.path}
+                  type="link"
+                >
+                  {buttonLink.name}
+                </Button>
+              )}
+              {showProcessComponent && (
+                <ProcessBlock {...process} color={accentColor} />
+              )}
+              {media && showMediaComponent && (
+                <Video
+                  thumbnailUrl={media.image && media.image.url}
+                  color={accentColor}
+                  onOpen={this.handlePlay.bind(this)}
+                />
+              )}
             </Root>
           </Container>
         </Skewer>
@@ -113,16 +119,30 @@ CaseInfo.propTypes = {
   descriptionThree: PropTypes.string,
   bgColor: PropTypes.string,
   accentColor: PropTypes.string,
-  video: PropTypes.shape({
-    provider: PropTypes.string,
-    providerUid: PropTypes.string
+  media: PropTypes.shape({
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    video: PropTypes.shape({
+      provider: PropTypes.string,
+      providerUid: PropTypes.string
+    })
   }),
-  button: PropTypes.shape({
+  buttonLink: PropTypes.shape({
     path: PropTypes.string,
     isExternal: PropTypes.bool,
     name: PropTypes.string
   }),
-  thumbnailUrl: PropTypes.string
+  thumbnailUrl: PropTypes.string,
+  showProcessComponent: PropTypes.bool,
+  showButtonLink: PropTypes.bool,
+  showImageGrid: PropTypes.bool,
+  showMediaComponent: PropTypes.bool,
+  gridImages: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string
+  }))
 }
 
 export default CaseInfo
