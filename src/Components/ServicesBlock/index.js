@@ -56,7 +56,8 @@ class ServicesBlock extends Component {
     const {
       bgColor,
       services,
-      buttonLink
+      buttonLink,
+      sideText
     } = this.props
 
     const {
@@ -69,7 +70,7 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services">
+          <Container sideText={sideText}>
             <Content>
               <ServiceList
                 services={services}
@@ -102,6 +103,7 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   bgColor: PropTypes.string,
+  sideText: PropTypes.string,
   services: PropTypes.array,
   buttonLink: PropTypes.shape({
     path: PropTypes.string,

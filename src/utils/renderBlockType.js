@@ -89,6 +89,7 @@ export default (block) => {
           consoleText={block.consoleText}
           bgColor={block.bgColor && block.bgColor.hex}
           moreToolsButton={block.moreToolsButton}
+          sideText={block.sideText}
         />
       )
     case 'DatoCmsToolboxBig':
@@ -178,6 +179,7 @@ export default (block) => {
           services={block.services}
           buttonLink={block.buttonLink}
           bgColor={block.bgColor && block.bgColor.hex}
+          sideText={block.sideText}
         />
       )
     }
@@ -187,6 +189,7 @@ export default (block) => {
           key={block.id}
           services={block.services}
           toolboxPage={block.toolboxPage}
+          sideText={block.sideText}
         />
       )
     }

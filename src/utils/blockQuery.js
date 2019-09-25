@@ -66,6 +66,7 @@ export const query = graphql`
       isExternal
       name
     }
+    sideText
     tools {
       ... on DatoCmsTool {
         id
@@ -240,6 +241,7 @@ export const query = graphql`
   }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
+    sideText
     buttonLink {
       path
       name
@@ -271,6 +273,7 @@ export const query = graphql`
     toolboxPage {
       url
     }
+    sideText
     services {
       id
       label

@@ -137,7 +137,8 @@ class ServicesBlock extends Component {
   render () {
     const {
       services,
-      toolboxPage
+      toolboxPage,
+      sideText
     } = this.props
 
     const {
@@ -150,7 +151,7 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services" fluid>
+          <Container sideText={sideText} fluid>
             <Content>
               <SidebarWrapper>
                 <Sidebar
@@ -180,6 +181,7 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   services: PropTypes.array,
+  sideText: PropTypes.string,
   toolboxPage: PropTypes.shape({
     url: PropTypes.string
   })
