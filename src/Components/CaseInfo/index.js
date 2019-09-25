@@ -118,7 +118,7 @@ class CaseInfo extends Component {
                   onOpen={this.handlePlay.bind(this)}
                 />
               )}
-              {media && showMediaComponent && media.image && (
+              {media && showMediaComponent && !media.video && media.image && (
                 <ImageMedia
                   src={media.image && media.image.url}
                 />
