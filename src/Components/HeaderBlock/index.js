@@ -194,7 +194,7 @@ class HeaderBlock extends Component {
   }
 
   handlePlay () {
-    if (!this.props.videoUrl) {
+    if (!this.props.video) {
       return
     }
     this.setState({
@@ -214,17 +214,16 @@ class HeaderBlock extends Component {
       body,
       bgColor,
       textColor,
-      videoUrl,
+      video,
       iconUrl,
       imageUrl
     } = this.props
     const { playing } = this.state
-    const hasVideo = !!videoUrl
 
     return (
       <>
-        {playing && hasVideo && (
-          <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
+        {playing && !!video && (
+          <VideoFullscreen video={video} onClose={this.handleClose.bind(this)} />
         )}
         <Skewer bgColor={bgColor} height="130vh" layer={800}>
           <Container noContentWrapper>
@@ -236,7 +235,7 @@ class HeaderBlock extends Component {
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer>
                 <ThumbImage src={imageUrl} />
-                {hasVideo && (
+                {!!video && (
                   <PlayButton onClick={this.handlePlay.bind(this)} />
                 )}
               </RightContainer>
@@ -253,7 +252,10 @@ HeaderBlock.propTypes = {
   body: PropTypes.string,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
-  videoUrl: PropTypes.string,
+  video: PropTypes.shape({
+    provider: PropTypes.string,
+    providerUid: PropTypes.string
+  }),
   iconUrl: PropTypes.string,
   imageUrl: PropTypes.string
 }

@@ -284,7 +284,7 @@ Footer.propTypes = {
     icon: PropTypes.shape({
       url: PropTypes.string
     }),
-    isExternal: PropTypes.string
+    isExternal: PropTypes.bool
   })),
   socialMediaHeader: PropTypes.string,
   instagramFeed: PropTypes.arrayOf(PropTypes.shape({

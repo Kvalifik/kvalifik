@@ -34,9 +34,11 @@ class CaseInfo extends Component {
   }
 
   handlePlay () {
-    this.setState({
-      playing: true
-    })
+    if (this.props.video) {
+      this.setState({
+        playing: true
+      })
+    }
   }
 
   handleClose () {
@@ -49,7 +51,7 @@ class CaseInfo extends Component {
     const {
       bgColor,
       accentColor,
-      videoUrl,
+      video,
       thumbnailUrl,
       button: {
         path,
@@ -61,9 +63,9 @@ class CaseInfo extends Component {
 
     return (
       <>
-        {this.state.playing && (
+        {this.state.playing && !!video && (
           <VideoFullscreen
-            src={videoUrl}
+            video={video}
             onClose={this.handleClose.bind(this)}
           />
         )}
@@ -111,7 +113,10 @@ CaseInfo.propTypes = {
   descriptionThree: PropTypes.string,
   bgColor: PropTypes.string,
   accentColor: PropTypes.string,
-  videoUrl: PropTypes.string,
+  video: PropTypes.shape({
+    provider: PropTypes.string,
+    providerUid: PropTypes.string
+  }),
   button: PropTypes.shape({
     path: PropTypes.string,
     isExternal: PropTypes.bool,

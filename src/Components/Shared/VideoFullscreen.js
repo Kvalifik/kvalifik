@@ -59,7 +59,7 @@ const CustomContainer = styled.div`
   }
 `
 
-const Video = styled.video`
+const VideoWrapper = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   width: 100%;
   position: relative;
@@ -75,6 +75,7 @@ const Backdrop = styled.div`
   z-index: 4999;
   top: 0;
   left: 0;
+  opacity: 0.9;
 
   animation: ${fadeIn} 0.6s linear;
 `
@@ -147,16 +148,61 @@ class VideoFullscreen extends Component {
     }
   }
 
+  renderVideo () {
+    const { video: { provider, providerUid } = {} } = this.props
+
+    if (provider === 'vimeo') {
+      const path = `${providerUid}?autoplay=1&title=0&byline=0&portrait=0`
+      const src = `https://player.vimeo.com/video/${path}`
+      return (
+        <>
+          <div
+            style={{
+              padding: '56.25% 0 0 0',
+              position: 'relative'
+            }}
+          >
+            <iframe
+              src={src}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%'
+              }}
+              frameBorder="0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+            />
+          </div>
+          <script src="https://player.vimeo.com/api/player.js" />
+        </>
+      )
+    } else if (provider === 'youtube') {
+      return (
+        <iframe
+          width="100%"
+          height="100%"
+          src={`https://www.youtube.com/embed/${providerUid}`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      )
+    }
+
+    return null
+  }
+
   render () {
-    const { src, onClose } = this.props
+    const { onClose } = this.props
 
     return (
       <>
         <Backdrop />
         <CustomContainer onClick={this.handleCloseButton.bind(this)}>
-          <Video controls={true} autoPlay>
-            <source src={src} type="video/mp4" />
-          </Video>
+          <VideoWrapper>{this.renderVideo()}</VideoWrapper>
           <CloseButton onClick={onClose}>
             <img src={cross} />
           </CloseButton>
@@ -167,7 +213,10 @@ class VideoFullscreen extends Component {
 }
 
 VideoFullscreen.propTypes = {
-  src: PropTypes.string,
+  video: PropTypes.shape({
+    provider: PropTypes.string,
+    providerUid: PropTypes.string
+  }),
   onClose: PropTypes.func
 }
 

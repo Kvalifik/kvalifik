@@ -97,7 +97,7 @@ const SocialIcons = styled.div`
   width: 100%;
 `
 
-const SocialIcon = styled(UniversalLink)`
+const SocialIcon = styled(({ collapsed, index, ...props }) => <UniversalLink {...props} />)`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
 
   img {
@@ -204,10 +204,11 @@ NavigationContent.propTypes = {
   navigationLinks: PropTypes.array,
   collapsed: PropTypes.bool,
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
-    linkUrl: PropTypes.string,
+    path: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string
-    })
+    }),
+    isExternal: PropTypes.bool
   }))
 }
 export default NavigationContent

@@ -21,7 +21,8 @@ export const query = graphql`
           url
         }
         video {
-          url
+          provider
+          providerUid
         }
       }
     }
@@ -191,7 +192,8 @@ export const query = graphql`
         url
       }
       video {
-        url
+        provider
+        providerUid
       }
     }
   }

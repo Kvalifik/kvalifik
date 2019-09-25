@@ -22,8 +22,7 @@ import theme from 'utils/theme'
 export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
-      const imageUrl = block.media.image.url
-      const videoUrl = block.media.video && block.media.video.url
+      const imageUrl = block.media.image && block.media.image.url
 
       return (
         <HeaderBlock
@@ -33,7 +32,7 @@ export default (block) => {
           iconUrl={block.icon && block.icon.url}
           bgColor={block.bgColor && block.bgColor.hex}
           textColor={block.textColor && block.textColor.hex}
-          videoUrl={videoUrl}
+          video={block.media.video}
           imageUrl={imageUrl}
         />
       )
@@ -138,7 +137,7 @@ export default (block) => {
           key={block.id}
           button={block.buttonLink}
           thumbnailUrl={video ? video.image.url : ''}
-          videoUrl={video ? video.video.url : ''}
+          video={video.video}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}
           {...others}
