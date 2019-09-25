@@ -6,7 +6,7 @@ import Skewer from 'Components/Shared/Skewer'
 import Container from 'Components/Shared/Container'
 import Button from 'Components/Shared/Button'
 import VideoFullscreen from 'Components/Shared/VideoFullscreen'
-import ImageTrack from 'Components/Shared/ImageTrack'
+import JustifiedGrid from 'Components/Shared/JustifiedGrid'
 
 import ProcessBlock from './ProcessBlock'
 import Video from './Video'
@@ -63,7 +63,13 @@ class CaseInfo extends Component {
       ...process
     } = this.props
 
-    const mappedGridImages = gridImages && gridImages.map(i => i.url)
+    const mappedGridImages = gridImages && gridImages.map(i => ({
+      src: i.url,
+      width: Math.round(i.width / 10),
+      height: Math.round(i.height / 10)
+    }))
+
+    console.log(showImageGrid, mappedGridImages)
 
     return (
       <>
@@ -97,10 +103,12 @@ class CaseInfo extends Component {
                 <ProcessBlock {...process} color={accentColor} />
               )}
               {gridImages && gridImages.length > 0 && showImageGrid && (
-                <ImageTrack
+                <JustifiedGrid
                   images={mappedGridImages}
-                  height="60vh"
-                  gutter="16px"
+                  rows={2}
+                  maxRowHeight={200}
+                  gutter={1}
+                  showIncompleteRow
                 />
               )}
               {media && showMediaComponent && media.video && (
