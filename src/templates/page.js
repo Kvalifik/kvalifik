@@ -55,7 +55,6 @@ PageTemplate.propTypes = {
 export const query = graphql`
   query($url: String!) {
     datoCmsPage(url: { eq: $url }) {
-      title
       url
       bgColor {
         hex
@@ -73,6 +72,9 @@ export const query = graphql`
         ...ServicesBlockFragment
         ...ServicesBigFragment
         ...Stepper
+      }
+      seoMetaTags {
+        tags
       }
     }
   }

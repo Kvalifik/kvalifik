@@ -157,8 +157,8 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
 
   const {
     url,
-    title,
-    pageSetup
+    pageSetup,
+    seoMetaTags
   } = page
 
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
@@ -166,11 +166,8 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   return (
     <>
       <GlobalStyle />
-      <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags}>
+      <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={seoMetaTags}>
         <meta charSet="utf-8" />
-        {title && (
-          <title>{title}</title>
-        )}
         {url && (
           <link rel="canonical" href={`https://kvalifik.dk${url}`} />
         )}
@@ -217,7 +214,7 @@ Main.propTypes = {
   bgColor: PropTypes.string,
   page: PropTypes.shape({
     url: PropTypes.string,
-    title: PropTypes.string,
+    seoMetaTags: PropTypes.object,
     pageSetup: PropTypes.array
   })
 }
