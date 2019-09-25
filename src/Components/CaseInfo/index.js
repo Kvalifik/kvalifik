@@ -9,6 +9,7 @@ import VideoFullscreen from 'Components/Shared/VideoFullscreen'
 
 import ProcessBlock from './ProcessBlock'
 import Video from './Video'
+import ImageMedia from './ImageMedia'
 
 import theme from 'utils/theme'
 
@@ -34,7 +35,7 @@ class CaseInfo extends Component {
   }
 
   handlePlay () {
-    if (this.props.media) {
+    if (this.props.media && this.props.media.video) {
       this.setState({
         playing: true
       })
@@ -63,7 +64,7 @@ class CaseInfo extends Component {
 
     return (
       <>
-        {this.state.playing && media && showMediaComponent && (
+        {this.state.playing && media && media.video && showMediaComponent && (
           <VideoFullscreen
             video={media.video}
             onClose={this.handleClose.bind(this)}
@@ -92,11 +93,16 @@ class CaseInfo extends Component {
               {showProcessComponent && (
                 <ProcessBlock {...process} color={accentColor} />
               )}
-              {media && showMediaComponent && (
+              {media && showMediaComponent && media.video && (
                 <Video
                   thumbnailUrl={media.image && media.image.url}
                   color={accentColor}
                   onOpen={this.handlePlay.bind(this)}
+                />
+              )}
+              {media && showMediaComponent && media.image && (
+                <ImageMedia
+                  src={media.image && media.image.url}
                 />
               )}
             </Root>
