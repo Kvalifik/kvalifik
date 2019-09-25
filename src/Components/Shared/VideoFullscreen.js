@@ -65,6 +65,7 @@ const VideoWrapper = styled.div`
   position: relative;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  background-color: ${props => props.theme.palette.dark};
 `
 
 const Backdrop = styled.div`
@@ -181,18 +182,13 @@ class VideoFullscreen extends Component {
       )
     } else if (provider === 'youtube') {
       return (
-        <iframe
-          width="100%"
-          height="100%"
-          src={`https://www.youtube.com/embed/${providerUid}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+        <p style={{ color: 'white' }}>YouTube not supported</p>
       )
     }
 
-    return null
+    return (
+      <p style={{ color: 'white' }}>No video attached</p>
+    )
   }
 
   render () {
