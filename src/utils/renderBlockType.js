@@ -1,7 +1,6 @@
 import React from 'react'
 
 import CaseGrid from 'Components/CaseGrid'
-import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
@@ -44,19 +43,8 @@ export default (block) => {
           hasMoreWork={!!block.moreWorkPage}
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
-        >
-          {block.cases.map(work => (
-            <CaseThump
-              key={work.id}
-              name={work.forWho}
-              description={work.description}
-              bgUrl={work.image.url}
-              bgColor={work.color.hex}
-              fullWidth={work.fullSize}
-              workUrl={work.url}
-            />
-          ))}
-        </CaseGrid>
+          cases={block.cases}
+        />
       )
     case 'DatoCmsSlogan':
       return (
