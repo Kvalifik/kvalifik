@@ -13,14 +13,14 @@ const Root = styled.div`
   margin: ${props => props.theme.spacing(4, 2)};
   padding-left: 2px;
   line-height: 1.4em;
-  min-height: calc(12px * 3 * 1.4);
+  min-height: calc(12px * ${props => props.lines} * 1.4);
 `
 
 const ConsoleContent = styled.span`
   white-space: pre-wrap;
 `
 
-const text = function (consoleText) {
+function formatText (consoleText) {
   const dateString = dateformat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT')
   const dots = new Array(8).fill(0).map(() => '.').join('^400')
   const output = [consoleText
@@ -32,18 +32,27 @@ const text = function (consoleText) {
   return output
 }
 
-const Console = React.forwardRef(({ color, isInsideViewport, consoleText }, ref) => (
-  <Root color={color} ref={ref}>
-    {isInsideViewport && (
-      <Typed
-        strings={text(consoleText)}
-        typeSpeed={20}
-      >
-        <ConsoleContent />
-      </Typed>
-    )}
-  </Root>
-))
+function calculateLines (consoleText) {
+  return consoleText.split(/\n/).length
+}
+
+const Console = React.forwardRef(({ color, isInsideViewport, consoleText }, ref) => {
+  const text = React.useMemo(() => formatText(consoleText), [consoleText])
+  const lines = React.useMemo(() => calculateLines(consoleText), [consoleText])
+
+  return (
+    <Root color={color} ref={ref} lines={lines}>
+      {isInsideViewport && (
+        <Typed
+          strings={text}
+          typeSpeed={20}
+        >
+          <ConsoleContent />
+        </Typed>
+      )}
+    </Root>
+  )
+})
 
 Console.propTypes = {
   isInsideViewport: PropTypes.bool,
