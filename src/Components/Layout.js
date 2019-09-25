@@ -166,6 +166,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   } = page
 
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+  const canonical = `https://kvalifik.dk${url}`
 
   return (
     <>
@@ -173,7 +174,10 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
       <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={seoMetaTags}>
         <meta charSet="utf-8" />
         {url && (
-          <link rel="canonical" href={`https://kvalifik.dk${url}`} />
+          <link rel="canonical" href={canonical} />
+        )}
+        {url && (
+          <meta property="og:url" content={canonical} />
         )}
         <meta name="format-detection" content="telephone=no" />
         {headerBlock && headerBlock.bgColor && (
