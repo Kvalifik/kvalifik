@@ -247,6 +247,9 @@ export const query = graphql`
       name
       isExternal
     }
+    toolboxPage {
+      url
+    }
     services {
       id
       label

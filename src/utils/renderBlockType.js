@@ -180,6 +180,7 @@ export default (block) => {
           buttonLink={block.buttonLink}
           bgColor={block.bgColor && block.bgColor.hex}
           sideText={block.sideText}
+          toolboxPage={block.toolboxPage}
         />
       )
     }

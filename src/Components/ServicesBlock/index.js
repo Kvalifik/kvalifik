@@ -57,12 +57,15 @@ class ServicesBlock extends Component {
       bgColor,
       services,
       buttonLink,
-      sideText
+      sideText,
+      toolboxPage
     } = this.props
 
     const {
       selected
     } = this.state
+
+    const toolboxUrl = toolboxPage ? toolboxPage.url : ''
 
     return (
       <Skewer
@@ -77,7 +80,10 @@ class ServicesBlock extends Component {
                 selected={selected}
                 onSelect={this.handleSelect.bind(this)}
                 renderPreview={(service) => (
-                  <ServicePreview service={service} />
+                  <ServicePreview
+                    service={service}
+                    toolboxUrl={toolboxUrl}
+                  />
                 )}
               />
               {buttonLink && (
@@ -109,6 +115,9 @@ ServicesBlock.propTypes = {
     path: PropTypes.string,
     name: PropTypes.string,
     isExternal: PropTypes.bool
+  }),
+  toolboxPage: PropTypes.shape({
+    url: PropTypes.string
   })
 }
 
