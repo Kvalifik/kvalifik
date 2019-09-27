@@ -1,3 +1,5 @@
+> We are soon going into production! There are some important next steps, before this happens. Please read [Road map](https://github.com/Kvalifik/kvalifik/wiki/Road-map)
+
 # Kvalifik dk static site
 
 Kvalifik's new website built with Gatsby and Dato CMS!
