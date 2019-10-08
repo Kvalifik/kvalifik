@@ -16,6 +16,14 @@ const Root = styled.div`
     ${props => (props.flushBottom || props.noPadding)
     ? 0
     : (props.half ? props.offset * 1.5 : props.offset)}vw;
+
+  @media ${props => props.theme.media.landscape} {
+    height: auto;
+  }
+
+  @media ${props => props.theme.media.lg} {
+    height: auto;
+  }
 `
 
 const Inner = styled.div`

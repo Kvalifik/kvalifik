@@ -22,14 +22,15 @@ const ButtonWrapper = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   margin-top: ${props => props.theme.spacing(5)};
+  text-align: center;
 `
 
 class ServicesBlock extends Component {
   constructor (props) {
     super(props)
-
+    const isMobile = !!window && window.screen.width < parseInt(theme.breakpoints.md)
     this.state = {
-      selected: 0,
+      selected: isMobile ? -1 : 0,
       selectedEl: null
     }
   }
@@ -47,7 +48,7 @@ class ServicesBlock extends Component {
 
   handleSelect (ev, next) {
     this.setState({
-      selected: next,
+      selected: next === this.state.selected ? -1 : next,
       selectedEl: ev.currentTarget
     })
   }

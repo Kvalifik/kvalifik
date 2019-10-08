@@ -126,8 +126,10 @@ const BottomLeftContainer = styled.div`
   padding: 0 ${props => props.theme.spacing(6)};
   justify-self: center;
   width: 70%;
+  line-height: 1.6;
 
   @media ${props => props.theme.media.xl} {
+    font-size: 1.2vw;
     width: 80%;
   }
 
@@ -137,6 +139,7 @@ const BottomLeftContainer = styled.div`
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+    font-size: 16px;
   }
 `
 

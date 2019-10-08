@@ -106,16 +106,14 @@ const Filter = styled.button`
   }
 
   margin: ${props => props.theme.spacing(1)};
+  cursor: pointer;
 
-  ${props => props.isChosen
-    ? css`
-      transform: scale(1) !important;
-      color: white;
-      border: 1px solid white;
-    `
-    : css`
-      cursor: pointer;
-    `}
+  ${props => props.isChosen && css`
+    color: rgb(29,29,29) !important;
+    transform: scale(1) !important;
+    background-color: ${props => props.theme.palette.primary.D};;
+    border: 0 !important;
+  `}
 `
 
 const Filters = styled.div`
@@ -236,7 +234,7 @@ class ToolboxBig extends Component {
   }
 
   chooseFilter (filter) {
-    this.setState({ chosenFilter: filter })
+    this.setState({ chosenFilter: filter === this.state.chosenFilter ? '' : filter })
   }
 
   openToolPreview (ev, i, scrollDown = false) {
@@ -331,17 +329,15 @@ class ToolboxBig extends Component {
       <Filter
         isChosen={isChosen}
         onClick={
-          !isChosen
-            ? this.chooseFilter.bind(this, toolFilter.title)
-            : () => null
+          this.chooseFilter.bind(this, toolFilter.title)
         }
         key={i}
       >
-        <RemoveFilter
+        {/* <RemoveFilter
           isChosen={isChosen}
           onClick={this.chooseFilter.bind(this, '')}
           key={i}
-        />
+        /> */}
         {toolFilter.title}
       </Filter>
     )
