@@ -28,7 +28,13 @@ const ButtonWrapper = styled.div`
 class ServicesBlock extends Component {
   constructor (props) {
     super(props)
-    const isMobile = !!window && window.screen.width < parseInt(theme.breakpoints.md)
+    let isMobile
+    try {
+      isMobile = !!window && window.screen.width < parseInt(theme.breakpoints.md)
+    } catch (e) {
+      console.log(e)
+      isMobile = false
+    }
     this.state = {
       selected: isMobile ? -1 : 0,
       selectedEl: null
