@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import theme from 'utils/theme'
 
@@ -17,13 +17,11 @@ const Root = styled.div`
     ? 0
     : (props.half ? props.offset * 1.5 : props.offset)}vw;
 
-  @media ${props => props.theme.media.landscape} {
-    height: auto;
-  }
-
-  @media ${props => props.theme.media.lg} {
-    height: auto;
-  }
+  ${props => props.isHeaderBlock && css`
+    @media ${props => props.theme.media.md} {
+      height: auto;
+    }
+  `}
 `
 
 const Inner = styled.div`
@@ -105,14 +103,15 @@ const Skewer = ({
   height,
   layer,
   flushBottom,
+  isHeaderBlock,
   id
 }) => {
   const offset = theme.skewer.calculateOffset(type)
   const angle = angles[type]
   const hasBgImage = bgImageUrl || renderBgImage
-
   return (
     <Root
+      isHeaderBlock={!!isHeaderBlock}
       id={id}
       offset={offset}
       layer={layer}
@@ -149,7 +148,8 @@ Skewer.propTypes = {
   height: PropTypes.string,
   layer: PropTypes.number,
   flushBottom: PropTypes.bool,
-  id: PropTypes.string
+  id: PropTypes.string,
+  isHeaderBlock: PropTypes.bool
 }
 
 export default Skewer
