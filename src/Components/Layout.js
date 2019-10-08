@@ -57,6 +57,12 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  line-height: 1.6;
+
+  p {
+    line-height: 1.6;
+  }
+
   * {
     box-sizing: border-box;
   }

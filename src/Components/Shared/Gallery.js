@@ -9,7 +9,7 @@ const Img = styled.div`
   background-position: center center;
   width: 100%;
   height: 100%;
-  transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  transition: background-image 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
 `
 
 class Gallery extends Component {

@@ -22,6 +22,10 @@ const ButtonWrapper = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   margin-top: ${props => props.theme.spacing(5)};
+
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(2)};
+  }
 `
 
 const loop = (value, min, max) => {

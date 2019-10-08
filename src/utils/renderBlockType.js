@@ -138,6 +138,7 @@ export default (block) => {
           bgColor={block.bgColor && block.bgColor.hex}
           description={block.description}
           number={block.number}
+          unit={block.unit}
         />
       )
     case 'DatoCmsQuote':

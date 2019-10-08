@@ -126,8 +126,10 @@ const BottomLeftContainer = styled.div`
   padding: 0 ${props => props.theme.spacing(6)};
   justify-self: center;
   width: 70%;
+  line-height: 1.6;
 
   @media ${props => props.theme.media.xl} {
+    font-size: 1.2vw;
     width: 80%;
   }
 
@@ -137,6 +139,7 @@ const BottomLeftContainer = styled.div`
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+    font-size: 16px;
   }
 `
 
@@ -175,7 +178,8 @@ const RightContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: ${props => props.theme.typography.fontSize.md};
+  /* font-size: ${props => props.theme.typography.fontSize.md}; */
+  font-size: 3vw;
   padding: 5px 0;
   margin: 0;
   ${props => props.theme.typography.hero.mixin()};
@@ -230,7 +234,7 @@ class HeaderBlock extends Component {
         {playing && !!video && (
           <VideoFullscreen video={video} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer bgColor={bgColor} height="130vh" layer={800}>
+        <Skewer bgColor={bgColor} height="130vh" layer={800} isHeaderBlock>
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>

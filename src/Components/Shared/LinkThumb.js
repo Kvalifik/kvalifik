@@ -68,6 +68,8 @@ const Center = styled.div`
     align-items: center;
 
     @media ${props => props.theme.media.sm} {
+      display: grid;
+      grid-template-columns: 40px 1fr;
       position: static;
       flex-direction: row;
       justify-content: start;
@@ -86,7 +88,15 @@ const Icon = styled(LazyImage)`
 `
 
 const Headline = styled.p`
+  text-align: center;
+  margin: ${props => props.theme.spacing(2)};
+  margin-bottom: ${props => props.theme.spacing(1)};
   font-size: 14px;
+
+  @media ${props => props.theme.media.sm} {
+    margin: ${props => props.theme.spacing(2)};
+    text-align: left;
+  }
 `
 
 export default class ToolThumb extends Component {

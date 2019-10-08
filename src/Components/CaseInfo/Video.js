@@ -46,7 +46,7 @@ const PlayButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    transform: translate(-50%, -50%) scale(0.95);
+    transform: translate(-50%, -50%) scale(1.04);
   }
 `
 
