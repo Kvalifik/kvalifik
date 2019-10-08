@@ -217,6 +217,7 @@ export const query = graphql`
     description
     duration
     number
+    unit
   }
   fragment QuoteBlockFragment on DatoCmsQuote {
     id

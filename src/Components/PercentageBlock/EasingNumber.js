@@ -48,9 +48,9 @@ class EasingNumber extends Component {
     const { value } = this.state
 
     return (
-      <div ref={el => { this.node = el }}>
+      <span ref={el => { this.node = el }}>
         {render(Math.round(value))}
-      </div>
+      </span>
     )
   }
 }

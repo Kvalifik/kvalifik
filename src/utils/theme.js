@@ -68,7 +68,7 @@ const theme = {
   },
   skewer: {
     smallAngle: 5,
-    largeAngle: 11
+    largeAngle: 8
   },
   breakpoints: {
     sm: '578px',

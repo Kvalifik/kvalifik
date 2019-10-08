@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Skewer from 'Components/Shared/Skewer'
@@ -41,10 +41,20 @@ const Number = styled.div`
   }
 `
 
+const Unit = styled.div`
+  font-size: 100px;
+  text-align: justify;
+  font-weight: bold;
+  ${props => (props.letters < 4) && css`
+    display: inline-block;
+  `}
+`
+
 const PercentageBlock = ({
   description,
   number,
   duration,
+  unit,
   bgColor
 }) => (
   <Skewer bgColor={bgColor} layer={1200}>
@@ -55,8 +65,11 @@ const PercentageBlock = ({
             value={number}
             duration={duration}
             awaitViewport
-            render={number => `${number}%`}
+            render={number => `${number}`}
           />
+          <Unit letters={parseInt(unit.length)}>
+            {unit}
+          </Unit>
         </Number>
         <Description dangerouslySetInnerHTML={{ __html: description }} />
       </Content>
@@ -68,7 +81,8 @@ PercentageBlock.propTypes = {
   description: PropTypes.string,
   number: PropTypes.number,
   duration: PropTypes.number,
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
+  unit: PropTypes.string
 }
 
 export default PercentageBlock
