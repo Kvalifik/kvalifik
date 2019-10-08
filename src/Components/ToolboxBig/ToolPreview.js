@@ -46,6 +46,7 @@ const ContentWrapper = styled.div`
 const Description = styled.div`
   p {
     margin: ${props => props.theme.spacing(2, 0)};
+    line-height: 1.6;
   }
 
   @media ${props => props.theme.media.lg} {

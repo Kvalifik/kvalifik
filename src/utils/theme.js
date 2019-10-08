@@ -100,6 +100,7 @@ const theme = {
       xs: '13px',
       sm: '14px',
       md: '40px',
+      lg: '50px',
       xl: '80px',
       quote: '18px',
       menuItem: '25px'

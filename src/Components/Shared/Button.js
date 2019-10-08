@@ -15,7 +15,7 @@ const ButtonWrapper = styled.div`
   width: ${props => props.fullWidth ? '100%' : 'auto'};
 
   &:hover {
-    transform: scale(0.95);
+    transform: scale(1.03);
   }
 
   @media ${props => props.theme.media.md} {

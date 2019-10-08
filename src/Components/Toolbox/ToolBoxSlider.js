@@ -53,7 +53,7 @@ const SliderElement = styled.div`
   `}
 
   &:hover {
-    transform: scale(0.95);
+    transform: scale(1.05);
 
     &::after {
       height: ${props => props.theme.spacing(0.5) * 2};

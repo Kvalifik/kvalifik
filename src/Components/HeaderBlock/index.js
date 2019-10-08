@@ -175,7 +175,8 @@ const RightContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: ${props => props.theme.typography.fontSize.md};
+  /* font-size: ${props => props.theme.typography.fontSize.md}; */
+  font-size: 3vw;
   padding: 5px 0;
   margin: 0;
   ${props => props.theme.typography.hero.mixin()};
