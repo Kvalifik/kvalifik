@@ -85,10 +85,23 @@ const SubHeadline = styled.h3`
   color: ${props => props.theme.palette.primary.D};
 `
 
-const Description = styled.h3`
+const Description = styled.p`
   font-size: 16px;
   font-weight: 100;
+
+  h3{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: ${props => props.theme.palette.primary.D};
+  }
 `
+
+const maxLenghtContent = (text, maxLength) => {
+  if (text < maxLength) {
+    return text
+  }
+  return text.split(' ').splice(0, maxLength).join(' ') + ' ...'
+}
 
 const ToolBoxContent = ({
   tools,
@@ -105,7 +118,9 @@ const ToolBoxContent = ({
       <Text>
         <Headline>{tool.headline}</Headline>
         <SubHeadline>{tool.subHeadline}</SubHeadline>
-        <Description dangerouslySetInnerHTML={{ __html: tool.description }} />
+        <Description
+          dangerouslySetInnerHTML={{ __html: maxLenghtContent(tool.description, 40) }}
+        />
         <LinkWrapper>
           <Link to={`${toolboxPath}#${id}`}>Learn how to do it <Arrow src={arrowImg} /></Link>
         </LinkWrapper>

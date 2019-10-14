@@ -44,13 +44,19 @@ const ContentWrapper = styled.div`
 `
 
 const Description = styled.div`
+  @media ${props => props.theme.media.lg} {
+    grid-row: 2 / -1;
+  }
+  
   p {
     margin: ${props => props.theme.spacing(2, 0)};
     line-height: 1.6;
   }
 
-  @media ${props => props.theme.media.lg} {
-    grid-row: 2 / -1;
+  h3{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: ${props => props.theme.palette.primary.D};
   }
 `
 const HeaderIcon = styled.img`

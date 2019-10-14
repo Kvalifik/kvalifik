@@ -9,7 +9,7 @@ const Root = styled.div`
   top: ${props => props.theme.spacing(2)};
   left: ${props => props.theme.spacing(2)};
   position: fixed;
-  z-index: 1000000;
+  z-index: 1000;
   background: rgba(0,0,0,0.6);
   
   @media ${props => props.theme.media.lg} {
@@ -17,8 +17,9 @@ const Root = styled.div`
     left: auto;
   }
   @media ${props => props.theme.media.sm} {
-    top: calc(1px + ${props => props.theme.spacing(8)});
+    top: calc(1px + ${props => props.theme.spacing(10)});
     padding: ${props => props.theme.spacing(2, 0)};
+    right: calc(${props => props.theme.spacing(0)});
   }
 `
 
