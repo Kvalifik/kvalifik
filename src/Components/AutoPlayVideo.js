@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Video from 'react-native-video'
 
 const Root = styled.div`
   cursor: pointer;
@@ -11,7 +10,7 @@ const Root = styled.div`
   position: relative;
 `
 
-const VideoModified = styled(Video)`
+const Video = styled.video`
   position: absolute;
   height: 100%;
   left: 0;
@@ -22,9 +21,9 @@ const VideoModified = styled(Video)`
 
 const AutoPlayVideo = (props) => (
   <Root>
-    <VideoModified autoPlay playsInline loop playing={props.autoPlaying} muted controls={false}>
-      <source source={{ uri: props.staticLink }} type="video/mp4" />
-    </VideoModified>
+    <Video autoPlay playsInline loop playing={props.autoPlaying} muted controls={false}>
+      <source src={props.staticLink} type="video/mp4" />
+    </Video>
   </Root>
 )
 
