@@ -32,7 +32,6 @@ class ServicesBlock extends Component {
     try {
       isMobile = !!window && window.screen.width < parseInt(theme.breakpoints.md)
     } catch (e) {
-      console.log(e)
       isMobile = false
     }
     this.state = {
