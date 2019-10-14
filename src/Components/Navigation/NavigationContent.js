@@ -138,7 +138,6 @@ class NavigationContent extends Component {
     } = this.props
 
     const currentRoute = this.state.currentRoute
-
     return (
       <Root>
         <NavItems>
@@ -148,8 +147,12 @@ class NavigationContent extends Component {
                 <NavItem
                   isExternal={navigationItem.isExternal}
                   to={navigationItem.path}
-                  isCurrentRoute={currentRoute.includes(navigationItem.path)}
-                  disabled={currentRoute.includes(navigationItem.path)}
+                  isCurrentRoute={navigationItem.path !== '/'
+                    ? currentRoute.includes(navigationItem.path)
+                    : currentRoute === '/'}
+                  disabled={navigationItem.path !== '/'
+                    ? currentRoute.includes(navigationItem.path)
+                    : currentRoute === '/'}
                 >
                   {navigationItem.name}
                   {navigationItem.isExternal && (

@@ -16,7 +16,6 @@ const LeftContainer = styled.div`
   @media ${props => props.theme.media.lg} {
     grid-column: 2 / 4;
     grid-row: 2;
-
     padding: 30vw 0;
   }
 

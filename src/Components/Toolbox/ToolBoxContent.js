@@ -85,9 +85,14 @@ const SubHeadline = styled.h3`
   color: ${props => props.theme.palette.primary.D};
 `
 
-const Description = styled.h3`
+const Description = styled.p`
   font-size: 16px;
   font-weight: 100;
+  h3{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: ${props => props.theme.palette.primary.D};
+  }
 `
 
 const ToolBoxContent = ({
