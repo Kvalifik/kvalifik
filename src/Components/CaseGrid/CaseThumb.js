@@ -116,9 +116,7 @@ const CaseThumb = ({
         <ProjectName>
           {name}
         </ProjectName>
-        <Header full={fullWidth}>
-          {description}
-        </Header>
+        <Header full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
       </Desc>
       <Img src={bgUrl} />
     </Content>

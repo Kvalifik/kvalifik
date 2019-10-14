@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { servicePropType } from 'models/service'
 
 const Root = styled.div`
-  ${props => props.theme.clearfix()}
+  ${props => props.theme.clearfix()};
   position: relative;
 `
 
