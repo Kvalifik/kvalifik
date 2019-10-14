@@ -8,6 +8,8 @@ import Icon from 'Components/Shared/Icon'
 import VideoFullscreen from 'Components/Shared/VideoFullscreen'
 import PlayButton from './PlayButton'
 import ThumbImage from './ThumbImage'
+import AutoPlayVideo from '../AutoPlayVideo.js'
+import theme from 'utils/theme'
 
 const IEContent = css`
   display: -ms-grid;
@@ -193,12 +195,25 @@ const Title = styled.h1`
   }
 `
 
+const shouldAutoplayVideo = () => {
+  let windowExists
+  try {
+    windowExists = !!window
+    console.log({windowExists})
+  } catch (e) {
+    windowExists = false
+  }
+  console.log(window.innerWidth, parseInt(theme.breakpoints.md))
+  return windowExists && window.innerWidth > parseInt(theme.breakpoints.md)
+}
+
 class HeaderBlock extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      playing: false
+      playing: false,
+      autoPlaying: true
     }
   }
 
@@ -242,10 +257,19 @@ class HeaderBlock extends Component {
                 <Title>{title}</Title>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
-              <RightContainer>
-                <ThumbImage src={imageUrl} />
+              <RightContainer onClick={this.handlePlay.bind(this)}>
+                {
+                  shouldAutoplayVideo()
+                    ? (
+                      <AutoPlayVideo
+                        autoPlaying={!playing}
+                        staticLink="https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4"
+                      />
+                    )
+                    : <ThumbImage src={imageUrl} />
+                }
                 {!!video && (
-                  <PlayButton onClick={this.handlePlay.bind(this)} />
+                  <PlayButton />
                 )}
               </RightContainer>
             </Content>

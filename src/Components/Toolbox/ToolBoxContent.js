@@ -100,7 +100,7 @@ const maxLenghtContent = (text, maxLength) => {
   if (text < maxLength) {
     return text
   }
-  return text.substr(0, maxLength) + ' ...'
+  return text.split(' ').splice(0, maxLength).join(' ') + ' ...'
 }
 
 const ToolBoxContent = ({
@@ -118,7 +118,9 @@ const ToolBoxContent = ({
       <Text>
         <Headline>{tool.headline}</Headline>
         <SubHeadline>{tool.subHeadline}</SubHeadline>
-        <Description dangerouslySetInnerHTML={{ __html: maxLenghtContent(tool.description, 350) }} />
+        <Description
+          dangerouslySetInnerHTML={{ __html: maxLenghtContent(tool.description, 40) }}
+        />
         <LinkWrapper>
           <Link to={`${toolboxPath}#${id}`}>Learn how to do it <Arrow src={arrowImg} /></Link>
         </LinkWrapper>
