@@ -8,6 +8,7 @@ import DownArrow from 'Components/DownArrow'
 
 import renderBlockType from 'utils/renderBlockType'
 import 'utils/blockQuery'
+import BackArrow from '../Components/Shared/BackArrow'
 
 const PageTemplate = ({ data }) => {
   const {
@@ -15,10 +16,15 @@ const PageTemplate = ({ data }) => {
     color
   } = data.datoCmsWork
 
+  const {
+    backButtonText
+  } = data.datoCmsGeneral
+
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout bgColor={color && color.hex} page={data.datoCmsWork}>
+      <BackArrow backText={backButtonText} />
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
@@ -48,12 +54,18 @@ PageTemplate.propTypes = {
       color: PropTypes.shape({
         hex: PropTypes.string
       })
+    }),
+    datoCmsGeneral: PropTypes.shape({
+      backButtonText: PropTypes.string
     })
   })
 }
 
 export const query = graphql`
   query($url: String!) {
+    datoCmsGeneral {
+      backButtonText
+    }
     datoCmsWork(url: { eq: $url }) {
       url
       color {
