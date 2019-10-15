@@ -128,7 +128,7 @@ const ServicePreview = ({
     <TextContainer>
       <div>
         <Title dangerouslySetInnerHTML={{ __html: title }} />
-        <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 30) }} />
+        <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 85) }} />
         <ReadMore>
           <Link to={`/services/#${idFromLabel(label)}`}>
             Read more <Arrow src={arrowImg} />
