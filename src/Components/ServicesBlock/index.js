@@ -37,6 +37,7 @@ class ServicesBlock extends Component {
     }
     this.state = {
       selected: isMobile ? -1 : 0,
+      isMobile,
       selectedEl: null
     }
   }

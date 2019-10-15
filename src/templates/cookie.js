@@ -15,8 +15,8 @@ const Root = styled.div`
   z-index: 10000;
   background: #000;
   color: white;
-  grid-template-columns: 1fr 300px;
   padding: ${props => props.theme.spacing(1)};
+  grid-template-columns: 1fr 300px;
   @media ${props => props.theme.media.md} {
     grid-template-columns: 1fr;
   }
@@ -38,7 +38,7 @@ class Cookie extends Component {
 
   componentDidMount () {
     const didAccept = cookies.get(DID_ACCEPT) === 'true'
-    console.log({didAccept})
+    console.log({ didAccept })
     this.setState({ didAccept })
   }
 
@@ -51,7 +51,7 @@ class Cookie extends Component {
     return (
       <Root didAccept={this.state.didAccept}>
         <Text>
-          🍪   We use cookies to provide a better user experience and analyse traffic.
+          🍪   We use cookies to provide a better user experience and analyze traffic.
           <LinkModified to="/cookies">See more</LinkModified>
         </Text>
         <Button

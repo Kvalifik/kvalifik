@@ -28,12 +28,7 @@ const PageTemplate = ({ data }) => {
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
-      <FixedSkewer
-        angle="large"
-        reverse
-        height="1vh"
-        layer={1000}
-      />
+
       <FixedSkewer
         angle="large"
         reverse

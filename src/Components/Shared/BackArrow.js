@@ -10,7 +10,7 @@ const Root = styled.div`
   top: ${props => props.theme.spacing(2)};
   left: ${props => props.theme.spacing(2)};
   position: fixed;
-  z-index: 1000;
+  z-index: 5000;
   background: rgba(0,0,0,0.6);
   
   @media ${props => props.theme.media.lg} {
