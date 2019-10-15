@@ -8,17 +8,20 @@ import DownArrow from 'Components/DownArrow'
 
 import renderBlockType from 'utils/renderBlockType'
 import 'utils/blockQuery'
+import BackArrow from '../Components/Shared/BackArrow'
 
 const PageTemplate = ({ data }) => {
   const {
     pageSetup,
-    bgColor
+    bgColor,
+    url
   } = data.datoCmsPage
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout bgColor={bgColor && bgColor.hex} page={data.datoCmsPage}>
+      {url !== '/' && <BackArrow />}
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}

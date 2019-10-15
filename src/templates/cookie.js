@@ -43,7 +43,6 @@ class Cookie extends Component {
 
   componentDidMount () {
     const didAccept = cookies.get(DID_ACCEPT) === 'true'
-    console.log({ didAccept })
     this.setState({ didAccept })
   }
 

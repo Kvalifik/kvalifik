@@ -25,6 +25,7 @@ const Root = styled.div`
 `
 
 const Wrapper = styled.div`
+  min-height: 50px;
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
   display: flex;
   align-items: center;
@@ -59,9 +60,11 @@ const BackArrow = (props) =>
   <Root onClick={goBack}>
     <Wrapper>
       <Img src={backArrow} />
-      <Text>
-        {props.backText}
-      </Text>
+      {props.backText &&
+        <Text>
+          {props.backText}
+        </Text>
+      }
     </Wrapper>
   </Root>
 
