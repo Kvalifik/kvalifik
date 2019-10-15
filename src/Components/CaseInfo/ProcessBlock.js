@@ -6,6 +6,7 @@ const Label = styled.span`
   text-transform: uppercase;
   font-size: 14px;
   line-height: 1.8em;
+  grid-area: label;
 `
 
 const Root = styled.div`
@@ -29,6 +30,10 @@ const Root = styled.div`
 `
 
 const Block = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "label" "title" "content";
   grid-area: block-${props => props.name};
 `
 
@@ -38,12 +43,14 @@ const Title = styled.h2`
   color: ${props => props.theme.palette.light};
   font-weight: bold;
   line-height: 1.25em;
+  grid-area: title;
 `
 
 const Description = styled.div`
   font-size: 14px;
   color: ${props => props.theme.palette.light};
   line-height: 1.3em;
+  block-area: content;
 `
 
 const ProcessBlock = ({
