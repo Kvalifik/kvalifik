@@ -20,6 +20,9 @@ const Root = styled.div`
   }
 
   height: 100%;
+  min-height: 100%;
+  min-height: -moz-available;        
+  min-height: -webkit-fill-available;
   min-height: fill-available;
   grid-template-rows: 100%;
   background-color: ${props => props.theme.palette.dark};
