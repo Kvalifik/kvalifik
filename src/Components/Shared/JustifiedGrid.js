@@ -31,6 +31,10 @@ const Row = styled.div`
 const CarouselWrapper = styled.div`
   display: none;
 
+  .carousel .slide{
+    background: transparent;
+  }
+
   @media ${props => props.theme.media.lg} {
     display: block;
   }
@@ -120,7 +124,7 @@ const JustifiedGrid = ({
       ))}
 
       <CarouselWrapper>
-        <Carousel showThumbs={false} infiniteLoop autoPlay swipeable={true}>
+        <Carousel showThumbs={false} infiniteLoop autoPlay swipeable={true} showStatus={false}>
           {images.map((img, index) => (
             <div>
               <img src={img.src}/>
