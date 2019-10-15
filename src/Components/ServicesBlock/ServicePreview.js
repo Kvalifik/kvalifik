@@ -7,6 +7,9 @@ import LinkThumb from 'Components/Shared/LinkThumb'
 import idFromLabel from 'utils/idFromLabel'
 import theme from 'utils/theme'
 import maxLengthString from '../../utils/maxLengthString'
+import { Link } from 'gatsby'
+import arrowImg from 'graphics/arrow.svg'
+
 
 const Root = styled.div`
   ${props => props.theme.grid.all([
@@ -15,8 +18,8 @@ const Root = styled.div`
   ])}
 
   @media ${props => props.theme.media.xl} {
-    display: block;
-  }
+    display: block
+  };
   
   height: 100%;
   min-height: fill-available;
@@ -118,14 +121,28 @@ const RelatedWrapper = styled.div`
 `
 
 const ReadMore = styled.div`
-  
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  text-align: right;
+`
+
+const Arrow = styled.img`
+  margin: 0;
+  height: 15px;
+  filter: invert(100%);
+  padding-left: ${props => props.theme.spacing(1)};
+  transform: translateY(20%);
 `
 
 const ServicePreview = ({
   service: {
     title,
+    label,
     description,
     images,
+    exampleCases,
     relatedTools
   },
   toolboxUrl
@@ -136,18 +153,22 @@ const ServicePreview = ({
       <div>
         <Title dangerouslySetInnerHTML={{ __html: title }} />
         <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 30) }} />
-        <ReadMore>Read more</ReadMore>
+        <ReadMore>
+          <Link to={`/services/#${idFromLabel(label)}`}>
+            Learn how to do it <Arrow src={arrowImg} />
+          </Link>
+        </ReadMore>
+
       </div>
       <RelatedWrapper>
-        {relatedTools.length > 0 && <ToolsHeader>Related tools</ToolsHeader>}
+        {exampleCases.length > 0 && <ToolsHeader>Related tools</ToolsHeader>}
         <Tools>
-          {relatedTools.slice(0, 2).map((tool, index) => (
+          {exampleCases.slice(0, 2).map((work, index) => (
             <LinkThumb
               key={index}
-              headline={tool.headline}
-              iconUrl={tool.icon && tool.icon.url}
-              color={theme.palette.primary.D}
-              to={`${toolboxUrl}#${idFromLabel(tool.headline)}`}
+              headline={work.forWho}
+              to={work.url}
+              color={theme.palette.light}
             />
           ))}
         </Tools>

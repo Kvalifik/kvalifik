@@ -272,6 +272,12 @@ export const query = graphql`
       }
       title
       description
+      exampleCases {
+        ...on DatoCmsWork {
+          forWho
+          url
+        }
+      }
       relatedTools {
         ...on DatoCmsTool {
           headline

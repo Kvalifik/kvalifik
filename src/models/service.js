@@ -15,5 +15,11 @@ export const servicePropType = PropTypes.shape({
     icon: PropTypes.shape({
       url: PropTypes.string
     })
+  })),
+  exampleCases: PropTypes.arrayOf(PropTypes.shape({
+    headline: PropTypes.string,
+    icon: PropTypes.shape({
+      url: PropTypes.string
+    })
   }))
 })
