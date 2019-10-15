@@ -9,7 +9,7 @@ import theme from 'utils/theme'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-import cookie from 'templates/cookie'
+import Cookie from '../templates/cookie'
 const browser = detect()
 
 // handle the case where we don't detect the browser
@@ -180,7 +180,6 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
   const canonical = `https://kvalifik.dk${url}`
 
-  console.log(cookie)
   return (
     <>
       <GlobalStyle />
@@ -198,9 +197,8 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         )}
       </HelmetDatoCms>
       <ThemeProvider theme={theme}>
-        <App bgColor={bgColor} x-ms-format-detection="none" >
-          <CookieBanner dangerouslySetInnerHTML={{ __html: cookie }} />
-
+        <App bgColor={bgColor} x-ms-format-detection="none">
+          <Cookie />
           {children}
           {!hideFooter && (
             <Footer

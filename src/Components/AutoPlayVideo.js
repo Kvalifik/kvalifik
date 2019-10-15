@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { errorMap } from '../../.cache/error-overlay-handler'
 
 const Root = styled.div`
   cursor: pointer;
@@ -30,12 +29,16 @@ export default class AutoPlayVideo extends Component {
     try {
       this.refs.vidRef.play()
     } catch (e) {
-      console.error('Could not play!')
+      console.error(e)
     }
   }
 
   pauseVideo () {
-    this.refs.vidRef.pause()
+    try {
+      this.refs.vidRef.pause()
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   render () {
