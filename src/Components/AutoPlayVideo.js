@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -19,17 +19,39 @@ const Video = styled.video`
   transform: translateX(-25%);
 `
 
-const AutoPlayVideo = (props) => (
-  <Root>
-    <Video autoPlay playsInline loop playing={props.autoPlaying} muted controls={false}>
-      <source src={props.staticLink} type="video/mp4" />
-    </Video>
-  </Root>
-)
+export default class AutoPlayVideo extends Component {
+  static propTypes = {
+    staticLink: PropTypes.string,
+    autoPlaying: PropTypes.bool
+  }
 
-AutoPlayVideo.propTypes = {
-  staticLink: PropTypes.string,
-  autoPlaying: PropTypes.bool
+  playVideo () {
+    this.refs.vidRef.play()
+  }
+
+  pauseVideo () {
+    this.refs.vidRef.pause()
+  }
+
+  render () {
+    if (this.props.autoPlaying) {
+      this.playVideo()
+    } else {
+      this.pauseVideo()
+    }
+    return (
+      <Root>
+        <Video
+          ref="vidRef"
+          autoPlay
+          playsInline
+          loop
+          muted
+          controls={false}
+        >
+          <source src={this.props.staticLink} type="video/mp4" />
+        </Video>
+      </Root>
+    )
+  }
 }
-
-export default AutoPlayVideo

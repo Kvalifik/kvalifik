@@ -7,6 +7,8 @@ const ThumbImage = styled.div`
   background-position: 15%;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
+  overflow: hidden;
 `
 
 export default ThumbImage

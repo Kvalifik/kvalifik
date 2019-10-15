@@ -202,7 +202,9 @@ const shouldAutoplayVideo = () => {
   } catch (e) {
     windowExists = false
   }
-  return windowExists && window.innerWidth > parseInt(theme.breakpoints.md)
+  return windowExists &&
+    window.location.pathname === '/' &&
+    window.innerWidth > parseInt(theme.breakpoints.md)
 }
 
 class HeaderBlock extends Component {
