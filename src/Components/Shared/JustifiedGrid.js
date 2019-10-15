@@ -44,7 +44,7 @@ const ImageItem = styled.div`
   flex: 1 1 ${props => props.basis * 100}%;
   overflow: hidden;
   height: 100%;
-  background-image: url(${props => props.src + props.theme.imgScale.sm});
+  background-image: url(${props => props.src + props.theme.imgScale[props.size]});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -113,6 +113,7 @@ const JustifiedGrid = ({
         <Row key={index} gutter={gutter}>
           {row.images.map((img, index) => (
             <ImageItem
+              size={row.images.size > 4 ? 'sm' : 'lg'}
               key={index}
               src={img.src}
               basis={img.basis}

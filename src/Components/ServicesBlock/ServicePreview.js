@@ -141,6 +141,7 @@ const ServicePreview = ({
         <Tools>
           {exampleCases.slice(0, 2).map((work, index) => (
             <LinkThumb
+              bold
               key={index}
               headline={work.forWho}
               to={work.url}
