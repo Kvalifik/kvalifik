@@ -13,14 +13,13 @@ import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 5fr 4fr'
+    'display: grid'
   ])}
 
   @media ${props => props.theme.media.xl} {
     display: block
   };
-  
+
   height: 100%;
   min-height: fill-available;
   grid-template-rows: 100%;
@@ -30,7 +29,7 @@ const Root = styled.div`
 const TextContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto;
-  
+
   ${props => props.theme.grid.all([
     'grid-column: 1',
     'grid-row: 1'
@@ -40,28 +39,6 @@ const TextContainer = styled.div`
 
   @media ${props => props.theme.media.xl} {
     padding: ${props => props.theme.spacing(2)};
-  }
-`
-
-const Media = styled.div`
-  ${props => props.theme.grid.all([
-    'grid-column: 2',
-    'grid-row: 1'
-  ])}
-
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  @media ${props => props.theme.media.xl} {
-    height: 300px;
-    width: 100%;
-  }
-
-  @media ${props => props.theme.media.lg} {
-    height: 200px;
-    width: 100%;
   }
 `
 
@@ -148,20 +125,19 @@ const ServicePreview = ({
   toolboxUrl
 }) => (
   <Root>
-    <Media src={images && images.length > 0 ? images[0].url : ''} />
     <TextContainer>
       <div>
         <Title dangerouslySetInnerHTML={{ __html: title }} />
         <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 30) }} />
         <ReadMore>
           <Link to={`/services/#${idFromLabel(label)}`}>
-            Learn how to do it <Arrow src={arrowImg} />
+            Read more <Arrow src={arrowImg} />
           </Link>
         </ReadMore>
 
       </div>
       <RelatedWrapper>
-        {exampleCases.length > 0 && <ToolsHeader>Related tools</ToolsHeader>}
+        {exampleCases.length > 0 && <ToolsHeader>Relevant cases</ToolsHeader>}
         <Tools>
           {exampleCases.slice(0, 2).map((work, index) => (
             <LinkThumb
