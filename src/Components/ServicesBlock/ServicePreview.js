@@ -6,6 +6,7 @@ import LinkThumb from 'Components/Shared/LinkThumb'
 
 import idFromLabel from 'utils/idFromLabel'
 import theme from 'utils/theme'
+import maxLengthString from '../../utils/maxLengthString'
 
 const Root = styled.div`
   ${props => props.theme.grid.all([
@@ -16,17 +17,23 @@ const Root = styled.div`
   @media ${props => props.theme.media.xl} {
     display: block;
   }
-
+  
+  height: 100%;
+  min-height: fill-available;
+  grid-template-rows: 100%;
   background-color: ${props => props.theme.palette.dark};
 `
 
 const TextContainer = styled.div`
+  display: grid;
+  grid-template-rows: auto auto;
+  
   ${props => props.theme.grid.all([
     'grid-column: 1',
     'grid-row: 1'
   ])}
 
-  padding: ${props => props.theme.spacing(2, 2, 2, 4)};
+  padding: ${props => props.theme.spacing(3)};
 
   @media ${props => props.theme.media.xl} {
     padding: ${props => props.theme.spacing(2)};
@@ -61,8 +68,10 @@ const Title = styled.h2`
   font-size: 20px;
   line-height: 1.6em;
   margin: ${props => props.theme.spacing(0, 0, 2)};
-
   p {
+    span{
+      font-weight: bold !important;
+    }
     margin: 0;
   }
 
@@ -102,6 +111,16 @@ const Tools = styled.div`
   }
 `
 
+const RelatedWrapper = styled.div`
+  bottom: ${props => props.theme.spacing(3)};
+  width: 100%;
+  align-self: end;
+`
+
+const ReadMore = styled.div`
+  
+`
+
 const ServicePreview = ({
   service: {
     title,
@@ -114,20 +133,25 @@ const ServicePreview = ({
   <Root>
     <Media src={images && images.length > 0 ? images[0].url : ''} />
     <TextContainer>
-      <Title dangerouslySetInnerHTML={{ __html: title }} />
-      <Description dangerouslySetInnerHTML={{ __html: description }} />
-      <ToolsHeader>Related tools</ToolsHeader>
-      <Tools>
-        {relatedTools.slice(0, 2).map((tool, index) => (
-          <LinkThumb
-            key={index}
-            headline={tool.headline}
-            iconUrl={tool.icon && tool.icon.url}
-            color={theme.palette.primary.D}
-            to={`${toolboxUrl}#${idFromLabel(tool.headline)}`}
-          />
-        ))}
-      </Tools>
+      <div>
+        <Title dangerouslySetInnerHTML={{ __html: title }} />
+        <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 30) }} />
+        <ReadMore>Read more</ReadMore>
+      </div>
+      <RelatedWrapper>
+        {relatedTools.length > 0 && <ToolsHeader>Related tools</ToolsHeader>}
+        <Tools>
+          {relatedTools.slice(0, 2).map((tool, index) => (
+            <LinkThumb
+              key={index}
+              headline={tool.headline}
+              iconUrl={tool.icon && tool.icon.url}
+              color={theme.palette.primary.D}
+              to={`${toolboxUrl}#${idFromLabel(tool.headline)}`}
+            />
+          ))}
+        </Tools>
+      </RelatedWrapper>
     </TextContainer>
   </Root>
 )

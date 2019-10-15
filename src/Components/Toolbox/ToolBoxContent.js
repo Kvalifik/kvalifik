@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
 import idFromLabel from 'utils/idFromLabel'
+import maxLengthString from '../../utils/maxLengthString'
 
 const Root = styled.div`
   min-height: 600px;
@@ -96,13 +97,6 @@ const Description = styled.p`
   }
 `
 
-const maxLenghtContent = (text, maxLength) => {
-  if (text < maxLength) {
-    return text
-  }
-  return text.split(' ').splice(0, maxLength).join(' ') + ' ...'
-}
-
 const ToolBoxContent = ({
   tools,
   chosenTool,
@@ -119,7 +113,7 @@ const ToolBoxContent = ({
         <Headline>{tool.headline}</Headline>
         <SubHeadline>{tool.subHeadline}</SubHeadline>
         <Description
-          dangerouslySetInnerHTML={{ __html: maxLenghtContent(tool.description, 40) }}
+          dangerouslySetInnerHTML={{ __html: maxLengthString(tool.description, 40) }}
         />
         <LinkWrapper>
           <Link to={`${toolboxPath}#${id}`}>Learn how to do it <Arrow src={arrowImg} /></Link>

@@ -6,6 +6,8 @@ import { servicePropType } from 'models/service'
 const Root = styled.div`
   ${props => props.theme.clearfix()};
   position: relative;
+  min-height: calc(${props => props.len} * 64px + ${props => props.len - 1} * ${props => props.theme.spacing(1)});
+
 `
 
 const Icon = styled.img`
@@ -78,6 +80,7 @@ const grow = keyframes`
 
 const Preview = styled.div`
   width: 65%;
+  height: 100%;
   overflow: hidden;
 
   transform-origin: top center;
@@ -107,7 +110,7 @@ const ServiceList = ({
   const canRenderPreview = typeof renderPreview === 'function'
 
   return (
-    <Root>
+    <Root len={services.length}>
       {services.map((service, index) => (
         <React.Fragment key={index}>
           <ListItem

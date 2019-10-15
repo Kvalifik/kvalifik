@@ -26,18 +26,21 @@ const ButtonWrapper = styled.div`
 `
 
 class ServicesBlock extends Component {
-  constructor (props) {
-    super(props)
+  isMobile () {
     let isMobile
     try {
-      isMobile = !!window && window.screen.width < parseInt(theme.breakpoints.md)
+      isMobile = !!window && window.innerWidth < parseInt(theme.breakpoints.md)
     } catch (e) {
-      console.log(e)
       isMobile = false
     }
+    return isMobile
+  }
+
+  constructor (props) {
+    super(props)
     this.state = {
-      selected: isMobile ? -1 : 0,
-      isMobile,
+      selected: this.isMobile() ? -1 : 0,
+      isMobile: this.isMobile(),
       selectedEl: null
     }
   }
@@ -55,7 +58,9 @@ class ServicesBlock extends Component {
 
   handleSelect (ev, next) {
     this.setState({
-      selected: next === this.state.selected ? -1 : next,
+      selected: next === this.state.selected /* if already selected */
+        ? this.state.isMobile ? -1 : next /* set to nothing if mobile and next on desktop */
+        : next, /* otherwise go to next */
       selectedEl: ev.currentTarget
     })
   }
