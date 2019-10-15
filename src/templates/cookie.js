@@ -57,9 +57,10 @@ class Cookie extends Component {
       <Root didAccept={this.state.didAccept}>
         <Text>
           🍪 We use cookies to provide a better user experience and analyze traffic.
+          <LinkModified to="/cookies">See more</LinkModified>
           <br />
           😋 We also use cookies as bribes in meetings -
-          <LinkModified to="/cookies">See more</LinkModified>
+          <LinkModified to="/anactualcookie">See more</LinkModified>
         </Text>
         <ButtonWrapper>
           <Button
