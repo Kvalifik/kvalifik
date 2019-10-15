@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Carousel } from 'react-responsive-carousel'
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const Root = styled.div`
   width: 100%;
@@ -113,7 +113,7 @@ const JustifiedGrid = ({
         <Row key={index} gutter={gutter}>
           {row.images.map((img, index) => (
             <ImageItem
-              size={row.images.size > 4 ? 'sm' : 'lg'}
+              size={row.images.length > 2 ? 'sm' : 'lg'}
               key={index}
               src={img.src}
               basis={img.basis}
@@ -125,9 +125,9 @@ const JustifiedGrid = ({
       ))}
 
       <CarouselWrapper>
-        <Carousel showThumbs={false} infiniteLoop autoPlay swipeable={true} showStatus={false}>
+        <Carousel showThumbs={false} infiniteLoop autoPlay swipeable showStatus={false}>
           {images.map((img, index) => (
-            <div>
+            <div key={index}>
               <img src={img.src} />
             </div>
           ))}

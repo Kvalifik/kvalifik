@@ -5,7 +5,6 @@ import Container from 'Components/Shared/Container'
 import Padder from 'Components/Shared/Padder'
 import Skewer from 'Components/Shared/Skewer'
 import SearchIcon from 'graphics/search.svg'
-import CloseIcon from 'graphics/close.svg'
 import LinkThumb from 'Components/Shared/LinkThumb'
 import ToolPreview from './ToolPreview'
 import { disableScroll, enableScroll } from 'utils/modal'
@@ -120,34 +119,6 @@ const Filters = styled.div`
   margin: ${props => props.theme.spacing(2)};
   margin-left: ${props => props.theme.spacing(1)};
   margin-right: ${props => props.theme.spacing(3)};
-`
-
-const RemoveFilter = styled.span`
-  transition: width 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  display: inline-flex;
-  width: 0;
-  overflow: hidden;
-  position: relative;
-  height: 20px;
-  justify-content: left;
-  align-items: center;
-  cursor: pointer;
-  margin-right: ${props => props.theme.spacing(1)};
-
-  ::before {
-    content: url(${CloseIcon});
-    position: absolute;
-    height: 32px;
-    width: 35px;
-    margin-left: -8px;
-    display: inline-block;
-    transform: scale(0.5);
-  }
-
-  ${props => props.isChosen &&
-    css`
-      width: 35px;
-  `}
 `
 
 const ToolView = styled.div`

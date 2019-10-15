@@ -86,7 +86,10 @@ const Arrow = styled.img`
 const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
-  background-image: url(${props => props.src + props.theme.imgScale[props.fullWidth ? 'md' : 'sm']});
+  background-image: url(
+    ${props =>
+      props.src + props.theme.imgScale[props.fullWidth ? 'md' : 'sm']}
+  );
   transform: scale(1.001);
 `
 

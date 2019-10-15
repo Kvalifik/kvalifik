@@ -88,7 +88,8 @@ const LinkItem = styled(UniversalLink)`
   font-size: ${props => props.theme.typography.fontSize.sm};
   text-transform: uppercase;
   text-decoration: none;
-  display: inline-block;
+
+  /* display: inline-block; */
   color: ${props => props.theme.palette.light};
   line-height: 1.4em;
   display: flex;

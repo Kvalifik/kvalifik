@@ -76,6 +76,10 @@ class Toolbox extends Component {
     })
   }
 
+  componentDidMount () { // a quickfix for updating toolbox beyond the complite
+    setTimeout(() => this.chooseTool(0), 50)
+  }
+
   render () {
     const {
       tools,

@@ -10,15 +10,14 @@ import maxLengthString from '../../utils/maxLengthString'
 import { Link } from 'gatsby'
 import arrowImg from 'graphics/arrow.svg'
 
-
 const Root = styled.div`
   ${props => props.theme.grid.all([
     'display: grid'
   ])}
 
   @media ${props => props.theme.media.xl} {
-    display: block
-  };
+    display: block;
+  }
 
   height: 100%;
   min-height: fill-available;
@@ -49,7 +48,7 @@ const Title = styled.h2`
   line-height: 1.6em;
   margin: ${props => props.theme.spacing(0, 0, 2)};
   p {
-    span{
+    span {
       font-weight: bold !important;
     }
     margin: 0;
@@ -98,7 +97,7 @@ const RelatedWrapper = styled.div`
 `
 
 const ReadMore = styled.div`
-  a{
+  a {
     text-decoration: none;
     color: white;
   }
@@ -134,7 +133,6 @@ const ServicePreview = ({
             Read more <Arrow src={arrowImg} />
           </Link>
         </ReadMore>
-
       </div>
       <RelatedWrapper>
         {exampleCases.length > 0 && <ToolsHeader>Relevant cases</ToolsHeader>}

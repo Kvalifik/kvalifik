@@ -11,7 +11,7 @@ const Label = styled.span`
 const Root = styled.div`
   display: grid;
   grid-template-areas: "block-one-header block-two-header block-three-header"
-                       "block-one-content block-two-content block-three-content";
+    "block-one-content block-two-content block-three-content";
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 0 ${props => props.theme.spacing(5)};
   background-color: ${props => props.theme.palette.dark};
@@ -22,7 +22,7 @@ const Root = styled.div`
       "block-one-content"
       "block-two-header"
       "block-two-content"
-      "block-three-header";
+      "block-three-header"
       "block-three-content";
     grid-template-columns: 1fr;
   }
@@ -37,10 +37,6 @@ const Header = styled.div`
   margin-top: ${props => props.theme.spacing(2)};
 `
 
-const Block = styled.div`
-  grid-area: block-${props => props.name};
-`
-
 const Title = styled.h2`
   font-size: 24px;
   margin: 0;
@@ -53,7 +49,9 @@ const Description = styled.div`
   font-size: 14px;
   color: ${props => props.theme.palette.light};
   line-height: 1.3em;
-  block-area: content;
+
+  // eslint-disable-next-line
+  block-area: content; 
 `
 
 const ProcessBlock = ({

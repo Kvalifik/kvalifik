@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "eslint . && gatsby build",
+    "build-no-lint": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes, { bool } from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Button from 'Components/Shared/Button'
 import Cookies from 'universal-cookie'
 import { Link } from 'gatsby'
@@ -17,6 +16,7 @@ const Root = styled.div`
   color: white;
   padding: ${props => props.theme.spacing(2)};
   grid-template-columns: 1fr 300px;
+
   @media ${props => props.theme.media.md} {
     grid-template-columns: 1fr;
   }

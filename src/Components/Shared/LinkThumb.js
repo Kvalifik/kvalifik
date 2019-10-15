@@ -112,7 +112,8 @@ export default class ToolThumb extends Component {
     to: PropTypes.string,
     headline: PropTypes.string,
     iconUrl: PropTypes.string,
-    color: PropTypes.string
+    color: PropTypes.string,
+    bold: PropTypes.bool
   }
 
   render () {

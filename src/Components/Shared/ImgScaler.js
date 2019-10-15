@@ -2,9 +2,7 @@ import styled from 'styled-components'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Root = styled.img`
-
-`
+const Root = styled.img``
 
 const ImgScaler = (props) => {
   let {
@@ -24,6 +22,7 @@ const ImgScaler = (props) => {
 }
 
 ImgScaler.propTypes = {
+  className: PropTypes.string,
   h: PropTypes.any,
   w: PropTypes.any,
   src: PropTypes.string

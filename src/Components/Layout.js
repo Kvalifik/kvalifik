@@ -94,11 +94,6 @@ const App = styled.div`
   background-color: ${props => props.bgColor || 'white'};
 `
 
-const CookieBanner = styled.div`
-  position: fixed;
-  z-index: 10000;
-`
-
 const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {

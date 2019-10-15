@@ -243,7 +243,7 @@ class HeaderBlock extends Component {
       imageUrl
     } = this.props
     const { playing } = this.state
-
+    const staticVideoUrl = 'https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4'
     return (
       <>
         {playing && !!video && (
@@ -263,7 +263,7 @@ class HeaderBlock extends Component {
                     ? (
                       <AutoPlayVideo
                         autoPlaying={!playing}
-                        staticLink="https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4"
+                        staticLink={staticVideoUrl}
                       />
                     )
                     : <ThumbImage src={imageUrl} />

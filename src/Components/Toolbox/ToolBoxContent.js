@@ -105,6 +105,7 @@ const ToolBoxContent = ({
 }) => {
   const tool = tools[chosenTool]
   const id = idFromLabel(tool.headline)
+  console.log(maxLengthString(tool.description, 40))
   return (
     <Root fadeIn={fadeIn}>
       <Icon src={tool.icon.url} />

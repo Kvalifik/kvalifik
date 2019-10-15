@@ -51,7 +51,8 @@ const OverlayRight = styled(OverlayBase)`
 const OverlayLeft = styled(OverlayBase)`
   background:
     linear-gradient(
-      to left, transparent,
+      to left,
+      transparent,
       rgba(0, 0, 0, 0.5)
     ), url(${leftArrow});
   background-position: top left, 20% 50%;

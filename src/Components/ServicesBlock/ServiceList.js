@@ -6,8 +6,12 @@ import { servicePropType } from 'models/service'
 const Root = styled.div`
   ${props => props.theme.clearfix()};
   position: relative;
-  min-height: calc(${props => props.len} * 64px + ${props => props.len - 1} * ${props => props.theme.spacing(1)});
-
+  min-height: calc(
+    ${props => props.len} * 64px
+      + ${props => props.len - 1}
+      * ${props => props.theme.spacing(1)
+    }
+  );
 `
 
 const Icon = styled.img`

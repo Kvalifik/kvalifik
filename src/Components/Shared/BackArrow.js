@@ -18,9 +18,10 @@ const Root = styled.div`
     left: auto;
   }
   @media ${props => props.theme.media.sm} {
-    top: calc(1px + ${props => props.theme.spacing(10)});
+    /* top: calc(1px + ${props => props.theme.spacing(10)});
     padding: ${props => props.theme.spacing(2, 0)};
-    right: calc(${props => props.theme.spacing(0)});
+    right: calc(${props => props.theme.spacing(0)}); */
+    display: none;
   }
 `
 
