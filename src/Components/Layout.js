@@ -9,7 +9,7 @@ import theme from 'utils/theme'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-
+import cookie from 'templates/cookie'
 const browser = detect()
 
 // handle the case where we don't detect the browser
@@ -94,6 +94,11 @@ const App = styled.div`
   background-color: ${props => props.bgColor || 'white'};
 `
 
+const CookieBanner = styled.div`
+  position: fixed;
+  z-index: 10000;
+`
+
 const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   const data = useStaticQuery(graphql`
     query FooterQuery {
@@ -175,6 +180,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
   const canonical = `https://kvalifik.dk${url}`
 
+  console.log(cookie)
   return (
     <>
       <GlobalStyle />
@@ -192,7 +198,9 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         )}
       </HelmetDatoCms>
       <ThemeProvider theme={theme}>
-        <App bgColor={bgColor} x-ms-format-detection="none">
+        <App bgColor={bgColor} x-ms-format-detection="none" >
+          <CookieBanner dangerouslySetInnerHTML={{ __html: cookie }} />
+
           {children}
           {!hideFooter && (
             <Footer
