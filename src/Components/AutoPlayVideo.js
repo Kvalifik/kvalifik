@@ -30,12 +30,16 @@ export default class AutoPlayVideo extends Component {
     try {
       this.refs.vidRef.play()
     } catch (e) {
-      console.error('Could not play!')
+      console.error(e)
     }
   }
 
   pauseVideo () {
-    this.refs.vidRef.pause()
+    try {
+      this.refs.vidRef.pause()
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   render () {
