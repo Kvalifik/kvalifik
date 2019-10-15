@@ -12,7 +12,6 @@ const Img = styled.div`
   @media ${props => props.theme.media.lg}{
     height: 120%;
   }
-  transition: background-image 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
 `
 
 class Gallery extends Component {
