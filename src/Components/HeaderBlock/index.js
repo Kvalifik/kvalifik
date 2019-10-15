@@ -163,7 +163,7 @@ const RightContainer = styled.div`
   ${IERightContainer}
   grid-column: 2 / 3;
   grid-row: 1 / -1;
-  height: 145vh;
+  height: 120vh;
   position: relative;
 
   @media ${props => props.theme.media.lg} {

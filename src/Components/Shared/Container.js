@@ -26,6 +26,7 @@ const Root = styled.div`
     }
   `}
 
+
   ${props => props.fluid && props.hasSideText && css`
     ${props => props.theme.grid('grid-template-columns: 80px 1fr 80px')};
   `}
