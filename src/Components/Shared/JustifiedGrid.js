@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Carousel } from 'react-responsive-carousel'
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 const Root = styled.div`
   width: 100%;
@@ -18,6 +21,18 @@ const Row = styled.div`
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media ${props => props.theme.media.lg} {
+    display: none;
+  }
+`
+
+const CarouselWrapper = styled.div`
+  display: none;
+
+  @media ${props => props.theme.media.lg} {
+    display: block;
   }
 `
 
@@ -103,6 +118,16 @@ const JustifiedGrid = ({
           ))}
         </Row>
       ))}
+
+      <CarouselWrapper>
+        <Carousel showThumbs={false} infiniteLoop autoPlay swipeable={true}>
+          {images.map((img, index) => (
+            <div>
+              <img src={img.src}/>
+            </div>
+          ))}
+        </Carousel>
+      </CarouselWrapper>
     </Root>
   )
 }

@@ -150,9 +150,6 @@ class NavigationContent extends Component {
                   isCurrentRoute={navigationItem.path !== '/'
                     ? currentRoute.includes(navigationItem.path)
                     : currentRoute === '/'}
-                  disabled={navigationItem.path !== '/'
-                    ? currentRoute.includes(navigationItem.path)
-                    : currentRoute === '/'}
                 >
                   {navigationItem.name}
                   {navigationItem.isExternal && (
@@ -171,7 +168,6 @@ class NavigationContent extends Component {
                   isExternal={navigationItem.isExternal}
                   to={navigationItem.path}
                   isCurrentRoute={currentRoute.includes(navigationItem.path)}
-                  disabled={currentRoute.includes(navigationItem.path)}
                 >
                   {navigationItem.name}
                   {navigationItem.isExternal && (
