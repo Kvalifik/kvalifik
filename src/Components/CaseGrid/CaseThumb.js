@@ -86,7 +86,7 @@ const Arrow = styled.img`
 const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
-  background-image: url(${props => props.src});
+  background-image: url(${props => props.src + props.theme.imgScale[props.fullWidth ? 'md' : 'sm']});
   transform: scale(1.001);
 `
 
@@ -118,7 +118,7 @@ const CaseThumb = ({
         </ProjectName>
         <Header full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
       </Desc>
-      <Img src={bgUrl} />
+      <Img src={bgUrl} fullWidth={fullWidth} />
     </Content>
   )
 

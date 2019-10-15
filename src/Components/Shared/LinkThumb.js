@@ -92,6 +92,7 @@ const Headline = styled.p`
   margin: ${props => props.theme.spacing(2)};
   margin-bottom: ${props => props.theme.spacing(1)};
   font-size: 14px;
+  min-width: 100px;
 
   @media ${props => props.theme.media.sm} {
     margin: ${props => props.theme.spacing(2)};

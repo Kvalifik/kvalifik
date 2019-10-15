@@ -44,7 +44,7 @@ const ImageItem = styled.div`
   flex: 1 1 ${props => props.basis * 100}%;
   overflow: hidden;
   height: 100%;
-  background-image: url(${props => props.src});
+  background-image: url(${props => props.src + props.theme.imgScale.sm});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -127,7 +127,7 @@ const JustifiedGrid = ({
         <Carousel showThumbs={false} infiniteLoop autoPlay swipeable={true} showStatus={false}>
           {images.map((img, index) => (
             <div>
-              <img src={img.src}/>
+              <img src={img.src} />
             </div>
           ))}
         </Carousel>
