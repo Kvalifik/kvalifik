@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import backArrow from 'graphics/back-arrow.svg'
+import { navigate } from "gatsby"
 
 const Root = styled.div`
   color: white;
@@ -46,7 +47,12 @@ const Text = styled.p`
 `
 
 const goBack = () => {
-  window.history.back()
+  navigate(
+    window.location.pathname
+      .split('/')
+      .slice(0, -1)
+      .join('/')
+  )
 }
 
 const BackArrow = (props) =>

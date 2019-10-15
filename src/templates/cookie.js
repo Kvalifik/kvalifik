@@ -3,6 +3,7 @@ import PropTypes, { bool } from 'prop-types'
 import styled, { css } from 'styled-components'
 import Button from 'Components/Shared/Button'
 import Cookies from 'universal-cookie'
+import { Link } from 'gatsby'
 const cookies = new Cookies()
 const DID_ACCEPT = 'DID_ACCEPT'
 
@@ -23,6 +24,11 @@ const Root = styled.div`
 const Text = styled.p`
   align-self: center;
   margin: ${props => props.theme.spacing(1)};
+`
+
+const LinkModified = styled(Link)`
+  color: white;
+  padding: ${props => props.theme.spacing(0, 1)};
 `
 
 class Cookie extends Component {
@@ -46,8 +52,14 @@ class Cookie extends Component {
       <Root didAccept={this.state.didAccept}>
         <Text>
           🍪   We use cookies to provide a better user experience and analyse traffic.
+          <LinkModified to="/cookies">See more</LinkModified>
         </Text>
-        <Button bgColor="#f5f29c" to="/cookies" onClick={this.acceptCookies.bind(this)} color="black">
+        <Button
+          bgColor="#f5f29c"
+          to="/cookies"
+          onClick={this.acceptCookies.bind(this)}
+          color="black"
+        >
           Got it!
         </Button>
       </Root>
