@@ -9,6 +9,7 @@ import ImageTrack from 'Components/Shared/ImageTrack'
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
 import idFromLabel from 'utils/idFromLabel'
+import ImgScaler from '../Shared/ImgScaler'
 
 const Root = styled.div`
   @media ${props => props.theme.media.lg} {
@@ -97,6 +98,10 @@ const Tools = styled.div`
   grid-gap: 16px;
 `
 
+const Image = styled(ImgScaler)`
+  width: 100%;
+`
+
 const ServicePreview = ({
   service: {
     title,
@@ -115,9 +120,9 @@ const ServicePreview = ({
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
-    <ImageTrack
+    <Image
       height="400px"
-      images={images.map(image => image.url)}
+      src={images[0].url}
       gutter="16px"
     />
     <TextContainer>

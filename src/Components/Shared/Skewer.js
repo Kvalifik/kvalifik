@@ -7,7 +7,7 @@ import theme from 'utils/theme'
 const Root = styled.div`
   overflow: ${props => props.flushBottom ? 'hidden' : 'unset'};
   position: relative;
-  margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 1px)`};
+  margin-top: ${props => props.half ? '-1px !important' : `calc(${-props.offset}vw - 2px)`};
   margin-bottom: 0 ${props => props.half && '!important'};
   height: ${props => props.height};
   z-index: ${props => props.layer};

@@ -74,14 +74,14 @@ const ProcessBlock = ({
     <Description name="one" dangerouslySetInnerHTML={{ __html: descriptionOne }} />
 
     <Header name="two">
-      <Label>{labelOne}</Label>
-      <Title>{titleOne}</Title>
+      <Label>{labelTwo}</Label>
+      <Title>{titleTwo}</Title>
     </Header>
     <Description name="two" dangerouslySetInnerHTML={{ __html: descriptionTwo }} />
 
     <Header name="three">
-      <Label>{labelOne}</Label>
-      <Title>{titleOne}</Title>
+      <Label>{labelThree}</Label>
+      <Title>{titleThree}</Title>
     </Header>
     <Description name="three" dangerouslySetInnerHTML={{ __html: descriptionThree }} />
   </Root>
