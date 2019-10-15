@@ -199,11 +199,9 @@ const shouldAutoplayVideo = () => {
   let windowExists
   try {
     windowExists = !!window
-    console.log({windowExists})
   } catch (e) {
     windowExists = false
   }
-  console.log(window.innerWidth, parseInt(theme.breakpoints.md))
   return windowExists && window.innerWidth > parseInt(theme.breakpoints.md)
 }
 
