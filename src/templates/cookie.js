@@ -15,7 +15,7 @@ const Root = styled.div`
   z-index: 10000;
   background: #000;
   color: white;
-  padding: ${props => props.theme.spacing(1)};
+  padding: ${props => props.theme.spacing(2)};
   grid-template-columns: 1fr 300px;
   @media ${props => props.theme.media.md} {
     grid-template-columns: 1fr;
@@ -29,6 +29,11 @@ const Text = styled.p`
 const LinkModified = styled(Link)`
   color: white;
   padding: ${props => props.theme.spacing(0, 1)};
+`
+
+const ButtonWrapper = styled.div`
+  align-self: center;
+  justify-self: right;
 `
 
 class Cookie extends Component {
@@ -51,17 +56,21 @@ class Cookie extends Component {
     return (
       <Root didAccept={this.state.didAccept}>
         <Text>
-          🍪   We use cookies to provide a better user experience and analyze traffic.
+          🍪 We use cookies to provide a better user experience and analyze traffic.
+          <br />
+          😋 We also use cookies as bribes in meetings -
           <LinkModified to="/cookies">See more</LinkModified>
         </Text>
-        <Button
-          bgColor="#f5f29c"
-          to="/cookies"
-          onClick={this.acceptCookies.bind(this)}
-          color="black"
-        >
+        <ButtonWrapper>
+          <Button
+            bgColor="#f5f29c"
+            to="/cookies"
+            onClick={this.acceptCookies.bind(this)}
+            color="black"
+          >
           Got it!
-        </Button>
+          </Button>
+        </ButtonWrapper>
       </Root>
     )
   }
