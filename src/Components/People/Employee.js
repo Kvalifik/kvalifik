@@ -28,10 +28,6 @@ const Root = styled.div`
   transform-origin: center;
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
-  &:hover {
-    transform: scale(0.98);
-  }
-
   @media ${props => props.theme.media.sm} {
     margin: ${props => props.theme.spacing(0.5, 2)};
   }
