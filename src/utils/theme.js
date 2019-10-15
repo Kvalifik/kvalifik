@@ -2,6 +2,11 @@ import { css } from 'styled-components'
 import gridFactory from 'ie-grid-mixins'
 
 const theme = {
+  imgScale: {
+    lg: '?w=1920&h=1920',
+    md: '?w=1280&h=1280',
+    sm: '?w=480&h=480'
+  },
   grid: gridFactory(css),
   clearfix: () => css`
     &::after {

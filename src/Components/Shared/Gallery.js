@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Img = styled.div`
-  background-image: url(${props => props.src});
+  background-image: url(${props => props.src + props.theme.imgScale.lg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

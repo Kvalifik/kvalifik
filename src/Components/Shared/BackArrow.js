@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import backArrow from 'graphics/back-arrow.svg'
-import { navigate } from "gatsby"
+import { navigate } from 'gatsby'
 
 const Root = styled.div`
   color: white;

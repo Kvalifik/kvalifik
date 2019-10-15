@@ -155,7 +155,7 @@ const ServicePreview = ({
         <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 30) }} />
         <ReadMore>
           <Link to={`/services/#${idFromLabel(label)}`}>
-            Learn how to do it <Arrow src={arrowImg} />
+            Read more <Arrow src={arrowImg} />
           </Link>
         </ReadMore>
 
