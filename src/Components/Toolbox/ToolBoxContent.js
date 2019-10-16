@@ -86,7 +86,7 @@ const SubHeadline = styled.h3`
   color: ${props => props.theme.palette.primary.D};
 `
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 16px;
   font-weight: 100;
 
