@@ -66,6 +66,10 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  a {
+    color: white;
+  }
 `
 
 const App = styled.div`
