@@ -1,5 +1,7 @@
 > We are soon going into production! There are some important next steps, before this happens. Please read [Road map](https://github.com/Kvalifik/kvalifik/wiki/Road-map)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e901c6be-5f18-4426-8f81-9c5dacb60307/deploy-status)](https://app.netlify.com/sites/kvalifikdk-demo/deploys)
+
 # Kvalifik dk static site
 
 Kvalifik's new website built with Gatsby and Dato CMS!
