@@ -70,8 +70,6 @@ class CaseInfo extends Component {
       height: Math.round(i.height / 10)
     }))
 
-    console.log(showImageGrid, mappedGridImages)
-
     return (
       <>
         {this.state.playing && media && media.video && showMediaComponent && (
