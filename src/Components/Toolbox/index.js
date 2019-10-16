@@ -94,7 +94,6 @@ class Toolbox extends Component {
         <Skewer bgColor={bgColor} layer={1200}>
           <Padder>
             <Container sideText={sideText}>
-              <Console consoleText={consoleText} />
               <ToolBoxContent
                 tools={tools}
                 chosenTool={this.state.chosenTool}

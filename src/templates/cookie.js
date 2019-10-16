@@ -58,7 +58,7 @@ class Cookie extends Component {
           🍪 We use cookies to provide a better user experience and analyze traffic.
           <LinkModified to="/cookies">See more</LinkModified>
           <br />
-          😋 We also use cookies as bribes in meetings -
+          😋 We also use cookies as bribes in meetings.
           <LinkModified to="/anactualcookie">See more</LinkModified>
         </Text>
         <ButtonWrapper>
