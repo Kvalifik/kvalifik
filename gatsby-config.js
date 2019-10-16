@@ -36,6 +36,12 @@ module.exports = {
       options: {
         username: 'kvalifik'
       }
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-59470797-4",
+      },
     }
   ]
 }
