@@ -27,7 +27,7 @@ export default class AutoPlayVideo extends Component {
 
   playVideo () {
     try {
-      // this.refs.vidRef.play()
+      this.refs.vidRef.play()
     } catch (e) {
       console.error(e)
     }
