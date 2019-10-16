@@ -9,6 +9,7 @@ import theme from 'utils/theme'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
+import { Helmet } from "react-helmet"
 import Cookie from '../templates/cookie'
 const browser = detect()
 
@@ -182,6 +183,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
   return (
     <>
       <GlobalStyle />
+
       <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={seoMetaTags}>
         <meta charSet="utf-8" />
         {url && (
@@ -195,6 +197,9 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           <meta name="theme-color" content={headerBlock.bgColor.hex} />
         )}
       </HelmetDatoCms>
+      <Helmet>
+        <script src="https://cdn.logrocket.com/LogRocket.min.js"></script>
+      </Helmet>
       <ThemeProvider theme={theme}>
         <App bgColor={bgColor} x-ms-format-detection="none">
           <Cookie />
