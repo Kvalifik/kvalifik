@@ -1,3 +1,5 @@
 exports.onClientEntry = () => {
-  LogRocket.init('kvalifik-aps/kvalifik');
+  if(typeof LogRocket !== 'undefined'){
+      LogRocket.init('kvalifik-aps/kvalifik');
+  }
 }
