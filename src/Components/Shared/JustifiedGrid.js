@@ -47,7 +47,7 @@ const CarouselImg = styled.div`
   height: 300px;
   background-size: cover;
   background-position: center;
-  background-image: url('${props => props.src}');
+  background-image: url('${props => props.src + props.theme.imgScale.md}');
 `
 
 const ImageItem = styled.div`
