@@ -38,6 +38,17 @@ const CarouselWrapper = styled.div`
   @media ${props => props.theme.media.lg} {
     display: block;
   }
+  ul{
+    padding-inline-start: 0;
+  }
+`
+
+const CarouselImg = styled.div`
+  background: orange;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-image: url('${props => props.src}');
 `
 
 const ImageItem = styled.div`
@@ -128,7 +139,7 @@ const JustifiedGrid = ({
         <Carousel showThumbs={false} infiniteLoop autoPlay swipeable showStatus={false}>
           {images.map((img, index) => (
             <div key={index}>
-              <img src={img.src} />
+              <CarouselImg src={img.src} />
             </div>
           ))}
         </Carousel>

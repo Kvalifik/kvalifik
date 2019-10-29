@@ -1,13 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import downArrow from 'graphics/down-arrow.svg'
 import { smoothScrollTo } from 'utils/scroll'
+
+const Hover = keyframes`
+  0% {
+    transform: translateY(-10px);
+  }
+  
+  50% {
+    transform: translateY(10px);
+  }
+  
+  100% {
+    transform: translateY(-10px);
+  }
+`
 
 const DownArrowIcon = styled.div`
   position: absolute;
   border-radius: 100%;
-  bottom: ${props => props.theme.skewer.calculateOffset('large') / 6}vw;
+  bottom: ${props => props.theme.skewer.calculateOffset('large') / 3}vw;
   left: 50%;
   transform: translateX(-50%);
   background-color: ${props => props.color};
@@ -34,6 +48,8 @@ const DownArrowIcon = styled.div`
     height: 16px;
     margin-top: 2px;
   }
+  
+  animation: ${Hover} 2s cubic-bezier(0.62, 0, 0.38, 1) infinite;
 `
 
 const DownArrow = ({ color }) => {

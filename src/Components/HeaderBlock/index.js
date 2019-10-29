@@ -249,7 +249,7 @@ class HeaderBlock extends Component {
         {playing && !!video && (
           <VideoFullscreen video={video} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer bgColor={bgColor} height="130vh" layer={800} isHeaderBlock>
+        <Skewer bgColor={bgColor} height="124vh" layer={800} isHeaderBlock>
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>
