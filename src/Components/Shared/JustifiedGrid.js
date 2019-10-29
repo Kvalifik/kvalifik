@@ -44,7 +44,6 @@ const CarouselWrapper = styled.div`
 `
 
 const CarouselImg = styled.div`
-  background: orange;
   height: 300px;
   background-size: cover;
   background-position: center;
