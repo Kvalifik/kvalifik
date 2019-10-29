@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import cursorThug from 'graphics/cursor-thug.png'
 import { employeePropType } from 'models/employee'
 
 const Info = styled.div`
@@ -17,6 +18,8 @@ const Media = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
+
+  cursor: url(${cursorThug}), auto;
 `
 
 const Root = styled.div`
