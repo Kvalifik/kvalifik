@@ -3,32 +3,28 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from 'Components/Layout'
-import FixedSkewer from 'Blocks/FixedSkewer'
+import FixedSkewer from 'Components/Shared/FixedSkewer'
 import DownArrow from 'Components/DownArrow'
 
-import { pagePropType } from 'models/page'
 import renderBlockType from 'utils/renderBlockType'
-import 'utils/pageQuery'
+import 'utils/blockQuery'
+import BackArrow from '../Components/Shared/BackArrow'
 
 const PageTemplate = ({ data }) => {
   const {
     pageSetup,
-    bgColor
+    bgColor,
+    url
   } = data.datoCmsPage
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout bgColor={bgColor && bgColor.hex} page={data.datoCmsPage}>
+      {url !== '/' && <BackArrow />}
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={headerBlock.bgColor.hex} />
       )}
-      <FixedSkewer
-        angle="large"
-        reverse
-        height="5vh"
-        layer={1000}
-      />
       <FixedSkewer
         angle="large"
         reverse
@@ -42,14 +38,41 @@ const PageTemplate = ({ data }) => {
 
 PageTemplate.propTypes = {
   data: PropTypes.shape({
-    datoCmsPage: pagePropType
+    datoCmsPage: PropTypes.shape({
+      pageSetup: PropTypes.array,
+      title: PropTypes.string,
+      url: PropTypes.string,
+      bgColor: PropTypes.shape({
+        hex: PropTypes.string
+      })
+    })
   })
 }
 
 export const query = graphql`
   query($url: String!) {
     datoCmsPage(url: { eq: $url }) {
-      ...PageFragment
+      url
+      bgColor {
+        hex
+      }
+      pageSetup {
+        __typename
+        ...HeaderFragment
+        ...ActionBlockFragment
+        ...SloganFragment
+        ...CaseGridFragment
+        ...ToolboxFragment
+        ...ToolboxBigFragment
+        ...FiftyFifty
+        ...PeopleBlockFragment
+        ...ServicesBlockFragment
+        ...ServicesBigFragment
+        ...Stepper
+      }
+      seoMetaTags {
+        tags
+      }
     }
   }
 `

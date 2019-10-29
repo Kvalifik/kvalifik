@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import rightArrow from 'graphics/rightArrow.svg'
 import leftArrow from 'graphics/leftArrow.svg'
+import ImgScaler from './ImgScaler'
 
-const ImageItem = styled.img`
+const ImageItem = styled(ImgScaler)`
   height: ${props => props.height || '400px'};
 
   margin-right: ${props => props.gutter || 0};
@@ -50,7 +51,8 @@ const OverlayRight = styled(OverlayBase)`
 const OverlayLeft = styled(OverlayBase)`
   background:
     linear-gradient(
-      to left, transparent,
+      to left,
+      transparent,
       rgba(0, 0, 0, 0.5)
     ), url(${leftArrow});
   background-position: top left, 20% 50%;

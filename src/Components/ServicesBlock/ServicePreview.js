@@ -1,56 +1,46 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { servicePropType } from 'models/service'
 import LinkThumb from 'Components/Shared/LinkThumb'
 
 import idFromLabel from 'utils/idFromLabel'
 import theme from 'utils/theme'
+import maxLengthString from '../../utils/maxLengthString'
+import { Link } from 'gatsby'
+import arrowImg from 'graphics/arrow.svg'
 
 const Root = styled.div`
   ${props => props.theme.grid.all([
-    'display: grid',
-    'grid-template-columns: 5fr 4fr'
+    'display: grid'
   ])}
 
   @media ${props => props.theme.media.xl} {
     display: block;
   }
 
+  height: 100%;
+  min-height: 100%;
+  min-height: -moz-available;        
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
+  grid-template-rows: 100%;
   background-color: ${props => props.theme.palette.dark};
 `
 
 const TextContainer = styled.div`
+  display: grid;
+  grid-template-rows: auto auto;
+
   ${props => props.theme.grid.all([
     'grid-column: 1',
     'grid-row: 1'
   ])}
 
-  padding: ${props => props.theme.spacing(2, 2, 2, 4)};
+  padding: ${props => props.theme.spacing(3)};
 
   @media ${props => props.theme.media.xl} {
     padding: ${props => props.theme.spacing(2)};
-  }
-`
-
-const Media = styled.div`
-  ${props => props.theme.grid.all([
-    'grid-column: 2',
-    'grid-row: 1'
-  ])}
-
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  @media ${props => props.theme.media.xl} {
-    height: 300px;
-    width: 100%;
-  }
-
-  @media ${props => props.theme.media.lg} {
-    height: 200px;
-    width: 100%;
   }
 `
 
@@ -60,8 +50,10 @@ const Title = styled.h2`
   font-size: 20px;
   line-height: 1.6em;
   margin: ${props => props.theme.spacing(0, 0, 2)};
-
   p {
+    span {
+      font-weight: bold !important;
+    }
     margin: 0;
   }
 
@@ -101,37 +93,71 @@ const Tools = styled.div`
   }
 `
 
+const RelatedWrapper = styled.div`
+  bottom: ${props => props.theme.spacing(3)};
+  width: 100%;
+  align-self: end;
+`
+
+const ReadMore = styled.div`
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  text-align: right;
+`
+
+const Arrow = styled.img`
+  margin: 0;
+  height: 15px;
+  filter: invert(100%);
+  padding-left: ${props => props.theme.spacing(1)};
+  transform: translateY(20%);
+`
+
 const ServicePreview = ({
   service: {
     title,
+    label,
     description,
     images,
+    exampleCases,
     relatedTools
-  }
+  },
+  toolboxUrl
 }) => (
   <Root>
-    <Media src={images && images.length > 0 ? images[0].url : ''} />
     <TextContainer>
-      <Title dangerouslySetInnerHTML={{ __html: title }} />
-      <Description dangerouslySetInnerHTML={{ __html: description }} />
-      <ToolsHeader>Related tools</ToolsHeader>
-      <Tools>
-        {relatedTools.slice(0, 2).map((tool, index) => (
-          <LinkThumb
-            key={index}
-            headline={tool.headline}
-            iconUrl={tool.icon && tool.icon.url}
-            color={theme.palette.primary.D}
-            to={`/toolbox#${idFromLabel(tool.headline)}`}
-          />
-        ))}
-      </Tools>
+      <div>
+        <Title dangerouslySetInnerHTML={{ __html: title }} />
+        <Description dangerouslySetInnerHTML={{ __html: maxLengthString(description, 85) }} />
+        <ReadMore>
+          <Link to={`/services/#${idFromLabel(label)}`}>
+            Read more <Arrow src={arrowImg} />
+          </Link>
+        </ReadMore>
+      </div>
+      <RelatedWrapper>
+        {exampleCases.length > 0 && <ToolsHeader>Relevant cases</ToolsHeader>}
+        <Tools>
+          {exampleCases.slice(0, 2).map((work, index) => (
+            <LinkThumb
+              bold
+              key={index}
+              headline={work.forWho}
+              to={work.url}
+              color={theme.palette.light}
+            />
+          ))}
+        </Tools>
+      </RelatedWrapper>
     </TextContainer>
   </Root>
 )
 
 ServicePreview.propTypes = {
-  service: servicePropType
+  service: servicePropType,
+  toolboxUrl: PropTypes.string
 }
 
 export default ServicePreview

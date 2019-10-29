@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Icon from 'Blocks/Icon'
-import VideoFullscreen from 'Blocks/VideoFullscreen'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Icon from 'Components/Shared/Icon'
+import VideoFullscreen from 'Components/Shared/VideoFullscreen'
 import PlayButton from './PlayButton'
 import ThumbImage from './ThumbImage'
+import AutoPlayVideo from '../AutoPlayVideo.js'
+import theme from 'utils/theme'
 
 const IEContent = css`
   display: -ms-grid;
@@ -39,6 +41,10 @@ const Content = styled.div`
   color: ${props => props.textColor || 'black'};
 
   @media ${props => props.theme.media.sm} {
+    margin-top: ${props => props.theme.navBarWidth};
+  }
+
+  @media ${props => props.theme.media.landscape} {
     margin-top: ${props => props.theme.navBarWidth};
   }
 
@@ -122,8 +128,10 @@ const BottomLeftContainer = styled.div`
   padding: 0 ${props => props.theme.spacing(6)};
   justify-self: center;
   width: 70%;
+  line-height: 1.6;
 
   @media ${props => props.theme.media.xl} {
+    font-size: 1.2vw;
     width: 80%;
   }
 
@@ -133,6 +141,7 @@ const BottomLeftContainer = styled.div`
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+    font-size: 16px;
   }
 `
 
@@ -154,7 +163,7 @@ const RightContainer = styled.div`
   ${IERightContainer}
   grid-column: 2 / 3;
   grid-row: 1 / -1;
-  height: 145vh;
+  height: 120vh;
   position: relative;
 
   @media ${props => props.theme.media.lg} {
@@ -170,9 +179,11 @@ const RightContainer = styled.div`
   }
 `
 
-const Title = styled.div`
-  font-size: ${props => props.theme.typography.fontSize.md};
+const Title = styled.h1`
+  /* font-size: ${props => props.theme.typography.fontSize.md}; */
+  font-size: 3vw;
   padding: 5px 0;
+  margin: 0;
   ${props => props.theme.typography.hero.mixin()};
 
   @media ${props => props.theme.media.md} {
@@ -184,17 +195,30 @@ const Title = styled.div`
   }
 `
 
+const shouldAutoplayVideo = () => {
+  let windowExists
+  try {
+    windowExists = !!window
+  } catch (e) {
+    windowExists = false
+  }
+  return windowExists &&
+    window.location.pathname === '/' &&
+    window.innerWidth > parseInt(theme.breakpoints.md)
+}
+
 class HeaderBlock extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      playing: false
+      playing: false,
+      autoPlaying: true
     }
   }
 
   handlePlay () {
-    if (!this.props.videoUrl) {
+    if (!this.props.video) {
       return
     }
     this.setState({
@@ -214,19 +238,18 @@ class HeaderBlock extends Component {
       body,
       bgColor,
       textColor,
-      videoUrl,
+      video,
       iconUrl,
       imageUrl
     } = this.props
     const { playing } = this.state
-    const hasVideo = !!videoUrl
-
+    const staticVideoUrl = 'https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4'
     return (
       <>
-        {playing && hasVideo && (
-          <VideoFullscreen src={videoUrl} onClose={this.handleClose.bind(this)} />
+        {playing && !!video && (
+          <VideoFullscreen video={video} onClose={this.handleClose.bind(this)} />
         )}
-        <Skewer bgColor={bgColor} height="130vh" layer={800}>
+        <Skewer bgColor={bgColor} height="130vh" layer={800} isHeaderBlock>
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>
@@ -234,10 +257,19 @@ class HeaderBlock extends Component {
                 <Title>{title}</Title>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
-              <RightContainer>
-                <ThumbImage src={imageUrl} />
-                {hasVideo && (
-                  <PlayButton onClick={this.handlePlay.bind(this)} />
+              <RightContainer onClick={this.handlePlay.bind(this)}>
+                {
+                  shouldAutoplayVideo()
+                    ? (
+                      <AutoPlayVideo
+                        autoPlaying={!playing}
+                        staticLink={staticVideoUrl}
+                      />
+                    )
+                    : <ThumbImage src={imageUrl} />
+                }
+                {!!video && (
+                  <PlayButton />
                 )}
               </RightContainer>
             </Content>
@@ -253,7 +285,10 @@ HeaderBlock.propTypes = {
   body: PropTypes.string,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
-  videoUrl: PropTypes.string,
+  video: PropTypes.shape({
+    provider: PropTypes.string,
+    providerUid: PropTypes.string
+  }),
   iconUrl: PropTypes.string,
   imageUrl: PropTypes.string
 }

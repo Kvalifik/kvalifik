@@ -2,6 +2,11 @@ import { css } from 'styled-components'
 import gridFactory from 'ie-grid-mixins'
 
 const theme = {
+  imgScale: {
+    lg: '?w=1920&h=1920',
+    md: '?w=1280&h=1280',
+    sm: '?w=480&h=480'
+  },
   grid: gridFactory(css),
   clearfix: () => css`
     &::after {
@@ -68,7 +73,7 @@ const theme = {
   },
   skewer: {
     smallAngle: 5,
-    largeAngle: 11
+    largeAngle: 8
   },
   breakpoints: {
     sm: '578px',
@@ -100,6 +105,7 @@ const theme = {
       xs: '13px',
       sm: '14px',
       md: '40px',
+      lg: '50px',
       xl: '80px',
       quote: '18px',
       menuItem: '25px'
@@ -178,9 +184,12 @@ const appendMixins = (theme) => ({
     }
   },
   media: Object.keys(theme.breakpoints).reduce((acc, label) => {
-    acc[label] = (...args) => `(max-width: ${theme.breakpoints[label]})`
+    acc[label] = `screen and (max-width: ${theme.breakpoints[label]})`
     return acc
-  }, {})
+  }, {
+    // eslint-disable-next-line max-len
+    landscape: `screen and (max-width: ${theme.breakpoints.md}) and (orientation: landscape), screen and (max-height: 500px) and (orientation: landscape)`
+  })
 })
 
 export default appendMixins(theme)

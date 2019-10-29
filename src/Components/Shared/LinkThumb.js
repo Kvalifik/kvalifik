@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import arrow from 'graphics/rightArrow.svg'
 import { Link } from 'gatsby'
 import LazyImage from 'Components/Shared/LazyImage'
@@ -68,6 +68,8 @@ const Center = styled.div`
     align-items: center;
 
     @media ${props => props.theme.media.sm} {
+      display: grid;
+      grid-template-columns: 40px 1fr;
       position: static;
       flex-direction: row;
       justify-content: start;
@@ -86,7 +88,21 @@ const Icon = styled(LazyImage)`
 `
 
 const Headline = styled.p`
+  text-align: center;
+  margin: ${props => props.theme.spacing(2)};
+  margin-bottom: ${props => props.theme.spacing(1)};
   font-size: 14px;
+  min-width: 100px;
+  
+  ${props => props.bold && css`
+    font-weight: bold;
+    font-size: 14px;
+  `}
+
+  @media ${props => props.theme.media.sm} {
+    margin: ${props => props.theme.spacing(2)};
+    text-align: left;
+  }
 `
 
 export default class ToolThumb extends Component {
@@ -96,7 +112,8 @@ export default class ToolThumb extends Component {
     to: PropTypes.string,
     headline: PropTypes.string,
     iconUrl: PropTypes.string,
-    color: PropTypes.string
+    color: PropTypes.string,
+    bold: PropTypes.bool
   }
 
   render () {
@@ -106,7 +123,8 @@ export default class ToolThumb extends Component {
       color,
       onClick,
       to,
-      id
+      id,
+      bold
     } = this.props
 
     return (
@@ -115,7 +133,7 @@ export default class ToolThumb extends Component {
           <Center color={color}>
             <Link to={to}>
               <Icon src={iconUrl} />
-              <Headline>{headline}</Headline>
+              <Headline bold={!!bold}>{headline}</Headline>
               <Arrow color={color} src={arrow} />
             </Link>
           </Center>
@@ -123,7 +141,7 @@ export default class ToolThumb extends Component {
         {!to && (
           <Center color={color}>
             <Icon src={iconUrl} />
-            <Headline>{headline}</Headline>
+            <Headline bold={!!bold}>{headline}</Headline>
             <Arrow color={color} src={arrow} />
           </Center>
         )}

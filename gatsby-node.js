@@ -8,32 +8,43 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             url
-            title
+          }
+        }
+      }
+      allDatoCmsWork {
+        edges {
+          node {
+            url
           }
         }
       }
     }
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
-    console.log(`Creating page ${node.title} on ${node.url}`)
+    console.log(`Creating page ${node.url}`)
 
-    if (/404/.test(node.url)) {
-      createPage({
-        path: node.url,
-        component: path.resolve(`./src/templates/404.js`),
-        context: {
-          url: node.url
-        }
-      })
-    } else {
-      createPage({
-        path: node.url,
-        component: path.resolve(`./src/templates/page.js`),
-        context: {
-          url: node.url
-        }
-      })
+    createPage({
+      path: node.url,
+      component: path.resolve(`./src/templates/page.js`),
+      context: {
+        url: node.url
+      }
+    })
+  })
+  result.data.allDatoCmsWork.edges.forEach(({ node }) => {
+    if (!node.url) {
+      return
     }
+
+    console.log(`Creating work page ${node.url}`)
+
+    createPage({
+      path: node.url,
+      component: path.resolve(`./src/templates/work.js`),
+      context: {
+        url: node.url
+      }
+    })
   })
 }
 

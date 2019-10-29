@@ -25,10 +25,8 @@ const NavDiv = styled.div`
     background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
   }
 
-  @media ${props => props.theme.media.md} {
-    @media (max-height: 500px) {
-      background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
-    }
+  @media ${props => props.theme.media.landscape} {
+    background-color: ${props => props.theme.hexToRgba(props.theme.palette.dark, 0.8)};
   }
 
   /* Mobile Nav: */
@@ -45,20 +43,18 @@ const NavDiv = styled.div`
         right: calc(-100% + ${props => props.theme.navBarWidth});
       `}
   }
-  @media ${props => props.theme.media.md} {
-    @media (max-height: 500px) {
-      width: 100%;
-      left: 0;
-      top: calc(-100vh + ${props => props.theme.navBarWidth});
-      height: 100vh;
+  @media ${props => props.theme.media.landscape} {
+    width: 100%;
+    left: 0;
+    top: calc(-100vh + ${props => props.theme.navBarWidth});
+    height: 100vh;
 
-      /* Collapsed mobile nav */
-      ${props => !props.collapsed &&
-        css`
-          top: 0;
-          right: calc(-100% + ${props => props.theme.navBarWidth});
-        `}
-    }
+    /* Collapsed mobile nav */
+    ${props => !props.collapsed &&
+      css`
+        top: 0;
+        right: calc(-100% + ${props => props.theme.navBarWidth});
+      `}
   }
 
   /* Collapsed Nav: */
@@ -109,15 +105,13 @@ const HomeLink = styled.div`
     transform: translate(10%, 30%);
   }
 
-  @media ${props => props.theme.media.md} {
-    @media (max-height: 500px) {
-      left: 0;
-      bottom: initial;
-      right: initial;
-      top: 0;
-      margin: 15px;
-      transform: translate(10%, 30%);
-    }
+  @media ${props => props.theme.media.landscape} {
+    left: 0;
+    bottom: initial;
+    right: initial;
+    top: 0;
+    margin: 15px;
+    transform: translate(10%, 30%);
   }
 `
 
@@ -134,14 +128,12 @@ const KvalfikLogo = styled.img`
     filter: ${props => props.isGlitch ? 'invert(1)' : 'none'};
   }
 
-  @media ${props => props.theme.media.md} {
-    @media (max-height: 500px) {
-      display: block;
-      width: ${props => props.isGlitch ? '110px' : '80px'};
-      height: initial;
-      margin: ${props => props.isGlitch ? '-10px -15px' : 0};
-      filter: ${props => props.isGlitch ? 'invert(1)' : 'none'};
-    }
+  @media ${props => props.theme.media.landscape} {
+    display: block;
+    width: ${props => props.isGlitch ? '110px' : '80px'};
+    height: initial;
+    margin: ${props => props.isGlitch ? '-10px -15px' : 0};
+    filter: ${props => props.isGlitch ? 'invert(1)' : 'none'};
   }
 `
 

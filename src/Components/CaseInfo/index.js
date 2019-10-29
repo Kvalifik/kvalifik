@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Button from 'Blocks/Button'
-import VideoFullscreen from 'Blocks/VideoFullscreen'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Button from 'Components/Shared/Button'
+import VideoFullscreen from 'Components/Shared/VideoFullscreen'
+import JustifiedGrid from 'Components/Shared/JustifiedGrid'
 
 import ProcessBlock from './ProcessBlock'
 import Video from './Video'
+import ImageMedia from './ImageMedia'
 
 import theme from 'utils/theme'
 
@@ -34,9 +36,11 @@ class CaseInfo extends Component {
   }
 
   handlePlay () {
-    this.setState({
-      playing: true
-    })
+    if (this.props.media && this.props.media.video) {
+      this.setState({
+        playing: true
+      })
+    }
   }
 
   handleClose () {
@@ -49,48 +53,73 @@ class CaseInfo extends Component {
     const {
       bgColor,
       accentColor,
-      videoUrl,
-      thumbnailUrl,
-      button: {
-        path,
-        name: buttonText,
-        isExternal
-      },
+      media,
+      buttonLink,
+      gridImages,
+      showProcessComponent,
+      showButtonLink,
+      showImageGrid,
+      showMediaComponent,
+      imageGridRows,
       ...process
     } = this.props
 
+    const mappedGridImages = gridImages && gridImages.map(i => ({
+      src: i.url,
+      width: Math.round(i.width / 10),
+      height: Math.round(i.height / 10)
+    }))
+
     return (
       <>
-        {this.state.playing && (
+        {this.state.playing && media && media.video && showMediaComponent && (
           <VideoFullscreen
-            src={videoUrl}
+            video={media.video}
             onClose={this.handleClose.bind(this)}
           />
         )}
         <Skewer bgColor={bgColor} layer={1200}>
           <Container>
             <Root>
-              <Button
-                bgColor={theme.hexToRgba(
-                  theme.contrastColor(
-                    bgColor,
-                    theme.palette.light,
-                    theme.palette.dark
-                  ),
-                  0.2
-                )}
-                isExternal={isExternal}
-                to={path}
-                type="link"
-              >
-                {buttonText}
-              </Button>
-              <ProcessBlock {...process} color={accentColor} />
-              <Video
-                thumbnailUrl={thumbnailUrl}
-                color={accentColor}
-                onOpen={this.handlePlay.bind(this)}
-              />
+              {buttonLink && showButtonLink && (
+                <Button
+                  bgColor={theme.hexToRgba(
+                    theme.contrastColor(
+                      bgColor,
+                      theme.palette.light,
+                      theme.palette.dark
+                    ),
+                    0.2
+                  )}
+                  isExternal={buttonLink.isExternal}
+                  to={buttonLink.path}
+                  type="link"
+                >
+                  {buttonLink.name}
+                </Button>
+              )}
+              {showProcessComponent && (
+                <ProcessBlock {...process} color={accentColor} />
+              )}
+              {gridImages && gridImages.length > 0 && showImageGrid && (
+                <JustifiedGrid
+                  images={mappedGridImages}
+                  rows={imageGridRows}
+                  gutter="16px"
+                />
+              )}
+              {media && showMediaComponent && media.video && (
+                <Video
+                  thumbnailUrl={media.image && media.image.url}
+                  color={accentColor}
+                  onOpen={this.handlePlay.bind(this)}
+                />
+              )}
+              {media && showMediaComponent && !media.video && media.image && (
+                <ImageMedia
+                  src={media.image && media.image.url}
+                />
+              )}
             </Root>
           </Container>
         </Skewer>
@@ -111,13 +140,31 @@ CaseInfo.propTypes = {
   descriptionThree: PropTypes.string,
   bgColor: PropTypes.string,
   accentColor: PropTypes.string,
-  videoUrl: PropTypes.string,
-  button: PropTypes.shape({
+  media: PropTypes.shape({
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
+    video: PropTypes.shape({
+      provider: PropTypes.string,
+      providerUid: PropTypes.string
+    })
+  }),
+  buttonLink: PropTypes.shape({
     path: PropTypes.string,
     isExternal: PropTypes.bool,
     name: PropTypes.string
   }),
-  thumbnailUrl: PropTypes.string
+  thumbnailUrl: PropTypes.string,
+  showProcessComponent: PropTypes.bool,
+  showButtonLink: PropTypes.bool,
+  showImageGrid: PropTypes.bool,
+  showMediaComponent: PropTypes.bool,
+  gridImages: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number
+  })),
+  imageGridRows: PropTypes.number
 }
 
 export default CaseInfo

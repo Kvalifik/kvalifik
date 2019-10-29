@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
 
 import Employee from './Employee'
 

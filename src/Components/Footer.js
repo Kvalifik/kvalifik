@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import theme from 'utils/theme'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Icon from 'Blocks/Icon'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Icon from 'Components/Shared/Icon'
 import UniversalLink from 'Components/Shared/UniversalLink'
 import targetBlank from 'graphics/target_blank.svg'
 import Svg from 'react-inlinesvg'
@@ -41,7 +41,7 @@ const Logo = styled.img`
   margin: 0 0 ${props => props.theme.spacing(1)};
 `
 
-const Subtitle = styled.h2`
+const Subtitle = styled.div`
   ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.sm};
   white-space: nowrap;
@@ -88,7 +88,8 @@ const LinkItem = styled(UniversalLink)`
   font-size: ${props => props.theme.typography.fontSize.sm};
   text-transform: uppercase;
   text-decoration: none;
-  display: inline-block;
+
+  /* display: inline-block; */
   color: ${props => props.theme.palette.light};
   line-height: 1.4em;
   display: flex;
@@ -163,14 +164,15 @@ const LinkHeader = styled.div`
 const FeedItem = styled.a`
   width: 75px;
   height: 75px;
-  background-image: url(${props => props.src});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: hidden;
   display: inline-block;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  & > img {
+    width: 100%;
   }
 `
 
@@ -190,12 +192,9 @@ const Footer = ({
   links,
   socialMediaLinks,
   socialMediaHeader,
-  instagramFeed
+  instagramFeed,
+  instagramFeedTitle
 }) => {
-  const mappedLinks = socialMediaLinks.map(link => ({
-    href: link.linkUrl,
-    iconUrl: link.icon.url
-  }))
   const mappedFeed = instagramFeed.map(node => ({
     src: node.thumbnails[3].src,
     timestamp: node.timestamp,
@@ -239,22 +238,23 @@ const Footer = ({
           </InfoContainer>
           <LinksContainer>
             <LinkHeader>{socialMediaHeader}</LinkHeader>
-            {mappedLinks.map(link => (
-              <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
-                <ExtendedIcon src={link.iconUrl} />
-              </a>
+            {socialMediaLinks.map(link => (
+              <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
+                <ExtendedIcon src={link.icon && link.icon.url} />
+              </UniversalLink>
             ))}
           </LinksContainer>
           <FeedContainer>
-            <FeedHeader>Follow us on Instagram</FeedHeader>
+            <FeedHeader>{instagramFeedTitle}</FeedHeader>
             {slicedFeed.map(item =>
               <FeedItem
-                key={item.src}
-                src={item.src}
+                key={item.id}
                 href={`https://instagram.com/p/${item.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-              />
+              >
+                <img src={item.src} alt={item.caption} />
+              </FeedItem>
             )}
           </FeedContainer>
           <CopyrightLine>
@@ -283,18 +283,21 @@ Footer.propTypes = {
     isExternal: PropTypes.bool
   })),
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
-    linkUrl: PropTypes.string,
+    path: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string
-    })
+    }),
+    isExternal: PropTypes.bool
   })),
   socialMediaHeader: PropTypes.string,
   instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
       timestamp: PropTypes.number
-    }))
-  }))
+    })),
+    caption: PropTypes.string
+  })),
+  instagramFeedTitle: PropTypes.string
 }
 
 export default Footer

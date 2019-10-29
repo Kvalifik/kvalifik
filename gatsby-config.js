@@ -5,8 +5,12 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://kvalifik.dk`,
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-netlify',
     {
       resolve: 'gatsby-plugin-styled-components',
       options: {
@@ -36,6 +40,15 @@ module.exports = {
       options: {
         username: 'kvalifik'
       }
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: "UA-59470797-4",
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap'
     }
   ]
 }

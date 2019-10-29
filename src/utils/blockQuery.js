@@ -16,42 +16,35 @@ export const query = graphql`
     }
     media {
       __typename
-      ... on DatoCmsVideo {
-        thumbnail {
+      ... on DatoCmsMediaItem {
+        image {
           url
         }
         video {
-          url
-        }
-      }
-      ... on DatoCmsImage {
-        image {
-          url
+          provider
+          providerUid
         }
       }
     }
   }
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
+    sideText
     moreWorkPage {
       url
     }
+    moreWorkLabel
     cases {
-      title
       description
       id
       forWho
+      url
       fullSize
       color {
         hex
       }
       image{
         url
-      }
-      page {
-        ... on DatoCmsPage {
-          url
-        }
       }
     }
   }
@@ -67,11 +60,13 @@ export const query = graphql`
     bgColor {
       hex
     }
+    consoleText
     moreToolsButton {
       path
       isExternal
       name
     }
+    sideText
     tools {
       ... on DatoCmsTool {
         id
@@ -174,11 +169,13 @@ export const query = graphql`
   }
   fragment CaseInfoFragment on DatoCmsCaseInfo {
     id
+    showButtonLink
     buttonLink {
       name
       path
       isExternal
     }
+    showProcessComponent
     labelOne
     labelTwo
     labelThree
@@ -194,13 +191,22 @@ export const query = graphql`
     accentColor {
       hex
     }
-    video {
-      thumbnail {
+    showMediaComponent
+    media {
+      image {
         url
       }
       video {
-        url
+        provider
+        providerUid
       }
+    }
+    showImageGrid
+    imageGridRows
+    gridImages {
+      url
+      width
+      height
     }
   }
   fragment PercentageBlockFragment on DatoCmsPercentage {
@@ -211,6 +217,7 @@ export const query = graphql`
     description
     duration
     number
+    unit
   }
   fragment QuoteBlockFragment on DatoCmsQuote {
     id
@@ -243,25 +250,16 @@ export const query = graphql`
       }
     }
   }
-  fragment NotFoundBlockFragment on DatoCms404 {
-    id
-    title
-    description
-    buttonLink {
-      isExternal
-      name
-      path
-    }
-    image {
-      url
-    }
-  }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
+    sideText
     buttonLink {
       path
       name
       isExternal
+    }
+    toolboxPage {
+      url
     }
     services {
       id
@@ -274,6 +272,12 @@ export const query = graphql`
       }
       title
       description
+      exampleCases {
+        ...on DatoCmsWork {
+          forWho
+          url
+        }
+      }
       relatedTools {
         ...on DatoCmsTool {
           headline
@@ -289,6 +293,7 @@ export const query = graphql`
     toolboxPage {
       url
     }
+    sideText
     services {
       id
       label
@@ -311,9 +316,7 @@ export const query = graphql`
       exampleCases {
         ...on DatoCmsWork {
           forWho
-          page {
-            url
-          }
+          url
         }
       }
     }
@@ -323,36 +326,6 @@ export const query = graphql`
     steps {
       title
       description
-    }
-  }
-
-  fragment PageFragment on DatoCmsPage {
-    title
-    url
-    bgColor {
-      hex
-    }
-    pageSetup {
-      __typename
-      ...HeaderFragment
-      ...ActionBlockFragment
-      ...SloganFragment
-      ...PercentageBlockFragment
-      ...CaseGridFragment
-      ...CaseInfoFragment
-      ...ToolboxFragment
-      ...ToolboxBigFragment
-      ...OverlayBlockFragment
-      ...FiftyFifty
-      ...QuoteBlockFragment
-      ...PeopleBlockFragment
-      ...NotFoundBlockFragment
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
-      ...NotFoundBlockFragment
-      ...Stepper
-      ...ServicesBlockFragment
-      ...ServicesBigFragment
     }
   }
 `

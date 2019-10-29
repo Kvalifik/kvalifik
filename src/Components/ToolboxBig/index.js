@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import Container from 'Blocks/Container'
-import Padder from 'Blocks/Padder'
-import Skewer from 'Blocks/Skewer'
+import Container from 'Components/Shared/Container'
+import Padder from 'Components/Shared/Padder'
+import Skewer from 'Components/Shared/Skewer'
 import SearchIcon from 'graphics/search.svg'
-import CloseIcon from 'graphics/close.svg'
 import LinkThumb from 'Components/Shared/LinkThumb'
 import ToolPreview from './ToolPreview'
 import { disableScroll, enableScroll } from 'utils/modal'
@@ -106,50 +105,20 @@ const Filter = styled.button`
   }
 
   margin: ${props => props.theme.spacing(1)};
+  cursor: pointer;
 
-  ${props => props.isChosen
-    ? css`
-      transform: scale(1) !important;
-      color: white;
-      border: 1px solid white;
-    `
-    : css`
-      cursor: pointer;
-    `}
+  ${props => props.isChosen && css`
+    color: rgb(29,29,29) !important;
+    transform: scale(1) !important;
+    background-color: ${props => props.theme.palette.primary.D};;
+    border: 0 !important;
+  `}
 `
 
 const Filters = styled.div`
   margin: ${props => props.theme.spacing(2)};
   margin-left: ${props => props.theme.spacing(1)};
   margin-right: ${props => props.theme.spacing(3)};
-`
-
-const RemoveFilter = styled.span`
-  transition: width 0.3s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-  display: inline-flex;
-  width: 0;
-  overflow: hidden;
-  position: relative;
-  height: 20px;
-  justify-content: left;
-  align-items: center;
-  cursor: pointer;
-  margin-right: ${props => props.theme.spacing(1)};
-
-  ::before {
-    content: url(${CloseIcon});
-    position: absolute;
-    height: 32px;
-    width: 35px;
-    margin-left: -8px;
-    display: inline-block;
-    transform: scale(0.5);
-  }
-
-  ${props => props.isChosen &&
-    css`
-      width: 35px;
-  `}
 `
 
 const ToolView = styled.div`
@@ -236,7 +205,7 @@ class ToolboxBig extends Component {
   }
 
   chooseFilter (filter) {
-    this.setState({ chosenFilter: filter })
+    this.setState({ chosenFilter: filter === this.state.chosenFilter ? '' : filter })
   }
 
   openToolPreview (ev, i, scrollDown = false) {
@@ -331,17 +300,15 @@ class ToolboxBig extends Component {
       <Filter
         isChosen={isChosen}
         onClick={
-          !isChosen
-            ? this.chooseFilter.bind(this, toolFilter.title)
-            : () => null
+          this.chooseFilter.bind(this, toolFilter.title)
         }
         key={i}
       >
-        <RemoveFilter
+        {/* <RemoveFilter
           isChosen={isChosen}
           onClick={this.chooseFilter.bind(this, '')}
           key={i}
-        />
+        /> */}
         {toolFilter.title}
       </Filter>
     )

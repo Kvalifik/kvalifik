@@ -6,11 +6,11 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
-import { Helmet } from 'react-helmet'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
-import { pagePropType } from 'models/page'
-
+import { HelmetDatoCms } from 'gatsby-source-datocms'
+import { Helmet } from "react-helmet"
+import Cookie from '../templates/cookie'
 const browser = detect()
 
 // handle the case where we don't detect the browser
@@ -58,8 +58,18 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  line-height: 1.6;
+
+  p {
+    line-height: 1.6;
+  }
+
   * {
     box-sizing: border-box;
+  }
+
+  a {
+    color: white;
   }
 `
 
@@ -70,6 +80,10 @@ const App = styled.div`
 
   @media ${props => props.theme.media.lg} {
     padding-right: ${props => props.theme.navBarWidth};
+  }
+
+  @media ${props => props.theme.media.landscape} {
+    padding-right: 0;
   }
 
   @media ${props => props.theme.media.sm} {
@@ -100,12 +114,14 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           isExternal
         },
         socialMediaLinks {
-          linkUrl,
+          path,
+          isExternal,
           icon {
             url
           }
         },
         socialMediaHeader
+        instagramFeedTitle
       }
       allInstaNode {
         nodes {
@@ -114,6 +130,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           }
           timestamp
           id
+          caption
         }
       }
       allDatoCmsNavigation {
@@ -146,33 +163,46 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           name
         }
       }
+      datoCmsSite {
+        faviconMetaTags {
+          ...GatsbyDatoCmsFaviconMetaTags
+        }
+      }
     }
   `)
 
   const {
     url,
-    title,
-    pageSetup
+    pageSetup,
+    seoMetaTags
   } = page
 
-  const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+  const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
+  const canonical = `https://kvalifik.dk${url}`
 
   return (
     <>
       <GlobalStyle />
-      <Helmet>
+
+      <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={seoMetaTags}>
         <meta charSet="utf-8" />
-        <title>{title}</title>
-        <link rel="canonical" href={`https://kvalifik.dk${url}`} />
-        <link rel="icon" type="image/png" href="favicon.png" />
-        <link rel="shortcut icon" type="image/png" href="favicon.png" />
+        {url && (
+          <link rel="canonical" href={canonical} />
+        )}
+        {url && (
+          <meta property="og:url" content={canonical} />
+        )}
         <meta name="format-detection" content="telephone=no" />
         {headerBlock && headerBlock.bgColor && (
           <meta name="theme-color" content={headerBlock.bgColor.hex} />
         )}
+      </HelmetDatoCms>
+      <Helmet>
+        <script src="https://cdn.logrocket.com/LogRocket.min.js"></script>
       </Helmet>
       <ThemeProvider theme={theme}>
         <App bgColor={bgColor} x-ms-format-detection="none">
+          <Cookie />
           {children}
           {!hideFooter && (
             <Footer
@@ -207,7 +237,11 @@ Main.propTypes = {
   hideFooter: PropTypes.bool,
   isGlitch: PropTypes.bool,
   bgColor: PropTypes.string,
-  page: pagePropType
+  page: PropTypes.shape({
+    url: PropTypes.string,
+    seoMetaTags: PropTypes.object,
+    pageSetup: PropTypes.array
+  })
 }
 
 export default Main

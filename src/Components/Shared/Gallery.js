@@ -3,13 +3,15 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Img = styled.div`
-  background-image: url(${props => props.src});
+  background-image: url(${props => props.src + props.theme.imgScale.lg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   width: 100%;
   height: 100%;
-  transition: 0.5s cubic-bezier(0.66, 0.03, 0.23, 0.99);
+  @media ${props => props.theme.media.lg}{
+    height: 120%;
+  }
 `
 
 class Gallery extends Component {

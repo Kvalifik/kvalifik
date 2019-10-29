@@ -5,10 +5,10 @@ import styled from 'styled-components'
 import ServiceList from './ServiceList'
 import ServicePreview from './ServicePreview'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Button from 'Blocks/Button'
-import Padder from 'Blocks/Padder'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Button from 'Components/Shared/Button'
+import Padder from 'Components/Shared/Padder'
 
 import theme from 'utils/theme'
 
@@ -22,14 +22,25 @@ const ButtonWrapper = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   margin-top: ${props => props.theme.spacing(5)};
+  text-align: center;
 `
 
 class ServicesBlock extends Component {
+  isMobile () {
+    let isMobile
+    try {
+      isMobile = !!window && window.innerWidth < parseInt(theme.breakpoints.md)
+    } catch (e) {
+      isMobile = false
+    }
+    return isMobile
+  }
+
   constructor (props) {
     super(props)
-
     this.state = {
-      selected: 0,
+      selected: this.isMobile() ? -1 : 0,
+      isMobile: this.isMobile(),
       selectedEl: null
     }
   }
@@ -47,7 +58,9 @@ class ServicesBlock extends Component {
 
   handleSelect (ev, next) {
     this.setState({
-      selected: next,
+      selected: next === this.state.selected /* if already selected */
+        ? this.state.isMobile ? -1 : next /* set to nothing if mobile and next on desktop */
+        : next, /* otherwise go to next */
       selectedEl: ev.currentTarget
     })
   }
@@ -56,12 +69,16 @@ class ServicesBlock extends Component {
     const {
       bgColor,
       services,
-      buttonLink
+      buttonLink,
+      sideText,
+      toolboxPage
     } = this.props
 
     const {
       selected
     } = this.state
+
+    const toolboxUrl = toolboxPage ? toolboxPage.url : ''
 
     return (
       <Skewer
@@ -69,14 +86,17 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services">
+          <Container sideText={sideText}>
             <Content>
               <ServiceList
                 services={services}
                 selected={selected}
                 onSelect={this.handleSelect.bind(this)}
                 renderPreview={(service) => (
-                  <ServicePreview service={service} />
+                  <ServicePreview
+                    service={service}
+                    toolboxUrl={toolboxUrl}
+                  />
                 )}
               />
               {buttonLink && (
@@ -102,11 +122,15 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   bgColor: PropTypes.string,
+  sideText: PropTypes.string,
   services: PropTypes.array,
   buttonLink: PropTypes.shape({
     path: PropTypes.string,
     name: PropTypes.string,
     isExternal: PropTypes.bool
+  }),
+  toolboxPage: PropTypes.shape({
+    url: PropTypes.string
   })
 }
 

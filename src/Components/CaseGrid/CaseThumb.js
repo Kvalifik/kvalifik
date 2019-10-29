@@ -19,7 +19,7 @@ const Root = styled.div`
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
 
   &:hover {
-    transform: scale(0.98);
+    transform: scale(1.02);
   }
 
   ${props => props.full && css`
@@ -86,7 +86,10 @@ const Arrow = styled.img`
 const Img = styled.div`
   background-position: 50% 50%;
   background-size: cover;
-  background-image: url(${props => props.src});
+  background-image: url(
+    ${props =>
+      props.src + props.theme.imgScale[props.fullWidth ? 'md' : 'sm']}
+  );
   transform: scale(1.001);
 `
 
@@ -101,7 +104,7 @@ const Header = styled.h3`
   }
 `
 
-const CaseThump = ({
+const CaseThumb = ({
   name,
   description,
   bgColor,
@@ -116,11 +119,9 @@ const CaseThump = ({
         <ProjectName>
           {name}
         </ProjectName>
-        <Header full={fullWidth}>
-          {description}
-        </Header>
+        <Header full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
       </Desc>
-      <Img src={bgUrl} />
+      <Img src={bgUrl} fullWidth={fullWidth} />
     </Content>
   )
 
@@ -135,7 +136,7 @@ const CaseThump = ({
   )
 }
 
-CaseThump.propTypes = {
+CaseThumb.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   bgColor: PropTypes.string,
@@ -144,4 +145,4 @@ CaseThump.propTypes = {
   workUrl: PropTypes.string
 }
 
-export default CaseThump
+export default CaseThumb

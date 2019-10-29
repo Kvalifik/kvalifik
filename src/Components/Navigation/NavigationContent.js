@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
-import targetBlankIcon from 'graphics/target_blank.svg'
+import UniversalLink from 'Components/Shared/UniversalLink'
+import Svg from 'react-inlinesvg'
+
+import targetBlank from 'graphics/target_blank.svg'
 
 const Li = styled.li`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
@@ -24,60 +26,55 @@ const NavItems = styled.div`
   align-self: center;
 
   &:first-of-type {
-    @media screen and (min-height: 500px) {
+    @media screen and (orientation: portrait) {
       margin-top: ${props => props.theme.navBarWidth};
     }
   }
 
-  @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 500px) {
-      margin-top: 65px;
-
-      @media screen and (min-height: 400px) {
-        margin-top: 125px;
-      }
-    }
+  @media ${props => props.theme.media.landscape} {
+    margin-top: 30vh;
   }
 `
 
-const NavItem = styled.div`
-  ${props => props.isExternal && css`
-    a:after{
-      content: url('${targetBlankIcon}');
-    }
+const NavItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest} />)`
+  color: white;
+  text-decoration: none;
+  line-height: ${props => props.theme.spacing(5)};
+  height: 100%;
+  font-weight: 700;
+  font-size: ${props => props.theme.typography.fontSize.menuItem};
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  ${props => props.isCurrentRoute && css`
+    font-weight: 900;
   `}
 
-  a {
-    color: white;
-    text-decoration: none;
-    line-height: ${props => props.theme.spacing(5)};
-    height: 100%;
-    font-weight: 700;
-    font-size: ${props => props.theme.typography.fontSize.menuItem};
-    text-transform: uppercase;
+  svg {
+    width: 30px;
+    height: 30px;
   }
 `
 
-const FooterItem = styled.div`
-  ${props => props.isExternal && css`
-    a {
-      display:flex;
+const FooterItem = styled(({ isCurrentRoute, ...rest }) => <UniversalLink {...rest} />)`
+  display: flex;
+  align-items: center;
+  line-height: ${props => props.theme.spacing(3)};
+  color: white;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
+  text-transform: uppercase;
 
-      &:after {
-        margin-top: -3px;
-        margin-left: 5px;
-        content: url('${targetBlankIcon}');
-      }
-    }
+  ${props => props.isCurrentRoute && css`
+    font-weight: 600;
   `}
 
-  a {
-    line-height: ${props => props.theme.spacing(3)};
-    color: white;
-    text-decoration: none;
-    font-weight: 300;
-    font-size: calc((${props => props.theme.typography.fontSize.menuItem}) * 0.75);
-    text-transform: uppercase;
+  svg {
+    width: 23px;
+    height: 23px;
   }
 `
 
@@ -87,10 +84,8 @@ const Root = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
 
-  @media ${props => props.theme.media.md} {
-    @media screen and (max-height: 500px) {
-      grid-template-columns: 1fr 1fr;
-    }
+  @media ${props => props.theme.media.landscape} {
+    grid-template-columns: 1fr 1fr;
   }
 `
 
@@ -102,7 +97,7 @@ const SocialIcons = styled.div`
   width: 100%;
 `
 
-const SocialIcon = styled.a`
+const SocialIcon = styled(({ collapsed, index, ...props }) => <UniversalLink {...props} />)`
   transition: 0.6s ${props => props.index * 0.01 + 's'} cubic-bezier(0.66, 0.03, 0.23, 0.99);
 
   img {
@@ -120,69 +115,87 @@ const SocialIcon = styled.a`
     `}
 `
 
-const NavigationContent = props => {
-  const { navigationItems, navigationLinks, collapsed, socialMediaLinks } = props
+class NavigationContent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      currentRoute: ''
+    }
+  }
 
-  return (
-    <Root>
-      <NavItems>
-        {
-          navigationItems.map((navigationItem, i) => (
-            <Li collapsed={collapsed} key={i} index={i}>
-              <NavItem isExternal={navigationItem.isExternal}>
-                {navigationItem.isExternal ? (
-                  <a
-                    href={navigationItem.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {navigationItem.name}
-                  </a>
-                ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
-                )}
-              </NavItem>
-            </Li>
-          ))
-        }
-      </NavItems>
-      <NavItems>
-        {
-          navigationLinks.map((navigationItem, i) => (
-            <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
-              <FooterItem isExternal={navigationItem.isExternal}>
-                {navigationItem.isExternal ? (
-                  <a
-                    href={navigationItem.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {navigationItem.name}
-                  </a>
-                ) : (
-                  <Link to={navigationItem.path}>{navigationItem.name}</Link>
-                )}
-              </FooterItem>
-            </Li>
-          ))
-        }
-        <SocialIcons>
+  componentDidMount () {
+    this.setState({
+      currentRoute: window.location.pathname
+    })
+  }
+
+  render () {
+    const {
+      navigationItems,
+      navigationLinks,
+      collapsed,
+      socialMediaLinks
+    } = this.props
+
+    const currentRoute = this.state.currentRoute
+    return (
+      <Root>
+        <NavItems>
           {
-            socialMediaLinks.map((socialMediaLink, i) =>
-              <SocialIcon
-                href={socialMediaLink.linkUrl}
-                collapsed={collapsed}
-                key={i}
-                index={i + navigationItems.length}
-              >
-                <img src={socialMediaLink.icon.url} />
-              </SocialIcon>
-            )
+            navigationItems.map((navigationItem, i) => (
+              <Li collapsed={collapsed} key={i} index={i}>
+                <NavItem
+                  isExternal={navigationItem.isExternal}
+                  to={navigationItem.path}
+                  isCurrentRoute={navigationItem.path !== '/'
+                    ? currentRoute.includes(navigationItem.path)
+                    : currentRoute === '/'}
+                >
+                  {navigationItem.name}
+                  {navigationItem.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
+                </NavItem>
+              </Li>
+            ))
           }
-        </SocialIcons>
-      </NavItems>
-    </Root>
-  )
+        </NavItems>
+        <NavItems>
+          {
+            navigationLinks.map((navigationItem, i) => (
+              <Li collapsed={collapsed} key={i} index={i + navigationItems.length}>
+                <FooterItem
+                  isExternal={navigationItem.isExternal}
+                  to={navigationItem.path}
+                  isCurrentRoute={currentRoute.includes(navigationItem.path)}
+                >
+                  {navigationItem.name}
+                  {navigationItem.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
+                </FooterItem>
+              </Li>
+            ))
+          }
+          <SocialIcons>
+            {
+              socialMediaLinks.map((socialMediaLink, i) =>
+                <SocialIcon
+                  to={socialMediaLink.path}
+                  collapsed={collapsed}
+                  key={i}
+                  index={i + navigationItems.length}
+                  isExternal={socialMediaLink.isExternal}
+                >
+                  <img src={socialMediaLink.icon && socialMediaLink.icon.url} />
+                </SocialIcon>
+              )
+            }
+          </SocialIcons>
+        </NavItems>
+      </Root>
+    )
+  }
 }
 
 NavigationContent.propTypes = {
@@ -190,10 +203,11 @@ NavigationContent.propTypes = {
   navigationLinks: PropTypes.array,
   collapsed: PropTypes.bool,
   socialMediaLinks: PropTypes.arrayOf(PropTypes.shape({
-    linkUrl: PropTypes.string,
+    path: PropTypes.string,
     icon: PropTypes.shape({
       url: PropTypes.string
-    })
+    }),
+    isExternal: PropTypes.bool
   }))
 }
 export default NavigationContent

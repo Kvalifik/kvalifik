@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import Sidebar from './Sidebar'
 import Service from './Service'
 
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Padder from 'Blocks/Padder'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Padder from 'Components/Shared/Padder'
 
 import theme from 'utils/theme'
 import { smoothScrollTo } from 'utils/scroll'
@@ -137,7 +137,8 @@ class ServicesBlock extends Component {
   render () {
     const {
       services,
-      toolboxPage
+      toolboxPage,
+      sideText
     } = this.props
 
     const {
@@ -150,7 +151,7 @@ class ServicesBlock extends Component {
         layer={1200}
       >
         <Padder padding={theme.spacing(10)}>
-          <Container sideText="Services" fluid>
+          <Container sideText={sideText}>
             <Content>
               <SidebarWrapper>
                 <Sidebar
@@ -180,6 +181,7 @@ class ServicesBlock extends Component {
 
 ServicesBlock.propTypes = {
   services: PropTypes.array,
+  sideText: PropTypes.string,
   toolboxPage: PropTypes.shape({
     url: PropTypes.string
   })

@@ -1,0 +1,6 @@
+# Redirect domain aliases to primary domain
+https://kvalifik.com/* https://kvalifik.dk/:splat 301!
+https://kvalifik.io/* https://kvalifik.dk/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://kvalifik.netlify.com/* https://kvalifik.dk/:splat 301!

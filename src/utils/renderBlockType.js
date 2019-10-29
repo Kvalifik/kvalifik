@@ -1,7 +1,6 @@
 import React from 'react'
 
 import CaseGrid from 'Components/CaseGrid'
-import CaseThump from 'Components/CaseThump'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
@@ -12,7 +11,6 @@ import CaseInfoBlock from 'Components/CaseInfo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
-import NotFound from 'Components/NotFound'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
@@ -23,22 +21,7 @@ import theme from 'utils/theme'
 export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
-      const mediaType = block.media ? block.media.__typename : null
-      let imageUrl = null
-      let videoUrl = null
-
-      switch (mediaType) {
-        case 'DatoCmsImage':
-          imageUrl = block.media.image.url
-          break
-        case 'DatoCmsVideo':
-          imageUrl = block.media.thumbnail.url
-          videoUrl = block.media.video.url
-          break
-        default:
-          imageUrl = null
-          videoUrl = null
-      }
+      const imageUrl = block.media.image && block.media.image.url
 
       return (
         <HeaderBlock
@@ -48,7 +31,7 @@ export default (block) => {
           iconUrl={block.icon && block.icon.url}
           bgColor={block.bgColor && block.bgColor.hex}
           textColor={block.textColor && block.textColor.hex}
-          videoUrl={videoUrl}
+          video={block.media.video}
           imageUrl={imageUrl}
         />
       )
@@ -60,19 +43,10 @@ export default (block) => {
           hasMoreWork={!!block.moreWorkPage}
           bgColor={theme.palette.dark}
           moreWorkUrl={block.moreWorkPage && block.moreWorkPage.url}
-        >
-          {block.cases.map(work => (
-            <CaseThump
-              key={work.id}
-              name={work.forWho}
-              description={work.description}
-              bgUrl={work.image.url}
-              bgColor={work.color.hex}
-              fullWidth={work.fullSize}
-              workUrl={work.page && work.page.url}
-            />
-          ))}
-        </CaseGrid>
+          moreWorkLabel={block.moreWorkLabel}
+          cases={block.cases}
+          sideText={block.sideText}
+        />
       )
     case 'DatoCmsSlogan':
       return (
@@ -113,8 +87,10 @@ export default (block) => {
         <Toolbox
           key={block.id}
           tools={block.tools}
+          consoleText={block.consoleText}
           bgColor={block.bgColor && block.bgColor.hex}
           moreToolsButton={block.moreToolsButton}
+          sideText={block.sideText}
         />
       )
     case 'DatoCmsToolboxBig':
@@ -140,19 +116,14 @@ export default (block) => {
       )
     case 'DatoCmsCaseInfo': {
       const {
-        buttonLink,
         id,
         bgColor,
-        video,
         accentColor,
         ...others
       } = block
       return (
         <CaseInfoBlock
           key={block.id}
-          button={block.buttonLink}
-          thumbnailUrl={video ? video.thumbnail.url : ''}
-          videoUrl={video ? video.video.url : ''}
           bgColor={bgColor.hex}
           accentColor={accentColor.hex}
           {...others}
@@ -167,6 +138,7 @@ export default (block) => {
           bgColor={block.bgColor && block.bgColor.hex}
           description={block.description}
           number={block.number}
+          unit={block.unit}
         />
       )
     case 'DatoCmsQuote':
@@ -190,16 +162,6 @@ export default (block) => {
           employees={block.employees}
         />
       )
-    case 'DatoCms404':
-      return (
-        <NotFound
-          key={block.id}
-          button={block.buttonLink}
-          description={block.description}
-          title={block.title}
-          imageUrl={block.image && block.image.url}
-        />
-      )
     case 'DatoCmsStepper':
       return (
         <Stepper
@@ -214,6 +176,8 @@ export default (block) => {
           services={block.services}
           buttonLink={block.buttonLink}
           bgColor={block.bgColor && block.bgColor.hex}
+          sideText={block.sideText}
+          toolboxPage={block.toolboxPage}
         />
       )
     }
@@ -223,6 +187,7 @@ export default (block) => {
           key={block.id}
           services={block.services}
           toolboxPage={block.toolboxPage}
+          sideText={block.sideText}
         />
       )
     }

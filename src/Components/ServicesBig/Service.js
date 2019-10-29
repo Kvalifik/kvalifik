@@ -9,6 +9,7 @@ import ImageTrack from 'Components/Shared/ImageTrack'
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'
 import idFromLabel from 'utils/idFromLabel'
+import ImgScaler from '../Shared/ImgScaler'
 
 const Root = styled.div`
   @media ${props => props.theme.media.lg} {
@@ -16,7 +17,7 @@ const Root = styled.div`
   }
 
   background-color: ${props => props.theme.palette.dark};
-  margin-bottom: 40vh;
+  margin-bottom: 20vh;
   padding-top: 10px;
 `
 
@@ -93,8 +94,12 @@ const Tools = styled.div`
   ${props => props.theme.grid.all([
     'display: grid'
   ])}
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 16px;
+`
+
+const Image = styled(ImgScaler)`
+  width: 100%;
 `
 
 const ServicePreview = ({
@@ -115,9 +120,9 @@ const ServicePreview = ({
       {label}
       <Icon src={icon && icon.url} right />
     </Header>
-    <ImageTrack
+    <Image
       height="400px"
-      images={images.map(image => image.url)}
+      src={images[0].url}
       gutter="16px"
     />
     <TextContainer>
@@ -131,7 +136,7 @@ const ServicePreview = ({
               <LinkThumb
                 key={index}
                 headline={work.forWho}
-                to={work.page && work.page.url}
+                to={work.url}
                 color={theme.palette.light}
               />
             ))}

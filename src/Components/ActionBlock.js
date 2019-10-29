@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Skewer from 'Blocks/Skewer'
-import Container from 'Blocks/Container'
-import Gallery from 'Blocks/Gallery'
-import Button from 'Blocks/Button'
-import Padder from 'Blocks/Padder'
+import Skewer from 'Components/Shared/Skewer'
+import Container from 'Components/Shared/Container'
+import Gallery from 'Components/Shared/Gallery'
+import Button from 'Components/Shared/Button'
+import Padder from 'Components/Shared/Padder'
 
 const LeftContainer = styled.div`
   grid-column: 2 / 3;
@@ -16,7 +16,6 @@ const LeftContainer = styled.div`
   @media ${props => props.theme.media.lg} {
     grid-column: 2 / 4;
     grid-row: 2;
-
     padding: 30vw 0;
   }
 
@@ -40,7 +39,7 @@ const Description = styled.div`
   color: ${props => props.color};
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
   ${props => props.theme.typography.header.mixin()}
   font-size: ${props => props.theme.typography.fontSize.md};
   margin: 0 0 ${props => props.theme.spacing(4)};

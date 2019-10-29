@@ -10,15 +10,21 @@ const Label = styled.span`
 
 const Root = styled.div`
   display: grid;
-  grid-template-areas: "block-one block-two block-three";
-  grid-gap: ${props => props.theme.spacing(5)};
+  grid-template-areas: "block-one-header block-two-header block-three-header"
+    "block-one-content block-two-content block-three-content";
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0 ${props => props.theme.spacing(5)};
   background-color: ${props => props.theme.palette.dark};
 
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
-      "block-one"
-      "block-two"
-      "block-three";
+      "block-one-header"
+      "block-one-content"
+      "block-two-header"
+      "block-two-content"
+      "block-three-header"
+      "block-three-content";
+    grid-template-columns: 1fr;
   }
 
   & ${Label} {
@@ -26,13 +32,14 @@ const Root = styled.div`
   }
 `
 
-const Block = styled.div`
-  grid-area: block-${props => props.name};
+const Header = styled.div`
+  grid-area: block-${props => props.name}-header;
+  margin-top: ${props => props.theme.spacing(2)};
 `
 
-const Title = styled.h4`
+const Title = styled.h2`
   font-size: 24px;
-  margin: 0 0 ${props => props.theme.spacing(2)};
+  margin: 0;
   color: ${props => props.theme.palette.light};
   font-weight: bold;
   line-height: 1.25em;
@@ -42,6 +49,9 @@ const Description = styled.div`
   font-size: 14px;
   color: ${props => props.theme.palette.light};
   line-height: 1.3em;
+
+  // eslint-disable-next-line
+  block-area: content; 
 `
 
 const ProcessBlock = ({
@@ -57,21 +67,23 @@ const ProcessBlock = ({
   color
 }) => (
   <Root color={color}>
-    <Block name="one">
+    <Header name="one">
       <Label>{labelOne}</Label>
       <Title>{titleOne}</Title>
-      <Description dangerouslySetInnerHTML={{ __html: descriptionOne }} />
-    </Block>
-    <Block name="two">
+    </Header>
+    <Description name="one" dangerouslySetInnerHTML={{ __html: descriptionOne }} />
+
+    <Header name="two">
       <Label>{labelTwo}</Label>
       <Title>{titleTwo}</Title>
-      <Description dangerouslySetInnerHTML={{ __html: descriptionTwo }} />
-    </Block>
-    <Block name="three">
+    </Header>
+    <Description name="two" dangerouslySetInnerHTML={{ __html: descriptionTwo }} />
+
+    <Header name="three">
       <Label>{labelThree}</Label>
       <Title>{titleThree}</Title>
-      <Description dangerouslySetInnerHTML={{ __html: descriptionThree }} />
-    </Block>
+    </Header>
+    <Description name="three" dangerouslySetInnerHTML={{ __html: descriptionThree }} />
   </Root>
 )
 

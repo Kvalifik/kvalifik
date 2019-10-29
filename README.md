@@ -1,3 +1,7 @@
+> We are soon going into production! There are some important next steps, before this happens. Please read [Road map](https://github.com/Kvalifik/kvalifik/wiki/Road-map)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e901c6be-5f18-4426-8f81-9c5dacb60307/deploy-status)](https://app.netlify.com/sites/kvalifikdk-demo/deploys)
+
 # Kvalifik dk static site
 
 Kvalifik's new website built with Gatsby and Dato CMS!
@@ -31,11 +35,12 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 
 [**Modular block setup**](https://github.com/Kvalifik/kvalifik/wiki/Modular-setup)
 
+[**Content management guide**](https://github.com/Kvalifik/kvalifik/wiki/Content-management-guide)
+
 **Source structure**
 
 ```
 ./src
-├── Blocks
 ├── Components
 ├── graphics
 ├── models
@@ -46,7 +51,7 @@ We follow the JAMStack paradigm. Read more [here](https://jamstack.org/).
 └── utils
 ```
 
-*Blocks* are small reusable components that are not designed to be used by themselves. *Components* are larger autonomous components (contains all blocks).
+*Components* are usually larger autonomous components, but also contains *Components/Shared* which are smaller reusable components.
 
 *templates* are template components used in the build process.
 
