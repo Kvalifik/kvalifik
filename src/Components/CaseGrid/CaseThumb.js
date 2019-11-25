@@ -128,7 +128,6 @@ const CaseThumb = ({
   workUrl,
   logo
 }) => {
-
   const logoOrText = logo != null ? (
     <LogoWrapper>
       <Logo full={fullWidth} src={logo.url} alt={logo.alt} />
@@ -141,7 +140,7 @@ const CaseThumb = ({
     <Content>
       <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
-        <Header> 
+        <Header>
           {logoOrText}
           <Description full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
         </Header>
