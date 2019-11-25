@@ -89,9 +89,10 @@ const Img = styled.div`
 `
 
 const Description = styled.div`
-  font-size: ${props => props.full ? '30px' : '15px'};
+  
   & > * {
     margin-top: 10px;
+    font-size: ${props => props.full ? '30px' : '18px'};
   }
   @media ${props => props.theme.media.lg} {
     font-size: initial;
@@ -106,10 +107,16 @@ const Header = styled.h3`
 
 const Logo = styled.img`
   max-height: ${props => props.full ? '55px' : '35px'};
+  @media ${props => props.theme.media.sm} {
+    max-height: ${props => props.full ? '40px' : '35px'};
+  }
 `
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  @media ${props => props.theme.media.sm} {
+    padding-top: 20px;
+  }
 `
 
 const CaseThumb = ({
