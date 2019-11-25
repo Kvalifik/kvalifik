@@ -50,6 +50,7 @@ const CaseGrid = (props) => {
                 bgColor={work.color.hex}
                 fullWidth={work.fullSize}
                 workUrl={work.url}
+                logo={work.logo}
               />
             ))}
           </Content>

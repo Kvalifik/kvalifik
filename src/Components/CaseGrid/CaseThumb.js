@@ -62,11 +62,6 @@ const Desc = styled.div`
 `
 
 const ProjectName = styled.div`
-  position: absolute;
-  bottom: 0;
-  transform: rotate(-90deg);
-  transform-origin: 0% 0%;
-  left: 10px;
   font-size: 13px;
 
   @media ${props => props.theme.media.xs} {
@@ -93,15 +88,28 @@ const Img = styled.div`
   transform: scale(1.001);
 `
 
+const Description = styled.div`
+  font-size: ${props => props.full ? '30px' : '15px'};
+  & > * {
+    margin-top: 10px;
+  }
+  @media ${props => props.theme.media.lg} {
+    font-size: initial;
+  }
+`
+
 const Header = styled.h3`
   display: grid;
   align-content: center;
   margin: 0 calc(15px * 2.5);
-  font-size: ${props => props.full ? '30px' : '15px'};
+`
 
-  @media ${props => props.theme.media.lg} {
-    font-size: initial;
-  }
+const Logo = styled.img`
+  max-height: ${props => props.full ? '55px' : '35px'};
+`
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `
 
 const CaseThumb = ({
@@ -110,16 +118,26 @@ const CaseThumb = ({
   bgColor,
   bgUrl,
   fullWidth,
-  workUrl
+  workUrl,
+  logo
 }) => {
+
+  const logoOrText = logo != null ? (
+    <LogoWrapper>
+      <Logo full={fullWidth} src={logo.url} alt={logo.alt} />
+    </LogoWrapper>
+  ) : (
+    <ProjectName>{name}</ProjectName>
+  )
+
   const body = (
     <Content>
       <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
-        <ProjectName>
-          {name}
-        </ProjectName>
-        <Header full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
+        <Header> 
+          {logoOrText}
+          <Description full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
+        </Header>
       </Desc>
       <Img src={bgUrl} fullWidth={fullWidth} />
     </Content>
@@ -142,7 +160,8 @@ CaseThumb.propTypes = {
   bgColor: PropTypes.string,
   fullWidth: PropTypes.bool,
   bgUrl: PropTypes.string,
-  workUrl: PropTypes.string
+  workUrl: PropTypes.string,
+  logo: PropTypes.string
 }
 
 export default CaseThumb

@@ -38,6 +38,10 @@ export const query = graphql`
       description
       id
       forWho
+      logo {
+        url
+        alt
+      }
       url
       fullSize
       color {
