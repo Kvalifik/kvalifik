@@ -39,8 +39,8 @@ export const query = graphql`
       id
       forWho
       logo {
-        url
         alt
+        url
       }
       url
       fullSize

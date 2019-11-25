@@ -121,12 +121,12 @@ const LogoWrapper = styled.div`
 
 const CaseThumb = ({
   name,
+  logo,
   description,
   bgColor,
   bgUrl,
   fullWidth,
-  workUrl,
-  logo
+  workUrl
 }) => {
   const logoOrText = logo != null ? (
     <LogoWrapper>

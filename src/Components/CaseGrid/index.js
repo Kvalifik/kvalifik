@@ -45,12 +45,12 @@ const CaseGrid = (props) => {
               <CaseThumb
                 key={work.id}
                 name={work.forWho}
+                logo={work.logo}
                 description={work.description}
                 bgUrl={work.image.url}
                 bgColor={work.color.hex}
                 fullWidth={work.fullSize}
                 workUrl={work.url}
-                logo={work.logo}
               />
             ))}
           </Content>
