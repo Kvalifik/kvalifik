@@ -62,10 +62,9 @@ const Desc = styled.div`
 `
 
 const ProjectName = styled.div`
-  font-size: 13px;
-
-  @media ${props => props.theme.media.xs} {
-    width: 50%;
+  font-size: 14px;
+  @media ${props => props.theme.media.lg} {
+    padding-top: 20px;
   }
 `
 
@@ -89,10 +88,9 @@ const Img = styled.div`
 `
 
 const Description = styled.div`
-  
+  font-size: ${props => props.full ? '30px' : '18px'};
   & > * {
     margin-top: 10px;
-    font-size: ${props => props.full ? '30px' : '18px'};
   }
   @media ${props => props.theme.media.lg} {
     font-size: initial;
@@ -114,7 +112,7 @@ const Logo = styled.img`
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
-  @media ${props => props.theme.media.sm} {
+  @media ${props => props.theme.media.lg} {
     padding-top: 20px;
   }
 `
