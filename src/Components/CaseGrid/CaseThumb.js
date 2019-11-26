@@ -64,7 +64,7 @@ const Desc = styled.div`
 const ProjectName = styled.div`
   font-size: 14px;
   @media ${props => props.theme.media.lg} {
-    padding-top: 20px;
+    padding-top: ${props => props.theme.spacing(2.5)};
   }
 `
 
@@ -90,10 +90,14 @@ const Img = styled.div`
 const Description = styled.div`
   font-size: ${props => props.full ? '30px' : '18px'};
   & > * {
-    margin-top: 10px;
+    margin-top: ${props => props.theme.spacing(1)};
+    margin-bottom: 0;
   }
   @media ${props => props.theme.media.lg} {
     font-size: initial;
+    & > p {
+      margin-bottom: ${props => props.theme.spacing(1)};
+    }
   }
 `
 
@@ -106,14 +110,14 @@ const Header = styled.h3`
 const Logo = styled.img`
   max-height: ${props => props.full ? '55px' : '35px'};
   @media ${props => props.theme.media.sm} {
-    max-height: ${props => props.full ? '40px' : '35px'};
+    max-height: ${props => props.theme.spacing(5)};
   }
 `
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   @media ${props => props.theme.media.lg} {
-    padding-top: 20px;
+    padding-top: ${props => props.theme.spacing(2.5)};
   }
 `
 
