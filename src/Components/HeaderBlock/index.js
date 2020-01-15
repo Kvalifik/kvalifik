@@ -131,7 +131,6 @@ const BottomLeftContainer = styled.div`
   line-height: 1.6;
 
   @media ${props => props.theme.media.xl} {
-    font-size: 1.2vw;
     width: 80%;
   }
 
@@ -141,8 +140,9 @@ const BottomLeftContainer = styled.div`
     grid-column: 1 / -1;
     grid-row: 3 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
-    font-size: 16px;
+    /* font-size: 16px; */
   }
+  font-size: 2vh;
 `
 
 const IERightContainer = css`
@@ -181,7 +181,7 @@ const RightContainer = styled.div`
 
 const Title = styled.h1`
   /* font-size: ${props => props.theme.typography.fontSize.md}; */
-  font-size: 3vw;
+  font-size: 5vh;
   padding: 5px 0;
   margin: 0;
   ${props => props.theme.typography.hero.mixin()};
