@@ -49,6 +49,14 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-NZWS69Z",
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-sitemap'
     }
   ]
