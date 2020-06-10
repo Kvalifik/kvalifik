@@ -191,10 +191,12 @@ const Footer = ({
   address,
   links,
   socialMediaLinks,
-  socialMediaHeader,
+  socialMediaHeader/*,
   instagramFeed,
-  instagramFeedTitle
+  instagramFeedTitle*/
 }) => {
+  /* DISABLED while waiting for instagram plugin update
+  
   const mappedFeed = instagramFeed.map(node => ({
     src: node.thumbnails[3].src,
     timestamp: node.timestamp,
@@ -209,7 +211,7 @@ const Footer = ({
     return 0
   })
   const slicedFeed = mappedFeed.slice(0, 4)
-
+*/
   return (
     <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
       <Container>
@@ -244,7 +246,7 @@ const Footer = ({
               </UniversalLink>
             ))}
           </LinksContainer>
-          <FeedContainer>
+          {/*<FeedContainer>
             <FeedHeader>{instagramFeedTitle}</FeedHeader>
             {slicedFeed.map(item =>
               <FeedItem
@@ -256,7 +258,7 @@ const Footer = ({
                 <img src={item.src} alt={item.caption} />
               </FeedItem>
             )}
-          </FeedContainer>
+            </FeedContainer>*/}
           <CopyrightLine>
             {copyright}
             <Separator />
@@ -290,14 +292,14 @@ Footer.propTypes = {
     isExternal: PropTypes.bool
   })),
   socialMediaHeader: PropTypes.string,
-  instagramFeed: PropTypes.arrayOf(PropTypes.shape({
+  /*instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
       timestamp: PropTypes.number
     })),
     caption: PropTypes.string
   })),
-  instagramFeedTitle: PropTypes.string
+  instagramFeedTitle: PropTypes.string*/
 }
 
 export default Footer

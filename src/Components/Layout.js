@@ -123,16 +123,6 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         socialMediaHeader
         instagramFeedTitle
       }
-      allInstaNode {
-        nodes {
-          thumbnails {
-            src
-          }
-          timestamp
-          id
-          caption
-        }
-      }
       allDatoCmsNavigation {
         nodes {
           mainLinks {
@@ -170,7 +160,19 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
       }
     }
   `)
-
+/*
+Instagram query removed while waiting for update, add back afterwards:
+allInstaNode {
+        nodes {
+          thumbnails {
+            src
+          }
+          timestamp
+          id
+          caption
+        }
+      }
+*/
   const {
     url,
     pageSetup,
@@ -207,7 +209,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           {!hideFooter && (
             <Footer
               {...data.datoCmsFooter}
-              instagramFeed={data.allInstaNode.nodes}
+              /*instagramFeed={data.allInstaNode.nodes}*/
               logoUrl={data.datoCmsGeneral.logo.url}
             />
           )}
