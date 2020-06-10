@@ -219,9 +219,9 @@ const Footer = ({
           <InfoContainer>
             <Logo src={logoUrl} />
             <Subtitle>
-              {phoneNumber}
+              <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
               <Separator />
-              {emailAddress}
+              <a href={'mailto:' + emailAddress}>{emailAddress}</a>
             </Subtitle>
             <LinkContainer>
               {links.map((link, i) => (
