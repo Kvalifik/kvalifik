@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import playButton from 'graphics/play-button.svg'
 
 const Root = styled.div`
-  border-color: ${props => props.color};
+  /*border-color: ${props => props.color};
   border-width: 6px;
-  border-style: solid;
+  border-style: solid;*/
   padding: 12px;
-  border-radius: 50px;
+  /*border-radius: 50px;*/
   position: relative;
 
   width: 650px;
@@ -57,7 +57,7 @@ const Thumbnail = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 32px;
+  /*border-radius: 32px;*/
 `
 
 const Video = ({
