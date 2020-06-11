@@ -145,6 +145,15 @@ export const query = graphql`
       hex
     }
   }
+  fragment Image on DatoCmsImageBlock {
+    id
+    image {
+      url
+    }
+    bgColor {
+      hex
+    }
+  }
   fragment OverlayBlockFragment on DatoCmsOverlay {
     id
     title

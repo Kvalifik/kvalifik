@@ -4,6 +4,7 @@ import CaseGrid from 'Components/CaseGrid'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
+import ImageBlock from 'Components/ImageBlock'
 import Toolbox from 'Components/Toolbox'
 import ToolboxBig from 'Components/ToolboxBig'
 import OverlayBlock from 'Components/OverlayBlock'
@@ -56,6 +57,15 @@ export default (block) => {
           key={block.id}
         />
       )
+      case 'DatoCmsImageBlock':
+        return (
+          <ImageBlock
+            key={block.id}
+            bgColor={block.bgColor && block.bgColor.hex}
+            src={block.image && block.image.url}
+            alt={block.alt}
+          />
+        )
     case 'DatoCmsFiftyFifty':
       return (
         <FiftyFifty

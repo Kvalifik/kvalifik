@@ -71,6 +71,7 @@ export const query = graphql`
         ...HeaderFragment
         ...ActionBlockFragment
         ...SloganFragment
+        ...Image
         ...PercentageBlockFragment
         ...CaseInfoFragment
         ...OverlayBlockFragment
