@@ -71,6 +71,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: white;
   }
+  h2 a{
+    color: inherit;
+    text-decoration:none;
+  }
 `
 
 const App = styled.div`
