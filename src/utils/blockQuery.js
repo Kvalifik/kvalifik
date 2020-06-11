@@ -276,6 +276,9 @@ export const query = graphql`
         ...on DatoCmsWork {
           forWho
           url
+          logo {
+            url
+          }
         }
       }
       relatedTools {
@@ -317,6 +320,9 @@ export const query = graphql`
         ...on DatoCmsWork {
           forWho
           url
+          logo {
+            url
+          }
         }
       }
     }
