@@ -4,11 +4,13 @@ import CaseGrid from 'Components/CaseGrid'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
-import ImageBlock from 'Components/ImageBlock'
+import GalleryBlock from 'Components/GalleryBlock'
+import MediaBlock from 'Components/MediaBlock'
 import Toolbox from 'Components/Toolbox'
 import ToolboxBig from 'Components/ToolboxBig'
 import OverlayBlock from 'Components/OverlayBlock'
 import CaseInfoBlock from 'Components/CaseInfo'
+import ProcessBlockSolo from 'Components/ProcessBlockSolo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
@@ -59,11 +61,11 @@ export default (block) => {
       )
       case 'DatoCmsImageBlock':
         return (
-          <ImageBlock
+          <GalleryBlock
             key={block.id}
             bgColor={block.bgColor && block.bgColor.hex}
-            src={block.image && block.image.url}
-            alt={block.alt}
+            gridImages={block.gridImages}
+            imageGridRows={block.imageGridRows}
           />
         )
     case 'DatoCmsFiftyFifty':
@@ -124,6 +126,33 @@ export default (block) => {
           imageUrl={block.image.url}
         />
       )
+      case 'DatoCmsProcessBlock': {
+        return (
+          <ProcessBlockSolo
+            key={block.id}
+            bgColor={block.bgColor && block.bgColor.hex}
+            color={block.accentColor && block.accentColor.hex}
+            labelOne={block.labelOne}
+            titleOne={block.titleOne}
+            descriptionOne={block.descriptionOne}
+            labelTwo={block.labelTwo}
+            titleTwo={block.titleTwo}
+            descriptionTwo={block.descriptionTwo}
+            labelThree={block.labelThree}
+            titleThree={block.titleThree}
+            descriptionThree={block.descriptionThree}
+            buttonLink={block.buttonLink}
+          />
+        )
+      }
+      case 'DatoCmsMediaBlock': {
+        return (
+          <MediaBlock
+            media={block.media}
+            bgColor={block.bgColor}
+          />
+        )
+      }
     case 'DatoCmsCaseInfo': {
       const {
         id,

@@ -145,10 +145,13 @@ export const query = graphql`
       hex
     }
   }
-  fragment Image on DatoCmsImageBlock {
+  fragment GalleryFragment on DatoCmsImageBlock {
     id
-    image {
+    imageGridRows
+    gridImages {
       url
+      width
+      height
     }
     bgColor {
       hex
@@ -174,6 +177,43 @@ export const query = graphql`
     header
     media {
       url
+    }
+  }
+  fragment MediaFragment on DatoCmsMediaBlock {
+    bgColor {
+      hex
+    } 
+    media {
+      image {
+        url
+      }
+      video {
+        provider
+        providerUid
+      }
+    }
+  }
+  fragment ProcessFragment on DatoCmsProcessBlock {
+    id
+    buttonLink {
+      name
+      path
+      isExternal
+    }
+    labelOne
+    labelTwo
+    labelThree
+    descriptionOne
+    descriptionTwo
+    descriptionThree
+    titleOne
+    titleTwo
+    titleThree
+    bgColor {
+      hex
+    }
+    accentColor {
+      hex
     }
   }
   fragment CaseInfoFragment on DatoCmsCaseInfo {

@@ -61,7 +61,8 @@ export const query = graphql`
         ...HeaderFragment
         ...ActionBlockFragment
         ...SloganFragment
-        ...Image
+        ...GalleryFragment
+        ...MediaFragment
         ...CaseGridFragment
         ...ToolboxFragment
         ...ToolboxBigFragment
