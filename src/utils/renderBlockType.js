@@ -59,16 +59,16 @@ export default (block) => {
           key={block.id}
         />
       )
-      case 'DatoCmsImageBlock':
-        return (
-          <GalleryBlock
-            key={block.id}
-            title={block.title}
-            bgColor={block.bgColor && block.bgColor.hex}
-            gridImages={block.gridImages}
-            imageGridRows={block.imageGridRows}
-          />
-        )
+    case 'DatoCmsImageBlock':
+      return (
+        <GalleryBlock
+          key={block.id}
+          title={block.title}
+          bgColor={block.bgColor && block.bgColor.hex}
+          gridImages={block.gridImages}
+          imageGridRows={block.imageGridRows}
+        />
+      )
     case 'DatoCmsFiftyFifty':
       return (
         <FiftyFifty
@@ -127,35 +127,35 @@ export default (block) => {
           imageUrl={block.image.url}
         />
       )
-      case 'DatoCmsProcessBlock': {
-        return (
-          <ProcessBlockSolo
-            key={block.id}
-            bgColor={block.bgColor && block.bgColor.hex}
-            color={block.accentColor && block.accentColor.hex}
-            labelOne={block.labelOne}
-            titleOne={block.titleOne}
-            descriptionOne={block.descriptionOne}
-            labelTwo={block.labelTwo}
-            titleTwo={block.titleTwo}
-            descriptionTwo={block.descriptionTwo}
-            labelThree={block.labelThree}
-            titleThree={block.titleThree}
-            descriptionThree={block.descriptionThree}
-            buttonLink={block.buttonLink}
-          />
-        )
-      }
-      case 'DatoCmsMediaBlock': {
-        return (
-          <MediaBlock
-            key={block.id}
-            title={block.title}
-            media={block.media}
-            bgColor={block.bgColor}
-          />
-        )
-      }
+    case 'DatoCmsProcessBlock': {
+      return (
+        <ProcessBlockSolo
+          key={block.id}
+          bgColor={block.bgColor && block.bgColor.hex}
+          color={block.accentColor && block.accentColor.hex}
+          labelOne={block.labelOne}
+          titleOne={block.titleOne}
+          descriptionOne={block.descriptionOne}
+          labelTwo={block.labelTwo}
+          titleTwo={block.titleTwo}
+          descriptionTwo={block.descriptionTwo}
+          labelThree={block.labelThree}
+          titleThree={block.titleThree}
+          descriptionThree={block.descriptionThree}
+          buttonLink={block.buttonLink}
+        />
+      )
+    }
+    case 'DatoCmsMediaBlock': {
+      return (
+        <MediaBlock
+          key={block.id}
+          title={block.title}
+          media={block.media}
+          bgColor={block.bgColor}
+        />
+      )
+    }
     case 'DatoCmsCaseInfo': {
       const {
         id,

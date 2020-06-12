@@ -122,7 +122,7 @@ const InfoContainer = styled.div`
   }
 `
 
-const FeedContainer = styled.div`
+/* const FeedContainer = styled.div`
   grid-area: feed;
 
   display: grid;
@@ -141,7 +141,7 @@ const FeedContainer = styled.div`
   @media ${props => props.theme.media.md} {
     grid-template-columns: repeat(2, 75px);
   }
-`
+` */
 
 const LinksContainer = styled.div`
   grid-area: links;
@@ -161,7 +161,7 @@ const LinkHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing(1.5)};
 `
 
-const FeedItem = styled.a`
+/* const FeedItem = styled.a`
   width: 75px;
   height: 75px;
   overflow: hidden;
@@ -174,13 +174,13 @@ const FeedItem = styled.a`
   & > img {
     width: 100%;
   }
-`
+` */
 
-const FeedHeader = styled.div`
+/* const FeedHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-column: 1 / -1;
-`
+` */
 
 const Footer = ({
   logoUrl,
@@ -191,12 +191,57 @@ const Footer = ({
   address,
   links,
   socialMediaLinks,
-  socialMediaHeader/*,
+  socialMediaHeader/* ,
   instagramFeed,
-  instagramFeedTitle*/
-}) => {
-  /* DISABLED while waiting for instagram plugin update
-  
+  instagramFeedTitle  */
+}) => (
+  <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
+    <Container>
+      <Grid>
+        <InfoContainer>
+          <Logo src={logoUrl} />
+          <Subtitle>
+            <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
+            <Separator />
+            <a href={'mailto:' + emailAddress}>{emailAddress}</a>
+          </Subtitle>
+          <LinkContainer>
+            {links.map((link, i) => (
+              <LinkItem
+                key={i}
+                to={link.path}
+                isExternal={link.isExternal}
+              >
+                {link.name}
+                {link.isExternal && (
+                  <Svg src={targetBlank} />
+                )}
+              </LinkItem>
+            ))}
+          </LinkContainer>
+        </InfoContainer>
+        <LinksContainer>
+          <LinkHeader>{socialMediaHeader}</LinkHeader>
+          {socialMediaLinks.map(link => (
+            <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
+              <ExtendedIcon src={link.icon && link.icon.url} />
+            </UniversalLink>
+          ))}
+        </LinksContainer>
+
+        <CopyrightLine>
+          {copyright}
+          <Separator />
+          {cvr}
+          <Separator />
+          {address}
+        </CopyrightLine>
+      </Grid>
+    </Container>
+  </Skewer>
+)
+/* DISABLED while waiting for instagram plugin update
+
   const mappedFeed = instagramFeed.map(node => ({
     src: node.thumbnails[3].src,
     timestamp: node.timestamp,
@@ -211,67 +256,7 @@ const Footer = ({
     return 0
   })
   const slicedFeed = mappedFeed.slice(0, 4)
-*/
-  return (
-    <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
-      <Container>
-        <Grid>
-          <InfoContainer>
-            <Logo src={logoUrl} />
-            <Subtitle>
-              <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
-              <Separator />
-              <a href={'mailto:' + emailAddress}>{emailAddress}</a>
-            </Subtitle>
-            <LinkContainer>
-              {links.map((link, i) => (
-                <LinkItem
-                  key={i}
-                  to={link.path}
-                  isExternal={link.isExternal}
-                >
-                  {link.name}
-                  {link.isExternal && (
-                    <Svg src={targetBlank} />
-                  )}
-                </LinkItem>
-              ))}
-            </LinkContainer>
-          </InfoContainer>
-          <LinksContainer>
-            <LinkHeader>{socialMediaHeader}</LinkHeader>
-            {socialMediaLinks.map(link => (
-              <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
-                <ExtendedIcon src={link.icon && link.icon.url} />
-              </UniversalLink>
-            ))}
-          </LinksContainer>
-          {/*<FeedContainer>
-            <FeedHeader>{instagramFeedTitle}</FeedHeader>
-            {slicedFeed.map(item =>
-              <FeedItem
-                key={item.id}
-                href={`https://instagram.com/p/${item.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={item.src} alt={item.caption} />
-              </FeedItem>
-            )}
-            </FeedContainer>*/}
-          <CopyrightLine>
-            {copyright}
-            <Separator />
-            {cvr}
-            <Separator />
-            {address}
-          </CopyrightLine>
-        </Grid>
-      </Container>
-    </Skewer>
-  )
-}
-
+  */
 Footer.propTypes = {
   logoUrl: PropTypes.string,
   phoneNumber: PropTypes.string,
@@ -291,15 +276,15 @@ Footer.propTypes = {
     }),
     isExternal: PropTypes.bool
   })),
-  socialMediaHeader: PropTypes.string,
-  /*instagramFeed: PropTypes.arrayOf(PropTypes.shape({
+  socialMediaHeader: PropTypes.string
+  /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
       timestamp: PropTypes.number
     })),
     caption: PropTypes.string
   })),
-  instagramFeedTitle: PropTypes.string*/
+  instagramFeedTitle: PropTypes.string  */
 }
 
 export default Footer
