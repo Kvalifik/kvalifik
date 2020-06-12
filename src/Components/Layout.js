@@ -9,7 +9,7 @@ import theme from 'utils/theme'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import Cookie from '../templates/cookie'
 const browser = detect()
 
@@ -164,7 +164,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
       }
     }
   `)
-/*
+  /*
 Instagram query removed while waiting for update, add back afterwards:
 allInstaNode {
         nodes {
@@ -204,7 +204,7 @@ allInstaNode {
         )}
       </HelmetDatoCms>
       <Helmet>
-        <script src="https://cdn.logrocket.com/LogRocket.min.js"></script>
+        <script src="https://cdn.logrocket.com/LogRocket.min.js" />
       </Helmet>
       <ThemeProvider theme={theme}>
         <App bgColor={bgColor} x-ms-format-detection="none">
@@ -213,7 +213,7 @@ allInstaNode {
           {!hideFooter && (
             <Footer
               {...data.datoCmsFooter}
-              /*instagramFeed={data.allInstaNode.nodes}*/
+              /* instagramFeed={data.allInstaNode.nodes} */
               logoUrl={data.datoCmsGeneral.logo.url}
             />
           )}

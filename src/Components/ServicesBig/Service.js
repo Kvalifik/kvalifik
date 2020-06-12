@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 import LinkThumb from 'Components/Shared/LinkThumb'
 import Icon from './Icon'
-import ImageTrack from 'Components/Shared/ImageTrack'
 
 import theme from 'utils/theme'
 import { servicePropType } from 'models/service'

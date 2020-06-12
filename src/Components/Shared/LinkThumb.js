@@ -113,7 +113,8 @@ export default class ToolThumb extends Component {
     headline: PropTypes.string,
     iconUrl: PropTypes.string,
     color: PropTypes.string,
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
+    logo: PropTypes.bool
   }
 
   render () {
@@ -133,7 +134,7 @@ export default class ToolThumb extends Component {
         {!!to && (
           <Center color={color}>
             <Link to={to}>
-              <Icon src={iconUrl} logo={!!logo}/>
+              <Icon src={iconUrl} logo={!!logo} />
               <Headline bold={!!bold}>{headline}</Headline>
               <Arrow color={color} src={arrow} />
             </Link>
@@ -141,7 +142,7 @@ export default class ToolThumb extends Component {
         )}
         {!to && (
           <Center color={color}>
-            <Icon src={iconUrl} logo={!!logo}/>
+            <Icon src={iconUrl} logo={!!logo} />
             <Headline bold={!!bold}>{headline}</Headline>
             <Arrow color={color} src={arrow} />
           </Center>
