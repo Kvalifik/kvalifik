@@ -148,6 +148,7 @@ export const query = graphql`
   fragment GalleryFragment on DatoCmsImageBlock {
     id
     imageGridRows
+    title
     gridImages {
       url
       width
@@ -180,6 +181,7 @@ export const query = graphql`
     }
   }
   fragment MediaFragment on DatoCmsMediaBlock {
+    title
     bgColor {
       hex
     } 

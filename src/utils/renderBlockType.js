@@ -63,6 +63,7 @@ export default (block) => {
         return (
           <GalleryBlock
             key={block.id}
+            title={block.title}
             bgColor={block.bgColor && block.bgColor.hex}
             gridImages={block.gridImages}
             imageGridRows={block.imageGridRows}
@@ -148,6 +149,8 @@ export default (block) => {
       case 'DatoCmsMediaBlock': {
         return (
           <MediaBlock
+            key={block.id}
+            title={block.title}
             media={block.media}
             bgColor={block.bgColor}
           />
