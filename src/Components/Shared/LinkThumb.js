@@ -79,7 +79,8 @@ const Center = styled.div`
 
 const Icon = styled(LazyImage)`
   display: ${props => props.src ? 'block' : 'none'};
-  width: 25%;
+  width: ${props => props.logo ? '55%' : '25%'};
+  background-size:contain;
 
   @media ${props => props.theme.media.sm} {
     width: 40px;
@@ -89,8 +90,7 @@ const Icon = styled(LazyImage)`
 
 const Headline = styled.p`
   text-align: center;
-  margin: ${props => props.theme.spacing(2)};
-  margin-bottom: ${props => props.theme.spacing(1)};
+  margin: ${props => props.theme.spacing(1)};
   font-size: 14px;
   min-width: 100px;
   
@@ -113,7 +113,8 @@ export default class ToolThumb extends Component {
     headline: PropTypes.string,
     iconUrl: PropTypes.string,
     color: PropTypes.string,
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
+    logo: PropTypes.bool
   }
 
   render () {
@@ -124,7 +125,8 @@ export default class ToolThumb extends Component {
       onClick,
       to,
       id,
-      bold
+      bold,
+      logo
     } = this.props
 
     return (
@@ -132,7 +134,7 @@ export default class ToolThumb extends Component {
         {!!to && (
           <Center color={color}>
             <Link to={to}>
-              <Icon src={iconUrl} />
+              <Icon src={iconUrl} logo={!!logo} />
               <Headline bold={!!bold}>{headline}</Headline>
               <Arrow color={color} src={arrow} />
             </Link>
@@ -140,7 +142,7 @@ export default class ToolThumb extends Component {
         )}
         {!to && (
           <Center color={color}>
-            <Icon src={iconUrl} />
+            <Icon src={iconUrl} logo={!!logo} />
             <Headline bold={!!bold}>{headline}</Headline>
             <Arrow color={color} src={arrow} />
           </Center>

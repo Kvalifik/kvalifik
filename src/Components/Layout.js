@@ -9,7 +9,7 @@ import theme from 'utils/theme'
 import NoIe from 'Components/NoIe'
 import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import Cookie from '../templates/cookie'
 const browser = detect()
 
@@ -71,6 +71,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: white;
   }
+  h2 a{
+    color: inherit;
+    text-decoration:none;
+  }
 `
 
 const App = styled.div`
@@ -123,16 +127,6 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         socialMediaHeader
         instagramFeedTitle
       }
-      allInstaNode {
-        nodes {
-          thumbnails {
-            src
-          }
-          timestamp
-          id
-          caption
-        }
-      }
       allDatoCmsNavigation {
         nodes {
           mainLinks {
@@ -170,7 +164,19 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
       }
     }
   `)
-
+  /*
+Instagram query removed while waiting for update, add back afterwards:
+allInstaNode {
+        nodes {
+          thumbnails {
+            src
+          }
+          timestamp
+          id
+          caption
+        }
+      }
+*/
   const {
     url,
     pageSetup,
@@ -198,7 +204,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         )}
       </HelmetDatoCms>
       <Helmet>
-        <script src="https://cdn.logrocket.com/LogRocket.min.js"></script>
+        <script src="https://cdn.logrocket.com/LogRocket.min.js" />
       </Helmet>
       <ThemeProvider theme={theme}>
         <App bgColor={bgColor} x-ms-format-detection="none">
@@ -207,7 +213,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           {!hideFooter && (
             <Footer
               {...data.datoCmsFooter}
-              instagramFeed={data.allInstaNode.nodes}
+              /* instagramFeed={data.allInstaNode.nodes} */
               logoUrl={data.datoCmsGeneral.logo.url}
             />
           )}

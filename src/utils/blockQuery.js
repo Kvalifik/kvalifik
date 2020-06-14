@@ -145,6 +145,19 @@ export const query = graphql`
       hex
     }
   }
+  fragment GalleryFragment on DatoCmsImageBlock {
+    id
+    imageGridRows
+    title
+    gridImages {
+      url
+      width
+      height
+    }
+    bgColor {
+      hex
+    }
+  }
   fragment OverlayBlockFragment on DatoCmsOverlay {
     id
     title
@@ -165,6 +178,44 @@ export const query = graphql`
     header
     media {
       url
+    }
+  }
+  fragment MediaFragment on DatoCmsMediaBlock {
+    title
+    bgColor {
+      hex
+    } 
+    media {
+      image {
+        url
+      }
+      video {
+        provider
+        providerUid
+      }
+    }
+  }
+  fragment ProcessFragment on DatoCmsProcessBlock {
+    id
+    buttonLink {
+      name
+      path
+      isExternal
+    }
+    labelOne
+    labelTwo
+    labelThree
+    descriptionOne
+    descriptionTwo
+    descriptionThree
+    titleOne
+    titleTwo
+    titleThree
+    bgColor {
+      hex
+    }
+    accentColor {
+      hex
     }
   }
   fragment CaseInfoFragment on DatoCmsCaseInfo {
@@ -276,6 +327,9 @@ export const query = graphql`
         ...on DatoCmsWork {
           forWho
           url
+          logo {
+            url
+          }
         }
       }
       relatedTools {
@@ -317,6 +371,9 @@ export const query = graphql`
         ...on DatoCmsWork {
           forWho
           url
+          logo {
+            url
+          }
         }
       }
     }

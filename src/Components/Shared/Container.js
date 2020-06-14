@@ -5,6 +5,9 @@ import styled, { css } from 'styled-components'
 const Root = styled.div`
   position: relative;
   display: grid;
+  ${props => props.center && css`
+  text-align: center;
+  `}
 
   ${props => !props.fluid && css`
     ${props.theme.grid('grid-template-columns: 1fr 525px 525px 1fr')};
@@ -96,6 +99,7 @@ const Content = styled.div`
 `
 
 const Container = ({
+  center,
   sideText,
   overflowRight,
   overflowLeft,
@@ -103,7 +107,7 @@ const Container = ({
   children,
   fluid
 }) => (
-  <Root hasSideText={!!sideText} fluid={fluid}>
+  <Root hasSideText={!!sideText} fluid={fluid} center={center}>
     {!!sideText && (
       <SideText>
         <SideTextSticky>
@@ -133,7 +137,8 @@ Container.propTypes = {
   overflowRight: PropTypes.bool,
   overflowLeft: PropTypes.bool,
   noContentWrapper: PropTypes.bool,
-  fluid: PropTypes.bool
+  fluid: PropTypes.bool,
+  center: PropTypes.bool
 }
 
 export default Container

@@ -143,8 +143,10 @@ const ServicePreview = ({
           {exampleCases.slice(0, 2).map((work, index) => (
             <LinkThumb
               bold
+              logo
               key={index}
-              headline={work.forWho}
+              headline={!work.logo && work.forWho}
+              iconUrl={work.logo && work.logo.url}
               to={work.url}
               color={theme.palette.light}
             />
