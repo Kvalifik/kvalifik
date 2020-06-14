@@ -7,6 +7,11 @@ import Container from 'Components/Shared/Container'
 import JustifiedGrid from 'Components/Shared/JustifiedGrid'
 
 const Root = styled.div`
+  padding: ${props => props.theme.spacing(4, 0, 0)};
+
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(5, 2)};
+  }
   &::after {
     clear: both;
     display: table;

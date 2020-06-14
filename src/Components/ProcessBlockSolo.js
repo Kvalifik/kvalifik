@@ -15,13 +15,17 @@ const Label = styled.span`
 
 const Root = styled.div`
   display: grid;
-  padding: ${props => props.theme.spacing(4, 0)};
   grid-template-areas: "block-one-header block-two-header block-three-header"
     "block-one-content block-two-content block-three-content";
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 0 ${props => props.theme.spacing(5)};
   background-color: ${props => props.theme.palette.dark};
 
+  padding: ${props => props.theme.spacing(4, 0, 0)};
+
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(5, 2)};
+  }
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
       "block-one-header"

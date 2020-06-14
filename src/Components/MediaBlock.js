@@ -15,12 +15,15 @@ const Label = styled.span`
 `
 
 const Root = styled.div`
-  padding: ${props => props.theme.spacing(4, 0)};
   grid-template-areas: "block-one-header block-two-header block-three-header"
     "block-one-content block-two-content block-three-content";
   grid-gap: 0 ${props => props.theme.spacing(5)};
   background-color: transparent;
+  padding: ${props => props.theme.spacing(4, 0, 0)};
 
+  @media ${props => props.theme.media.md} {
+    padding: ${props => props.theme.spacing(5, 2)};
+  }
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
       "block-one-header"
