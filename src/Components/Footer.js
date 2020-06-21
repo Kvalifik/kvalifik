@@ -107,7 +107,9 @@ const CopyrightLine = styled.div`
   grid-area: copyright;
   white-space: nowrap;
   opacity: 0.5;
-
+  a{
+    text-decoration:none;
+  }
   @media ${props => props.theme.media.md} {
     text-align: center;
     white-space: normal;
@@ -230,11 +232,11 @@ const Footer = ({
         </LinksContainer>
 
         <CopyrightLine>
-          {copyright}
+          <span dangerouslySetInnerHTML={{ __html: copyright }} />
           <Separator />
-          {cvr}
+          <span dangerouslySetInnerHTML={{ __html: cvr }} />
           <Separator />
-          {address}
+          <span dangerouslySetInnerHTML={{ __html: address }} />
         </CopyrightLine>
       </Grid>
     </Container>
