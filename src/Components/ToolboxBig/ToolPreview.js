@@ -249,7 +249,7 @@ const ToolPreview = ({
           <Image image={tool.image.url} />
           <CaseExamples>
             {tool.references.length > 0 && (
-              <ExampleHeader left>RESSOURCES</ExampleHeader>
+              <ExampleHeader left>RESOURCES</ExampleHeader>
             )}
             {tool.references.map((reference, i) =>
               <Resource
