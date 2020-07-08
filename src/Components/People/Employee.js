@@ -88,7 +88,7 @@ const Employee = ({ person }) => (
         <div>{person.jobTitle}</div>
       </NameContainer>
       <ContactContainer>
-        <div><Clickable href={'tel:' + person.phone }>{person.phone}</Clickable></div>
+        <div><Clickable href={'tel:' + person.phone}>{person.phone}</Clickable></div>
         <div><Clickable href={'mailto:' + person.email}>{person.email}</Clickable></div>
       </ContactContainer>
     </Info>

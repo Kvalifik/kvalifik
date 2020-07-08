@@ -1,5 +1,5 @@
 import 'normalize.css'
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -12,7 +12,6 @@ import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { Helmet } from 'react-helmet'
 import Cookie from '../templates/cookie'
-import { useState } from 'react'
 const browser = detect()
 
 // handle the case where we don't detect the browser
@@ -226,11 +225,11 @@ allInstaNode {
           <Cookie />
           {children}
           <SignupModal
-            visible={showNewsletterModal} 
+            visible={showNewsletterModal}
             hideModal={() => setNewsletterModalVisibility(false)}
             callToAction={data.datoCmsNewsletter.newsletterCallToAction}
             successMessage={data.datoCmsNewsletter.successMessage}
-            errorMessage={data.datoCmsNewsletter.errorMessage} 
+            errorMessage={data.datoCmsNewsletter.errorMessage}
           />
           {!hideFooter && (
             <Footer

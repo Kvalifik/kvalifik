@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import theme from 'utils/theme'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 
 const Background = styled.div`
@@ -132,7 +131,6 @@ const CloseButton = styled.button`
 `
 
 class SignupModal extends React.Component {
-
   constructor (props) {
     super(props)
     this.callToAction = this.props.callToAction
@@ -175,7 +173,7 @@ class SignupModal extends React.Component {
       .then(data => {
         console.log(data)
         if (data.result === 'success') {
-          this.setState({ 
+          this.setState({
             formSubmitted: true,
             statusMessage: this.successMessage
           })
@@ -197,7 +195,7 @@ class SignupModal extends React.Component {
               <Heading>{this.callToAction}</Heading>
               {this.state.formSubmitted ? (
                 <StatusMessage>{this.state.statusMessage}</StatusMessage>
-                ) 
+              )
                 : (
                   <form onSubmit={(e) => this.handleNewsletterSignup(e)} action="#" method="POST">
                     <InputGroup>
@@ -208,7 +206,7 @@ class SignupModal extends React.Component {
                           name="firstName"
                           type="text"
                           placeholder="First name"
-                          onChange={(e) => this.setState({ firstName: e.target.value})}
+                          onChange={(e) => this.setState({ firstName: e.target.value })}
                           value={this.state.firstName}
                           required
                         />
@@ -230,7 +228,7 @@ class SignupModal extends React.Component {
                         name="email"
                         type="email"
                         onChange={(e) => this.setState({ email: e.target.value })}
-                        value={this.state.email} 
+                        value={this.state.email}
                         required
                       />
                     </InputGroup>
