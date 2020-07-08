@@ -35,12 +35,12 @@ module.exports = {
         disableLiveReload: false
       }
     },
-    {
+    /*{ DISABLED WHILE WAITING FOR UPDATE
       resolve: 'gatsby-source-instagram',
       options: {
         username: 'kvalifik'
       }
-    },
+    },*/
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
@@ -51,9 +51,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        id: "GTM-NZWS69Z",
-        includeInDevelopment: false,
+        id: "GTM-W9THFCR",
+        includeInDevelopment: true,
         defaultDataLayer: { platform: "gatsby" },
+        routeChangeEventName: "gatsby-route-change",
       },
     },
     {
