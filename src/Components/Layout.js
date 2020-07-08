@@ -3,6 +3,7 @@ import React from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
+import SignupModal from 'Components/SignupModal'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
@@ -11,6 +12,7 @@ import { detect } from 'detect-browser'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { Helmet } from 'react-helmet'
 import Cookie from '../templates/cookie'
+import { useState } from 'react'
 const browser = detect()
 
 // handle the case where we don't detect the browser
@@ -157,6 +159,11 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
           name
         }
       }
+      datoCmsNewsletter {
+        newsletterCallToAction
+        successMessage
+        errorMessage
+      }
       datoCmsSite {
         faviconMetaTags {
           ...GatsbyDatoCmsFaviconMetaTags
@@ -186,6 +193,14 @@ allInstaNode {
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
   const canonical = `https://kvalifik.dk${url}`
 
+  const [showNewsletterModal, setNewsletterModalVisibility] = useState(false)
+
+  const toggleOverlay = () => {
+    const currentState = showNewsletterModal
+    setNewsletterModalVisibility(!currentState)
+    console.log(showNewsletterModal)
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -210,11 +225,19 @@ allInstaNode {
         <App bgColor={bgColor} x-ms-format-detection="none">
           <Cookie />
           {children}
+          <SignupModal
+            visible={showNewsletterModal} 
+            hideModal={() => setNewsletterModalVisibility(false)}
+            callToAction={data.datoCmsNewsletter.newsletterCallToAction}
+            successMessage={data.datoCmsNewsletter.successMessage}
+            errorMessage={data.datoCmsNewsletter.errorMessage} 
+          />
           {!hideFooter && (
             <Footer
               {...data.datoCmsFooter}
               /* instagramFeed={data.allInstaNode.nodes} */
               logoUrl={data.datoCmsGeneral.logo.url}
+              handleSignupClick={toggleOverlay}
             />
           )}
           <Navigation

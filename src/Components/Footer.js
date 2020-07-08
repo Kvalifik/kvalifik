@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import theme from 'utils/theme'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 
 import Skewer from 'Components/Shared/Skewer'
 import Container from 'Components/Shared/Container'
@@ -184,6 +185,12 @@ const LinkHeader = styled.div`
   grid-column: 1 / -1;
 ` */
 
+const SignupButton = styled.button`
+  background: red;
+  height: 100px;
+`
+
+
 const Footer = ({
   logoUrl,
   phoneNumber,
@@ -193,55 +200,67 @@ const Footer = ({
   address,
   links,
   socialMediaLinks,
-  socialMediaHeader/* ,
+  socialMediaHeader,
+  handleSignupClick
+  /* ,
   instagramFeed,
   instagramFeedTitle  */
-}) => (
-  <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
-    <Container>
-      <Grid>
-        <InfoContainer>
-          <Logo src={logoUrl} />
-          <Subtitle>
-            <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
-            <Separator />
-            <a href={'mailto:' + emailAddress}>{emailAddress}</a>
-          </Subtitle>
-          <LinkContainer>
-            {links.map((link, i) => (
-              <LinkItem
-                key={i}
-                to={link.path}
-                isExternal={link.isExternal}
-              >
-                {link.name}
-                {link.isExternal && (
-                  <Svg src={targetBlank} />
-                )}
-              </LinkItem>
-            ))}
-          </LinkContainer>
-        </InfoContainer>
-        <LinksContainer>
-          <LinkHeader>{socialMediaHeader}</LinkHeader>
-          {socialMediaLinks.map(link => (
-            <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
-              <ExtendedIcon src={link.icon && link.icon.url} />
-            </UniversalLink>
-          ))}
-        </LinksContainer>
+}) => {
 
-        <CopyrightLine>
-          <span dangerouslySetInnerHTML={{ __html: copyright }} />
-          <Separator />
-          <span dangerouslySetInnerHTML={{ __html: cvr }} />
-          <Separator />
-          <span dangerouslySetInnerHTML={{ __html: address }} />
-        </CopyrightLine>
-      </Grid>
-    </Container>
-  </Skewer>
-)
+  return (
+    <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
+      <Container>
+        <Grid>
+          <InfoContainer>
+            <Logo src={logoUrl} />
+            <Subtitle>
+              <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
+              <Separator />
+              <a href={'mailto:' + emailAddress}>{emailAddress}</a>
+            </Subtitle>
+            <LinkContainer>
+              {links.map((link, i) => (
+                <LinkItem
+                  key={i}
+                  to={link.path}
+                  isExternal={link.isExternal}
+                >
+                  {link.name}
+                  {link.isExternal && (
+                    <Svg src={targetBlank} />
+                  )}
+                </LinkItem>
+              ))}
+            </LinkContainer>
+          </InfoContainer>
+          <LinksContainer>
+            <LinkHeader>{socialMediaHeader}</LinkHeader>
+            {socialMediaLinks.map(link => (
+              <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
+                <ExtendedIcon src={link.icon && link.icon.url} />
+              </UniversalLink>
+            ))}
+          </LinksContainer>
+  
+          <CopyrightLine>
+            <span dangerouslySetInnerHTML={{ __html: copyright }} />
+            <Separator />
+            <span dangerouslySetInnerHTML={{ __html: cvr }} />
+            <Separator />
+            <span dangerouslySetInnerHTML={{ __html: address }} />
+          </CopyrightLine>
+  
+          <div>
+            <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
+          </div>
+  
+          
+
+        </Grid>
+      </Container>
+    </Skewer>
+  )
+} 
 /* DISABLED while waiting for instagram plugin update
 
   const mappedFeed = instagramFeed.map(node => ({
@@ -278,7 +297,8 @@ Footer.propTypes = {
     }),
     isExternal: PropTypes.bool
   })),
-  socialMediaHeader: PropTypes.string
+  socialMediaHeader: PropTypes.string,
+  handleSignupClick: PropTypes.func
   /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
