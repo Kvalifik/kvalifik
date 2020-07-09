@@ -106,7 +106,6 @@ const SignupButton = styled.input`
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-
 `
 const CloseButton = styled.button`
   width: 20px;
@@ -135,6 +134,7 @@ class SignupModal extends React.Component {
     super(props)
     this.callToAction = this.props.callToAction
     this.successMessage = this.props.successMessage
+    this.email = this.props.email
     this.errorMessage = this.props.errorMessage
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleNewsletterSignup = this.handleNewsletterSignup.bind(this)
@@ -171,7 +171,6 @@ class SignupModal extends React.Component {
       COMPANY: company
     })
       .then(data => {
-        console.log(data)
         if (data.result === 'success') {
           this.setState({
             formSubmitted: true,
@@ -180,7 +179,7 @@ class SignupModal extends React.Component {
         } else {
           this.setState({
             formSubmitted: true,
-            statusMessage: this.errorMessage
+            statusMessage: this.errorMessage !== '' ? this.errorMessage : data.msg
           })
         }
       })
@@ -228,7 +227,7 @@ class SignupModal extends React.Component {
                         name="email"
                         type="email"
                         onChange={(e) => this.setState({ email: e.target.value })}
-                        value={this.state.email}
+                        value={this.state.email !== '' ? this.state.email : this.props.email}
                         required
                       />
                     </InputGroup>
@@ -265,7 +264,8 @@ SignupModal.propTypes = {
   hideModal: PropTypes.func,
   callToAction: PropTypes.string,
   successMessage: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  email: PropTypes.string
 }
 
 export default SignupModal

@@ -13,7 +13,7 @@ const Grid = styled.div`
   display: grid;
 
   grid-template-areas:
-    "info links feed"
+    "info links newsletter"
     "copyright copyright copyright";
 
   justify-content: space-between;
@@ -24,8 +24,8 @@ const Grid = styled.div`
 
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
+      "newsletter"
       "info"
-      "feed"
       "links"
       "copyright";
 
@@ -37,7 +37,7 @@ const Grid = styled.div`
 
 const Logo = styled.img`
   height: 30px;
-  margin: 0 0 ${props => props.theme.spacing(1)};
+  margin: 0 0 ${props => props.theme.spacing(3)};
 `
 
 const Subtitle = styled.div`
@@ -54,6 +54,11 @@ const Subtitle = styled.div`
   @media ${props => props.theme.media.md} {
     white-space: normal;
   }
+  @media screen and (max-width: 350px) {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
 `
 
 const Separator = styled.span`
@@ -61,25 +66,27 @@ const Separator = styled.span`
   height: 100%;
   border-right: 1px solid #d1d1d1;
 
-  @media ${props => props.theme.media.md} {
+  /* @media ${props => props.theme.media.md} {
     display: block;
     border-right: 0;
     height: ${props => props.theme.spacing(0.5)};
     margin: 0;
-  }
+  } */
 `
 
 const LinkContainer = styled.div`
   margin-top: ${props => props.theme.spacing(3)};
-
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
   @media ${props => props.theme.media.lg} {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
-  }
+    align-items: center; */
+    max-width: 300px;
+    width: 100%;
+  } 
 `
 
 const LinkItem = styled(UniversalLink)`
@@ -109,9 +116,14 @@ const CopyrightLine = styled.div`
   a{
     text-decoration:none;
   }
-  @media ${props => props.theme.media.md} {
-    text-align: center;
+  @media ${props => props.theme.media.lg} {
+    text-align: left;
     white-space: normal;
+    padding: ${props => props.theme.spacing(0, 2.5)};
+  }
+  @media ${props => props.theme.media.sm} {
+    max-width: 50ch;
+    justify-self: flex-start;
   }
 `
 
@@ -120,6 +132,12 @@ const InfoContainer = styled.div`
 
   @media ${props => props.theme.media.lg} {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    align-items: flex-start;
+    /* width: 100%; */
+    padding: ${props => props.theme.spacing(0, 2.5)};
   }
 `
 
@@ -147,6 +165,15 @@ const InfoContainer = styled.div`
 const LinksContainer = styled.div`
   grid-area: links;
   justify-self: center;
+  & > a:first-of-type {
+    & > img {
+      margin-left: 0;
+    }
+  }
+  @media ${props => props.theme.media.lg} {
+    justify-self: flex-start;
+    padding: ${props => props.theme.spacing(0, 2.5)};
+  }
 `
 
 const ExtendedIcon = styled(Icon)`
@@ -154,12 +181,14 @@ const ExtendedIcon = styled(Icon)`
   width: 30px;
   height: 30px;
   display: inline-block;
+  
 `
 
 const LinkHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
-  font-size: ${props => props.theme.typography.fontSize.xs};
-  margin-bottom: ${props => props.theme.spacing(1.5)};
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: ${props => props.theme.spacing(3)};
 `
 
 /* const FeedItem = styled.a`
@@ -182,10 +211,38 @@ const LinkHeader = styled.div`
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-column: 1 / -1;
 ` */
-
+const NewsletterRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: ${props => props.theme.spacing(3)};
+`
+const SignupInput = styled.input`
+  height: 55px;
+  background: #515151;
+  border: none;
+  padding: ${props => props.theme.spacing(0, 1.5)};
+  color: white;
+  @media ${props => props.theme.media.md} {
+    width: 75%;
+  }
+  &::placeholder {
+    color: #A8A8A8;
+  }
+`
 const SignupButton = styled.button`
-  background: red;
-  height: 100px;
+  background: ${props => props.theme.palette.primary.D};
+  width: 100%;
+  @media ${props => props.theme.media.md} {
+    width: 50%;
+  }
+  max-width: 178px;
+  margin: 0 auto;
+  padding: ${props => props.theme.spacing(1.5, 3)};
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
 `
 
 const Footer = ({
@@ -198,7 +255,8 @@ const Footer = ({
   links,
   socialMediaLinks,
   socialMediaHeader,
-  handleSignupClick
+  handleSignupClick,
+  handleInputChange
   /* ,
   instagramFeed,
   instagramFeedTitle  */
@@ -230,6 +288,15 @@ const Footer = ({
         </InfoContainer>
         <LinksContainer>
           <LinkHeader>{socialMediaHeader}</LinkHeader>
+          <NewsletterRow>
+            <SignupInput
+              onChange={(e) => handleInputChange(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+            <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
+          </NewsletterRow>
+
           {socialMediaLinks.map(link => (
             <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
               <ExtendedIcon src={link.icon && link.icon.url} />
@@ -243,10 +310,6 @@ const Footer = ({
           <Separator />
           <span dangerouslySetInnerHTML={{ __html: address }} />
         </CopyrightLine>
-        <div>
-          <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
-        </div>
-
       </Grid>
     </Container>
   </Skewer>
@@ -288,7 +351,8 @@ Footer.propTypes = {
     isExternal: PropTypes.bool
   })),
   socialMediaHeader: PropTypes.string,
-  handleSignupClick: PropTypes.func
+  handleSignupClick: PropTypes.func,
+  handleInputChange: PropTypes.func
   /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
