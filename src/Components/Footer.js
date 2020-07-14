@@ -211,41 +211,41 @@ const LinkHeader = styled.div`
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-column: 1 / -1;
 ` */
-const NewsletterRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: ${props => props.theme.spacing(3)};
-`
-const SignupInput = styled.input`
-  height: 55px;
-  background: #515151;
-  border: none;
-  padding: ${props => props.theme.spacing(0, 1.5)};
-  color: white;
-  @media ${props => props.theme.media.md} {
-    width: 75%;
-  }
-  &::placeholder {
-    color: #A8A8A8;
-  }
-`
-const SignupButton = styled.button`
-  background: ${props => props.theme.palette.primary.D};
-  width: 100%;
-  @media ${props => props.theme.media.md} {
-    font-size: 16px;
-    width: 50%;
-    padding: ${props => props.theme.spacing(1.25, 0.5)};
-  }
-  max-width: 178px;
-  margin: 0 auto;
-  padding: ${props => props.theme.spacing(1.5, 3)};
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-`
+// const NewsletterRow = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   margin-bottom: ${props => props.theme.spacing(3)};
+// `
+// const SignupInput = styled.input`
+//   height: 55px;
+//   background: #515151;
+//   border: none;
+//   padding: ${props => props.theme.spacing(0, 1.5)};
+//   color: white;
+//   @media ${props => props.theme.media.md} {
+//     width: 75%;
+//   }
+//   &::placeholder {
+//     color: #A8A8A8;
+//   }
+// `
+// const SignupButton = styled.button`
+//   background: ${props => props.theme.palette.primary.D};
+//   width: 100%;
+//   @media ${props => props.theme.media.md} {
+//     font-size: 16px;
+//     width: 50%;
+//     padding: ${props => props.theme.spacing(1.25, 0.5)};
+//   }
+//   max-width: 178px;
+//   margin: 0 auto;
+//   padding: ${props => props.theme.spacing(1.5, 3)};
+//   border: none;
+//   font-size: 20px;
+//   font-weight: bold;
+//   text-transform: uppercase;
+//   cursor: pointer;
+// `
 
 const Footer = ({
   logoUrl,
@@ -290,14 +290,14 @@ const Footer = ({
         </InfoContainer>
         <LinksContainer>
           <LinkHeader>{socialMediaHeader}</LinkHeader>
-          <NewsletterRow>
+          {/* <NewsletterRow>
             <SignupInput
               onChange={(e) => handleInputChange(e.target.value)}
               type="email"
               placeholder="Email"
             />
             <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
-          </NewsletterRow>
+          </NewsletterRow> */}
 
           {socialMediaLinks.map(link => (
             <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
