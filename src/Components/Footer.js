@@ -233,7 +233,9 @@ const SignupButton = styled.button`
   background: ${props => props.theme.palette.primary.D};
   width: 100%;
   @media ${props => props.theme.media.md} {
+    font-size: 16px;
     width: 50%;
+    padding: ${props => props.theme.spacing(1.25, 0.5)};
   }
   max-width: 178px;
   margin: 0 auto;

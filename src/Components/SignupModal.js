@@ -198,6 +198,17 @@ class SignupModal extends React.Component {
                 : (
                   <form onSubmit={(e) => this.handleNewsletterSignup(e)} action="#" method="POST">
                     <InputGroup>
+                      <Label htmlFor="newsletter_email">Email *</Label>
+                      <Input
+                        id="newsletter_email"
+                        name="email"
+                        type="email"
+                        onChange={(e) => this.setState({ email: e.target.value })}
+                        value={this.state.email !== '' ? this.state.email : this.props.email}
+                        required
+                      />
+                    </InputGroup>
+                    <InputGroup>
                       <Label htmlFor="newsletter_firstName">Name *</Label>
                       <Row>
                         <Input
@@ -219,17 +230,6 @@ class SignupModal extends React.Component {
                           required
                         />
                       </Row>
-                    </InputGroup>
-                    <InputGroup>
-                      <Label htmlFor="newsletter_email">Email *</Label>
-                      <Input
-                        id="newsletter_email"
-                        name="email"
-                        type="email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
-                        value={this.state.email !== '' ? this.state.email : this.props.email}
-                        required
-                      />
                     </InputGroup>
                     <InputGroup>
                       <Label htmlFor="newsletter_company">company</Label>
