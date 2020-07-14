@@ -65,6 +65,11 @@ const NameContainer = styled.div`
   }
 `
 
+const Clickable = styled.a`
+  color: #000000;
+  text-decoration: none;
+`
+
 const ContactContainer = styled.div`
   grid-column: 1;
   grid-row: 1;
@@ -83,8 +88,8 @@ const Employee = ({ person }) => (
         <div>{person.jobTitle}</div>
       </NameContainer>
       <ContactContainer>
-        <div>{person.phone}</div>
-        <div>{person.email}</div>
+        <div><Clickable href={'tel:' + person.phone}>{person.phone}</Clickable></div>
+        <div><Clickable href={'mailto:' + person.email}>{person.email}</Clickable></div>
       </ContactContainer>
     </Info>
     <Media imageSrc={person.image && person.image.url} />

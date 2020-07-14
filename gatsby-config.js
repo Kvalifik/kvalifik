@@ -58,6 +58,13 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+          endpoint: 'https://kvalifik.us9.list-manage.com/subscribe/post?u=c88ea208db67dd3c9c625a4ae&amp;id=1162fc2390',
+          timeout: 6000, 
+      },
+    },
+    {
       resolve: 'gatsby-plugin-sitemap'
     }
   ]
