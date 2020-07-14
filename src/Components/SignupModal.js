@@ -138,7 +138,6 @@ class SignupModal extends React.Component {
     this.errorMessage = this.props.errorMessage
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleNewsletterSignup = this.handleNewsletterSignup.bind(this)
-    this.newsletterForm = React.createRef()
     this.state = {
       formSubmitted: false,
       statusMessage: '',
