@@ -14,7 +14,8 @@ const Grid = styled.div`
   display: grid;
 
   grid-template-areas:
-    "info links newsletter"
+    "logo logo logo"
+    "info ... social"
     "copyright copyright copyright";
 
   justify-content: space-between;
@@ -25,9 +26,8 @@ const Grid = styled.div`
 
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
-      "newsletter"
+      "social"
       "info"
-      "links"
       "copyright";
 
     gap: ${props => props.theme.spacing(5)} 0;
@@ -39,6 +39,18 @@ const Grid = styled.div`
 const Logo = styled.img`
   height: 30px;
   margin: 0 0 ${props => props.theme.spacing(3)};
+  display: none;
+  @media ${props => props.theme.media.lg} {
+    display: block;
+  }
+
+`
+const StandaloneLogo = styled(Logo)`
+  grid-area: logo;
+  display: block;
+  @media ${props => props.theme.media.lg} {
+    display: none;
+  }
 `
 
 const Subtitle = styled.div`
@@ -110,6 +122,9 @@ const LinkItem = styled(UniversalLink)`
 
 const CopyrightLine = styled.div`
   margin-top: ${props => props.theme.spacing(3)};
+  @media ${props => props.theme.media.lg} {
+    margin-top: ${props => props.theme.spacing(0)};
+  }
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-area: copyright;
   white-space: nowrap;
@@ -130,6 +145,9 @@ const CopyrightLine = styled.div`
 
 const InfoContainer = styled.div`
   grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
 
   @media ${props => props.theme.media.lg} {
     text-align: center;
@@ -164,7 +182,7 @@ const InfoContainer = styled.div`
 ` */
 
 const LinksContainer = styled.div`
-  grid-area: links;
+  grid-area: social;
   justify-self: center;
   & > a:first-of-type {
     & > img {
@@ -187,9 +205,9 @@ const ExtendedIcon = styled(Icon)`
 
 const LinkHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: ${props => props.theme.spacing(3)};
+  margin-bottom: ${props => props.theme.spacing(2)};
 `
 
 /* const FeedItem = styled.a`
@@ -233,16 +251,15 @@ const SignupInput = styled.input`
 const SignupButton = styled.button`
   background: ${props => props.theme.palette.primary.D};
   width: 100%;
+  max-width: 178px;
   @media ${props => props.theme.media.md} {
-    font-size: 16px;
     width: 50%;
     padding: ${props => props.theme.spacing(1.25, 0.5)};
   }
-  max-width: 178px;
   margin: 0 auto;
-  padding: ${props => props.theme.spacing(1.5, 3)};
+  padding: ${props => props.theme.spacing(1.5, 4)};
   border: none;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
@@ -259,7 +276,7 @@ const Footer = ({
   socialMediaLinks,
   socialMediaHeader,
   handleSignupClick,
-  newsletterCallToAction,
+  callToAction,
   successMessage,
   errorMessage
 }) => {
@@ -276,7 +293,7 @@ const Footer = ({
       <SignupModal
         visible={showNewsletterModal}
         hideModal={() => setNewsletterModalVisibility(false)}
-        callToAction={newsletterCallToAction}
+        callToAction={callToAction}
         successMessage={successMessage}
         errorMessage={errorMessage}
         email={newsletterEmail}
@@ -284,6 +301,7 @@ const Footer = ({
       <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
         <Container>
           <Grid>
+            <StandaloneLogo src={logoUrl} />
             <InfoContainer>
               <Logo src={logoUrl} />
               <Subtitle>
@@ -377,7 +395,7 @@ Footer.propTypes = {
   })),
   socialMediaHeader: PropTypes.string,
   handleSignupClick: PropTypes.func,
-  newsletterCallToAction: PropTypes.string,
+  callToAction: PropTypes.string,
   successMessage: PropTypes.string,
   errorMessage: PropTypes.string
   /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
