@@ -161,6 +161,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         newsletterCallToAction
         successMessage
         errorMessage
+        heading
       }
       datoCmsSite {
         faviconMetaTags {
@@ -219,6 +220,7 @@ allInstaNode {
             <Footer
               {...data.datoCmsFooter}
               /* instagramFeed={data.allInstaNode.nodes} */
+              socialMediaHeader={data.datoCmsNewsletter.heading}
               callToAction={data.datoCmsNewsletter.newsletterCallToAction}
               successMessage={data.datoCmsNewsletter.successMessage}
               errorMessage={data.datoCmsNewsletter.errorMessage}
