@@ -1,9 +1,8 @@
 import 'normalize.css'
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
-import SignupModal from 'Components/SignupModal'
 import Footer from 'Components/Footer'
 import Navigation from 'Components/Navigation'
 import theme from 'utils/theme'
@@ -162,6 +161,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         newsletterCallToAction
         successMessage
         errorMessage
+        heading
       }
       datoCmsSite {
         faviconMetaTags {
@@ -189,21 +189,8 @@ allInstaNode {
     seoMetaTags
   } = page
 
-  const signupModalRef = useRef()
-
   const headerBlock = pageSetup && pageSetup.find(item => item.__typename === 'DatoCmsHeader')
   const canonical = `https://kvalifik.dk${url}`
-
-  const [showNewsletterModal, setNewsletterModalVisibility] = useState(false)
-  const [newsletterEmail, setNewsletterEmail] = useState('')
-
-  const toggleOverlay = () => {
-    const currentState = showNewsletterModal
-    setNewsletterModalVisibility(!currentState)
-  }
-  const handleEmailInputChange = (val) => {
-    setNewsletterEmail(val)
-  }
 
   return (
     <>
@@ -229,22 +216,15 @@ allInstaNode {
         <App bgColor={bgColor} x-ms-format-detection="none">
           <Cookie />
           {children}
-          <SignupModal
-            ref={signupModalRef}
-            visible={showNewsletterModal}
-            hideModal={() => setNewsletterModalVisibility(false)}
-            callToAction={data.datoCmsNewsletter.newsletterCallToAction}
-            successMessage={data.datoCmsNewsletter.successMessage}
-            errorMessage={data.datoCmsNewsletter.errorMessage}
-            email={newsletterEmail}
-          />
           {!hideFooter && (
             <Footer
               {...data.datoCmsFooter}
               /* instagramFeed={data.allInstaNode.nodes} */
+              socialMediaHeader={data.datoCmsNewsletter.heading}
+              callToAction={data.datoCmsNewsletter.newsletterCallToAction}
+              successMessage={data.datoCmsNewsletter.successMessage}
+              errorMessage={data.datoCmsNewsletter.errorMessage}
               logoUrl={data.datoCmsGeneral.logo.url}
-              handleSignupClick={toggleOverlay}
-              handleInputChange={e => handleEmailInputChange(e)}
             />
           )}
           <Navigation

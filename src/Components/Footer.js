@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import theme from 'utils/theme'
@@ -8,12 +8,14 @@ import Icon from 'Components/Shared/Icon'
 import UniversalLink from 'Components/Shared/UniversalLink'
 import targetBlank from 'graphics/target_blank.svg'
 import Svg from 'react-inlinesvg'
+import SignupModal from 'Components/SignupModal'
 
 const Grid = styled.div`
   display: grid;
 
   grid-template-areas:
-    "info links newsletter"
+    "logo logo logo"
+    "info ... social"
     "copyright copyright copyright";
 
   justify-content: space-between;
@@ -24,9 +26,8 @@ const Grid = styled.div`
 
   @media ${props => props.theme.media.lg} {
     grid-template-areas:
-      "newsletter"
+      "social"
       "info"
-      "links"
       "copyright";
 
     gap: ${props => props.theme.spacing(5)} 0;
@@ -38,6 +39,18 @@ const Grid = styled.div`
 const Logo = styled.img`
   height: 30px;
   margin: 0 0 ${props => props.theme.spacing(3)};
+  display: none;
+  @media ${props => props.theme.media.lg} {
+    display: block;
+  }
+
+`
+const StandaloneLogo = styled(Logo)`
+  grid-area: logo;
+  display: block;
+  @media ${props => props.theme.media.lg} {
+    display: none;
+  }
 `
 
 const Subtitle = styled.div`
@@ -109,6 +122,9 @@ const LinkItem = styled(UniversalLink)`
 
 const CopyrightLine = styled.div`
   margin-top: ${props => props.theme.spacing(3)};
+  @media ${props => props.theme.media.lg} {
+    margin-top: ${props => props.theme.spacing(0)};
+  }
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-area: copyright;
   white-space: nowrap;
@@ -129,6 +145,9 @@ const CopyrightLine = styled.div`
 
 const InfoContainer = styled.div`
   grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
 
   @media ${props => props.theme.media.lg} {
     text-align: center;
@@ -163,7 +182,7 @@ const InfoContainer = styled.div`
 ` */
 
 const LinksContainer = styled.div`
-  grid-area: links;
+  grid-area: social;
   justify-self: center;
   & > a:first-of-type {
     & > img {
@@ -186,9 +205,9 @@ const ExtendedIcon = styled(Icon)`
 
 const LinkHeader = styled.div`
   ${props => props.theme.typography.body.mixin()}
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: ${props => props.theme.spacing(3)};
+  margin-bottom: ${props => props.theme.spacing(2)};
 `
 
 /* const FeedItem = styled.a`
@@ -211,41 +230,40 @@ const LinkHeader = styled.div`
   font-size: ${props => props.theme.typography.fontSize.xs};
   grid-column: 1 / -1;
 ` */
-// const NewsletterRow = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   margin-bottom: ${props => props.theme.spacing(3)};
-// `
-// const SignupInput = styled.input`
-//   height: 55px;
-//   background: #515151;
-//   border: none;
-//   padding: ${props => props.theme.spacing(0, 1.5)};
-//   color: white;
-//   @media ${props => props.theme.media.md} {
-//     width: 75%;
-//   }
-//   &::placeholder {
-//     color: #A8A8A8;
-//   }
-// `
-// const SignupButton = styled.button`
-//   background: ${props => props.theme.palette.primary.D};
-//   width: 100%;
-//   @media ${props => props.theme.media.md} {
-//     font-size: 16px;
-//     width: 50%;
-//     padding: ${props => props.theme.spacing(1.25, 0.5)};
-//   }
-//   max-width: 178px;
-//   margin: 0 auto;
-//   padding: ${props => props.theme.spacing(1.5, 3)};
-//   border: none;
-//   font-size: 20px;
-//   font-weight: bold;
-//   text-transform: uppercase;
-//   cursor: pointer;
-// `
+const NewsletterRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: ${props => props.theme.spacing(3)};
+`
+const SignupInput = styled.input`
+  height: 55px;
+  background: #515151;
+  border: none;
+  padding: ${props => props.theme.spacing(0, 1.5)};
+  color: white;
+  @media ${props => props.theme.media.md} {
+    width: 75%;
+  }
+  &::placeholder {
+    color: #A8A8A8;
+  }
+`
+const SignupButton = styled.button`
+  background: ${props => props.theme.palette.primary.D};
+  width: 100%;
+  max-width: 178px;
+  @media ${props => props.theme.media.md} {
+    width: 50%;
+    padding: ${props => props.theme.spacing(1.25, 0.5)};
+  }
+  margin: 0 auto;
+  padding: ${props => props.theme.spacing(1.5, 4)};
+  border: none;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+`
 
 const Footer = ({
   logoUrl,
@@ -258,64 +276,87 @@ const Footer = ({
   socialMediaLinks,
   socialMediaHeader,
   handleSignupClick,
-  handleInputChange
-  /* ,
-  instagramFeed,
-  instagramFeedTitle  */
-}) => (
-  <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
-    <Container>
-      <Grid>
-        <InfoContainer>
-          <Logo src={logoUrl} />
-          <Subtitle>
-            <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
-            <Separator />
-            <a href={'mailto:' + emailAddress}>{emailAddress}</a>
-          </Subtitle>
-          <LinkContainer>
-            {links.map((link, i) => (
-              <LinkItem
-                key={i}
-                to={link.path}
-                isExternal={link.isExternal}
-              >
-                {link.name}
-                {link.isExternal && (
-                  <Svg src={targetBlank} />
-                )}
-              </LinkItem>
-            ))}
-          </LinkContainer>
-        </InfoContainer>
-        <LinksContainer>
-          <LinkHeader>{socialMediaHeader}</LinkHeader>
-          {/* <NewsletterRow>
-            <SignupInput
-              onChange={(e) => handleInputChange(e.target.value)}
-              type="email"
-              placeholder="Email"
-            />
-            <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
-          </NewsletterRow> */}
+  callToAction,
+  successMessage,
+  errorMessage
+}) => {
+  const [showNewsletterModal, setNewsletterModalVisibility] = useState(false)
+  const [newsletterEmail, setNewsletterEmail] = useState('')
 
-          {socialMediaLinks.map(link => (
-            <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
-              <ExtendedIcon src={link.icon && link.icon.url} />
-            </UniversalLink>
-          ))}
-        </LinksContainer>
-        <CopyrightLine>
-          <span dangerouslySetInnerHTML={{ __html: copyright }} />
-          <Separator />
-          <span dangerouslySetInnerHTML={{ __html: cvr }} />
-          <Separator />
-          <span dangerouslySetInnerHTML={{ __html: address }} />
-        </CopyrightLine>
-      </Grid>
-    </Container>
-  </Skewer>
-)
+  const submitFooterEmail = (e) => {
+    e.preventDefault()
+    setNewsletterModalVisibility(true)
+  }
+
+  return (
+    <>
+      <SignupModal
+        visible={showNewsletterModal}
+        hideModal={() => setNewsletterModalVisibility(false)}
+        callToAction={callToAction}
+        successMessage={successMessage}
+        errorMessage={errorMessage}
+        email={newsletterEmail}
+      />
+      <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
+        <Container>
+          <Grid>
+            <StandaloneLogo src={logoUrl} />
+            <InfoContainer>
+              <Logo src={logoUrl} />
+              <Subtitle>
+                <a href={'tel:' + phoneNumber}>{phoneNumber}</a>
+                <Separator />
+                <a href={'mailto:' + emailAddress}>{emailAddress}</a>
+              </Subtitle>
+              <LinkContainer>
+                {links.map((link, i) => (
+                  <LinkItem
+                    key={i}
+                    to={link.path}
+                    isExternal={link.isExternal}
+                  >
+                    {link.name}
+                    {link.isExternal && (
+                      <Svg src={targetBlank} />
+                    )}
+                  </LinkItem>
+                ))}
+              </LinkContainer>
+            </InfoContainer>
+            <LinksContainer>
+              <LinkHeader>{socialMediaHeader}</LinkHeader>
+              <form action="" method="POST" onSubmit={(e) => submitFooterEmail(e)}>
+                <NewsletterRow>
+                  <SignupInput
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
+                </NewsletterRow>
+              </form>
+
+              {socialMediaLinks.map(link => (
+                <UniversalLink key={link.path} to={link.path} isExternal={link.isExternal}>
+                  <ExtendedIcon src={link.icon && link.icon.url} />
+                </UniversalLink>
+              ))}
+            </LinksContainer>
+            <CopyrightLine>
+              <span dangerouslySetInnerHTML={{ __html: copyright }} />
+              <Separator />
+              <span dangerouslySetInnerHTML={{ __html: cvr }} />
+              <Separator />
+              <span dangerouslySetInnerHTML={{ __html: address }} />
+            </CopyrightLine>
+          </Grid>
+        </Container>
+      </Skewer>
+    </>
+  )
+}
 /* DISABLED while waiting for instagram plugin update
 
   const mappedFeed = instagramFeed.map(node => ({
@@ -354,7 +395,9 @@ Footer.propTypes = {
   })),
   socialMediaHeader: PropTypes.string,
   handleSignupClick: PropTypes.func,
-  handleInputChange: PropTypes.func
+  callToAction: PropTypes.string,
+  successMessage: PropTypes.string,
+  errorMessage: PropTypes.string
   /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
