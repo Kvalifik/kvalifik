@@ -208,6 +208,7 @@ const LinkHeader = styled.div`
   font-size: 14px;
   font-weight: bold;
   margin-bottom: ${props => props.theme.spacing(2)};
+  max-width: 39ch;
 `
 
 /* const FeedItem = styled.a`
@@ -235,6 +236,13 @@ const NewsletterRow = styled.div`
   flex-direction: row;
   margin-bottom: ${props => props.theme.spacing(3)};
 `
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  
+`
+
 const SignupInput = styled.input`
   height: 55px;
   background: #515151;
@@ -328,13 +336,15 @@ const Footer = ({
               <LinkHeader>{socialMediaHeader}</LinkHeader>
               <form action="" method="POST" onSubmit={(e) => submitFooterEmail(e)}>
                 <NewsletterRow>
-                  <SignupInput
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    type="email"
-                    placeholder="Email"
-                    required
-                  />
-                  <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
+                  <InputWrapper>
+                    <SignupInput
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      type="email"
+                      placeholder="Email"
+                      required
+                    />
+                    <SignupButton onClick={handleSignupClick}>Sign up</SignupButton>
+                  </InputWrapper>
                 </NewsletterRow>
               </form>
 
