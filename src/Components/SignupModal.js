@@ -85,7 +85,9 @@ const Input = styled.input`
   &:placeholder {
     color: #A8A8A8;
   }
-  
+  &:focus {
+    outline: none;
+  }
   border: none;
 `
 
@@ -134,7 +136,6 @@ class SignupModal extends React.Component {
     super(props)
     this.callToAction = this.props.callToAction
     this.successMessage = this.props.successMessage
-    this.email = this.props.email
     this.errorMessage = this.props.errorMessage
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleNewsletterSignup = this.handleNewsletterSignup.bind(this)
@@ -143,7 +144,7 @@ class SignupModal extends React.Component {
       statusMessage: '',
       firstName: '',
       lastName: '',
-      email: '',
+      email: this.props.email,
       company: ''
     }
   }
@@ -186,80 +187,74 @@ class SignupModal extends React.Component {
 
   render () {
     return (
-      <>
-        {this.props.visible ? (
-          <Background>
-            <Modal>
-              <Heading>{this.callToAction}</Heading>
-              {this.state.formSubmitted ? (
-                <StatusMessage>{this.state.statusMessage}</StatusMessage>
-              )
-                : (
-                  <form onSubmit={(e) => this.handleNewsletterSignup(e)} action="#" method="POST">
-                    <InputGroup>
-                      <Label htmlFor="newsletter_email">Email *</Label>
-                      <Input
-                        id="newsletter_email"
-                        name="email"
-                        type="email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
-                        value={this.state.email !== '' ? this.state.email : this.props.email}
-                        required
-                      />
-                    </InputGroup>
-                    <InputGroup>
-                      <Label htmlFor="newsletter_firstName">Name *</Label>
-                      <Row>
-                        <Input
-                          id="newsletter_firstName"
-                          name="firstName"
-                          type="text"
-                          placeholder="First name"
-                          onChange={(e) => this.setState({ firstName: e.target.value })}
-                          value={this.state.firstName}
-                          required
-                        />
-                        <Input
-                          id="newsletter_lastname"
-                          name="lastName"
-                          type="text"
-                          placeholder="Last name"
-                          onChange={(e) => this.setState({ lastName: e.target.value })}
-                          value={this.state.lastName}
-                          required
-                        />
-                      </Row>
-                    </InputGroup>
-                    <InputGroup>
-                      <Label htmlFor="newsletter_company">company</Label>
-                      <Input
-                        id="newsletter_company"
-                        name="company"
-                        type="text"
-                        onChange={(e) => this.setState({ company: e.target.value })}
-                        value={this.state.company}
-                      />
-                    </InputGroup>
-                    <ButtonWrapper>
-                      <SignupButton type="submit" value="Sign up" />
-                    </ButtonWrapper>
-                  </form>
-                )
-              }
+      <Background>
+        <Modal>
+          <Heading>{this.callToAction}</Heading>
+          {this.state.formSubmitted ? (
+            <StatusMessage>{this.state.statusMessage}</StatusMessage>
+          )
+            : (
+              <form onSubmit={(e) => this.handleNewsletterSignup(e)} action="#" method="POST">
+                <InputGroup>
+                  <Label htmlFor="newsletter_email">Email *</Label>
+                  <Input
+                    id="newsletter_email"
+                    name="email"
+                    type="email"
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                    value={this.state.email}
+                    required
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <Label htmlFor="newsletter_firstName">Name *</Label>
+                  <Row>
+                    <Input
+                      id="newsletter_firstName"
+                      name="firstName"
+                      type="text"
+                      placeholder="First name"
+                      onChange={(e) => this.setState({ firstName: e.target.value })}
+                      value={this.state.firstName}
+                      required
+                    />
+                    <Input
+                      id="newsletter_lastname"
+                      name="lastName"
+                      type="text"
+                      placeholder="Last name"
+                      onChange={(e) => this.setState({ lastName: e.target.value })}
+                      value={this.state.lastName}
+                      required
+                    />
+                  </Row>
+                </InputGroup>
+                <InputGroup>
+                  <Label htmlFor="newsletter_company">company</Label>
+                  <Input
+                    id="newsletter_company"
+                    name="company"
+                    type="text"
+                    onChange={(e) => this.setState({ company: e.target.value })}
+                    value={this.state.company}
+                  />
+                </InputGroup>
+                <ButtonWrapper>
+                  <SignupButton type="submit" value="Sign up" />
+                </ButtonWrapper>
+              </form>
+            )
+          }
 
-              <CloseButton onClick={() => this.handleButtonClick()}>╳</CloseButton>
+          <CloseButton onClick={() => this.handleButtonClick()}>╳</CloseButton>
 
-            </Modal>
-          </Background>
-        ) : ''
-        }
-      </>
+        </Modal>
+      </Background>
     )
   }
 }
 
 SignupModal.propTypes = {
-  visible: PropTypes.bool,
   hideModal: PropTypes.func,
   callToAction: PropTypes.string,
   successMessage: PropTypes.string,

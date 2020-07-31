@@ -255,6 +255,9 @@ const SignupInput = styled.input`
   &::placeholder {
     color: #A8A8A8;
   }
+  &:focus {
+    outline: none;
+  }
 `
 const SignupButton = styled.button`
   background: ${props => props.theme.palette.primary.D};
@@ -271,6 +274,9 @@ const SignupButton = styled.button`
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `
 
 const Footer = ({
@@ -298,14 +304,15 @@ const Footer = ({
 
   return (
     <>
-      <SignupModal
-        visible={showNewsletterModal}
-        hideModal={() => setNewsletterModalVisibility(false)}
-        callToAction={callToAction}
-        successMessage={successMessage}
-        errorMessage={errorMessage}
-        email={newsletterEmail}
-      />
+      {showNewsletterModal &&
+        <SignupModal
+          hideModal={() => setNewsletterModalVisibility(false)}
+          callToAction={callToAction}
+          successMessage={successMessage}
+          errorMessage={errorMessage}
+          email={newsletterEmail}
+        />
+      }
       <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
         <Container>
           <Grid>
