@@ -16,7 +16,11 @@ const Root = styled.div`
 `
 
 const Padder = ({ innerPadding = '150px', removeOnMedia, children, removeTopPadding = false }) => (
-  <Root innerPadding={innerPadding} removeOnMedia={removeOnMedia} removeTopPadding={removeTopPadding}>
+  <Root
+    innerPadding={innerPadding}
+    removeOnMedia={removeOnMedia}
+    removeTopPadding={removeTopPadding}
+  >
     {children}
   </Root>
 )
