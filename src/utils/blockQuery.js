@@ -196,6 +196,13 @@ export const query = graphql`
       }
     }
   }
+  fragment ReferencelogoblockFragment on DatoCmsReferenceslogoblock {
+    id
+    logos {
+      url
+      alt
+    }
+  }
   fragment ProcessFragment on DatoCmsProcessBlock {
     id
     buttonLink {
