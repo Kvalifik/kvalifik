@@ -32,13 +32,14 @@ const CaseGrid = (props) => {
     cases,
     moreWorkUrl,
     moreWorkLabel,
-    sideText
+    sideText,
+    removeTopPadding
   } = props
   const hasMoreWork = !!moreWorkUrl
 
   return (
     <Skewer bgColor={bgColor} layer={1200}>
-      <Padder>
+      <Padder removeTopPadding={removeTopPadding}>
         <Container sideText={sideText} bgColor={bgColor}>
           <Content fadeBottom={hasMoreWork}>
             {cases.map(work => (
@@ -88,7 +89,8 @@ CaseGrid.propTypes = {
   sideText: PropTypes.string,
   bgColor: PropTypes.string.isRequired,
   moreWorkUrl: PropTypes.string,
-  moreWorkLabel: PropTypes.string
+  moreWorkLabel: PropTypes.string,
+  removeTopPadding: PropTypes.bool
 }
 
 export default CaseGrid

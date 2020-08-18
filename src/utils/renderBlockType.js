@@ -49,6 +49,7 @@ export default (block) => {
           moreWorkLabel={block.moreWorkLabel}
           cases={block.cases}
           sideText={block.sideText}
+          removeTopPadding={block.removeTopPadding}
         />
       )
     case 'DatoCmsSlogan':

@@ -30,6 +30,7 @@ export const query = graphql`
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
     sideText
+    removeTopPadding
     moreWorkPage {
       url
     }
