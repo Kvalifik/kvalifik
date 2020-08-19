@@ -202,6 +202,7 @@ export const query = graphql`
       url
       alt
     }
+    title
   }
   fragment ProcessFragment on DatoCmsProcessBlock {
     id

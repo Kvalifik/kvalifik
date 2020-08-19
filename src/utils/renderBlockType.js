@@ -162,6 +162,7 @@ export default (block) => {
       return (
         <ReferenceLogoBlock
           key={block.id}
+          title={block.title}
           logos={block.logos}
         />
       )
