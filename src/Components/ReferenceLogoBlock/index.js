@@ -38,6 +38,8 @@ const Title = styled.h3`
   text-align: center;
   color: white;
   padding-bottom: ${props => props.theme.spacing(3)};
+  padding-left: ${props => props.theme.spacing(2)};
+  padding-right: ${props => props.theme.spacing(2)};
   max-width: 100%;
   @media ${props => props.theme.media.sm} {
     max-width: 360px;
