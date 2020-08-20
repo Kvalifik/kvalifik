@@ -140,7 +140,7 @@ const ServicePreview = ({
       <RelatedWrapper>
         {exampleCases.length > 0 && <ToolsHeader>Relevant cases</ToolsHeader>}
         <Tools>
-          {exampleCases.slice(0, 2).map((work, index) => (
+          {exampleCases.map((work, index) => (
             <LinkThumb
               bold
               logo
