@@ -145,7 +145,7 @@ const ServicePreview = ({
               bold
               logo
               key={index}
-              headline={!work.logo && work.forWho}
+              headline={work.logo && work.forWho}
               iconUrl={work.logo && work.logo.url}
               to={work.url}
               color={theme.palette.light}

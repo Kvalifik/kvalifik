@@ -95,6 +95,9 @@ const Tools = styled.div`
   ])}
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 16px;
+  @media ${props => props.theme.media.sm} {
+    grid-template-columns: 1fr;
+  }
 `
 
 const Image = styled(ImgScaler)`
@@ -133,8 +136,11 @@ const ServicePreview = ({
           <Tools>
             {exampleCases.map((work, index) => (
               <LinkThumb
+                bold
+                logo
                 key={index}
-                headline={work.forWho}
+                headline={work.logo && work.forWho}
+                iconUrl={work.logo && work.logo.url}
                 to={work.url}
                 color={theme.palette.light}
               />
@@ -148,6 +154,7 @@ const ServicePreview = ({
           <Tools>
             {relatedTools.map((tool, index) => (
               <LinkThumb
+                keepText
                 key={index}
                 headline={tool.headline}
                 iconUrl={tool.icon.url}

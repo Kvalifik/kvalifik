@@ -89,6 +89,7 @@ const Icon = styled(LazyImage)`
 `
 
 const Headline = styled.p`
+  display: ${props => props.keepText ? 'inline' : 'none'};
   text-align: center;
   margin: ${props => props.theme.spacing(1)};
   font-size: 14px;
@@ -100,6 +101,7 @@ const Headline = styled.p`
   `}
 
   @media ${props => props.theme.media.sm} {
+    display: inline;
     margin: ${props => props.theme.spacing(2)};
     text-align: left;
   }
@@ -114,7 +116,8 @@ export default class ToolThumb extends Component {
     iconUrl: PropTypes.string,
     color: PropTypes.string,
     bold: PropTypes.bool,
-    logo: PropTypes.bool
+    logo: PropTypes.bool,
+    keepText: PropTypes.bool
   }
 
   render () {
@@ -126,7 +129,8 @@ export default class ToolThumb extends Component {
       to,
       id,
       bold,
-      logo
+      logo,
+      keepText
     } = this.props
 
     return (
@@ -135,7 +139,7 @@ export default class ToolThumb extends Component {
           <Center color={color}>
             <Link to={to}>
               <Icon src={iconUrl} logo={!!logo} />
-              <Headline bold={!!bold}>{headline}</Headline>
+              <Headline bold={!!bold} keepText={!!keepText}>{headline}</Headline>
               <Arrow color={color} src={arrow} />
             </Link>
           </Center>
@@ -143,7 +147,7 @@ export default class ToolThumb extends Component {
         {!to && (
           <Center color={color}>
             <Icon src={iconUrl} logo={!!logo} />
-            <Headline bold={!!bold}>{headline}</Headline>
+            <Headline bold={!!bold} keepText={!!keepText}>{headline}</Headline>
             <Arrow color={color} src={arrow} />
           </Center>
         )}
