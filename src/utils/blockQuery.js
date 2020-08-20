@@ -30,6 +30,7 @@ export const query = graphql`
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
     sideText
+    removeTopPadding
     moreWorkPage {
       url
     }
@@ -194,6 +195,14 @@ export const query = graphql`
         providerUid
       }
     }
+  }
+  fragment ReferencelogoblockFragment on DatoCmsReferenceslogoblock {
+    id
+    logos {
+      url
+      alt
+    }
+    title
   }
   fragment ProcessFragment on DatoCmsProcessBlock {
     id

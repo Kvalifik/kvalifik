@@ -18,6 +18,7 @@ import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
 import FiftyFifty from 'Components/FiftyFifty'
+import ReferenceLogoBlock from 'Components/ReferenceLogoBlock'
 
 import theme from 'utils/theme'
 
@@ -49,6 +50,7 @@ export default (block) => {
           moreWorkLabel={block.moreWorkLabel}
           cases={block.cases}
           sideText={block.sideText}
+          removeTopPadding={block.removeTopPadding}
         />
       )
     case 'DatoCmsSlogan':
@@ -153,6 +155,15 @@ export default (block) => {
           title={block.title}
           media={block.media}
           bgColor={block.bgColor}
+        />
+      )
+    }
+    case 'DatoCmsReferenceslogoblock': {
+      return (
+        <ReferenceLogoBlock
+          key={block.id}
+          title={block.title}
+          logos={block.logos}
         />
       )
     }
