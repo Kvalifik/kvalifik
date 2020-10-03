@@ -181,8 +181,31 @@ class VideoFullscreen extends Component {
         </>
       )
     } else if (provider === 'youtube') {
+      const src = `https://www.youtube-nocookie.com/embed/${providerUid}?autoplay=1`
       return (
-        <p style={{ color: 'white' }}>YouTube not supported</p>
+        <>
+          <div
+            style={{
+              padding: '56.25% 0 0 0',
+              position: 'relative'
+            }}
+          >
+            <iframe
+              src={src}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%'
+              }}
+
+              frameBorder="0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+            />
+          </div>
+        </>
       )
     }
 
