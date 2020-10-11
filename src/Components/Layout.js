@@ -161,6 +161,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         newsletterCallToAction
         successMessage
         errorMessage
+        checkboxMessage
         heading
       }
       datoCmsSite {
@@ -224,6 +225,7 @@ allInstaNode {
               callToAction={data.datoCmsNewsletter.newsletterCallToAction}
               successMessage={data.datoCmsNewsletter.successMessage}
               errorMessage={data.datoCmsNewsletter.errorMessage}
+              checkboxMessage={data.datoCmsNewsletter.checkboxMessage}
               logoUrl={data.datoCmsGeneral.logo.url}
             />
           )}
