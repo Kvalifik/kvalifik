@@ -162,6 +162,7 @@ const Main = ({ children, hideFooter, isGlitch, bgColor, page }) => {
         successMessage
         errorMessage
         checkboxMessage
+        disclaimerMessage
         heading
       }
       datoCmsSite {
@@ -226,6 +227,7 @@ allInstaNode {
               successMessage={data.datoCmsNewsletter.successMessage}
               errorMessage={data.datoCmsNewsletter.errorMessage}
               checkboxMessage={data.datoCmsNewsletter.checkboxMessage}
+              disclaimerMessage={data.datoCmsNewsletter.disclaimerMessage}
               logoUrl={data.datoCmsGeneral.logo.url}
             />
           )}

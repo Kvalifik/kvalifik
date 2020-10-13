@@ -23,6 +23,10 @@ const Modal = styled.div`
   background: #252525;
   max-width: 960px;
   width: 100%;
+  max-height: 97%;
+  @media ${props => props.theme.media.sm} {
+    overflow-y: scroll;
+  }
   margin: ${props => props.theme.spacing(0, 1.5)};
   padding: ${props => props.theme.spacing(6)};
   position: relative;
@@ -37,7 +41,8 @@ const Heading = styled.h1`
   line-height: 50px;
   margin-bottom: ${props => props.theme.spacing(6)};
   @media ${props => props.theme.media.sm} {
-    font-size: 17px;
+    font-size: 20px;
+    line-height: 32px;
   }
 `
 const StatusMessage = styled.p`
@@ -57,12 +62,14 @@ const Row = styled.div`
   flex-direction: row;
   max-width: 1020px;
   & > input {
-
     max-width: 500px;
     width: 100%;
 
     &:first-of-type {
       margin-right: ${props => props.theme.spacing(5)};
+      @media ${props => props.theme.media.sm} {
+        margin-right: ${props => props.theme.spacing(2)};
+      }
     }
   }
   
@@ -97,10 +104,10 @@ const Input = styled.input`
 const PrivacyPolicy = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `
 
 const CheckboxContainer = styled.div`
-  margin-top: 5px;
   margin-right: ${props => props.theme.spacing(2)};
 `
 
@@ -129,6 +136,12 @@ const CheckboxMessage = styled.div`
   & > * {
     color: white;
     margin: 0;
+  }
+`
+const DisclaimerMessage = styled.div`
+  & > * {
+    font-size: 13px;
+    color: white;
   }
 `
 
@@ -191,14 +204,24 @@ const CloseButton = styled.button`
 const MailChimpDisclaimer = styled.div`
   display: flex;
   flex-direction: row;
+  @media ${props => props.theme.media.sm} {
+    flex-direction: column;
+    margin-top: ${props => props.theme.spacing(4)};
+  }
   align-items: center;
   margin-top: ${props => props.theme.spacing(3)};
+`
+const MailChimpLogo = styled.div`
+  max-width: 64px;
+  width: 100%;
+  margin-right: ${props => props.theme.spacing(2)};
   & > svg {
-    width: 96px;
-    margin-right: ${props => props.theme.spacing(2)};
+    width: 100%;
+    height: 100%;
   }
 `
-const DisclaimerText = styled.p`
+
+const MailChimpDisclaimerText = styled.p`
   font-size: ${props => props.theme.typography.fontSize.xs};
   color: white;
 `
@@ -209,6 +232,7 @@ class SignupModal extends React.Component {
     this.callToAction = this.props.callToAction
     this.successMessage = this.props.successMessage
     this.checkboxMessage = this.props.checkboxMessage
+    this.disclaimerMessage = this.props.disclaimerMessage
     this.errorMessage = this.props.errorMessage
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleNewsletterSignup = this.handleNewsletterSignup.bind(this)
@@ -323,6 +347,7 @@ class SignupModal extends React.Component {
                   </CheckboxContainer>
                   <CheckboxMessage dangerouslySetInnerHTML={{ __html: this.checkboxMessage }} />
                 </PrivacyPolicy>
+                <DisclaimerMessage dangerouslySetInnerHTML={{ __html: this.disclaimerMessage }} />
 
                 <ButtonWrapper>
                   <SignupButton
@@ -333,20 +358,23 @@ class SignupModal extends React.Component {
                   />
                 </ButtonWrapper>
                 <MailChimpDisclaimer>
-                  <Svg src={MailChimpGDPR} />
-                  <DisclaimerText>
+                  <MailChimpLogo>
+                    <Svg src={MailChimpGDPR} />
+                  </MailChimpLogo>
+                  <MailChimpDisclaimerText>
                     <span>We use Mailchimp as our marketing platform.
                       By clicking above to sign up, you acknowledge
                       that your information will be transferred to
-                      Mailchimp for processing.
-                    </span> <a
+                      Mailchimp for processing.&nbsp;
+                    </span>
+                    <a
                       href="https://mailchimp.com/legal/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Learn more about Mailchimp's privacy practices here.
                     </a>
-                  </DisclaimerText>
+                  </MailChimpDisclaimerText>
                 </MailChimpDisclaimer>
               </form>
             )
@@ -366,6 +394,7 @@ SignupModal.propTypes = {
   successMessage: PropTypes.string,
   errorMessage: PropTypes.string,
   checkboxMessage: PropTypes.string,
+  disclaimerMessage: PropTypes.string,
   email: PropTypes.string
 }
 
