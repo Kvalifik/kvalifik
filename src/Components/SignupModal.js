@@ -81,7 +81,7 @@ const Input = styled.input`
   margin-bottom: ${props => props.theme.spacing(3.75)};
   height: 100%;
   min-height: 55px;
-  padding: ${props => props.theme.spacing(2,2)};
+  padding: ${props => props.theme.spacing(2, 2)};
   background: #515151;
 
   color: white;  
@@ -97,19 +97,19 @@ const Input = styled.input`
 const PrivacyPolicy = styled.div`
   display: flex;
   flex-direction: row;
-`;
+`
 
 const CheckboxContainer = styled.div`
   margin-top: 5px;
   margin-right: ${props => props.theme.spacing(2)};
-`;
+`
 
 const Checkbox = styled.div`
   width: 20px;
   height: 20px;
-  background: ${props => props.checked 
-    ? "#515151"
-    : "#515151"
+  background: ${props => props.checked
+    ? '#515151'
+    : '#515151'
   };
   cursor: pointer;
   ${({ checked }) => checked && `
@@ -124,13 +124,13 @@ const Checkbox = styled.div`
       color: #49EAAC;
     }
   `}
-`;
+`
 const CheckboxMessage = styled.div`
   & > * {
     color: white;
     margin: 0;
   }
-`;
+`
 
 const ButtonWrapper = styled.div`
   width: 100%;
@@ -139,13 +139,13 @@ const ButtonWrapper = styled.div`
   margin-top: ${props => props.theme.spacing(2.5)};
 `
 const SignupButton = styled.input`
-  background: ${props => props.consented 
+  background: ${props => props.consented
     ? props.theme.palette.primary.D
-    : "#515151"
+    : '#515151'
   };
   color: ${props => props.consented
-    ? "black"
-    : "#A8A8A8"
+    ? 'black'
+    : '#A8A8A8'
   };
 
   width: 100%;
@@ -154,9 +154,9 @@ const SignupButton = styled.input`
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  cursor: ${props => props.consented 
-    ? "pointer"
-    : "disabled"
+  cursor: ${props => props.consented
+    ? 'pointer'
+    : 'disabled'
   };
   max-width: 200px;
   min-height: 55px;
@@ -197,11 +197,11 @@ const MailChimpDisclaimer = styled.div`
     width: 96px;
     margin-right: ${props => props.theme.spacing(2)};
   }
-`;
+`
 const DisclaimerText = styled.p`
   font-size: ${props => props.theme.typography.fontSize.xs};
   color: white;
-`;
+`
 
 class SignupModal extends React.Component {
   constructor (props) {
@@ -232,7 +232,6 @@ class SignupModal extends React.Component {
     })
   }
 
-
   handleNewsletterSignup (e) {
     e.preventDefault()
     const firstName = this.state.firstName
@@ -240,26 +239,24 @@ class SignupModal extends React.Component {
     const email = this.state.email
     const company = this.state.company
 
-
-
     addToMailchimp(email, {
       FNAME: firstName,
       LNAME: lastName,
       COMPANY: company
     })
-    .then(data => {
-      if (data.result === 'success') {
-        this.setState({
-          formSubmitted: true,
-          statusMessage: this.successMessage
-        })
-      } else {
-        this.setState({
-          formSubmitted: true,
-          statusMessage: this.errorMessage !== '' ? this.errorMessage : data.msg
-        })
-      }
-    })
+      .then(data => {
+        if (data.result === 'success') {
+          this.setState({
+            formSubmitted: true,
+            statusMessage: this.successMessage
+          })
+        } else {
+          this.setState({
+            formSubmitted: true,
+            statusMessage: this.errorMessage !== '' ? this.errorMessage : data.msg
+          })
+        }
+      })
   }
 
   render () {
@@ -319,24 +316,37 @@ class SignupModal extends React.Component {
 
                 <PrivacyPolicy>
                   <CheckboxContainer>
-                    <Checkbox 
+                    <Checkbox
                       checked={this.state.consented}
-                      onClick={() => this.setState({consented: !this.state.consented})} 
+                      onClick={() => this.setState({ consented: !this.state.consented })}
                     />
                   </CheckboxContainer>
-                  <CheckboxMessage dangerouslySetInnerHTML={{__html: this.checkboxMessage}} />
+                  <CheckboxMessage dangerouslySetInnerHTML={{ __html: this.checkboxMessage }} />
                 </PrivacyPolicy>
 
                 <ButtonWrapper>
-                  <SignupButton consented={this.state.consented} type="submit" value="Sign up" onSubmit={(e) => this.handleNewsletterSignup(e)}/>
+                  <SignupButton
+                    consented={this.state.consented}
+                    type="submit"
+                    value="Sign up"
+                    onSubmit={(e) => this.handleNewsletterSignup(e)}
+                  />
                 </ButtonWrapper>
                 <MailChimpDisclaimer>
                   <Svg src={MailChimpGDPR} />
                   <DisclaimerText>
-                    <span>We use Mailchimp as our marketing platform. By clicking below to subscribe, 
-                      you acknowledge that your information will be transferred to Mailchimp for processing. </span>
-                    <a href="https://mailchimp.com/legal/" target="_blank">Learn more about Mailchimp's privacy practices here.</a> 
-                    </DisclaimerText>
+                    <span>We use Mailchimp as our marketing platform.
+                      By clicking above to sign up, you acknowledge
+                      that your information will be transferred to
+                      Mailchimp for processing.
+                    </span> <a
+                      href="https://mailchimp.com/legal/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn more about Mailchimp's privacy practices here.
+                    </a>
+                  </DisclaimerText>
                 </MailChimpDisclaimer>
               </form>
             )
