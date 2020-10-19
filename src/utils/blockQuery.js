@@ -351,6 +351,27 @@ export const query = graphql`
       }
     }
   }
+  fragment AvailablePosition on DatoCmsAvailablePosition {
+    id
+    title
+    description
+    jobPosting {
+      id
+      jobPostName
+      positionType
+      color {
+        red
+        green
+        blue
+        alpha
+        rgb
+        hex
+      }
+      jobPostingLink {
+        path
+      }
+    }
+  }
   fragment ServicesBigFragment on DatoCmsServicesBig {
     id
     toolboxPage {

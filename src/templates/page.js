@@ -71,6 +71,7 @@ export const query = graphql`
         ...PeopleBlockFragment
         ...ServicesBlockFragment
         ...ServicesBigFragment
+        ...AvailablePosition
         ...Stepper
       }
       seoMetaTags {

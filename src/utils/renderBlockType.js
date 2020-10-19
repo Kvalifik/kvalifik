@@ -19,6 +19,7 @@ import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
 import FiftyFifty from 'Components/FiftyFifty'
 import ReferenceLogoBlock from 'Components/ReferenceLogoBlock'
+import AvailablePosition from 'Components/AvailablePosition'
 
 import theme from 'utils/theme'
 
@@ -231,6 +232,16 @@ export default (block) => {
           bgColor={block.bgColor && block.bgColor.hex}
           sideText={block.sideText}
           toolboxPage={block.toolboxPage}
+        />
+      )
+    }
+    case 'DatoCmsAvailablePosition': {
+      return (
+        <AvailablePosition
+          key={block.id}
+          title={block.title}
+          description={block.description}
+          jobPostings={block.jobPosting}
         />
       )
     }

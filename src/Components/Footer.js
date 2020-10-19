@@ -292,7 +292,9 @@ const Footer = ({
   handleSignupClick,
   callToAction,
   successMessage,
-  errorMessage
+  errorMessage,
+  checkboxMessage,
+  disclaimerMessage
 }) => {
   const [showNewsletterModal, setNewsletterModalVisibility] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
@@ -311,6 +313,8 @@ const Footer = ({
           successMessage={successMessage}
           errorMessage={errorMessage}
           email={newsletterEmail}
+          checkboxMessage={checkboxMessage}
+          disclaimerMessage={disclaimerMessage}
         />
       }
       <Skewer angle="small" flushBottom bgColor={theme.palette.dark} layer={1200}>
@@ -414,7 +418,9 @@ Footer.propTypes = {
   handleSignupClick: PropTypes.func,
   callToAction: PropTypes.string,
   successMessage: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  checkboxMessage: PropTypes.string,
+  disclaimerMessage: PropTypes.string
   /* instagramFeed: PropTypes.arrayOf(PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string,
