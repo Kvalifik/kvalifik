@@ -12,7 +12,7 @@ const Top = styled.div`
   margin: ${props => props.theme.spacing(10, 0)};
 
   @media ${props => props.theme.media.sm} {
-    margin: ${props => props.theme.spacing(10, 1)};
+    margin: ${props => props.theme.spacing(10, 2)};
   }
 
   @media ${props => props.theme.media.lg} {
@@ -67,12 +67,15 @@ const Description = styled.div`
 
 const JobPostings = styled.div`
   display: grid;
+  @media ${props => props.theme.media.lg} {
+    grid-template-columns: 1fr;
+  }
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 9px;
   margin: ${props => props.theme.spacing(-2, -2, 8)};
 
   @media ${props => props.theme.media.sm} {
-    margin: ${props => props.theme.spacing(-0.5, -1, 9.5)};
+    margin: ${props => props.theme.spacing(-0.5, 0, 9.5)};
   }
 
 `

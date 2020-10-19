@@ -11,24 +11,22 @@ const Info = styled.div`
 const Root = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  height: 175px;
-  margin: ${props => props.theme.spacing(2)};
-
+  height: 225px;
+  @media ${props => props.theme.media.lg} {
+    margin: ${props => props.theme.spacing(0)};
+  }
+  margin: ${props => props.theme.spacing(1)};
   transform-origin: center;
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
-
+  padding: ${props => props.theme.spacing(2)};
   @media ${props => props.theme.media.sm} {
     margin: ${props => props.theme.spacing(0.5, 2)};
+    padding: ${props => props.theme.spacing(0)};
   }
 
   @media ${props => props.theme.media.lg} {
     &:nth-child(odd) {
       grid-template-columns: 1fr;
-
-      ${Info} {
-        grid-column: 2;
-        grid-row: 1;
-      }
     }
   }
 `
@@ -39,10 +37,10 @@ const NameContainer = styled.div`
   align-self: center;
   justify-self: start;
 
-  font-size: 16px;
+  font-size: 18px;
 
   strong {
-    font-size: 18px;
+    font-size: 20px;
   }
 `
 
@@ -63,7 +61,7 @@ const LinkContainer = styled.div`
 `
 
 const JobPosting = ({ post }) => (
-  <Root>
+  <Root href={post.jobPostingLink.path}>
     <Info bgColor={post.color && post.color.hex}>
       <NameContainer>
         <strong>{post.jobPostName}</strong>
