@@ -262,7 +262,6 @@ class SignupModal extends React.Component {
     const lastName = this.state.lastName
     const email = this.state.email
     const company = this.state.company
-
     addToMailchimp(email, {
       FNAME: firstName,
       LNAME: lastName,
@@ -292,7 +291,7 @@ class SignupModal extends React.Component {
             <StatusMessage>{this.state.statusMessage}</StatusMessage>
           )
             : (
-              <form action="#" method="POST">
+              <form action="#" method="POST" onSubmit={(e) => this.handleNewsletterSignup(e)}>
                 <InputGroup>
                   <Label htmlFor="newsletter_email">Email *</Label>
                   <Input
@@ -354,7 +353,6 @@ class SignupModal extends React.Component {
                     consented={this.state.consented}
                     type="submit"
                     value="Sign up"
-                    onSubmit={(e) => this.handleNewsletterSignup(e)}
                   />
                 </ButtonWrapper>
                 <MailChimpDisclaimer>
