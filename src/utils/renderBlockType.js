@@ -1,5 +1,6 @@
 import React from 'react'
 
+import BlogGrid from 'Components/BlogGrid'
 import CaseGrid from 'Components/CaseGrid'
 import ActionBlock from 'Components/ActionBlock'
 import HeaderBlock from 'Components/HeaderBlock'
@@ -20,6 +21,7 @@ import Stepper from 'Components/Stepper'
 import FiftyFifty from 'Components/FiftyFifty'
 import ReferenceLogoBlock from 'Components/ReferenceLogoBlock'
 import AvailablePosition from 'Components/AvailablePosition'
+import RichtextBlock from 'Components/RichtextBlock'
 
 import theme from 'utils/theme'
 
@@ -41,6 +43,16 @@ export default (block) => {
         />
       )
     }
+    case 'DatoCmsBlogGrid':
+      return (
+        <BlogGrid
+          key={block.id}
+          bgColor={theme.palette.dark}
+          blogs={block.blogposts}
+          sideText={block.sideText}
+          removeTopPadding={block.removeTopPadding}
+        />
+      )
     case 'DatoCmsCaseGrid':
       return (
         <CaseGrid
@@ -53,6 +65,14 @@ export default (block) => {
           sideText={block.sideText}
           removeTopPadding={block.removeTopPadding}
         />
+      )
+    case 'DatoCmsRichtext':
+      return (
+        <RichtextBlock 
+          key={block.id}
+          textColor={block.textColor}
+          bgColor={block.bgColor}
+          text={block.textNode.childMarkdownRemark.html}/>
       )
     case 'DatoCmsSlogan':
       return (

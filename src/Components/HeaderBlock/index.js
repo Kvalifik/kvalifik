@@ -195,6 +195,11 @@ const Title = styled.h1`
   }
 `
 
+const Author = styled.span`
+  font-size: 2vh;
+  margin: 1rem 0;
+`
+
 const shouldAutoplayVideo = () => {
   let windowExists
   try {
@@ -240,7 +245,8 @@ class HeaderBlock extends Component {
       textColor,
       video,
       iconUrl,
-      imageUrl
+      imageUrl,
+      author
     } = this.props
     const { playing } = this.state
     const staticVideoUrl = 'https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4'
@@ -255,6 +261,7 @@ class HeaderBlock extends Component {
               <TopLeftContainer>
                 {iconUrl && (<Icon src={iconUrl} />)}
                 <Title>{title}</Title>
+                { author && <Author>Written by { author.name }, { author.jobTitle }</Author>}
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer onClick={this.handlePlay.bind(this)}>
@@ -282,6 +289,10 @@ class HeaderBlock extends Component {
 
 HeaderBlock.propTypes = {
   title: PropTypes.string,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    jobTitle: PropTypes.string
+  }),
   body: PropTypes.string,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,

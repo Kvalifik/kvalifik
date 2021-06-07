@@ -49,6 +49,45 @@ export const query = graphql`
       }
     }
   }
+  fragment BlogGridFragment on DatoCmsBlogGrid {
+    id
+    sideText
+    removeTopPadding
+    blogposts {
+      description
+      id
+      forWho
+      url
+      fullSize
+      author{
+        name
+        jobTitle
+      }
+      meta {
+        publishedAt(formatString: "DD MMMM, YYYY")
+      }
+      color {
+        hex
+      }
+      image{
+        url
+      }
+    }
+  }
+  fragment RichtextFragment on DatoCmsRichtext {
+    id
+    textNode {
+      childMarkdownRemark {
+        html
+      }
+    }
+    bgColor {
+      hex
+    }
+    textColor {
+      hex
+    }
+  }
   fragment SloganFragment on DatoCmsSlogan {
     id
     punchline
