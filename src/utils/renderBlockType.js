@@ -29,6 +29,7 @@ export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
       const imageUrl = block.media.image && block.media.image.url
+      console.log("Rendering header", block)
 
       return (
         <HeaderBlock

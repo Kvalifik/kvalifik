@@ -18,7 +18,7 @@ const PageTemplate = ({ data }) => {
 
   const {
     backButtonText
-  } = data.datoCmsGeneral
+  } = 'Back to blog'
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
@@ -34,6 +34,7 @@ const PageTemplate = ({ data }) => {
         height="20vh"
         layer={500}
       />
+      {console.log(pageSetup)}
       {pageSetup.map(renderBlockType)}
     </Layout>
   )
@@ -53,18 +54,12 @@ PageTemplate.propTypes = {
       color: PropTypes.shape({
         hex: PropTypes.string
       })
-    }),
-    datoCmsGeneral: PropTypes.shape({
-      backButtonText: PropTypes.string
     })
   })
 }
 
 export const query = graphql`
   query($url: String!) {
-    datoCmsGeneral {
-      backButtonText
-    }
     datoCmsBlog(url: { eq: $url }) {
       url
       color {

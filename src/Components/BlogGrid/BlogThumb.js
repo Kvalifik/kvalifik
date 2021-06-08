@@ -61,15 +61,15 @@ const Desc = styled.div`
   }
 `
 
-const ProjectName = styled.div`
+const PublishedAt = styled.div`
   position: absolute;
   bottom: 0;
   transform: rotate(-90deg);
   transform-origin: 0% 0%;
   left: 10px;
-  font-size: 13px;
+  font-size: 10px;
 
-  @media ${props => props.theme.media.xs} {
+  @media ${props => props.theme.media.lg} {
     width: 50%;
   }
 `
@@ -131,12 +131,10 @@ const BlogThumb = ({
     <Content>
       <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
-        <ProjectName>
-          {date}
-        </ProjectName>
+        <PublishedAt>{ date }</PublishedAt>
         <Header full={fullWidth}>
             <Headline full={fullWidth} dangerouslySetInnerHTML={{ __html: description }}/>
-            <Author>Written by: <br/><strong>{author.name}</strong>, { author.jobTitle }</Author>
+            <Author>Written by: <br/><strong>{author.name}</strong>, {author.jobTitle}</Author>
         </Header>
       </Desc>
       <Img src={bgUrl} fullWidth={fullWidth} />
