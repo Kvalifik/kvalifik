@@ -118,7 +118,6 @@ const Author = styled.span`
 
 
 const BlogThumb = ({
-  name,
   author,
   date,
   description,

@@ -27,6 +27,36 @@ export const query = graphql`
       }
     }
   }
+  fragment BlogHeaderFragment on DatoCmsBlogHeader {
+    id
+    title
+    description
+    blogAuthor: author{
+      name
+      jobTitle
+    }
+    meta {
+      publishedAt(formatString: "DD MMMM, YYYY")
+    }
+    bgColor {
+      hex
+    }
+    textColor{
+      hex
+    }
+    media {
+      __typename
+      ... on DatoCmsMediaItem {
+        image {
+          url
+        }
+        video {
+          provider
+          providerUid
+        }
+      }
+    }
+  }
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
     sideText
@@ -56,7 +86,6 @@ export const query = graphql`
     blogposts {
       description
       id
-      forWho
       url
       fullSize
       author{

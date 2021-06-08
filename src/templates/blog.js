@@ -74,7 +74,7 @@ export const query = graphql`
       }
       pageSetup {
         __typename
-        ...HeaderFragment
+        ...BlogHeaderFragment
         ...ActionBlockFragment
         ...SloganFragment
         ...RichtextFragment

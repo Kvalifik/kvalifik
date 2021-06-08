@@ -3,6 +3,7 @@ import React from 'react'
 import BlogGrid from 'Components/BlogGrid'
 import CaseGrid from 'Components/CaseGrid'
 import ActionBlock from 'Components/ActionBlock'
+import BlogHeader from 'Components/BlogHeader'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import GalleryBlock from 'Components/GalleryBlock'
@@ -29,7 +30,6 @@ export default (block) => {
   switch (block && block.__typename) {
     case 'DatoCmsHeader': {
       const imageUrl = block.media.image && block.media.image.url
-      console.log("Rendering header", block)
 
       return (
         <HeaderBlock
@@ -37,6 +37,23 @@ export default (block) => {
           title={block.title}
           body={block.description}
           iconUrl={block.icon && block.icon.url}
+          bgColor={block.bgColor && block.bgColor.hex}
+          textColor={block.textColor && block.textColor.hex}
+          video={block.media.video}
+          imageUrl={imageUrl}
+        />
+      )
+    }
+    case 'DatoCmsBlogHeader': {
+      const imageUrl = block.media.image && block.media.image.url
+
+      return (
+        <BlogHeader
+          key={block.id}
+          title={block.title}
+          publishedAt={block.meta.publishedAt}
+          body={block.description}
+          blogAuthor={block.blogAuthor}
           bgColor={block.bgColor && block.bgColor.hex}
           textColor={block.textColor && block.textColor.hex}
           video={block.media.video}

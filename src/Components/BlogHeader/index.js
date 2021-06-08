@@ -7,8 +7,8 @@ import Container from 'Components/Shared/Container'
 import Icon from 'Components/Shared/Icon'
 import VideoFullscreen from 'Components/Shared/VideoFullscreen'
 import PlayButton from './PlayButton'
-import ThumbImage from './ThumbImage'
 import AutoPlayVideo from '../AutoPlayVideo.js'
+import ThumbImage from './ThumbImage'
 import theme from 'utils/theme'
 
 const IEContent = css`
@@ -244,9 +244,9 @@ class BlogHeader extends Component {
       bgColor,
       textColor,
       video,
-      iconUrl,
       imageUrl,
-      author
+      blogAuthor,
+      publishedAt
     } = this.props
     const { playing } = this.state
     const staticVideoUrl = 'https://kvalifik-assets.s3.eu-central-1.amazonaws.com/kvalifik.mp4'
@@ -259,9 +259,9 @@ class BlogHeader extends Component {
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>
-                {iconUrl && (<Icon src={iconUrl} />)}
                 <Title>{title}</Title>
-                { author && <Author>Written by { author.name }, { author.jobTitle }</Author>}
+                <Author>Written by { blogAuthor.name }, { blogAuthor.jobTitle }</Author>
+                <p>Published { publishedAt }</p>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer onClick={this.handlePlay.bind(this)}>
@@ -289,7 +289,7 @@ class BlogHeader extends Component {
 
 BlogHeader.propTypes = {
   title: PropTypes.string,
-  author: PropTypes.shape({
+  blogAuthor: PropTypes.shape({
     name: PropTypes.string,
     jobTitle: PropTypes.string
   }),
