@@ -260,8 +260,8 @@ class BlogHeader extends Component {
             <Content textColor={textColor}>
               <TopLeftContainer>
                 <Title>{title}</Title>
-                <Author>Written by { blogAuthor.name }, { blogAuthor.jobTitle }</Author>
-                <p>Published { publishedAt }</p>
+                <Author>Written by {blogAuthor.name}, {blogAuthor.jobTitle}</Author>
+                <p>Published {publishedAt}</p>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer onClick={this.handlePlay.bind(this)}>
@@ -293,6 +293,7 @@ BlogHeader.propTypes = {
     name: PropTypes.string,
     jobTitle: PropTypes.string
   }),
+  publishedAt: PropTypes.string,
   body: PropTypes.string,
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
@@ -300,7 +301,6 @@ BlogHeader.propTypes = {
     provider: PropTypes.string,
     providerUid: PropTypes.string
   }),
-  iconUrl: PropTypes.string,
   imageUrl: PropTypes.string
 }
 

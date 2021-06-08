@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import Container from 'Components/Shared/Container'
 import Skewer from 'Components/Shared/Skewer'
 
-import theme from 'utils/theme'
-
 const Root = styled.div`
   &::after {
     clear: both;
@@ -40,14 +38,16 @@ const RichtextBlock = ({
   <Root>
     <Skewer bgColor={bgColor.hex} layer={1200}>
       <Container overflowLeft overflowRight>
-          <Content textColor={textColor.hex} dangerouslySetInnerHTML={{ __html: text }} />
+        <Content textColor={textColor.hex} dangerouslySetInnerHTML={{ __html: text }} />
       </Container>
     </Skewer>
   </Root>
 )
 
 RichtextBlock.propTypes = {
-  text: PropTypes.string,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
+  text: PropTypes.string
 }
 
 export default RichtextBlock

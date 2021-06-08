@@ -57,6 +57,18 @@ const BlogGrid = (props) => {
             ))}
           </Content>
         </Container>
+        {hasMoreWork && (
+          <MoreWork>
+            <Button
+              type="link"
+              to={moreWorkUrl}
+              bgColor={theme.hexToRgba(theme.palette.light, 0.2)}
+              color={theme.palette.light}
+            >
+              {moreWorkLabel}
+            </Button>
+          </MoreWork>
+        )}
       </Padder>
     </Skewer>
   )
@@ -68,8 +80,8 @@ BlogGrid.propTypes = {
     forWho: PropTypes.string,
     description: PropTypes.string,
     author: PropTypes.shape({
-        name: PropTypes.string,
-        jobTitle: PropTypes.string
+      name: PropTypes.string,
+      jobTitle: PropTypes.string
     }),
     image: PropTypes.shape({
       url: PropTypes.string

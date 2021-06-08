@@ -86,11 +86,12 @@ export default (block) => {
       )
     case 'DatoCmsRichtext':
       return (
-        <RichtextBlock 
+        <RichtextBlock
           key={block.id}
           textColor={block.textColor}
           bgColor={block.bgColor}
-          text={block.textNode.childMarkdownRemark.html}/>
+          text={block.textNode.childMarkdownRemark.html}
+        />
       )
     case 'DatoCmsSlogan':
       return (

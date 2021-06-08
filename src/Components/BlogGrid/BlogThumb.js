@@ -109,13 +109,11 @@ const Headline = styled.h3`
       }
 `
 
-
 const Author = styled.span`
   font-weight: 400;
   font-size: 12px;
   line-height: 1.4rem;
 `
-
 
 const BlogThumb = ({
   author,
@@ -130,10 +128,10 @@ const BlogThumb = ({
     <Content>
       <Desc color={bgColor}>
         <Arrow src={arrowImg} alt="arrow" />
-        <PublishedAt>{ date }</PublishedAt>
+        <PublishedAt>{date}</PublishedAt>
         <Header full={fullWidth}>
-            <Headline full={fullWidth} dangerouslySetInnerHTML={{ __html: description }}/>
-            <Author>Written by: <br/><strong>{author.name}</strong>, {author.jobTitle}</Author>
+          <Headline full={fullWidth} dangerouslySetInnerHTML={{ __html: description }} />
+          <Author>Written by: <br /><strong>{author.name}</strong>, {author.jobTitle}</Author>
         </Header>
       </Desc>
       <Img src={bgUrl} fullWidth={fullWidth} />
@@ -153,6 +151,8 @@ const BlogThumb = ({
 
 BlogThumb.propTypes = {
   name: PropTypes.string,
+  author: PropTypes.string,
+  date: PropTypes.string,
   description: PropTypes.string,
   bgColor: PropTypes.string,
   fullWidth: PropTypes.bool,

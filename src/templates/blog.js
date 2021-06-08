@@ -16,15 +16,11 @@ const PageTemplate = ({ data }) => {
     color
   } = data.datoCmsBlog
 
-  const {
-    backButtonText
-  } = 'Back to blog'
-
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
     <Layout bgColor={color && color.hex} page={data.datoCmsBlog}>
-      <BackArrow backText={'Back to blog'} />
+      <BackArrow backText="Back to blog" />
       {headerBlock && headerBlock.bgColor && (
         <DownArrow color={color && color.hex} />
       )}
@@ -46,8 +42,8 @@ PageTemplate.propTypes = {
       pageSetup: PropTypes.array,
       title: PropTypes.string,
       author: PropTypes.shape({
-          name: PropTypes.string,
-          jobTitle: PropTypes.string
+        name: PropTypes.string,
+        jobTitle: PropTypes.string
       }),
       url: PropTypes.string,
       date: PropTypes.string,
