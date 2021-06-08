@@ -30,7 +30,6 @@ const PageTemplate = ({ data }) => {
         height="20vh"
         layer={500}
       />
-      {console.log(pageSetup)}
       {pageSetup.map(renderBlockType)}
     </Layout>
   )

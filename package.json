@@ -35,7 +35,7 @@
     "gatsby-plugin-styled-components": "^3.1.2",
     "gatsby-source-datocms": "^2.1.18",
     "gatsby-source-instagram": "^0.5.1",
-    "gatsby-transformer-remark": "^2.17.0-next.0",
+    "gatsby-transformer-remark": "^2.8.35",
     "ie-grid-mixins": "github:Kvalifik/ie-grid-mixins",
     "logrocket": "^1.0.3",
     "normalize.css": "^8.0.1",
