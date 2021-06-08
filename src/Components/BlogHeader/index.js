@@ -312,9 +312,11 @@ class BlogHeader extends Component {
                   Written by
                   {
                     blogAuthor.email
-                      ? <AuthorLink href={'mailto:' + blogAuthor.email}>
-                        {blogAuthor.name}
-                      </AuthorLink>
+                      ? (
+                        <AuthorLink href={'mailto:' + blogAuthor.email}>
+                          {blogAuthor.name}
+                        </AuthorLink>
+                      )
                       : blogAuthor.name
                   }, {blogAuthor.jobTitle}
                 </Author>
