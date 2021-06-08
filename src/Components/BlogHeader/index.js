@@ -184,6 +184,7 @@ const Title = styled.h1`
   font-size: 5vh;
   padding: 5px 0;
   margin: 0;
+  position: relative;
   ${props => props.theme.typography.hero.mixin()};
 
   @media ${props => props.theme.media.md} {
@@ -193,11 +194,58 @@ const Title = styled.h1`
   @media ${props => props.theme.media.sm} {
     font-size: 7vw;
   }
+
+  &:before{
+    content: attr(data-subtitle);
+    display: block;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 300;
+    opacity: .5;
+    position: absolute;
+    top: -1rem;
+    right: auto;
+    transform: none;
+  }
+  
+  @media ${props => props.theme.media.lg} {
+    &:before{
+      top: 50%;
+      transform: translateY(-50%);
+      right: -2rem;
+    }
+  }
 `
 
 const Author = styled.span`
-  font-size: 2vh;
+  font-size: 1.8vh;
   margin: 1rem 0;
+  display: block;
+`
+
+const AuthorLink = styled.a`
+  text-decoration: none;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  display: inline-block;
+  position: relative;
+  font-weight: 600;
+
+  &:before{
+    content: "";
+    background-color: currentColor;
+    opacity: 0.8;
+    height: 1.5px;
+    bottom: -4px;
+    position: absolute;
+    width: 0px;
+    transition: width 200ms ease-in-out;
+  }
+
+  &:hover{
+    &:before{
+      width: 100%;
+    }
+  }
 `
 
 const shouldAutoplayVideo = () => {
@@ -259,9 +307,17 @@ class BlogHeader extends Component {
           <Container noContentWrapper>
             <Content textColor={textColor}>
               <TopLeftContainer>
-                <Title>{title}</Title>
-                <Author>Written by {blogAuthor.name}, {blogAuthor.jobTitle}</Author>
-                <p>Published {publishedAt}</p>
+                <Title data-subtitle={publishedAt}>{title}</Title>
+                <Author>
+                  Written by
+                  {
+                    blogAuthor.email
+                      ? <AuthorLink href={'mailto:' + blogAuthor.email}>
+                        {blogAuthor.name}
+                      </AuthorLink>
+                      : blogAuthor.name
+                  }, {blogAuthor.jobTitle}
+                </Author>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer onClick={this.handlePlay.bind(this)}>
@@ -291,7 +347,8 @@ BlogHeader.propTypes = {
   title: PropTypes.string,
   blogAuthor: PropTypes.shape({
     name: PropTypes.string,
-    jobTitle: PropTypes.string
+    jobTitle: PropTypes.string,
+    email: PropTypes.string
   }),
   publishedAt: PropTypes.string,
   body: PropTypes.string,

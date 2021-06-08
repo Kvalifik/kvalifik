@@ -34,6 +34,7 @@ export const query = graphql`
     blogAuthor: author{
       name
       jobTitle
+      email
     }
     meta {
       publishedAt(formatString: "DD MMMM, YYYY")

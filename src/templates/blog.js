@@ -40,10 +40,6 @@ PageTemplate.propTypes = {
     datoCmsBlog: PropTypes.shape({
       pageSetup: PropTypes.array,
       title: PropTypes.string,
-      author: PropTypes.shape({
-        name: PropTypes.string,
-        jobTitle: PropTypes.string
-      }),
       url: PropTypes.string,
       date: PropTypes.string,
       color: PropTypes.shape({
@@ -62,10 +58,6 @@ export const query = graphql`
       }
       meta {
         publishedAt(formatString: "DD MMMM, YYYY")
-      }
-      author {
-        name
-        jobTitle
       }
       pageSetup {
         __typename
