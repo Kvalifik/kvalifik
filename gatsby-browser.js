@@ -1,5 +1,5 @@
 /* eslint-disable import/no-commonjs */
-require("prismjs/themes/prism-tomorrow.css")
+require('prismjs/themes/prism-tomorrow.css')
 
 exports.onClientEntry = () => {
   if (typeof LogRocket !== 'undefined') {

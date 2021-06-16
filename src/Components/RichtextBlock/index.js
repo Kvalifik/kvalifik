@@ -71,7 +71,11 @@ const RichtextBlock = ({
   <Root>
     <Skewer bgColor={bgColor.hex} layer={1200}>
       <Container overflowLeft overflowRight>
-        <Content bgColor={bgColor.hex} textColor={textColor.hex} dangerouslySetInnerHTML={{ __html: text }} />
+        <Content
+          bgColor={bgColor.hex}
+          textColor={textColor.hex}
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
       </Container>
     </Skewer>
   </Root>
