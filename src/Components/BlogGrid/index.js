@@ -45,7 +45,7 @@ const BlogGrid = (props) => {
             {blogs.map(blog => (
               <BlogThumb
                 key={blog.id}
-                date={blog.meta.publishedAt}
+                date={blog.meta.firstPublishedAt}
                 name={blog.forWho}
                 description={blog.description}
                 bgUrl={blog.image.url}

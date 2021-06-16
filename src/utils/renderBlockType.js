@@ -51,7 +51,7 @@ export default (block) => {
         <BlogHeader
           key={block.id}
           title={block.title}
-          publishedAt={block.meta.publishedAt}
+          publishedAt={block.meta.firstPublishedAt}
           body={block.description}
           blogAuthor={block.blogAuthor}
           bgColor={block.bgColor && block.bgColor.hex}

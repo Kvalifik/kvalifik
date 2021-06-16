@@ -37,7 +37,7 @@ export const query = graphql`
       email
     }
     meta {
-      publishedAt(formatString: "DD MMMM, YYYY")
+      firstPublishedAt(formatString: "DD MMMM, YYYY")
     }
     bgColor {
       hex
@@ -93,8 +93,8 @@ export const query = graphql`
         name
         jobTitle
       }
-      meta {
-        publishedAt(formatString: "DD MMMM, YYYY")
+      meta{
+        firstPublishedAt(formatString: "DD MMMM, YYYY")
       }
       color {
         hex
