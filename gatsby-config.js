@@ -75,13 +75,20 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap'
     },
-  
-      {
-        resolve: `gatsby-plugin-facebook-pixel`,
-        options: {
-          pixelId: "964281396940446",
-        },
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: "964281396940446",
       },
+    },
+    {
+      resolve: `gatsby-plugin-hubspot`,
+      options: {
+        trackingCode: '20205211',
+        respectDNT: true,
+        productionOnly: false,
+      }
+    }
     
   ]
 }
