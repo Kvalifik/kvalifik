@@ -229,6 +229,7 @@ const AuthorLink = styled.a`
   display: inline-block;
   position: relative;
   font-weight: 600;
+  margin-left: 0.25ch;
 
   &:before{
     content: "";

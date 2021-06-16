@@ -28,6 +28,39 @@ const Content = styled.div`
     color: ${props => props.theme.palette.dark};
     font-weight: 700;
   }
+
+  a{
+    color: ${props => props.textColor};
+    text-decoration: underline;
+  }
+
+  .gatsby-highlight{
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+  }
+
+  .gatsby-highlight::before {
+    position: relative;
+    bottom: 0;
+    padding: 0.5rem 1rem;;
+    border-radius: 10px 10px 0px 0px;
+    content: attr(data-language);
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: ${props => props.textColor};
+    color: ${props => props.bgColor};
+
+    background-color: #2d2d2d;
+    color: #ccc;
+  }
+
 `
 
 const RichtextBlock = ({
@@ -38,7 +71,7 @@ const RichtextBlock = ({
   <Root>
     <Skewer bgColor={bgColor.hex} layer={1200}>
       <Container overflowLeft overflowRight>
-        <Content textColor={textColor.hex} dangerouslySetInnerHTML={{ __html: text }} />
+        <Content bgColor={bgColor.hex} textColor={textColor.hex} dangerouslySetInnerHTML={{ __html: text }} />
       </Container>
     </Skewer>
   </Root>
