@@ -17,6 +17,9 @@ const Root = styled.div`
 
   transform-origin: center;
   transition: 0.4s 0s cubic-bezier(0.26, 0.16, 0.09, 0.97);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 
   &:hover {
     transform: scale(1.02);
