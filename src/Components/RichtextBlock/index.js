@@ -20,6 +20,10 @@ const Content = styled.div`
   max-width: 75ch;
   margin: 0 auto;
 
+  h2{
+    margin-top: 3rem;
+  }
+
   p, li {
     margin: ${props => props.theme.spacing(0.5)}; 
   }
@@ -49,14 +53,18 @@ const Content = styled.div`
 
   .gatsby-highlight{
     padding: 0.5rem 0;
-    margin: 0.5rem 0;
+    margin: 2rem 0;
   }
+
+  /*.gatsby-highlight pre{
+    border-radius: 0 10px 10px 10px;
+  }*/
 
   .gatsby-highlight::before {
     position: relative;
     bottom: 0;
     padding: 0.5rem 1rem;;
-    border-radius: 10px 10px 0px 0px;
+    //border-radius: 10px 10px 0px 0px;
     content: attr(data-language);
     background-image: initial;
     background-position-x: initial;
@@ -67,9 +75,6 @@ const Content = styled.div`
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
-    background-color: ${props => props.textColor};
-    color: ${props => props.bgColor};
-
     background-color: #2d2d2d;
     color: #ccc;
   }
