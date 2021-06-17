@@ -58,6 +58,7 @@ const Desc = styled.div`
   display: flex;
   position: relative;
   background-color: ${props => props.color || props.theme.palette.primary.C};
+  padding-bottom: 1rem;
 
   @media ${props => props.theme.media.sm} {
     grid-row: 2 / 2;
