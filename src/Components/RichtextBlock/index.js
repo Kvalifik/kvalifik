@@ -20,18 +20,31 @@ const Content = styled.div`
   max-width: 75ch;
   margin: 0 auto;
 
-  p {
+  p, li {
     margin: ${props => props.theme.spacing(0.5)}; 
   }
 
+  li p{
+    margin-left: 0;
+  }
+
   strong {
-    color: ${props => props.theme.palette.dark};
     font-weight: 700;
   }
 
   a{
     color: ${props => props.textColor};
     text-decoration: underline;
+  }
+
+  blockquote{
+    padding: 1rem;
+    background-color: ${props => props.theme.hexToRgba(props.textColor, 0.075)};
+    color: ${props => props.textColor};
+
+    @media ${props => props.theme.media.lg} {
+      margin: 1rem 0;
+    }
   }
 
   .gatsby-highlight{
@@ -60,7 +73,6 @@ const Content = styled.div`
     background-color: #2d2d2d;
     color: #ccc;
   }
-
 `
 
 const RichtextBlock = ({

@@ -87,6 +87,8 @@ const TopLeftContainer = styled.div`
   line-height: 1.25;
   justify-self: center;
   width: 70%;
+  margin-right: 1rem;
+  padding-top: 100px;
 
   @media ${props => props.theme.media.xl} {
     width: 80%;
@@ -97,8 +99,17 @@ const TopLeftContainer = styled.div`
     width: auto;
     grid-column: 1 / -1;
     padding: 0 ${props => props.theme.spacing(6)} 0 ${props => props.theme.spacing(2)};
+    padding-top: 25px;
+    padding-top: clamp(40px,7vh,60px);
   }
 
+  @media screen and (min-width: 768px) and (max-height: 500px){
+    padding-top: 25px;
+  }
+
+  @media screen and (min-width: 768px) and (min-height: 500px){
+    padding-top: 120px;
+  }
   & > ${Icon} {
     transform: scale(1.4);
     transform-origin: center;
@@ -129,6 +140,7 @@ const BottomLeftContainer = styled.div`
   justify-self: center;
   width: 70%;
   line-height: 1.6;
+  margin-right: 1rem;
 
   @media ${props => props.theme.media.xl} {
     width: 80%;
@@ -198,7 +210,7 @@ const Title = styled.h1`
   &:before{
     content: attr(data-subtitle);
     display: block;
-    font-size: 1rem;
+    font-size: 1.5vh;
     line-height: 1rem;
     font-weight: 300;
     opacity: .5;
@@ -210,11 +222,22 @@ const Title = styled.h1`
   
   @media ${props => props.theme.media.lg} {
     &:before{
-      top: 50%;
-      transform: translateY(-50%);
-      right: -2rem;
+      display: none;
     }
   }
+`
+
+const DateMobile = styled.span`
+  display: none;
+  @media ${props => props.theme.media.lg} {
+    display: block;
+    font-size: 1.5vh;
+    margin-bottom: 1rem;
+    line-height: 1rem;
+    font-weight: 300;
+    opacity: .5;
+  }  
+
 `
 
 const Author = styled.span`
@@ -229,7 +252,6 @@ const AuthorLink = styled.a`
   display: inline-block;
   position: relative;
   font-weight: 600;
-  margin-left: 0.25ch;
 
   &:before{
     content: "";
@@ -310,7 +332,7 @@ class BlogHeader extends Component {
               <TopLeftContainer>
                 <Title data-subtitle={publishedAt}>{title}</Title>
                 <Author>
-                  Written by
+                  <span>Written by </span>
                   {
                     blogAuthor.email
                       ? (
@@ -318,9 +340,12 @@ class BlogHeader extends Component {
                           {blogAuthor.name}
                         </AuthorLink>
                       )
-                      : blogAuthor.name
+                      : ' ' + blogAuthor.name
                   }, {blogAuthor.jobTitle}
                 </Author>
+                <DateMobile>
+                  {publishedAt}
+                </DateMobile>
               </TopLeftContainer>
               <BottomLeftContainer dangerouslySetInnerHTML={{ __html: body }} />
               <RightContainer onClick={this.handlePlay.bind(this)}>
