@@ -18,6 +18,13 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsBlog {
+        edges {
+          node {
+            url
+          }
+        }
+      }
     }
   `)
   result.data.allDatoCmsPage.edges.forEach(({ node }) => {
@@ -41,6 +48,21 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: node.url,
       component: path.resolve(`./src/templates/work.js`),
+      context: {
+        url: node.url
+      }
+    })
+  })
+  result.data.allDatoCmsBlog.edges.forEach(({ node }) => {
+    if (!node.url) {
+      return
+    }
+
+    console.log(`Creating blog post ${node.url}`)
+
+    createPage({
+      path: node.url,
+      component: path.resolve(`./src/templates/blog.js`),
       context: {
         url: node.url
       }

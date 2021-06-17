@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import addToMailchimp from 'gatsby-plugin-mailchimp'
-import Svg from 'react-inlinesvg'
-import MailChimpGDPR from '../graphics/mailchimp-gdpr.svg'
+// import addToMailchimp from 'gatsby-plugin-mailchimp'
+// import Svg from 'react-inlinesvg'
+// import HubSpotGDPR from '../graphics/mailchimp-gdpr.svg'
 
 const Background = styled.div`
   background: rgba(0,0,0,0.8);
@@ -201,7 +201,7 @@ const CloseButton = styled.button`
   }
 `
 
-const MailChimpDisclaimer = styled.div`
+const HubSpotDisclaimer = styled.div`
   display: flex;
   flex-direction: row;
   @media ${props => props.theme.media.sm} {
@@ -211,7 +211,8 @@ const MailChimpDisclaimer = styled.div`
   align-items: center;
   margin-top: ${props => props.theme.spacing(3)};
 `
-const MailChimpLogo = styled.div`
+/*
+const HubSpotLogo = styled.div`
   max-width: 64px;
   width: 100%;
   margin-right: ${props => props.theme.spacing(2)};
@@ -220,8 +221,9 @@ const MailChimpLogo = styled.div`
     height: 100%;
   }
 `
+*/
 
-const MailChimpDisclaimerText = styled.p`
+const HubSpotDisclaimerText = styled.p`
   font-size: ${props => props.theme.typography.fontSize.xs};
   color: white;
 `
@@ -262,24 +264,45 @@ class SignupModal extends React.Component {
     const lastName = this.state.lastName
     const email = this.state.email
     const company = this.state.company
-    addToMailchimp(email, {
-      FNAME: firstName,
-      LNAME: lastName,
-      COMPANY: company
-    })
-      .then(data => {
-        if (data.result === 'success') {
-          this.setState({
-            formSubmitted: true,
-            statusMessage: this.successMessage
-          })
-        } else {
-          this.setState({
-            formSubmitted: true,
-            statusMessage: this.errorMessage !== '' ? this.errorMessage : data.msg
-          })
+
+    const portalID = '20205211'
+    const formID = '3ad2574e-63ea-4a54-ab89-93da38cd8d04'
+    const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalID}/${formID}`
+    const data = {
+      submittedAt: Date.now(),
+      fields: [
+        {
+          name: 'email',
+          value: email
+        },
+        {
+          name: 'firstname',
+          value: firstName
+        },
+        {
+          name: 'lastname',
+          value: lastName
+        },
+        {
+          name: 'company',
+          value: company
         }
+      ]
+    }
+    const formData = JSON.stringify(data)
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: formData
+    }).then(response => {
+      this.setState({
+        formSubmitted: true,
+        statusMessage: this.successMessage
       })
+    })
   }
 
   render () {
@@ -355,25 +378,29 @@ class SignupModal extends React.Component {
                     value="Sign up"
                   />
                 </ButtonWrapper>
-                <MailChimpDisclaimer>
-                  <MailChimpLogo>
-                    <Svg src={MailChimpGDPR} />
-                  </MailChimpLogo>
-                  <MailChimpDisclaimerText>
-                    <span>We use Mailchimp as our marketing platform.
+                <HubSpotDisclaimer>
+                  {
+                    /*
+                    <HubSpotLogo>
+                      <Svg src={HubSpotGDPR} />
+                    </HubSpotLogo>
+                    */
+                  }
+                  <HubSpotDisclaimerText>
+                    <span>We use HubSpot as our marketing platform.
                       By clicking above to sign up, you acknowledge
                       that your information will be transferred to
-                      Mailchimp for processing.&nbsp;
+                      HubSpot for processing.&nbsp;
                     </span>
                     <a
-                      href="https://mailchimp.com/legal/"
+                      href="https://legal.hubspot.com/privacy-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Learn more about Mailchimp's privacy practices here.
+                      Learn more about HubSpot's privacy practices here.
                     </a>
-                  </MailChimpDisclaimerText>
-                </MailChimpDisclaimer>
+                  </HubSpotDisclaimerText>
+                </HubSpotDisclaimer>
               </form>
             )
           }

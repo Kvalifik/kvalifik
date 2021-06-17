@@ -13,17 +13,16 @@ import BackArrow from '../Components/Shared/BackArrow'
 const PageTemplate = ({ data }) => {
   const {
     pageSetup,
-    bgColor,
-    url
-  } = data.datoCmsPage
+    color
+  } = data.datoCmsBlog
 
   const headerBlock = pageSetup.find(item => item.__typename === 'DatoCmsHeader')
 
   return (
-    <Layout bgColor={bgColor && bgColor.hex} page={data.datoCmsPage}>
-      {url !== '/' && <BackArrow />}
+    <Layout bgColor={color && color.hex} page={data.datoCmsBlog}>
+      <BackArrow backText="Back to blog" />
       {headerBlock && headerBlock.bgColor && (
-        <DownArrow color={headerBlock.bgColor.hex} />
+        <DownArrow color={color && color.hex} />
       )}
       <FixedSkewer
         angle="large"
@@ -38,11 +37,12 @@ const PageTemplate = ({ data }) => {
 
 PageTemplate.propTypes = {
   data: PropTypes.shape({
-    datoCmsPage: PropTypes.shape({
+    datoCmsBlog: PropTypes.shape({
       pageSetup: PropTypes.array,
       title: PropTypes.string,
       url: PropTypes.string,
-      bgColor: PropTypes.shape({
+      date: PropTypes.string,
+      color: PropTypes.shape({
         hex: PropTypes.string
       })
     })
@@ -51,29 +51,24 @@ PageTemplate.propTypes = {
 
 export const query = graphql`
   query($url: String!) {
-    datoCmsPage(url: { eq: $url }) {
+    datoCmsBlog(url: { eq: $url }) {
       url
-      bgColor {
+      color {
         hex
+      }
+      meta {
+        publishedAt(formatString: "DD MMMM, YYYY")
       }
       pageSetup {
         __typename
-        ...HeaderFragment
+        ...BlogHeaderFragment
         ...ActionBlockFragment
         ...SloganFragment
+        ...RichtextFragment
         ...GalleryFragment
         ...MediaFragment
-        ...ReferencelogoblockFragment
-        ...CaseGridFragment
-        ...BlogGridFragment
-        ...ToolboxFragment
-        ...ToolboxBigFragment
-        ...FiftyFifty
-        ...PeopleBlockFragment
-        ...ServicesBlockFragment
-        ...ServicesBigFragment
-        ...AvailablePosition
-        ...Stepper
+        ...PercentageBlockFragment
+        ...QuoteBlockFragment
       }
       seoMetaTags {
         tags

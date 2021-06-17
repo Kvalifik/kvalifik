@@ -27,6 +27,37 @@ export const query = graphql`
       }
     }
   }
+  fragment BlogHeaderFragment on DatoCmsBlogHeader {
+    id
+    title
+    description
+    blogAuthor: author{
+      name
+      jobTitle
+      email
+    }
+    meta {
+      firstPublishedAt(formatString: "DD MMMM, YYYY")
+    }
+    bgColor {
+      hex
+    }
+    textColor{
+      hex
+    }
+    media {
+      __typename
+      ... on DatoCmsMediaItem {
+        image {
+          url
+        }
+        video {
+          provider
+          providerUid
+        }
+      }
+    }
+  }
   fragment CaseGridFragment on DatoCmsCaseGrid {
     id
     sideText
@@ -47,6 +78,44 @@ export const query = graphql`
       image{
         url
       }
+    }
+  }
+  fragment BlogGridFragment on DatoCmsBlogGrid {
+    id
+    sideText
+    removeTopPadding
+    blogposts {
+      description
+      id
+      url
+      fullSize
+      author{
+        name
+        jobTitle
+      }
+      meta{
+        firstPublishedAt(formatString: "DD MMMM, YYYY")
+      }
+      color {
+        hex
+      }
+      image{
+        url
+      }
+    }
+  }
+  fragment RichtextFragment on DatoCmsRichtext {
+    id
+    textNode {
+      childMarkdownRemark {
+        html
+      }
+    }
+    bgColor {
+      hex
+    }
+    textColor {
+      hex
     }
   }
   fragment SloganFragment on DatoCmsSlogan {

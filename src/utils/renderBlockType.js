@@ -1,7 +1,9 @@
 import React from 'react'
 
+import BlogGrid from 'Components/BlogGrid'
 import CaseGrid from 'Components/CaseGrid'
 import ActionBlock from 'Components/ActionBlock'
+import BlogHeader from 'Components/BlogHeader'
 import HeaderBlock from 'Components/HeaderBlock'
 import SloganBlock from 'Components/SloganBlock'
 import GalleryBlock from 'Components/GalleryBlock'
@@ -20,6 +22,7 @@ import Stepper from 'Components/Stepper'
 import FiftyFifty from 'Components/FiftyFifty'
 import ReferenceLogoBlock from 'Components/ReferenceLogoBlock'
 import AvailablePosition from 'Components/AvailablePosition'
+import RichtextBlock from 'Components/RichtextBlock'
 
 import theme from 'utils/theme'
 
@@ -41,6 +44,33 @@ export default (block) => {
         />
       )
     }
+    case 'DatoCmsBlogHeader': {
+      const imageUrl = block.media.image && block.media.image.url
+
+      return (
+        <BlogHeader
+          key={block.id}
+          title={block.title}
+          publishedAt={block.meta.firstPublishedAt}
+          body={block.description}
+          blogAuthor={block.blogAuthor}
+          bgColor={block.bgColor && block.bgColor.hex}
+          textColor={block.textColor && block.textColor.hex}
+          video={block.media.video}
+          imageUrl={imageUrl}
+        />
+      )
+    }
+    case 'DatoCmsBlogGrid':
+      return (
+        <BlogGrid
+          key={block.id}
+          bgColor={theme.palette.dark}
+          blogs={block.blogposts}
+          sideText={block.sideText}
+          removeTopPadding={block.removeTopPadding}
+        />
+      )
     case 'DatoCmsCaseGrid':
       return (
         <CaseGrid
@@ -52,6 +82,15 @@ export default (block) => {
           cases={block.cases}
           sideText={block.sideText}
           removeTopPadding={block.removeTopPadding}
+        />
+      )
+    case 'DatoCmsRichtext':
+      return (
+        <RichtextBlock
+          key={block.id}
+          textColor={block.textColor}
+          bgColor={block.bgColor}
+          text={block.textNode.childMarkdownRemark.html}
         />
       )
     case 'DatoCmsSlogan':
