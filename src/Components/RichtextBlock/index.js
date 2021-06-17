@@ -20,6 +20,10 @@ const Content = styled.div`
   max-width: 75ch;
   margin: 0 auto;
 
+  @media ${props => props.theme.media.lg} {
+    width: 100%;
+  }
+
   h2{
     margin-top: 3rem;
   }

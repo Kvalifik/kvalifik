@@ -75,6 +75,7 @@ const SideTextInner = styled.div`
   position: absolute;
   transform-origin: 0% 0%;
   transform: rotate(90deg) scale(-1) translate(-100%, -100%);
+  width: max-content;
 `
 
 const Content = styled.div`
