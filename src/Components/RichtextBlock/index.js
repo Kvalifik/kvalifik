@@ -28,8 +28,8 @@ const Content = styled.div`
     margin-top: 3rem;
   }
 
-  p, li {
-    margin: ${props => props.theme.spacing(0.5)}; 
+  p, li{
+    margin-top: ${props => props.theme.spacing(0.5)}; 
   }
 
   li p{
