@@ -247,6 +247,7 @@ const Author = styled.span`
 `
 
 const AuthorLink = styled.a`
+  color: currentColor;
   text-decoration: none;
   transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
   display: inline-block;
