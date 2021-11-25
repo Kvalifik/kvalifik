@@ -258,11 +258,11 @@ export default (block) => {
       )
     case 'DatoCmsPerksBlock':
       return (
-        <PerksBlock 
-          key={block.id} 
+        <PerksBlock
+          key={block.id}
           title={block.title}
           description={block.descriptionNode.childMarkdownRemark.html}
-          perks={block.perks} 
+          perks={block.perks}
         />
       )
     case 'DatoCmsStepper':
