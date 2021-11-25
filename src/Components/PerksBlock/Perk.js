@@ -22,6 +22,12 @@ const Icon = styled.div`
   background-position: center;
 `
 
+const Title = styled.strong`
+  display: inline-block;
+  line-height: ${props => props.theme.spacing(2.5)};
+  margin-bottom: ${props => props.theme.spacing(0.5)};
+`
+
 const Root = styled.div`
   display: grid;
   grid-template-columns: 8fr 7fr;
@@ -74,7 +80,7 @@ const Perk = ({ perk }) => (
   <Root bgColor={perk.color && perk.color.hex}>
     <Info>
       <NameContainer>
-        <strong>{perk.title}</strong>
+        <Title>{perk.title}</Title>
         <p>{perk.subtitle}</p>
       </NameContainer>
     </Info>
