@@ -70,6 +70,7 @@ export const query = graphql`
         ...ToolboxBigFragment
         ...FiftyFifty
         ...PeopleBlockFragment
+        ...PerksBlockFragment
         ...ServicesBlockFragment
         ...ServicesBigFragment
         ...AvailablePosition

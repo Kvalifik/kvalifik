@@ -16,6 +16,7 @@ import ProcessBlockSolo from 'Components/ProcessBlockSolo'
 import PercentageBlock from 'Components/PercentageBlock'
 import QuoteBlock from 'Components/QuoteBlock'
 import People from 'Components/People'
+import PerksBlock from 'Components/PerksBlock'
 import ServicesBlock from 'Components/ServicesBlock'
 import ServicesBig from 'Components/ServicesBig'
 import Stepper from 'Components/Stepper'
@@ -253,6 +254,15 @@ export default (block) => {
           word={block.word}
           pronounce={block.pronounce}
           employees={block.employees}
+        />
+      )
+    case 'DatoCmsPerksBlock':
+      return (
+        <PerksBlock 
+          key={block.id} 
+          title={block.title}
+          description={block.descriptionNode.childMarkdownRemark.html}
+          perks={block.perks} 
         />
       )
     case 'DatoCmsStepper':

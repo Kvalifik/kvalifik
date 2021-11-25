@@ -379,6 +379,24 @@ export const query = graphql`
       }
     }
   }
+  fragment PerksBlockFragment on DatoCmsPerksBlock {
+    title
+    descriptionNode {
+      childMarkdownRemark {
+        html
+      }
+    }
+    perks {
+      title
+      subtitle
+      image {
+        url
+      }
+      color {
+        hex
+      }
+    }
+  }
   fragment ServicesBlockFragment on DatoCmsServicesBlock {
     id
     sideText
